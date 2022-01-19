@@ -1,12 +1,11 @@
-import { boardService } from "../services/board.service.js";
+import { boardService } from "../services/boards.service";
 import { userService } from "../services/user.service.js";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
-export async function loadBoards() {
-    return (dispatch) => {
+export function loadBoards() {
+    return async (dispatch) => {
         try {
             const boards = await boardService.query()
-
             console.log('Boards from DB:', boards)
             dispatch({
                 type: 'SET_BOARDS',
@@ -20,8 +19,26 @@ export async function loadBoards() {
     }
 }
 
-export async function onRemoveBoard(boardId) {
-    return (dispatch, getState) => {
+export function loadBoard(boardId) {
+    return async (dispatch) => {
+        try {
+            console.log('hi')
+            const boards = await boardService.getById(boardId)
+            console.log('Boards from DB:', boards)
+            dispatch({
+                type: 'SET_BOARDS',
+                boards
+            })
+
+        } catch (err) {
+            showErrorMsg('Cannot load boards')
+            console.log('Cannot load boards', err)
+        }
+    }
+}
+
+export function onRemoveBoard(boardId) {
+    return async (dispatch, getState) => {
         try {
             await boardService.remove(boardId)
             console.log('Deleted Succesfully!');
@@ -38,8 +55,8 @@ export async function onRemoveBoard(boardId) {
     }
 }
 
-export async function onAddBoard() {
-    return (dispatch) => {
+export function onAddBoard() {
+    return async (dispatch) => {
         try {
             const board = boardService.getEmptyBoard();
             const savedBoard = await boardService.save(board)
@@ -59,10 +76,10 @@ export async function onAddBoard() {
     }
 }
 
-export async function onEditBoard(boardToSave) {
-    return (dispatch) => {
+export function onEditBoard(boardToSave) {
+    return async (dispatch) => {
         try {
-            savedBoard = await boardService.save(boardToSave)
+            const savedBoard = await boardService.save(boardToSave)
             console.log('Updated Board:', savedBoard);
             boardService.save(boardToSave);
             dispatch({

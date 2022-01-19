@@ -1,11 +1,11 @@
+import {GroupPreview} from './GroupPreview'
 
 
-
-export function GroupsList (groups){
-
+export function GroupList ({groups}){
+    console.log(groups)
     return(
         <section className='group-list'>
-            {groups.map(group=><GroupPreview group={group}/>)}
+            {groups.map(group=><GroupPreview key={group.id} group={group}/>)}
         </section>
     )
 }
