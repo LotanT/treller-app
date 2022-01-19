@@ -1,9 +1,9 @@
-export function GroupsList (task){
-
+export function TaskPreview ({task}){
+    console.log(task)
     return(
         <section className='card'>
-            {false && <div><img src={group.style.img}/></div>}
-            <span>{group.title}</span>
+            {false && <div><img src={task.style.img}/></div>}
+            <span>{task.title}</span>
             
         </section>
     )
