@@ -47,13 +47,15 @@ class _TaskEdit extends React.Component {
     if (!task) return <h1>Loading..</h1>;
     return (
       <section className="task-edit">
-        <label htmlFor="name">Name:</label>
-        <input
-          name="name"
-          type="text"
-          onChange={this.handleChange}
-          value={task.name}
-        />
+        {edit !== "name" && <label htmlFor="name">Name:</label>}
+        {edit == "name" && (
+          <input
+            name="name"
+            type="text"
+            onChange={this.handleChange}
+            value={task.name}
+          />
+        )}
       </section>
     );
   }
