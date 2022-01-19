@@ -1,0 +1,51 @@
+.homepage {
+    width: 100%;
+    background-color: #f9fafc;
+    min-height: 100vh;
+    padding: 100px 10%;
+    color: #091e42;
+    background: linear-gradient(0deg, #fff, #eae6ff 100%);
+
+    h1 {
+        font-family: "Charlie Display", sans-serif;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-family: "Charlie Display", sans-serif;
+        font-weight: 500;
+        font-size: 3rem;
+        line-height: 1.25;
+    }
+    h2 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-family: "Charlie Display", sans-serif;
+        font-weight: 500;
+        font-size: 2.25rem;
+    }
+    .hero-img {
+        max-height: 1000px;
+    }
+    .second-container {
+        padding-top: 5rem;
+    }
+
+    .btn-start-doing {
+        color: #0065ff;
+        background-color: transparent;
+        background-image: none;
+        border-color: #0065ff;
+        padding-left: 1.3rem;
+        padding-right: 1.3rem;
+
+        &:hover {
+            color: #f9fafc;
+            border-color: #0065ff;
+            background-color: #0065ff;
+            cursor: pointer;
+        }
+    }
+
+    .board-img {
+        padding-top: 20px;
+    }
+}
