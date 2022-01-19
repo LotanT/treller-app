@@ -1,5 +1,6 @@
 import React from "react";
 import CreatableSelect from "react-select/creatable";
+import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { boardService } from "../../services/boards.service";
 import { utilService } from "../../util.service";
@@ -22,7 +23,7 @@ class _TaskEdit extends React.Component {
     const { taskId } = this.props.match.params;
     if (!taskId) return;
     else
-      taskService.getById(taskId).then((task) => {
+      boardService.getById(taskId).then((task) => {
         if (!task) this.history.push("/board");
         else this.setState({ task });
       });
@@ -32,9 +33,13 @@ class _TaskEdit extends React.Component {
     this.clearState();
   }
 
+//אה
   clearState = () => {
-    const task = null;
-    this.setState({ task });
+    const clearedState = {
+      task: null,
+      edit:null
+    }
+    this.setState(clearedState);
   };
 
   getTaskLabels = () => {
@@ -56,6 +61,8 @@ class _TaskEdit extends React.Component {
             value={task.name}
           />
         )}
+        <h1>In list: <Link></Link></h1>
+
       </section>
     );
   }
