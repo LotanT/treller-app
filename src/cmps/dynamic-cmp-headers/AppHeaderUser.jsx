@@ -15,33 +15,16 @@ function _AppHeaderUser() {
     const [isBoardsPage, setIsBoardsPage] = useState((window.location.hash === '#/userboards'))
     const history = useHistory()
 
-    useEffect(() => {
-        
-        if(isBoardsPage){
-            document.querySelector('.app-header-user').classList.add('user-boards')
-            setIsBoardsPage(true)
-        }else{
-            document.querySelector('.app-header-user').classList.remove('user-boards')
-            setIsBoardsPage(false)
-        }
-
+    useEffect(() => {        
         return history.listen((location) => {
-               
-            if(location.pathname==='/userboards'){
-                document.querySelector('.app-header-user').classList.add('user-boards')
-                setIsBoardsPage(true)
-            }else if( document.querySelector('.user-boards')){
-                document.querySelector('.app-header-user').classList.remove('user-boards')
-                setIsBoardsPage(false)
-            }
-            console.log(`You changed the page to: ${location.pathname}`)
+            setIsBoardsPage((window.location.hash === '#/userboards'))
             
         })
     }, [history])
-
+    
 
     return (
-        <header className="app-header-user">
+        <header className={`app-header-user ${isBoardsPage? "user-boards":""}`}  >
             <div className="header-content flex">
 
                 <a href='#/' className="user-header-logo">

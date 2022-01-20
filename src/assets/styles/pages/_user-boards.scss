@@ -1,5 +1,6 @@
 .user-boards-list {
-    .starred-boards-header {
+    .starred-boards-header,
+    .my-boards-header {
         img {
             height: 24px;
             line-height: 32px;
@@ -19,8 +20,20 @@
             white-space: nowrap;
         }
     }
+    .board-preview {
+        position: relative;
+        .board-details {
+            cursor: pointer;
+            height: 100%;
+            width: 150px;
+            border-radius: 3px;
+            transition: filter 0.2s;
+            text-align: center;
+            background-size: cover !important;
+            background-position: center !important;
+            &:hover {
+                filter: brightness(0.8);
+            }
+        }
+    }
 }
-
-// .user-boards{
-//     background-color: #026AA7;
-// }

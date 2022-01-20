@@ -3,7 +3,7 @@ import { userService } from "../services/user.service.js";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 export function loadBoards() {
-    return async (dispatch) => {
+    return async dispatch => {
         try {
             const boards = await boardService.query()
             console.log('Boards from DB:', boards)

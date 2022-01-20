@@ -15,9 +15,7 @@ function _AppHeader() {
     const history = useHistory()
 
     useEffect(() => {
-        console.log(window.location.hash)
         return history.listen((location) => {
-            // console.log(`You changed the page to: ${location.pathname}`)
             (location.pathname !== '/') ? setIsHomePage(false) : setIsHomePage(true)
             
             
@@ -37,7 +35,6 @@ function _AppHeader() {
         }
 
     }
-    console.log(isHomePage)
     return (
         <DynamicCmp />
     )
