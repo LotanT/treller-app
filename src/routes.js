@@ -1,6 +1,6 @@
 import { HomePage } from './pages/HomePage.jsx'
 import { BoardDetails } from './pages/BoardDetails.jsx';
-import { TaskEdit } from './cmps/task-edit/TaskEdit.jsx';
+
 
 const routes = [
     {
@@ -13,11 +13,11 @@ const routes = [
         component: BoardDetails,
         label: 'Home',
     },
-    {
-        path: '/:boardId/:groupId/:taskId',
-        component: TaskEdit,
-        label: 'edit'
-    }
+    // {
+    //     path: '/:boardId/:taskId',
+    //     component: TaskEdit,
+    //     label: 'edit'
+    // }
 ]
 
 export default routes;
