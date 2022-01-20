@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import {GroupList} from '../cmps/GroupsList'
 import { loadBoard } from '../store/board.actions';
-// import {BoardHeader} fro
+import {BoardHeader} from '../cmps/BoardHeader'
 
 
 
@@ -19,7 +19,7 @@ function _BoardDetails (props){
     if(!board) return <span>loading...</span>
     return(
         <div className='board-container'>
-            {/* <BoardHeader board={board}/> */}
+            <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
             <GroupList groups={board.groups}/>

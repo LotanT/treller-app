@@ -21,7 +21,7 @@ const initialState = {
             {
                 "_id": "u101",
                 "fullname": "Tal Tarablus",
-                "imgUrl": "https://www.google.com"
+                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
             }
         ],
         "groups": [
