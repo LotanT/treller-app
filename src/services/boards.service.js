@@ -10,7 +10,7 @@ export const boardService = {
     save,
     remove,
     getEmptyBoard,
-    
+
 
 
 }
@@ -129,7 +129,7 @@ function _createBoards() {
                                                 "title": "To Do 1",
                                                 "isDone": false
                                             }, {
-                                                "id": "212jX",
+                                                "id": "213jX",
                                                 "title": "To Do 1",
                                                 "isDone": false
                                             }
@@ -336,10 +336,10 @@ function _createBoards() {
                 ]
             },
         ]
-        localStorage.setItem(STORAGE_KEY,JSON.stringify(boards))
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(boards))
     }
-    console.log('boards:' ,boards)
-    
+    console.log('boards:', boards)
+
 }
 
 

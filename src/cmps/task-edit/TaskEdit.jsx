@@ -1,68 +1,129 @@
 import React from "react";
-import CreatableSelect from "react-select/creatable";
-import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
-import { boardService } from "../../services/boards.service";
-import { utilService } from "../../util.service";
+import { CheckList } from "./CheckList";
+import { EditableText } from "./EditableText";
 
 const testTask = {
-  id: "c101",
-  title: "Workout",
-  description: "workout long and hard",
+  id: "c104",
+  title: "Help me",
+  status: "in-progress",
+  description: "description",
+  comments: [
+    {
+      id: "ZdPnm",
+      txt: "also @yaronb please CR this",
+      createdAt: 1590999817436.0,
+      byMember: {
+        _id: "u101",
+        fullname: "Tal Tarablus",
+        imgUrl:
+          "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+      },
+    },
+  ],
+  checklists: [
+    {
+      id: "YEhmF",
+      title: "Checklist 1",
+      todos: [
+        {
+          id: "212jX",
+          title: "To Do 1",
+          isDone: false,
+        },
+        {
+          id: "213jX",
+          title: "To Do 2",
+          isDone: true,
+        },
+      ],
+    },
+    {
+      id: "YEhmG",
+      title: "Checklist 2",
+      todos: [
+        {
+          id: "214jX",
+          title: "To Do 3",
+          isDone: false,
+        },
+      ],
+    },
+  ],
+  members: [
+    {
+      _id: "u101",
+      username: "Tal",
+      fullname: "Tal Tarablus",
+      imgUrl:
+        "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+    },
+  ],
+  labelIds: ["l101", "l102"],
+  createdAt: 1590999730348,
+  dueDate: 16156215211,
+  byMember: {
+    _id: "u101",
+    username: "Tal",
+    fullname: "Tal Tarablus",
+    imgUrl:
+      "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg",
+  },
+  style: {
+    bgColor: "#26de81",
+  },
   isArchive: false,
 };
 
 class _TaskEdit extends React.Component {
   state = {
-    task: null,
-    edit: null,
+    task: testTask,
   };
 
-  //check if get task from service or store
-  componentDidMount() {
-    const { taskId } = this.props.match.params;
-    if (!taskId) return;
-    else
-      boardService.getById(taskId).then((task) => {
-        if (!task) this.history.push("/board");
-        else this.setState({ task });
-      });
-  }
+  // componentDidMount() {
+  //   const { taskId } = this.props.match.params;
+  //   if (!taskId) return;
+  //   else
+  //     boardService.getById(taskId).then((task) => {
+  //       if (!task) this.history.push("/board");
+  //       else this.setState({ task });
+  //     });
+  // }
 
   componentWillUnmount() {
     this.clearState();
   }
 
-//אה
   clearState = () => {
-    const clearedState = {
-      task: null,
-      edit:null
-    }
-    this.setState(clearedState);
+    const task = null;
+    this.setState({ task });
+    const editField = null;
+    this.setState({ editField });
   };
 
-  getTaskLabels = () => {
-    const { labels } = this.state.task;
-    return labels.map((label) => ({ value: label, label }));
-  };
+  // getTaskLabels = () => {
+  //   const { labels } = this.state.task;
+  //   return labels.map((label) => ({ value: label, label }));
+  // };
 
   render() {
-    var { task, edit } = this.state;
+    var { task } = this.state;
     if (!task) return <h1>Loading..</h1>;
     return (
       <section className="task-edit">
-        {edit !== "name" && <label htmlFor="name">Name:</label>}
-        {edit == "name" && (
-          <input
-            name="name"
-            type="text"
-            onChange={this.handleChange}
-            value={task.name}
-          />
-        )}
-        <h1>In list: <Link></Link></h1>
-
+        <div className="task-header">
+          <EditableText text={task.title} />
+          <a href="#">X</a>
+        </div>
+        <div className="task-main">
+          <div className="description">
+            <h3>Description</h3> <a href="#">Edit</a>
+            <EditableText text={task.description} />
+          </div>
+          {task.checklists?.map((checklist) => (
+            <CheckList key={checklist.id} checklist={checklist} />
+          ))}
+        </div>
       </section>
     );
   }
@@ -72,9 +133,6 @@ function mapStateToProps({ taskModule }) {
   return {};
 }
 
-const mapDispatchToProps = {
-  removetask,
-  savetask,
-};
+const mapDispatchToProps = {};
 
-export const taskEdit = connect(mapStateToProps, mapDispatchToProps)(_taskEdit);
+export const TaskEdit = connect(mapStateToProps, mapDispatchToProps)(_TaskEdit);
