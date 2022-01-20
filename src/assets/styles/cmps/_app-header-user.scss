@@ -1,0 +1,147 @@
+.app-header-user {
+    background-color: rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(6px);
+    font-size: rem(14px);
+    backdrop-filter: blur(6px);
+    max-height: 44px;
+    width: 100%;
+    padding: 6px 4px;
+    position: sticky;
+    top: 0;
+    img {
+        // height: 36px;
+    }
+
+    .user-header-logo {
+        padding: 0 6px;
+        // width: 100%;
+        // height: 100%;
+        img{
+            height: 17px;
+            width: 105px;
+            // position: absolute;
+            // top: -18;
+            // left: 50px;
+        }
+    }
+    .arrow {
+        width: 16px;
+        height: 16px;
+    }
+
+    button {
+        font-size: 1.09375rem;
+        line-height: 1.5;
+        border-radius: 0.2rem;
+        padding: 0.25rem 0.5rem;
+        display: inline-block;
+        border: 1px solid transparent;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .login-btn {
+        color: $clr1;
+        background-color: rgba(255, 255, 255, 0);
+        padding-right: 13px;
+
+        &:hover {
+            text-decoration: underline;
+            color: #0051cc;
+        }
+    }
+    .sign-up-btn {
+        color: $clr5;
+        background-color: $clr1;
+
+        &:hover {
+            background-color: #0051cc;
+        }
+    }
+    .user-profile {
+        justify-content: flex-end;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        line-height: 33px;
+        font-weight: bold;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        user-select: none;
+        background: url(https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png)
+            0% 0% / 32px 32px no-repeat scroll content-box border-box transparent;
+    }
+    .nav-links {
+        flex-shrink: 0;
+        margin: 0 5px;
+        color: #fff;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+
+        &:hover {
+            background-color: hsla(0, 0%, 100%, 0.2);
+            box-shadow: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        &:first-child {
+            margin-left: 20px;
+        }
+    }
+    .nav-link-btn {
+        color: #fff;
+        background-color: transparent;
+        height: 32px;
+        line-height: 32px;
+        margin-left: 4px;
+        padding-right: 10px;
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        padding: 6px 12px;
+        border: none;
+    }
+
+    .nav-btn {
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 4px 0 0;
+        padding: 0;
+        white-space: nowrap;
+        background-color: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        text-decoration: none;
+        margin-left: 5px;
+
+        &:hover {
+            background-color: hsla(0, 0%, 100%, 0.2);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        a {
+            margin: 0;
+            padding: 0 12px;
+        }
+    }
+}
+
+.user-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+
+.user-boards{
+    background-color: #026AA7;
+}

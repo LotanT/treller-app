@@ -7,10 +7,11 @@
 @import "basics/helpers";
 
 // Pages
-@import "pages/homepage";
+@import "pages/home-page";
 
 // Components
 @import "cmps/app-header-main";
+@import "cmps/app-header-user";
 @import "cmps/board";
 @import "cmps/group-container";
 @import "cmps/board-container";
@@ -18,4 +19,3 @@
 @import "cmps/card";
 @import "cmps/group-list";
 @import "cmps/task-list";
-@import "cmps/app-header-main";

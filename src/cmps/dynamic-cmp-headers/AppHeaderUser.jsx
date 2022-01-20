@@ -1,25 +1,79 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import MainLogo from '../../assets/imgs/header/main-logo.png'
+
+import { useHistory } from 'react-router-dom'
+
+import MainLogo from '../../assets/imgs/header/user-header-still.gif'
+import DownArrow from '../../assets/imgs/header/down-arrow.svg'
 // import { Link, NavLink } from 'react-router-dom'
 
 
 
 function _AppHeaderUser() {
-    const [isLogin, setIsLogin] = useState(false);
+
+    const [isBoardsPage, setIsBoardsPage] = useState((window.location.hash === '#/userboards'))
+    const history = useHistory()
+
+    useEffect(() => {
+        
+        if(isBoardsPage){
+            document.querySelector('.app-header-user').classList.add('user-boards')
+            setIsBoardsPage(true)
+        }else{
+            document.querySelector('.app-header-user').classList.remove('user-boards')
+            setIsBoardsPage(false)
+        }
+
+        return history.listen((location) => {
+               
+            if(location.pathname==='/userboards'){
+                document.querySelector('.app-header-user').classList.add('user-boards')
+                setIsBoardsPage(true)
+            }else if( document.querySelector('.user-boards')){
+                document.querySelector('.app-header-user').classList.remove('user-boards')
+                setIsBoardsPage(false)
+            }
+            console.log(`You changed the page to: ${location.pathname}`)
+            
+        })
+    }, [history])
+
 
     return (
-        <header className="app-header">
-            <div className="header-content flex space-between">
-                <div className="header-logo">
+        <header className="app-header-user">
+            <div className="header-content flex">
+
+                <a href='#/' className="user-header-logo">
                     <img src={MainLogo}></img>
+                </a>
+                <div className="nav-links ">
+                    <a className='nav-link-btn'>Workspaces </a>
+                    <img className='arrow' src={DownArrow}/>
+                </div>
+                
+                <div className="nav-links ">
+                    <a className='nav-link-btn'>Recent </a>
+                    <img className='arrow' src={DownArrow}/>
+                </div>
+                
+                <div className="nav-links ">
+                    <a className='nav-link-btn'>Starred </a>
+                    <img className='arrow' src={DownArrow}/>
+                </div>
+                
+                <div className="nav-links ">
+                    <a className='nav-link-btn'>Templates </a>
+                    <img className='arrow' src={DownArrow}/>
+                </div>
+                <div className="nav-btn">
+                    <a>Create</a>
                 </div>
 
-                {!isLogin && <div>
-                    <button className="btn login-btn">Log in</button>
-                    <button className="btn sign-up-btn">Sign up</button>
-                </div>}
+
+                <div className='user-container'>
+                <div className="user-profile "></div>
+                </div>
             </div>
         </header >
     )
