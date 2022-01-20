@@ -18,12 +18,12 @@ export class CheckList extends React.Component {
       <section className="checklist">
         <div className="title">
           <EditableText text={checklist.title} />
-          <a href="#">Delete</a>
+          <a className="grey-btn">Delete</a>
         </div>
         {checklist.todos?.map((todo) => (
           <CheckListTodo key={todo.id} todo={todo} />
         ))}
-        <a href="#">Add an todo</a>
+        <a className="grey-btn">Add an todo</a>
       </section>
     );
   }

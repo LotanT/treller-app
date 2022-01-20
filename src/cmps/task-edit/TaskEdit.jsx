@@ -113,13 +113,14 @@ class _TaskEdit extends React.Component {
       <section className="task-edit">
         <div className="task-header">
           <EditableText text={task.title} />
-          <a href="#">X</a>
+          <a>X</a>
         </div>
         <div className="task-main">
           <div className="description">
-            <h3>Description</h3> <a href="#">Edit</a>
-            <EditableText text={task.description} />
+            <h3>Description</h3>
+            <a className="grey-btn">Edit</a>
           </div>
+          <EditableText text={task.description} />
           {task.checklists?.map((checklist) => (
             <CheckList key={checklist.id} checklist={checklist} />
           ))}

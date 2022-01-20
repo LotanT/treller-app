@@ -24,6 +24,12 @@ const routes = [
         component: HomePage,
         label: 'Home',
     },
+
+    // {
+    //     path: '/:boardId/:taskId',
+    //     component: TaskEdit,
+    //     label: 'edit'
+    // }
 ]
 
 export default routes;
