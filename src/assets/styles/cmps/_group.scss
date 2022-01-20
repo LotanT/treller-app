@@ -10,12 +10,10 @@
   width: 100% !important;
 }
 
-// .group {
-//   box-sizing: border-box;
-//   display: inline-block;
-//   height: 100%;
-//   margin: 0 4px;
-//   vertical-align: top;
-//   white-space: nowrap;
-//   width: 272px;
-// }
+.group-header{
+  flex: 0 0 auto;
+  min-height: 20px;
+  padding: 10px 8px;
+  position: relative;
+  padding-left: 15px;
+}
