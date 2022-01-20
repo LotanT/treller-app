@@ -13,7 +13,7 @@ import { AppHeaderUser } from './AppHeaderUser';
 
     console.log('props:' ,window.location)
     useEffect(()=>{
-        console.log('hello');
+        console.log('hello from my side');
         // console.log('props:' ,props)
         
     })
