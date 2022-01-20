@@ -18,12 +18,13 @@ function _BoardDetails (props){
     const {board} = props
     if(!board) return <span>loading...</span>
     return(
-        <section className='board-container'>
+        <div className='board-container'>
             {/* <BoardHeader board={board}/> */}
-            <section className='board'>
+            <div className="board-scroller"></div>
+            <div className='board'>
             <GroupList groups={board.groups}/>
-            </section>
-        </section>
+            </div>
+        </div>
     )
 }
 

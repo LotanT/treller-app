@@ -37,7 +37,8 @@ const initialState = {
                     {
                         "id": "c102",
                         "title": "Add Samples",
-                        "isArchive": false
+                        "isArchive": false,
+                        "img": "https://cdn.pixabay.com/photo/2018/09/30/16/26/sun-3713835__340.jpg"
                     }
                 ],
                 "style": {},
@@ -50,8 +51,8 @@ const initialState = {
                     {
                         "id": "c103",
                         "title": "Do that",
-                        "isArchive": false
-
+                        "isArchive": false,
+                        "img": "https://static01.nyt.com/images/2022/01/05/technology/personaltech/05TECHTIP-GIF/05TECHTIP-GIF-mobileMasterAt3x.gif"
                     },
                     {
                         "id": "c104",
