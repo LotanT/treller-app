@@ -4,10 +4,15 @@ import { TaskEdit } from './cmps/task-edit/TaskEdit.jsx';
 import {UserBoards} from './pages/UserBoards.jsx'
 
 const routes = [
+    // {
+    //     path: '/:boardId/:groupId/:taskId',
+    //     component: TaskEdit,
+    //     label: 'TaskEdit'
+    // },
     {
-        path: '/:boardId/:groupId/:taskId',
-        component: TaskEdit,
-        label: 'edit'
+        path: '/:boardId/:taskId',
+        component: BoardDetails,
+        label: 'BoardDetails',
     },
     {
         path: '/userboards',

@@ -139,6 +139,8 @@ class _TaskEdit extends React.Component {
     var { task } = this.state;
     if (!task) return <h1>Loading..</h1>;
     return (
+      <React.Fragment>
+      <div className="screen"></div>
       <section className="task-edit">
         <div className="task-header">
           <div className="flex">
@@ -181,6 +183,7 @@ class _TaskEdit extends React.Component {
           <div className="edit-nav">navbar</div>
         </div>
       </section>
+      </React.Fragment>
     );
   }
 }
