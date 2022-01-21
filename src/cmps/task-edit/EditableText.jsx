@@ -18,7 +18,13 @@ export class EditableText extends React.Component {
 
   setText = (ev) => {
     const text = ev.target.value;
+    if (!text) text = "Add Text";
     this.setState({ text });
+    this.props.updateFunction(
+      this.props.property,
+      text,
+      this.props.checklistId
+    );
   };
 
   render() {

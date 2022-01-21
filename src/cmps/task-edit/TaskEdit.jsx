@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { CheckList } from "./CheckList";
 import { EditableText } from "./EditableText";
+import { GrTextAlignFull } from "react-icons/gr";
+import { AiOutlineClose } from "react-icons/ai";
+import { FaPager } from "react-icons/fa";
 
 const testTask = {
   id: "c104",
@@ -97,13 +100,39 @@ class _TaskEdit extends React.Component {
   clearState = () => {
     const task = null;
     this.setState({ task });
-    const editField = null;
-    this.setState({ editField });
   };
 
-  // getTaskLabels = () => {
-  //   const { labels } = this.state.task;
-  //   return labels.map((label) => ({ value: label, label }));
+  updateTaskProperty = (property, value) => {
+    this.state.task[property] = value;
+  };
+
+  updateCheckListProperty = (property, value, checklistId) => {
+    var { task } = this.state;
+    var { checklists } = task;
+    const idx = checklists.findIndex(
+      (checklist) => checklist.id === checklistId
+    );
+    checklists[idx][property] = value;
+    task.checklists = checklists;
+    this.setState({ task });
+  };
+
+  // updateCheckListTitle = (checklistId, value) => {
+  //   var { checklists } = this.state.task;
+  //   const idx = checklists.findIndex(
+  //     (checklist) => checklist.id === checklistId
+  //   );
+  //   checklists[idx].title = value;
+  //   this.setState({ checklists });
+  // };
+
+  // updateCheckListTodos = (checklistId, todos) => {
+  //   var { checklists } = this.state.task;
+  //   const idx = checklists.findIndex(
+  //     (checklist) => checklist.id === checklistId
+  //   );
+  //   checklists[idx].todos = todos;
+  //   this.setState({ checklists });
   // };
 
   render() {
@@ -112,18 +141,44 @@ class _TaskEdit extends React.Component {
     return (
       <section className="task-edit">
         <div className="task-header">
-          <EditableText text={task.title} />
-          <a>X</a>
-        </div>
-        <div className="task-main">
-          <div className="description">
-            <h3>Description</h3>
-            <a className="grey-btn">Edit</a>
+          <div className="flex">
+            <div className="lower">
+              <FaPager />
+            </div>
+            <EditableText
+              text={task.title}
+              updateFunction={this.updateTaskProperty}
+              property={"title"}
+            />
           </div>
-          <EditableText text={task.description} />
-          {task.checklists?.map((checklist) => (
-            <CheckList key={checklist.id} checklist={checklist} />
-          ))}
+          <a>
+            <AiOutlineClose />
+          </a>
+        </div>
+        <div className="flex">
+          <div className="task">
+            <div className="task-main">
+              <div className="description">
+                <GrTextAlignFull />
+                <h3>Description</h3>
+                <a className="grey-btn">Edit</a>
+              </div>
+              <EditableText
+                text={task.description}
+                updateFunction={this.updateTaskProperty}
+                property={"description"}
+              />
+              {task.checklists?.map((checklist) => (
+                <CheckList
+                  key={checklist.id}
+                  checklist={checklist}
+                  updateCheckListProperty={this.updateCheckListProperty}
+                  checklistId={checklist.id}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="edit-nav">navbar</div>
         </div>
       </section>
     );
