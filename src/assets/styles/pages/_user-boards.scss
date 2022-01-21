@@ -1,5 +1,7 @@
 .user-boards-list {
-    .starred-boards-header {
+    .starred-boards-header,
+    .my-boards-header {
+        background-color: #fafbfc;
         img {
             height: 24px;
             line-height: 32px;
@@ -19,8 +21,141 @@
             white-space: nowrap;
         }
     }
+
+    .board-preview {
+        margin-right: 10px;
+        position: relative;
+        background-size: cover !important;
+        background-position: center !important;
+        transition: filter 0.2s;
+        filter: brightness(0.9);
+        width: 200px;
+        height: 100px;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
+        .board-details {
+            display: flex;
+            cursor: pointer;
+            border-radius: 3px;
+            padding: 10px 10px;
+            text-align: center;
+            z-index: 1;
+            height: 100%;
+
+            h2 {
+                font-size: rem(14px);
+                color: white;
+                // text-align:start;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .new-board-preview {
+        background-color: #091e420a;
+        border: none;
+        box-shadow: none;
+        color: #172b4d;
+        display: table-cell;
+        font-weight: 400;
+        text-align: center;
+        transition-duration: 85ms;
+        transition-property: background-color, border-color, box-shadow;
+        transition-timing-function: ease;
+        vertical-align: middle;
+        width: inherit;
+        width: 200px;
+        height: 100px;
+
+        &:hover {
+            background-color: #091e4214;
+            color: #172b4d;
+        }
+        .board-title {
+            background-position: 50%;
+            font-size: rem(14px);
+            line-height: 20px;
+            padding: 8px;
+            position: relative;
+            text-decoration: none;
+        }
+    }
+
+    .star-btn {
+        position: relative;
+        bottom: 32px;
+        left: 164px;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
 }
 
-// .user-boards{
-//     background-color: #026AA7;
-// }
+
+.add-board-pop {
+    position: absolute;
+    top: 230px;
+    left: 415px;
+
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px 1px #091e4240;
+    color: #172b4d;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    background-color: #fff;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 200px;
+    // outline: 0;
+    // overflow: hidden;
+
+    .add-board-title {
+        text-align: center;
+        color: #172b4d;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+        color: #5e6c84;
+        height: 40px;
+        display: block;
+        line-height: 40px;
+        margin: 0;
+        overflow: hidden;
+        padding: 0 32px;
+        position: relative;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .add-title {
+        color: #5e6c84;
+        font-size: 10px;
+        line-height: 16px;
+        font-weight: 700;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .create-board {
+        box-shadow: none;
+        border: none;
+        color: #a5adba;
+        font-size: 14px;
+        width: 100%;
+        margin-top: 16px;
+        height: 30px;
+    }
+    img {
+        position: relative;
+        bottom: 137px;
+        left: 175px;
+        width: 10px !important;
+    }
+
+ 
+}

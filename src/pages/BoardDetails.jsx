@@ -11,11 +11,14 @@ function _BoardDetails (props){
     // const [board, setBoard] = useState({board: null})
     console.log(props)
     useEffect(()=>{
-        loadBoard()
-    }, [])
+        // console.log(this.props);
 
+        props.loadBoard(props.match.params.boardId)
+    }, [])
+    
     const onAddGroup = () => {}
     const {board} = props
+    console.log(board)
     if(!board) return <span>loading...</span>
     return(
         <div className='board-container'>

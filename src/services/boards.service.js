@@ -9,7 +9,7 @@ export const boardService = {
     getById,
     save,
     remove,
-    getEmptyBoard,
+    getNewBoard,
 
 
 
@@ -36,10 +36,88 @@ function save(board) {
     }
 }
 
-function getEmptyBoard() {
+function getNewBoard(title) {
     return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
+
+        "title": title,
+        "createdAt": 1589983468418,
+        "createdBy": {
+            "_id": "u101",
+            "fullname": "Abi Abambi",
+            "imgUrl": "http://some-img"
+        },
+        "style": {},
+        "labels": [
+            {
+                "id": "l101",
+                "title": "Done",
+                "color": "#61bd4f"
+            }
+        ],
+        "members": [
+            {
+                "_id": "u101",
+                "fullname": "Tal Tarablus",
+                "imgUrl": "https://www.google.com"
+            }
+        ],
+        "groups": [
+            {
+                "id": "g101",
+                "title": "Group 1",
+                "tasks": [
+                    {
+                        "id": "c101",
+                        "title": "Replace logo",
+                        "isArchive": false
+                    },
+                    {
+                        "id": "c102",
+                        "title": "Add Samples",
+                        "isArchive": false
+                    }
+                ],
+                "style": {},
+                "isArchive": false
+            },
+            {
+                "id": "g102",
+                "title": "Group 2",
+                "tasks": [
+                    {
+                        "id": "c103",
+                        "title": "Do that",
+                        "isArchive": false
+
+                    },
+                        ],
+                "style": {
+                },
+                "isArchive": false
+            },
+        ],
+        "activities": [
+            {
+                "id": "a101",
+                "txt": "Changed Color",
+                "createdAt": 154514,
+                "byMember": {
+                    "_id": "u101",
+                    "fullname": "Abi Abambi",
+                    "imgUrl": "http://some-img"
+                },
+                "task": {
+                    "id": "c101",
+                    "title": "Replace Logo",
+
+                }
+            }
+        ],
+        "style": {
+            "bgImg": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/b95de2cf239d179275031cf5eefc799d/photo-1642076573338-9bc6a667fe57.jpg"
+        },
+        "isStarred": false
+
     }
 }
 
@@ -170,7 +248,8 @@ function _createBoards() {
                                 "isArchive": false
                             }
                         ],
-                        "style": {},
+                        "style": {
+                        },
                         "isArchive": false
                     },
                 ],
@@ -191,6 +270,10 @@ function _createBoards() {
                         }
                     }
                 ],
+                "style": {
+                    "bgImg": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/b95de2cf239d179275031cf5eefc799d/photo-1642076573338-9bc6a667fe57.jpg"
+                },
+                "isStarred": false
             },
             {
                 "_id": "b102",
@@ -313,7 +396,8 @@ function _createBoards() {
                                 "isArchive": false
                             }
                         ],
-                        "style": {},
+                        "style": {
+                        },
                         "isArchive": false
                     },
                 ],
@@ -333,7 +417,11 @@ function _createBoards() {
 
                         }
                     }
-                ]
+                ],
+                "style": {
+                    "bgImg": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/b95de2cf239d179275031cf5eefc799d/photo-1642076573338-9bc6a667fe57.jpg"
+                },
+                "isStarred": true
             },
         ]
         localStorage.setItem(STORAGE_KEY, JSON.stringify(boards))

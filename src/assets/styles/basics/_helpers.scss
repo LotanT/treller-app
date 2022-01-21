@@ -25,7 +25,13 @@
     text-align: center;
 }
 
-
+//Hide
+.hidden {
+    display: none;
+}
+.show{
+    display:block;
+}
 // Cleans Helpers
 .clean-list {
     list-style-type: none;
