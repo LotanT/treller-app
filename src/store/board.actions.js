@@ -1,12 +1,14 @@
 import { boardService } from "../services/boards.service";
+import { taskService } from "../services/task.service";
 import { userService } from "../services/user.service.js";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 export function loadBoards() {
+    
     return async dispatch => {
         try {
             const boards = await boardService.query()
-            console.log('Boards from DB:', boards)
+            // console.log('Boards from DB:', boards)
             dispatch({
                 type: 'SET_BOARDS',
                 boards
@@ -22,17 +24,33 @@ export function loadBoards() {
 export function loadBoard(boardId) {
     return async (dispatch) => {
         try {
-            console.log('hi')
-            const boards = await boardService.getById(boardId)
-            console.log('Boards from DB:', boards)
+            const board = await boardService.getById(boardId)
+            console.log('Board from DB:', board)
             dispatch({
-                type: 'SET_BOARDS',
-                boards
+                type: 'SET_BOARD',
+                board
             })
 
         } catch (err) {
             showErrorMsg('Cannot load boards')
             console.log('Cannot load boards', err)
+        }
+    }
+}
+
+export function loadTask(boardId,groupId,taskId) {
+    return async (dispatch) => {
+        try {
+            const task = await taskService.getTaskById(boardId,groupId,taskId)
+            console.log('task from DB:', task)
+            dispatch({
+                type: 'SET_TASK',
+                task
+            })
+
+        } catch (err) {
+            showErrorMsg('Cannot load task')
+            console.log('Cannot load task', err)
         }
     }
 }
@@ -55,10 +73,10 @@ export function onRemoveBoard(boardId) {
     }
 }
 
-export function onAddBoard() {
+export function onAddBoard(title) {
     return async (dispatch) => {
         try {
-            const board = boardService.getEmptyBoard();
+            const board = boardService.getNewBoard(title);
             const savedBoard = await boardService.save(board)
             console.log('Added Board', savedBoard);
             dispatch({
@@ -80,7 +98,6 @@ export function onEditBoard(boardToSave) {
     return async (dispatch) => {
         try {
             const savedBoard = await boardService.save(boardToSave)
-            console.log('Updated Board:', savedBoard);
             boardService.save(boardToSave);
             dispatch({
                 type: 'UPDATE_BOARD',

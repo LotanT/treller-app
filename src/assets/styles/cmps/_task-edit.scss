@@ -97,3 +97,42 @@
   flex-flow: row wrap;
   justify-content: space-between;
 }
+
+
+
+
+
+
+
+
+
+/* TASK EDIT */
+.note-edit {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 2;
+
+  flex-direction: column;
+  max-width: 600px;
+  min-width: 400px;
+  min-height: 200px;
+  border: 1px solid;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  gap: 5px;
+  background-color: rgba(47, 85, 189, 0.925);
+}
+
+
+/* SCREEN BLACK */
+.screen {
+  position: fixed;
+  inset: 0;
+  background-color: #202124;
+  opacity: 0.2;
+  z-index: 1;
+}

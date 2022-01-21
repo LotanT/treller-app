@@ -10,17 +10,18 @@ export const storageService = {
     post,
     put,
     remove,
-    postMany
+    postMany,
+    getTask
 }
 
 function query(entityType, delay = 600) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
 
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
             // reject('OOOOPs')
             resolve(entities)
-        }, delay)   
+        }, delay)
     })
     // return Promise.resolve(entities)
 }
@@ -67,9 +68,18 @@ function _save(entityType, entities) {
 function postMany(entityType, newEntities) {
     return query(entityType)
         .then(entities => {
-            newEntities = newEntities.map(entity => ({...entity, _id: utilService.makeId()}))
+            newEntities = newEntities.map(entity => ({ ...entity, _id: utilService.makeId() }))
             entities.push(...newEntities)
             _save(entityType, entities)
             return entities
         })
+}
+
+
+async function getTask(entityType, boardId, groupId, taskId) {
+    const boards = await query(entityType)
+    const board = boards.find(board => board._id === boardId)
+    const group = board.groups.find(group => group.id === groupId)
+    const task = group.tasks.find(task => task.id === taskId)
+    return task
 }
