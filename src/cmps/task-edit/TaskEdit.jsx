@@ -96,8 +96,9 @@ class _TaskEdit extends React.Component {
 
 
   componentDidMount(){
-    this.task= taskService.getTaskById(this.props.match.params.taskId)
-    console.log(this.task);
+    // this.task= taskService.getTaskById(this.props.match.params.taskId)
+    // if(!this.task) this.task= taskService.getTaskById(this.props.match.params.taskId)
+    // console.log(this.task);
   }
 
   
@@ -144,6 +145,7 @@ class _TaskEdit extends React.Component {
   // };
 
   render() {
+    console.log(this.props);
     var { task } = this.state;
     if (!task) return <h1>Loading..</h1>;
     return (
@@ -196,8 +198,10 @@ class _TaskEdit extends React.Component {
   }
 }
 
-function mapStateToProps({ taskModule }) {
-  return {};
+function mapStateToProps(state) {
+  return {
+      board: state.boardModule.board
+  }
 }
 
 const mapDispatchToProps = {};

@@ -29,8 +29,8 @@ function getTaskById(taskId) {
 
 
 function getBoard() {
-    // const state = store.getState()
-    // if (state.boardModule.board) return state.boardModule.board
+    const state = store.getState()
+    if (state.boardModule.board) return state.boardModule.board
     return setTimeout(() => {
         const state = store.getState();
         console.log(state.boardModule.board);
