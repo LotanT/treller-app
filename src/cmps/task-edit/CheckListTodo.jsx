@@ -19,7 +19,7 @@ export class CheckListTodo extends React.Component {
     document.addEventListener("mousedown", this.handleClick);
     const { todo } = this.props;
     this.setState({ todo });
-    const prevTodo = this.props.todo;
+    const prevTodo ={...(this.props.todo)}
     this.setState({ prevTodo });
     if (!todo.title) {
       const isEdit = true;
@@ -66,20 +66,22 @@ export class CheckListTodo extends React.Component {
     this.props.updateCheckListTodos(this.state.todo.id);
   };
 
-  onCloseTodoEdit = () => {
-    var { todo } = this.state;
-    todo.title = this.state.prevTodo.title;
-    console.log(todo.title);
-    this.setState({ todo });
+  onCloseTodoEdit = (prevState) => {
+    console.log('eeee');
+    var { todo, prevTodo } = this.state;
+    // console.log(todo,prevState);
+    // todo.title = {...prevTodo.title};
+    this.setState({todo:{...prevTodo}});
     this.setIsEdit(false);
   };
 
   onSaveEdit = () => {
+    console.log('sss');
     this.setIsEdit(false);
     const { todo } = this.state;
     this.props.updateCheckListTodos(todo);
-    // const prevTodo = todo;
-    // this.setState({ prevTodo });
+    const prevTodo = todo;
+    this.setState({ prevTodo });
   };
 
   getTitleClass = () => {
@@ -128,11 +130,9 @@ export class CheckListTodo extends React.Component {
                 >
                   Save
                 </a>
-                <div
-                  className="lower"
+                <div className="lower"
                   ref={this.closeTodoBtnRef}
-                  onClick={this.onCloseTodoEdit}
-                >
+                  onClick={this.onCloseTodoEdit}>
                   <AiOutlineClose />
                 </div>
               </div>
