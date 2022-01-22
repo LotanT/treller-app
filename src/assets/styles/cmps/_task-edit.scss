@@ -3,8 +3,9 @@
   min-height: 600px;
   padding-left: 30px;
   padding-right: 30px;
+  padding-top: 30px;
   width: 768px;
-  background-color: rgb(243 ,244, 246);
+  background-color: rgb(243, 244, 246);
   position: fixed;
   top: 47%;
   right: 50%;
@@ -20,12 +21,22 @@
   display: block;
 }
 
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .task {
   flex-grow: 1;
 }
 
 .edit-nav {
   margin-top: 20px;
+}
+
+.task-edit .title {
+  flex-grow: 1;
 }
 
 .task-edit textarea {
@@ -43,7 +54,7 @@
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 100;
 }
 
 .task-edit h5 {
@@ -70,8 +81,9 @@
   min-height: 32px;
   position: relative;
   z-index: 1;
-  padding: 12px 0 0 8px;
-  margin: 10px 0px 0px 0px;
+  margin-left: 7px;
+  //   padding: 12px 0 0 8px;
+  //   margin: 10px 0px 0px 0px;
 }
 
 .task-header h5,
@@ -82,6 +94,7 @@
   color: #010203;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  margin-left: 16px;
 }
 
 .task-main {
@@ -111,9 +124,13 @@
   margin-left: 15px;
 }
 
-.task-edit h5 {
-  margin-left: 7px;
+.description .editable-text h5 {
+  margin-left: 18px;
 }
+
+// .task-edit h5 {
+//   margin-left: 15px;
+// }
 
 .task-edit h3 {
   display: inline-block;
@@ -146,10 +163,12 @@
   justify-content: center;
   line-height: 20px;
   padding: 6px 12px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .grey-btn {
-  margin-left: 8px;
+  margin-left: 12px;
   align-items: center;
   background-color: #091e420a;
   border: none;
@@ -201,20 +220,30 @@
   display: flex;
 }
 
+.checklist-icon {
+  margin-right: 15px;
+}
+
 .checklist .title h5,
 .description .title h3,
 .checklist .title textarea {
-  font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   color: #172b4d;
-  margin-left: 15px;
+}
+
+.checklist .title h5 {
+  //   margin-left: 15px;
+  font-weight: 600;
 }
 
 .add-checklist-todo {
   margin-top: 25px;
 }
 
+.delete-btn {
+  top: 0;
+}
 //CHECKLIST-TODO
 .checklist-todo {
   display: flex;
@@ -223,8 +252,17 @@
   padding: 8px;
 }
 
+.checklist-todo textarea {
+  transform: translateY(-16px);
+  font-style: normal;
+}
+
 .checklist-todo:hover {
-  background-color: rgb(241, 241, 241);
+  background-color: rgb(245, 244, 244);
+}
+
+.task-edit .edit {
+  background-color: rgb(245, 244, 244);
 }
 
 .checklist-todo .checked {
@@ -247,10 +285,8 @@
   width: 20px;
   font-size: 20px;
   line-height: 0;
+  margin-right: 15px;
 }
-
-//Dynamic ClassName
-// <header className={`app-header-user ${isBoardsPage? "user-boards":""}`}  >
 
 /* TASK EDIT */
 .note-edit {
@@ -280,4 +316,73 @@
   background-color: #202124;
   opacity: 0.8;
   z-index: 2;
+}
+
+//MENU
+
+.edit-menu {
+  float: right;
+  overflow: hidden;
+  padding: 0 16px 8px 8px;
+  width: calc(100% - 600px);
+  z-index: 10;
+}
+
+.edit-menu h3 {
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: -4px;
+}
+
+.menu-btn {
+  background-color: #091e420a;
+  border: none;
+  border-radius: 3px;
+  box-shadow: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  height: 32px;
+  margin-top: 8px;
+  max-width: 300px;
+  overflow: hidden;
+  padding: 6px 12px;
+  position: relative;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transition-duration: 85ms;
+  transition-property: background-color, border-color, box-shadow;
+  transition-timing-function: ease;
+  -webkit-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  color: #172b4d;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.menu-btn:hover {
+  background-color: rgb(236, 235, 235);
+}
+
+.menu-text {
+  margin: 0 6px 0 6px;
+}
+
+.menu-icon {
+  width: 20px;
+}
+
+.task-edit .description h5,
+.task-edit .description textarea {
+  margin-left: 20px;
+}
+
+.desc-editable-text {
+  margin-left: 16px;
 }

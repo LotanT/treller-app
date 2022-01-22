@@ -10,11 +10,11 @@ export function boardReducer(state = initialState, action) {
 
     switch (action.type) {
         case 'SET_BOARDS':
-            console.log(action.boards);
+            // console.log(action.boards);
             newState = { ...state, boards: action.boards }
             break
         case 'SET_BOARD':
-            console.log(action.board);
+            // console.log(action.board);
             newState = { ...state, board: action.board }
             break
         case 'REMOVE_BOARD':

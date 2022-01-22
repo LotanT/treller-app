@@ -1,4 +1,5 @@
 import React from "react";
+import { utilService } from "../../services/util.service";
 import { CheckListTodo } from "./CheckListTodo";
 import { EditableText } from "./EditableText";
 import { IoMdCheckboxOutline } from "react-icons/io";
@@ -6,6 +7,7 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 export class CheckList extends React.Component {
   state = {
     checklist: null,
+    isEdit: false,
   };
 
   componentDidMount() {
@@ -13,31 +15,69 @@ export class CheckList extends React.Component {
     this.setState({ checklist });
   }
 
-  updateCheckListTodos = (updatedTodo) => {
+  updateCheckListTodos = (todoToUpdate) => {
     const { checklist } = this.state;
     var { todos } = checklist;
-    const idx = todos.findIndex((todo) => todo.id === updatedTodo.id);
-    todos[idx] = updatedTodo;
+    if (!todoToUpdate) {
+      todoToUpdate = this.getEmptyTodo();
+      todos[todos.length] = todoToUpdate;
+    } else if (!todoToUpdate.title) {
+      this.deleteTodo(todos, todoToUpdate);
+    } else {
+      const idx = todos.findIndex((todo) => todo.id === todoToUpdate.id);
+      todos[idx] = todoToUpdate;
+    }
     checklist.todos = todos;
     this.setState({ checklist });
     this.props.updateCheckListProperty("todos", todos, checklist.id);
   };
 
+  deleteTodo = (todos, todoId) => {
+    const idx = todos.findIndex((todo) => todo.id === todoId);
+    return todos.splice(idx, 1);
+  };
+
+  getEmptyTodo = () => {
+    return {
+      title: "",
+      description: "",
+      isDone: false,
+    };
+  };
+
+  setIsEdit = (boolean) => {
+    console.log(boolean);
+    const isEdit = boolean;
+    this.setState({ isEdit });
+  };
+
   render() {
-    const { checklist } = this.props;
+    // const { checklist } = this.props;
+    const { checklist, isEdit } = this.state;
+    if (!checklist) return <span>Loading..</span>;
     return (
       <section className="checklist">
         <div className="title">
           <div className="left-title">
-            <IoMdCheckboxOutline />
+            <div className="checklist-icon">
+              <IoMdCheckboxOutline />
+            </div>
             <EditableText
               text={checklist.title}
               updateFunction={this.props.updateCheckListProperty}
               checklistId={checklist.id}
               property={"title"}
+              setIsEdit={this.setIsEdit}
             />
           </div>
-          <a className="grey-btn">Delete</a>
+          {!isEdit && (
+            <a
+              className="grey-btn delete-btn"
+              onClick={() => this.props.deleteCheckList(checklist.id)}
+            >
+              Delete
+            </a>
+          )}
         </div>
         {checklist.todos?.map((todo) => (
           <CheckListTodo
@@ -46,7 +86,12 @@ export class CheckList extends React.Component {
             updateCheckListTodos={this.updateCheckListTodos}
           />
         ))}
-        <a className="grey-btn add-checklist-todo">Add an item</a>
+        <a
+          className="grey-btn add-checklist-todo"
+          onClick={() => this.updateCheckListTodos()}
+        >
+          Add an item
+        </a>
       </section>
     );
   }

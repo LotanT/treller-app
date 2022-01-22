@@ -22,10 +22,11 @@ export function loadBoards() {
 }
 
 export function loadBoard(boardId) {
+    console.log(boardId)
     return async (dispatch) => {
         try {
             const board = await boardService.getById(boardId)
-            console.log('Board from DB:', board)
+            // console.log('Board from DB:', board)
             dispatch({
                 type: 'SET_BOARD',
                 board
