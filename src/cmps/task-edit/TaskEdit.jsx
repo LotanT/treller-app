@@ -6,6 +6,7 @@ import { EditMenu } from "./EditMenu";
 import { GrTextAlignFull } from "react-icons/gr";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaPager } from "react-icons/fa";
+import { taskService } from "../../services/task.service";
 
 const testTask = {
   id: "c104",
@@ -95,6 +96,13 @@ class _TaskEdit extends React.Component {
   //     });
   // }
 
+
+  componentDidMount(){
+    this.task= taskService.getTaskById(this.props.match.params.taskId)
+    console.log(this.task);
+  }
+
+  
   componentWillUnmount() {
     this.clearState();
   }
@@ -139,6 +147,8 @@ class _TaskEdit extends React.Component {
     var { isEdit, task } = this.state;
     if (!task) return <h1>Loading..</h1>;
     return (
+      <React.Fragment>
+      <div className="screen"></div>
       <section className="task-edit">
         <div className="task-header">
           <div className="title flex">
@@ -188,6 +198,7 @@ class _TaskEdit extends React.Component {
           <EditMenu />
         </div>
       </section>
+      </React.Fragment>
     );
   }
 }

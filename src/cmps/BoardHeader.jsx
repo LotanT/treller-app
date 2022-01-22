@@ -2,7 +2,6 @@ import { BsStar } from 'react-icons/bs';
 // BsStar
 
 export function BoardHeader ({board}){
-    console.log(board)
     return(
         <div className='board-header'>
           <div className="board-name">{board.title}</div>

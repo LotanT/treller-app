@@ -11,13 +11,13 @@ export function BoardList(props) {
   const { boards, onEditBoard } = props
 
   return (
-    <div className="boards-list flex">
+    <React.Fragment>
       {boards &&
         boards.map((board, idx) => (
           <BoardPreview board={board} key={idx} onEditBoard={onEditBoard} />
         ))}
+    </React.Fragment>
 
-    </div>
   )
 }
 

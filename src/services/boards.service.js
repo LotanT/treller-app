@@ -307,6 +307,7 @@ function _createBoards() {
                             {
                                 "id": "c101",
                                 "title": "Replace logo",
+                                "img": "https://static01.nyt.com/images/2022/01/05/technology/personaltech/05TECHTIP-GIF/05TECHTIP-GIF-mobileMasterAt3x.gif",
                                 "isArchive": false
                             },
                             {
@@ -331,6 +332,7 @@ function _createBoards() {
                             {
                                 "id": "c104",
                                 "title": "Help me",
+                                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbMZUssCb25YW6rL-kAkjfR7EgUkdCJoIFgw&usqp=CAU",
                                 "status": "in-progress",
                                 "description": "description",
                                 "comments": [
@@ -391,7 +393,8 @@ function _createBoards() {
                                     "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                                 },
                                 "style": {
-                                    "bgColor": "#26de81"
+                                    "bgColor": "#26de81",
+                                    "img": "https://cdn.pixabay.com/photo/2018/09/30/16/26/sun-3713835__340.jpg",
                                 },
                                 "isArchive": false
                             }

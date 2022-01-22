@@ -9,7 +9,7 @@ import {BoardHeader} from '../cmps/BoardHeader'
 
 function _BoardDetails (props){
     // const [board, setBoard] = useState({board: null})
-    console.log(props)
+    // console.log(props)
     useEffect(()=>{
         // console.log(this.props);
 
@@ -18,14 +18,14 @@ function _BoardDetails (props){
     
     const onAddGroup = () => {}
     const {board} = props
-    console.log(board)
+    // console.log(board)
     if(!board) return <span>loading...</span>
     return(
-        <div className='board-container'>
+        <div className='board-container' style={{background:`url(${board.style.bgImg})`}}>
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
-            <GroupList groups={board.groups}/>
+            <GroupList groups={board.groups} boardId={props.match.params.boardId}/>
             </div>
         </div>
     )

@@ -38,23 +38,6 @@ export function loadBoard(boardId) {
     }
 }
 
-export function loadTask(boardId,groupId,taskId) {
-    return async (dispatch) => {
-        try {
-            const task = await taskService.getTaskById(boardId,groupId,taskId)
-            console.log('task from DB:', task)
-            dispatch({
-                type: 'SET_TASK',
-                task
-            })
-
-        } catch (err) {
-            showErrorMsg('Cannot load task')
-            console.log('Cannot load task', err)
-        }
-    }
-}
-
 export function onRemoveBoard(boardId) {
     return async (dispatch, getState) => {
         try {

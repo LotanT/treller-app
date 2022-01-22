@@ -13,7 +13,6 @@ export function BoardPreview(props) {
     const onToggleStar = async()=>{
         const newBoard = {...board}
         newBoard.isStarred = !newBoard.isStarred
-        console.log('newBoard.isStarred:' ,newBoard.isStarred)
         
         try{
             onEditBoard(newBoard);
