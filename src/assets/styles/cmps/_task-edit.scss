@@ -3,7 +3,13 @@
   min-height: 600px;
   padding-left: 30px;
   padding-right: 30px;
-  width: 800px;
+  width: 768px;
+  background-color: rgb(243 ,244, 246);
+  position: fixed;
+  top: 47%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 2;
 }
 
 .task-edit .lower {
@@ -272,6 +278,6 @@
   position: fixed;
   inset: 0;
   background-color: #202124;
-  opacity: 0.2;
-  z-index: 1;
+  opacity: 0.8;
+  z-index: 2;
 }

@@ -46,8 +46,8 @@ class _UserBoards extends React.Component {
                     <h3>My boards</h3>
                     <div className="boards-list flex">
                     <BoardList boards={boards.filter((board) => !board.isStarred)} onEditBoard={this.props.onEditBoard} />
-                    <CreateNewBoard openModal={this.openModal}/>
-                    <AddBoard closeModal={this.closeModal} isOpenModal={isOpenModal}/>
+                    <CreateNewBoard closeModal={this.closeModal} isOpenModal={isOpenModal} openModal={this.openModal}/>
+                    {/* <AddBoard closeModal={this.closeModal} isOpenModal={isOpenModal}/> */}
                     </div>
                 </div>
 
