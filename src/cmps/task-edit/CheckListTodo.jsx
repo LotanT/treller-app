@@ -20,7 +20,7 @@ export class CheckListTodo extends React.Component {
     this.setState({ todo });
     const prevTodo = this.props.todo;
     this.setState({ prevTodo });
-    if (!todo.id) {
+    if (!todo.title) {
       const isEdit = true;
       this.setState({ isEdit });
     }
@@ -77,8 +77,8 @@ export class CheckListTodo extends React.Component {
     this.setIsEdit(false);
     const { todo } = this.state;
     this.props.updateCheckListTodos(todo);
-    const prevTodo = todo;
-    this.setState({ prevTodo });
+    // const prevTodo = todo;
+    // this.setState({ prevTodo });
   };
 
   getTitleClass = () => {

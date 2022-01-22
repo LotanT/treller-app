@@ -4,7 +4,7 @@ import { RiKeyboardBoxLine } from 'react-icons/ri';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
 export function GroupPreview({ group, boardId }) {
-  // console.log(group);
+  console.log(group);
   return (
     <div className="group-container">
       <div className="group">

@@ -39,6 +39,7 @@ export class CheckList extends React.Component {
 
   getEmptyTodo = () => {
     return {
+      id: utilService.makeId(),
       title: "",
       description: "",
       isDone: false,
