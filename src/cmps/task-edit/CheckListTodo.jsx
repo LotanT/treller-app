@@ -52,7 +52,6 @@ export class CheckListTodo extends React.Component {
     var { todo } = this.state;
     todo.title = ev.target.value;
     this.setState({ todo });
-    console.log(this.state.prevTodo.title, this.state.todo.title);
   };
 
   toggleIsDone = () => {
