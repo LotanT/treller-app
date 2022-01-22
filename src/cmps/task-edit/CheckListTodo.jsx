@@ -15,6 +15,7 @@ export class CheckListTodo extends React.Component {
   closeTodoBtnRef = React.createRef();
 
   componentDidMount() {
+    console.log("h");
     document.addEventListener("mousedown", this.handleClick);
     const { todo } = this.props;
     this.setState({ todo });
