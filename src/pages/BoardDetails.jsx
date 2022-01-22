@@ -9,7 +9,7 @@ import {BoardHeader} from '../cmps/BoardHeader'
 
 function _BoardDetails (props){
     // const [board, setBoard] = useState({board: null})
-    console.log(props)
+    // console.log(props)
     useEffect(()=>{
         // console.log(this.props);
 
@@ -18,7 +18,7 @@ function _BoardDetails (props){
     
     const onAddGroup = () => {}
     const {board} = props
-    console.log(board)
+    // console.log(board)
     if(!board) return <span>loading...</span>
     return(
         <div className='board-container'>

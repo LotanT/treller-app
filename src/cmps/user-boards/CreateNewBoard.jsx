@@ -9,8 +9,8 @@ export function CreateNewBoard({ openModal,closeModal, isOpenModal}) {
 
 
     return (
-        <div className="new-board-preview" onClick={openModal}>
-            <div className='board-details'>
+        <div className="new-board-preview" >
+            <div className='board-details' onClick={openModal}>
                 <h2 className='board-title'>Create new board</h2>
             </div>
             <AddBoard closeModal={closeModal} isOpenModal={isOpenModal} />

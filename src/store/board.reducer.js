@@ -1,7 +1,6 @@
 const initialState = {
     boards: [],  //mini boards
     board: null,
-    task: null
 
 }
 
@@ -11,13 +10,12 @@ export function boardReducer(state = initialState, action) {
 
     switch (action.type) {
         case 'SET_BOARDS':
+            console.log(action.boards);
             newState = { ...state, boards: action.boards }
             break
         case 'SET_BOARD':
+            console.log(action.board);
             newState = { ...state, board: action.board }
-            break
-        case 'SET_TASK':
-            newState = { ...state, task: action.task }
             break
         case 'REMOVE_BOARD':
             boards = state.boards.filter(board => board._id !== action.boardId)

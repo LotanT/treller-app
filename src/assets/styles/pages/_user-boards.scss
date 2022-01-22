@@ -1,7 +1,9 @@
 .user-boards-list {
     .starred-boards-header,
     .my-boards-header {
+        margin: 40px 20px 40px;
         background-color: #fafbfc;
+        height: 100%;
         img {
             height: 24px;
             line-height: 32px;
@@ -35,14 +37,17 @@
         &:hover {
             filter: brightness(0.8);
         }
-        .board-details {
-            display: flex;
-            cursor: pointer;
-            border-radius: 3px;
-            padding: 10px 10px;
-            text-align: center;
-            z-index: 1;
-            height: 100%;
+        // .board-details {
+        //     display: flex;
+        //     cursor: pointer;
+        //     border-radius: 3px;
+        //     padding: 10px 10px;
+        //     text-align: center;
+        //     z-index: 1;
+        //     height: 100%;
+        //     width: 100%;
+        //     align-content: center;
+        //     justify-content: center;
 
             h2 {
                 font-size: rem(14px);
@@ -93,7 +98,6 @@
             filter: brightness(0.8);
         }
     }
-}
 
 
 .add-board-pop {
@@ -157,6 +161,25 @@
         left: 90px;
         width: 10px !important;
     }
+}
+.boards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 206px);
+    grid-auto-rows: 100px;
+    grid-gap: 16px;
+    gap: 16px;
+}
+.board-details {
+    display: flex;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 10px 10px;
+    text-align: center;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    
 
- 
 }

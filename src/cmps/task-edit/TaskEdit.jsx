@@ -5,6 +5,7 @@ import { EditableText } from "./EditableText";
 import { GrTextAlignFull } from "react-icons/gr";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaPager } from "react-icons/fa";
+import { taskService } from "../../services/task.service";
 
 const testTask = {
   id: "c104",
@@ -93,6 +94,13 @@ class _TaskEdit extends React.Component {
   //     });
   // }
 
+
+  componentDidMount(){
+    this.task= taskService.getTaskById(this.props.match.params.taskId)
+    console.log(this.task);
+  }
+
+  
   componentWillUnmount() {
     this.clearState();
   }

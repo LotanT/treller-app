@@ -11,7 +11,7 @@ export const storageService = {
     put,
     remove,
     postMany,
-    getTask
+    
 }
 
 function query(entityType, delay = 600) {
@@ -30,6 +30,7 @@ function get(entityType, entityId) {
     return query(entityType)
         .then(entities => entities.find(entity => entity._id === entityId))
 }
+
 function post(entityType, newEntity) {
     newEntity._id = utilService.makeId()
     return query(entityType)
@@ -76,10 +77,10 @@ function postMany(entityType, newEntities) {
 }
 
 
-async function getTask(entityType, boardId, groupId, taskId) {
-    const boards = await query(entityType)
-    const board = boards.find(board => board._id === boardId)
-    const group = board.groups.find(group => group.id === groupId)
-    const task = group.tasks.find(task => task.id === taskId)
-    return task
-}
+// async function getTask(entityType, boardId, groupId, taskId) {
+//     const boards = await query(entityType)
+//     const board = boards.find(board => board._id === boardId)
+//     const group = board.groups.find(group => group.id === groupId)
+//     const task = group.tasks.find(task => task.id === taskId)
+//     return task
+// }

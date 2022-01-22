@@ -6,7 +6,6 @@ import { MdAttachFile } from 'react-icons/md';
 
 
 export function TaskPreview({ task }) {
-  console.log(task);
   // const isLabel = task.labelIds;
   // const [isEditHeader, setisEditHeader] = useState({ isEditHeader: false });
 

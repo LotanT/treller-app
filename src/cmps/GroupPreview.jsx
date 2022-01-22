@@ -1,7 +1,6 @@
 import { TaskPreview } from './TaskPreview';
 
 export function GroupPreview({ group }) {
-  console.log(group);
   return (
     <div className="group-container">
       <div className="group">
