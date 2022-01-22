@@ -99,7 +99,7 @@ class _TaskEdit extends React.Component {
             />
           </div>
           <a>
-            <AiOutlineClose />
+            <AiOutlineClose onClick={() => this.props.history.push(`/${this.props.match.params.boardId}`)} />
           </a>
         </div>
         <div className="flex">
