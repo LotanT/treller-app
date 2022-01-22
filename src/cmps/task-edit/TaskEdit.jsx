@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { CheckList } from "./CheckList";
 import { EditableText } from "./EditableText";
+import { EditMenu } from "./EditMenu";
 import { GrTextAlignFull } from "react-icons/gr";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaPager } from "react-icons/fa";
@@ -81,6 +82,7 @@ const testTask = {
 class _TaskEdit extends React.Component {
   state = {
     task: testTask,
+    isEdit: false,
   };
 
   // componentDidMount() {
@@ -102,6 +104,11 @@ class _TaskEdit extends React.Component {
     this.setState({ task });
   };
 
+  setIsEdit = (boolean) => {
+    const isEdit = boolean;
+    this.setState({ isEdit });
+  };
+
   updateTaskProperty = (property, value) => {
     this.state.task[property] = value;
   };
@@ -117,31 +124,24 @@ class _TaskEdit extends React.Component {
     this.setState({ task });
   };
 
-  // updateCheckListTitle = (checklistId, value) => {
-  //   var { checklists } = this.state.task;
-  //   const idx = checklists.findIndex(
-  //     (checklist) => checklist.id === checklistId
-  //   );
-  //   checklists[idx].title = value;
-  //   this.setState({ checklists });
-  // };
-
-  // updateCheckListTodos = (checklistId, todos) => {
-  //   var { checklists } = this.state.task;
-  //   const idx = checklists.findIndex(
-  //     (checklist) => checklist.id === checklistId
-  //   );
-  //   checklists[idx].todos = todos;
-  //   this.setState({ checklists });
-  // };
+  deleteCheckList = (checklistId) => {
+    var { task } = this.state;
+    var { checklists } = task;
+    const idx = checklists.findIndex(
+      (checklist) => checklist.id === checklistId
+    );
+    checklists.splice(idx, 1);
+    task.checklists = checklists;
+    this.setState({ task });
+  };
 
   render() {
-    var { task } = this.state;
+    var { isEdit, task } = this.state;
     if (!task) return <h1>Loading..</h1>;
     return (
       <section className="task-edit">
         <div className="task-header">
-          <div className="flex">
+          <div className="title flex">
             <div className="lower">
               <FaPager />
             </div>
@@ -149,6 +149,9 @@ class _TaskEdit extends React.Component {
               text={task.title}
               updateFunction={this.updateTaskProperty}
               property={"title"}
+              setIsEdit={() => {
+                return;
+              }}
             />
           </div>
           <a>
@@ -161,24 +164,28 @@ class _TaskEdit extends React.Component {
               <div className="description">
                 <GrTextAlignFull />
                 <h3>Description</h3>
-                <a className="grey-btn">Edit</a>
+                {!isEdit && <a className="grey-btn">Edit</a>}
               </div>
-              <EditableText
-                text={task.description}
-                updateFunction={this.updateTaskProperty}
-                property={"description"}
-              />
+              <div className="desc-editable-text">
+                <EditableText
+                  text={task.description}
+                  updateFunction={this.updateTaskProperty}
+                  property={"description"}
+                  setIsEdit={this.setIsEdit}
+                />
+              </div>
               {task.checklists?.map((checklist) => (
                 <CheckList
                   key={checklist.id}
                   checklist={checklist}
-                  updateCheckListProperty={this.updateCheckListProperty}
                   checklistId={checklist.id}
+                  updateCheckListProperty={this.updateCheckListProperty}
+                  deleteCheckList={this.deleteCheckList}
                 />
               ))}
             </div>
           </div>
-          <div className="edit-nav">navbar</div>
+          <EditMenu />
         </div>
       </section>
     );

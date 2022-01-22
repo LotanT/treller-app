@@ -14,6 +14,7 @@ export class EditableText extends React.Component {
   setIsEdit = (boolean) => {
     const isEdit = boolean;
     this.setState({ isEdit });
+    this.props.setIsEdit(isEdit);
   };
 
   setText = (ev) => {
@@ -26,6 +27,8 @@ export class EditableText extends React.Component {
       this.props.checklistId
     );
   };
+
+  handleBlur = (ev) => {};
 
   render() {
     const { isEdit, text } = this.state;
@@ -40,7 +43,9 @@ export class EditableText extends React.Component {
         {isEdit && (
           <textarea
             onChange={this.setText}
-            onBlur={() => this.setIsEdit(false)}
+            onBlur={() => {
+              this.handleBlur();
+            }}
             value={text}
             autoFocus
           ></textarea>
