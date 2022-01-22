@@ -1,8 +1,14 @@
+.user-boards-container{
+    background-color: #fafbfc;
+    height: 95vh;
+    padding-top: 40px;
+
+}
+
 .user-boards-list {
     .starred-boards-header,
     .my-boards-header {
-        margin: 40px 20px 40px;
-        background-color: #fafbfc;
+        margin: 0px 20px 40px;
         height: 100%;
         img {
             height: 24px;

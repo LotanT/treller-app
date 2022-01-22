@@ -33,6 +33,7 @@ class _UserBoards extends React.Component {
         const { boards } = this.props
         const { isOpenModal } = this.state
         return (
+            <div className="user-boards-container">
             <section className="user-boards-list">
                 <section className='starred-boards-header'>
                     <img src={starIcon} />
@@ -52,6 +53,7 @@ class _UserBoards extends React.Component {
                 </div>
 
             </section>
+            </div>
         );
     }
 }

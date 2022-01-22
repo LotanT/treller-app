@@ -95,12 +95,20 @@ class _TaskEdit extends React.Component {
   // }
 
 
-  componentDidMount(){
-    this.task= taskService.getTaskById(this.props.match.params.taskId)
+  componentDidMount() {
+    this.task = taskService.getTaskById(this.props.match.params.taskId)
+    if (!this.task) {
+      setTimeout(() => {
+        this.task = taskService.getTaskById(this.props.match.params.taskId)
+        console.log(this.task);
+
+      }, 1000)
+
+    }
     console.log(this.task);
   }
 
-  
+
   componentWillUnmount() {
     this.clearState();
   }
@@ -148,49 +156,49 @@ class _TaskEdit extends React.Component {
     if (!task) return <h1>Loading..</h1>;
     return (
       <React.Fragment>
-      <div className="screen"></div>
-      <section className="task-edit">
-        <div className="task-header">
-          <div className="flex">
-            <div className="lower">
-              <FaPager />
-            </div>
-            <EditableText
-              text={task.title}
-              updateFunction={this.updateTaskProperty}
-              property={"title"}
-            />
-          </div>
-          <a>
-            <AiOutlineClose />
-          </a>
-        </div>
-        <div className="flex">
-          <div className="task">
-            <div className="task-main">
-              <div className="description">
-                <GrTextAlignFull />
-                <h3>Description</h3>
-                <a className="grey-btn">Edit</a>
+        <div className="screen"></div>
+        <section className="task-edit">
+          <div className="task-header">
+            <div className="flex">
+              <div className="lower">
+                <FaPager />
               </div>
               <EditableText
-                text={task.description}
+                text={task.title}
                 updateFunction={this.updateTaskProperty}
-                property={"description"}
+                property={"title"}
               />
-              {task.checklists?.map((checklist) => (
-                <CheckList
-                  key={checklist.id}
-                  checklist={checklist}
-                  updateCheckListProperty={this.updateCheckListProperty}
-                  checklistId={checklist.id}
-                />
-              ))}
             </div>
+            <a>
+              <AiOutlineClose />
+            </a>
           </div>
-          <div className="edit-nav">navbar</div>
-        </div>
-      </section>
+          <div className="flex">
+            <div className="task">
+              <div className="task-main">
+                <div className="description">
+                  <GrTextAlignFull />
+                  <h3>Description</h3>
+                  <a className="grey-btn">Edit</a>
+                </div>
+                <EditableText
+                  text={task.description}
+                  updateFunction={this.updateTaskProperty}
+                  property={"description"}
+                />
+                {task.checklists?.map((checklist) => (
+                  <CheckList
+                    key={checklist.id}
+                    checklist={checklist}
+                    updateCheckListProperty={this.updateCheckListProperty}
+                    checklistId={checklist.id}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="edit-nav">navbar</div>
+          </div>
+        </section>
       </React.Fragment>
     );
   }
