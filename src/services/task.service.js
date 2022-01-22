@@ -1,28 +1,39 @@
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
-
-
-// import { userService } from './user.service.js'
+import { onEditBoard } from '../store/board.actions'
 
 const STORAGE_KEY = 'boardDB'
 
 export const taskService = {
-    getTaskById
+    getTaskById,
+    updateTask
 
 }
 
 function getTaskById(board, taskId) {
-    if(!board) return 
+    if (!board) return
     for (let i = 0; i < board.groups.length; i++) {
         for (let j = 0; j < board.groups[i].tasks.length; j++) {
             if (board.groups[i].tasks[j].id === taskId) {
                 console.log('task from TaskService:', board.groups[i].tasks[j])
                 return board.groups[i].tasks[j]
-            }   
+            }
         }
     }
 }
 
+
+function updateTask(board, updatedTask) {
+    console.log(board);
+    board.groups.tasks = board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            return task.id === updatedTask.id ? updatedTask : task
+        })
+        console.log(group);
+        return group.tasks
+    })
+    console.log(board);
+    return board
+
+}
 
 
 

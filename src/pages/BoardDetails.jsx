@@ -18,7 +18,7 @@ function _BoardDetails (props){
     
     const onAddGroup = () => {}
     const {board} = props
-    // console.log(board)
+    console.log(board)
     if(!board) return <span>loading...</span>
     return(
         <div className='board-container' style={{background:`url(${board.style.bgImg})`}}>

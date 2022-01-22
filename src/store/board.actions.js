@@ -78,7 +78,7 @@ export function onAddBoard(title) {
     }
 }
 
-export function onEditBoard(boardToSave) {
+export function onEditBoard(boardToSave) {    
     return async (dispatch) => {
         try {
             const savedBoard = await boardService.save(boardToSave)
