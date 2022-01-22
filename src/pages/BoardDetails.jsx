@@ -21,11 +21,11 @@ function _BoardDetails (props){
     console.log(board)
     if(!board) return <span>loading...</span>
     return(
-        <div className='board-container'>
+        <div className='board-container' style={{background:`url(${board.style.bgImg})`}}>
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
-            <GroupList groups={board.groups}/>
+            <GroupList groups={board.groups} boardId={props.match.params.boardId}/>
             </div>
         </div>
     )
