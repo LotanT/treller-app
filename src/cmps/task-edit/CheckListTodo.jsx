@@ -15,17 +15,16 @@ export class CheckListTodo extends React.Component {
   closeTodoBtnRef = React.createRef();
 
   componentDidMount() {
-    console.log("h");
     document.addEventListener("mousedown", this.handleClick);
     const { todo } = this.props;
     this.setState({ todo });
-    const prevTodo ={...(this.props.todo)}
+    const prevTodo = { ...this.props.todo };
     this.setState({ prevTodo });
     if (!todo.title) {
       const isEdit = true;
       this.setState({ isEdit });
     }
-    if (!todo.title && !this.state.isEdit) return <div></div>;
+    if (!todo.title) return <div></div>;
   }
 
   componentWillUnmount() {
@@ -66,17 +65,13 @@ export class CheckListTodo extends React.Component {
     this.props.updateCheckListTodos(this.state.todo.id);
   };
 
-  onCloseTodoEdit = (prevState) => {
-    console.log('eeee');
-    var { todo, prevTodo } = this.state;
-    // console.log(todo,prevState);
-    // todo.title = {...prevTodo.title};
-    this.setState({todo:{...prevTodo}});
+  onCloseTodoEdit = () => {
+    var { prevTodo } = this.state;
+    this.setState({ todo: { ...prevTodo } });
     this.setIsEdit(false);
   };
 
   onSaveEdit = () => {
-    console.log('sss');
     this.setIsEdit(false);
     const { todo } = this.state;
     this.props.updateCheckListTodos(todo);
@@ -93,6 +88,7 @@ export class CheckListTodo extends React.Component {
   render() {
     const { isEdit, todo } = this.state;
     if (!todo) return <h1>Loading..</h1>;
+    if (!todo.title && !isEdit) todo.title = "Add title";
     return (
       <section className={`checklist-todo ${isEdit ? " edit" : ""}`}>
         {!todo.isDone && (
@@ -119,6 +115,7 @@ export class CheckListTodo extends React.Component {
               onChange={this.setTitle}
               value={todo.title}
               ref={this.todoTextareaRef}
+              placeholder={"Add Title..."}
               autoFocus
             ></textarea>
             <div className="space-between">
@@ -130,9 +127,11 @@ export class CheckListTodo extends React.Component {
                 >
                   Save
                 </a>
-                <div className="lower"
+                <div
+                  className="lower"
                   ref={this.closeTodoBtnRef}
-                  onClick={this.onCloseTodoEdit}>
+                  onClick={this.onCloseTodoEdit}
+                >
                   <AiOutlineClose />
                 </div>
               </div>

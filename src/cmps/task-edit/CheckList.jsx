@@ -15,6 +15,11 @@ export class CheckList extends React.Component {
     this.setState({ checklist });
   }
 
+  setIsEdit = (boolean) => {
+    const isEdit = boolean;
+    this.setState({ isEdit });
+  };
+
   updateCheckListTodos = (todoToUpdate) => {
     const { checklist } = this.state;
     var { todos } = checklist;
@@ -47,13 +52,11 @@ export class CheckList extends React.Component {
   };
 
   setIsEdit = (boolean) => {
-    console.log(boolean);
     const isEdit = boolean;
     this.setState({ isEdit });
   };
 
   render() {
-    // const { checklist } = this.props;
     const { checklist, isEdit } = this.state;
     if (!checklist) return <span>Loading..</span>;
     return (

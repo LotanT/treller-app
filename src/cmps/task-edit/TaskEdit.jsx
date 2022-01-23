@@ -7,7 +7,7 @@ import { GrTextAlignFull } from "react-icons/gr";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaPager } from "react-icons/fa";
 import { taskService } from "../../services/task.service";
-import { loadBoard, onEditBoard } from '../../store/board.actions';
+import { loadBoard, onEditBoard } from "../../store/board.actions";
 
 class _TaskEdit extends React.Component {
   state = {
@@ -16,22 +16,21 @@ class _TaskEdit extends React.Component {
   };
 
   componentDidMount() {
-    this.props.loadBoard(this.props.match.params.boardId)
+    this.props.loadBoard(this.props.match.params.boardId);
   }
 
   loadTask = () => {
-    // this.props.loadBoard(this.props.match.params.boardId)
-    const task = taskService.getTaskById(this.props.board, this.props.match.params.taskId)
-    this.setState({ task })
-  }
+    const task = taskService.getTaskById(
+      this.props.board,
+      this.props.match.params.taskId
+    );
+    this.setState({ task });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.task === null) {
-      // console.log(prevProps.board, this.props.board);
-
-      this.loadTask()
+      this.loadTask();
     }
-
   }
 
   componentWillUnmount() {
@@ -51,8 +50,8 @@ class _TaskEdit extends React.Component {
   updateTaskProperty = (property, value) => {
     var { task } = this.state;
     task[property] = value;
-    const updatedBoard = taskService.updateTask(this.props.board, task)
-    this.props.onEditBoard(updatedBoard)
+    const updatedBoard = taskService.updateTask(this.props.board, task);
+    this.props.onEditBoard(updatedBoard);
   };
 
   updateCheckListProperty = (property, value, checklistId) => {
@@ -64,8 +63,8 @@ class _TaskEdit extends React.Component {
     checklists[idx][property] = value;
     task.checklists = checklists;
     this.setState({ task });
-    const updatedBoard = taskService.updateTask(this.props.board, task)
-    this.props.onEditBoard(updatedBoard)
+    const updatedBoard = taskService.updateTask(this.props.board, task);
+    this.props.onEditBoard(updatedBoard);
   };
 
   deleteCheckList = (checklistId) => {
@@ -77,16 +76,27 @@ class _TaskEdit extends React.Component {
     checklists.splice(idx, 1);
     task.checklists = checklists;
     this.setState({ task });
-    const updatedBoard = taskService.updateTask(this.props.board, task)
-    this.props.onEditBoard(updatedBoard)
+    const updatedBoard = taskService.updateTask(this.props.board, task);
+    this.props.onEditBoard(updatedBoard);
   };
+
+  onCreateNewTaskList = ()=>{
+    const updatedBoard = taskService.createNewTaskList(this.props.board, this.props.match.params.taskId)
+    this.props.onEditBoard(updatedBoard)
+  }
+
 
   render() {
     let { isEdit, task } = this.state;
-    if (!task) return <span></span>
+    if (!task) return <span></span>;
     return (
       <React.Fragment>
-        <div className="screen"></div>
+        <div
+          className="screen"
+          onClick={() =>
+            this.props.history.push(`/${this.props.match.params.boardId}`)
+          }
+        ></div>
         <section className="task-edit">
           <div className="task-header">
             <div className="title flex">
@@ -102,13 +112,17 @@ class _TaskEdit extends React.Component {
                 }}
               />
             </div>
-            <a>
-              <AiOutlineClose onClick={() => this.props.history.push(`/${this.props.match.params.boardId}`)} />
+            <a className="close-edit-page-btn">
+              <AiOutlineClose
+                onClick={() =>
+                  this.props.history.push(`/${this.props.match.params.boardId}`)
+                }
+              />
             </a>
           </div>
           <div className="flex">
             <div className="task">
-              <div className="task-main">
+              <div className="task-details">
                 <div className="description">
                   <GrTextAlignFull />
                   <h3>Description</h3>
@@ -132,11 +146,9 @@ class _TaskEdit extends React.Component {
                   />
                 ))}
               </div>
-              <a>
-                {/* <AiOutlineClose /> */}
-              </a>
+              <a></a>
             </div>
-            <EditMenu />
+            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList}/>
           </div>
         </section>
       </React.Fragment>
@@ -146,13 +158,13 @@ class _TaskEdit extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    board: state.boardModule.board
-  }
+    board: state.boardModule.board,
+  };
 }
 
 const mapDispatchToProps = {
   loadBoard,
-  onEditBoard
+  onEditBoard,
 };
 
 export const TaskEdit = connect(mapStateToProps, mapDispatchToProps)(_TaskEdit);
