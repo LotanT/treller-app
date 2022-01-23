@@ -9,18 +9,21 @@ import { onAddBoard } from '../../store/board.actions'
 //MAP TO BOARD PREV
 
 export function AddCheckList({onCreateNewTaskList, toggleModal }) {
-  const [boardTitle, setBoardTitle] = useState('')
+  const [CheckListTitle, setCheckListTitle] = useState('')
 
 
-
-
+  
+  const onCreateNewTaskListAdd = () =>{
+    onCreateNewTaskList(CheckListTitle)
+    toggleModal()
+  }
 
   return (
     <div  className="add-check-list-pop">
-      <div className='add-list-title'>Create board</div>
-      <div className="add-title">Board Title:</div>
-      <input type="text" required="" aria-required="true" value={boardTitle} onChange={e=> setBoardTitle(e.target.value)}></input>
-      <button className='btn create-list' onClick={onCreateNewTaskList}>Create</button>
+      <div className='add-list-title'>Add checklist</div>
+      <div className="add-title">Title:</div>
+      <input type="text" required="" aria-required="true" value={CheckListTitle} onChange={e=> setCheckListTitle(e.target.value)}></input>
+      <button className='btn create-list' onClick={onCreateNewTaskListAdd}>Create</button>
       <img className='exit-svg' onClick={toggleModal} src={ExitSvg}></img>
     </div>
   )

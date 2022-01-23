@@ -31,6 +31,10 @@ class _TaskEdit extends React.Component {
     if (prevState.task === null) {
       this.loadTask();
     }
+
+    if(prevProps.board !==this.props.board){
+      this.loadTask();
+    }
   }
 
   componentWillUnmount() {
@@ -80,11 +84,11 @@ class _TaskEdit extends React.Component {
     this.props.onEditBoard(updatedBoard);
   };
 
-  onCreateNewTaskList = ()=>{
-    const updatedBoard = taskService.createNewTaskList(this.props.board, this.props.match.params.taskId)
-    this.props.onEditBoard(updatedBoard)
-  }
+  onCreateNewTaskList = async (title )=>{
+    const updatedBoard = taskService.createNewTaskList(this.props.board, this.props.match.params.taskId, title)
+    await this.props.onEditBoard(updatedBoard)
 
+  }
 
   render() {
     let { isEdit, task } = this.state;

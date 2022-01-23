@@ -1,25 +1,28 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Route } from "react-router";
 
-import {GroupList} from '../cmps/user-board/GroupsList'
+
+import { GroupList } from '../cmps/user-board/GroupsList'
 import { loadBoard, onEditBoard } from '../store/board.actions';
-import {BoardHeader} from '../cmps/user-board/BoardHeader'
-import {taskService} from '../services/task.service'
+import { BoardHeader } from '../cmps/user-board/BoardHeader'
+import { taskService } from '../services/task.service'
+import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 
-function _BoardDetails (props){
+function _BoardDetails(props) {
     // const [board, setBoard] = useState({board: null})
     // console.log(props)
-    const {board} = props
+    const { board } = props
     const boardId = props.match.params.boardId
 
-    useEffect(()=>{
+    useEffect(() => {
         props.loadBoard(boardId)
     }, [])
-    
-    const onAddGroup = () => {}
-    const onAddTask = async (groupId,title) => {
-        const updatedBoard = taskService.addTask(board,groupId,title)
+
+    const onAddGroup = () => { }
+    const onAddTask = async (groupId, title) => {
+        const updatedBoard = taskService.addTask(board, groupId, title)
         await props.onEditBoard(updatedBoard)
     }
 
@@ -31,13 +34,20 @@ function _BoardDetails (props){
     // console.log(board)
     if(!board) return <span>loading...</span>
     return(
+        <>
         <div className='board-container' style={{background:`url(${board.style.bgImg})`}}>
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
             <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} />
             </div>
-        </div>
+            </div>
+            <Route
+                path="/:boardId/:taskId"
+                component={TaskEdit}
+                label="edit"
+            />
+        </>
     )
 }
 
