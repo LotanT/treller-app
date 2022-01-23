@@ -7,7 +7,7 @@ export class EditableText extends React.Component {
   };
 
   componentDidMount() {
-    const text = this.props.text ? this.props.text : "Add Text";
+    const text = this.props.text;
     this.setState({ text });
   }
 
@@ -18,8 +18,7 @@ export class EditableText extends React.Component {
   };
 
   setText = (ev) => {
-    const text = ev.target.value;
-    if (!text) text = "Add Text";
+    let text = ev.target.value;
     this.setState({ text });
     this.props.updateFunction(
       this.props.property,
@@ -28,10 +27,10 @@ export class EditableText extends React.Component {
     );
   };
 
-  handleBlur = (ev) => {};
-
   render() {
-    const { isEdit, text } = this.state;
+    let { isEdit, text } = this.state;
+    if (!text && !isEdit) text = `Add ${this.props.property}`;
+
     return (
       <section
         className="editable-text"
@@ -43,9 +42,8 @@ export class EditableText extends React.Component {
         {isEdit && (
           <textarea
             onChange={this.setText}
-            onBlur={() => {
-              this.handleBlur();
-            }}
+            onBlur={() => this.setIsEdit(false)}
+            placeholder={`Add ${this.props.property} `}
             value={text}
             autoFocus
           ></textarea>
