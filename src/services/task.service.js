@@ -3,11 +3,11 @@ import { utilService } from './util.service'
 
 
 export const taskService = {
-    getTaskById,
-    updateTask,
-    createNewTaskList,
-    addTask
-
+  getTaskById,
+  updateTask,
+  addTask,
+  editGroupTitle, 
+  createNewTaskList,
 }
 
 function getTaskById(board, taskId) {
@@ -78,6 +78,19 @@ function createNewTaskList(board, taskId, title = "New Check List") {
     })
     return board
 }
+
+
+function editGroupTitle (board,groupId,groupTitle){
+  board.groups.map((group) => {
+    if (group.id === groupId) {
+      group.title = groupTitle
+    }
+  });
+  // console.log(board);
+  return board;
+}
+
+
 
 
 

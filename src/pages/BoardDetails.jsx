@@ -26,16 +26,21 @@ function _BoardDetails(props) {
         await props.onEditBoard(updatedBoard)
     }
 
+    const onEditGroupTitle = async (groupId,title) => {
+        const updatedBoard = taskService.editGroupTitle(board,groupId,title)
+        await props.onEditBoard(updatedBoard)
+    }
+   
     // console.log(board)
-    if (!board) return <span>loading...</span>
-    return (
+    if(!board) return <span>loading...</span>
+    return(
         <>
-            <div className='board-container' style={{ background: `url(${board.style.bgImg})` }}>
-                <BoardHeader board={board} />
-                <div className="board-scroller"></div>
-                <div className='board'>
-                    <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} />
-                </div>
+        <div className='board-container' style={{background:`url(${board.style.bgImg})`}}>
+            <BoardHeader board={board}/>
+            <div className="board-scroller"></div>
+            <div className='board'>
+            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} />
+            </div>
             </div>
             <Route
                 path="/:boardId/:taskId"
