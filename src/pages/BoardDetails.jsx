@@ -22,6 +22,11 @@ function _BoardDetails (props){
         const updatedBoard = taskService.addTask(board,groupId,title)
         await props.onEditBoard(updatedBoard)
     }
+
+    const onEditGroupTitle = async (groupId,title) => {
+        const updatedBoard = taskService.editGroupTitle(board,groupId,title)
+        await props.onEditBoard(updatedBoard)
+    }
    
     // console.log(board)
     if(!board) return <span>loading...</span>
@@ -30,7 +35,7 @@ function _BoardDetails (props){
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
-            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} />
+            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} />
             </div>
         </div>
     )

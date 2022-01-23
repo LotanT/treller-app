@@ -6,6 +6,7 @@ export const taskService = {
   getTaskById,
   updateTask,
   addTask,
+  editGroupTitle,
 };
 
 function getTaskById(board, taskId) {
@@ -75,6 +76,24 @@ function createNewTaskList(board, taskId) {
     })
     return board
 }
+
+
+function editGroupTitle (board,groupId,groupTitle){
+  board.groups.map((group) => {
+    if (group.id === groupId) {
+      group.title = groupTitle
+    }
+  });
+  // console.log(board);
+  return board;
+}
+
+
+
+
+
+
+
 // function getTaskById(boardId){
 //     const state = store.getState();
 //     // const authToken = state.currentUser.token;

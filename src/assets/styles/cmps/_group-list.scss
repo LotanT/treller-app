@@ -12,3 +12,45 @@
     user-select: none;
     white-space: nowrap;
 }
+
+.add-group{
+    background-color: #00000014;
+    cursor: pointer;
+    border-radius: 3px;
+    height: auto;
+    min-height: 32px;
+    padding: 4px;
+    &:hover{
+        background-color: #00000029
+    }
+    .open-new-card{
+        padding-top: 10px;
+    }
+    .card-composer-control{
+        height: 32px;
+    margin: 4px 0 0;
+    overflow: hidden;
+    transition: margin 85ms ease-in,height 85ms ease-in;
+    }
+    input{
+    background-color: #fff;
+    box-shadow: inset 0 0 0 2px #0079bf;
+    display: block;
+    margin: 0;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    line-height: 20px;
+    outline: none;
+    padding: 8px 12px;
+    } 
+}
+
+
+// background-color: #ebecf0;
+//     border-radius: 3px;
+//     height: auto;
+//     min-height: 32px;
+//     padding: 4px;
+//     transition: background 85ms ease-in,opacity 40ms ease-in,border-color 85ms ease-in;
