@@ -81,6 +81,12 @@ class _TaskEdit extends React.Component {
     this.props.onEditBoard(updatedBoard)
   };
 
+  onCreateNewTaskList = ()=>{
+    const updatedBoard = taskService.createNewTaskList(this.props.board, this.props.match.params.taskId)
+    this.props.onEditBoard(updatedBoard)
+  }
+
+
   render() {
     let { isEdit, task } = this.state;
     if (!task) return <span></span>
@@ -136,7 +142,7 @@ class _TaskEdit extends React.Component {
                 {/* <AiOutlineClose /> */}
               </a>
             </div>
-            <EditMenu />
+            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList}/>
           </div>
         </section>
       </React.Fragment>
