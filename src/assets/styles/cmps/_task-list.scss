@@ -1,9 +1,103 @@
-.task-list{
-    flex: 1 1 auto;
-    margin: 0 4px;
-    min-height: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 0 4px;
-    z-index: 1;
+.task-list {
+  flex: 1 1 auto;
+  margin: 0 4px;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 4px;
+  z-index: 1;
 }
+
+.card-composer {
+  padding-bottom: 8px;
+}
+.list-card-composer {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #091e4240;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 8px;
+  max-width: 300px;
+  min-height: 20px;
+  position: relative;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden; //
+  padding: 6px 8px 2px; //
+  textarea {
+    font-family: inherit;
+    font-size: inherit;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    resize: none;
+    height: 54px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 4px;
+    max-height: 162px;
+    min-height: 54px;
+    padding: 0;
+    width: 100%;
+    outline: none;
+  }
+}
+
+.card-composer-control {
+    display: flex;
+    flex-direction: row;
+  span {
+    margin-right: 4px;
+    align-items: center;
+    background-color: #091e420a;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #172b4d;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    justify-content: center;
+    line-height: 20px;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition-duration: 85ms;
+    transition-property: background-color, border-color, box-shadow;
+    transition-timing-function: ease;
+    white-space: normal;
+    background-color: #0079bf;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+    &:hover{
+        background-color: #0068a5 ;
+    }
+  }
+  .control-close-icon{
+    cursor: pointer;
+    color: #6b778c;
+    font-size: 24px;
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover{
+        color: #172b4b; 
+    }
+  }
+}
+
+.cc-control-section{
+    display: flex;
+}
+// overflow: hidden;
+//     padding: 6px 8px 2px;
+//     position: relative;
+//     z-index: 10;

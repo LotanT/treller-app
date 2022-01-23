@@ -1,31 +1,36 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import {GroupList} from '../cmps/GroupsList'
-import { loadBoard } from '../store/board.actions';
-import {BoardHeader} from '../cmps/BoardHeader'
-
+import {GroupList} from '../cmps/user-board/GroupsList'
+import { loadBoard, onEditBoard } from '../store/board.actions';
+import {BoardHeader} from '../cmps/user-board/BoardHeader'
+import {taskService} from '../services/task.service'
 
 
 function _BoardDetails (props){
     // const [board, setBoard] = useState({board: null})
     // console.log(props)
-    useEffect(()=>{
-        // console.log(this.props);
+    const {board} = props
+    const boardId = props.match.params.boardId
 
-        props.loadBoard(props.match.params.boardId)
+    useEffect(()=>{
+        props.loadBoard(boardId)
     }, [])
     
     const onAddGroup = () => {}
-    const {board} = props
-    console.log(board)
+    const onAddTask = async (groupId,title) => {
+        const updatedBoard = taskService.addTask(board,groupId,title)
+        await props.onEditBoard(updatedBoard)
+    }
+   
+    // console.log(board)
     if(!board) return <span>loading...</span>
     return(
         <div className='board-container' style={{background:`url(${board.style.bgImg})`}}>
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
-            <GroupList groups={board.groups} boardId={props.match.params.boardId}/>
+            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} />
             </div>
         </div>
     )
@@ -38,7 +43,8 @@ function mapStateToProps(state) {
     }
 }
 const mapDispatchToProps = {
-    loadBoard
+    loadBoard,
+    onEditBoard
 }
 
 

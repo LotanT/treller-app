@@ -1,11 +1,11 @@
 import { onEditBoard } from '../store/board.actions'
-
+import { utilService } from './util.service'
 const STORAGE_KEY = 'boardDB'
 
 export const taskService = {
     getTaskById,
-    updateTask
-
+    updateTask,
+    addTask
 }
 
 function getTaskById(board, taskId) {
@@ -33,6 +33,21 @@ function updateTask(board, updatedTask) {
     console.log(board);
     return board
 
+}
+
+function addTask (board,groupId,title){
+    const task = {
+        id: utilService.makeId(),
+        isArchive: false,
+        title
+    }
+    board.groups.map(group=>{
+        if(group.id === groupId){
+            group.tasks.push(task)
+        }
+    })
+    console.log(board)
+    return board
 }
 
 
