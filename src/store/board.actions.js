@@ -22,7 +22,6 @@ export function loadBoards() {
 }
 
 export function loadBoard(boardId) {
-    console.log(boardId)
     return async (dispatch) => {
         try {
             const board = await boardService.getById(boardId)
@@ -82,7 +81,6 @@ export function onEditBoard(boardToSave) {
     return async (dispatch) => {
         try {
             const savedBoard = await boardService.save(boardToSave)
-            boardService.save(boardToSave);
             dispatch({
                 type: 'UPDATE_BOARD',
                 board: savedBoard
