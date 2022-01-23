@@ -74,7 +74,7 @@ function createNewTaskList(board, taskId) {
 
     })
     return board
-
+}
 // function getTaskById(boardId){
 //     const state = store.getState();
 //     // const authToken = state.currentUser.token;
