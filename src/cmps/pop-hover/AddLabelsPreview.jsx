@@ -16,16 +16,13 @@ export function AddLabelsPreview({ label, task, onToggleLabelToTask }) {
 
 
     const doOnToggleLabelToTask = () => {
-        onToggleLabelToTask(label.id)
+        onToggleLabelToTask(label)
         isLabelOnTask()
     }
 
     const isLabelOnTask = () => {
-        console.log(task.labelIds, label.id)
-        if (task.labelIds) {
-            let bol = task.labelIds.some((labelId) => (labelId === label.id))
-            console.log('bol:' ,bol)
-            
+        if (task.labels) {
+            let bol = task.labels.some((taskLabel) => (taskLabel.id === label.id))            
             setIsOnTask(bol)
         }
     }
