@@ -11,12 +11,16 @@ import { GrList } from "react-icons/gr";
 
 import { AddCheckList } from "../pop-hover/AddCheckList";
 import { AddLabel } from "../pop-hover/AddLabel";
+import { DatePickerPop } from "../pop-hover/DatePickerPop";
+import { AddCover } from "../pop-hover/AddCover";
 
 export class EditMenu extends React.Component {
   state = {
     isAddCheckList: false,
     isLabel: false,
     isAddMembers: false,
+    isDueDatePop: false,
+    isAddCover: false,
   };
 
   toggleModal = (popHover) => {
@@ -28,7 +32,7 @@ export class EditMenu extends React.Component {
   };
 
   render() {
-    const { isAddCheckList, isLabel } = this.state;
+    const { isAddCheckList, isLabel, isDueDatePop,isAddCover } = this.state;
     return (
       <section className="edit-menu">
         <h3>Add to card</h3>
@@ -67,18 +71,21 @@ export class EditMenu extends React.Component {
           />
         )}
 
-        <a className="menu-btn">
+        <a className="menu-btn" onClick={() => this.toggleModal("isDueDatePop")}>
           <span className="menu-icon">
             <FiClock />
           </span>
           <span className="menu-text">Dates</span>
         </a>
-        <a className="menu-btn">
+        {isDueDatePop && <DatePickerPop toggleModal={this.toggleModal} taskId={this.props.taskId} />}
+
+        <a className="menu-btn" onClick={() => this.toggleModal("isAddCover")}>
           <span className="menu-icon">
             <FaRegWindowMaximize />
           </span>
           <span className="menu-text">Cover</span>
         </a>
+        {isAddCover && <AddCover toggleModal={this.toggleModal} taskId={this.props.taskId} />}
 
         <h3>Actions</h3>
         <a className="menu-btn">

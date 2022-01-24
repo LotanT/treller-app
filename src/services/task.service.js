@@ -15,7 +15,10 @@ export const taskService = {
     updateLabel,
     removeLabel,
     addGroup,
-    updateGroups
+    updateGroups,
+    saveDueDateToTask,
+    removeDueDateToTask,
+    toggleCoverToTask
 }
 
 function getTaskById(board, taskId) {
@@ -169,6 +172,58 @@ function updateGroups(board, groups) {
     board.groups = groups
     return board
 }
+
+
+
+function saveDueDateToTask(board, taskId, dueDate) {
+    board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            if (task.id === taskId) {
+                task.dueDate = dueDate
+
+            }
+            return task
+        })
+
+        return group.tasks
+    })
+    return board
+}
+
+
+
+function removeDueDateToTask(board, taskId) {
+    board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            if (task.id === taskId) {
+                task.dueDate = null
+            }
+            return task
+        })
+
+        return group.tasks
+    })
+    return board
+
+}
+
+function toggleCoverToTask(board, taskId, cover) {
+    board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            if (task.id === taskId) {
+                if (!task.style) {
+                    task.style = { bgColor: null, img: null }
+                    console.log('EMPTY LABELSIDS~!');
+                }else task.style.bgColor = cover;
+            }
+            return task
+        })
+
+        return group.tasks
+    })
+    return board
+}
+
 
 // function toggleLabelToTask(board, taskId, labelId) {
 //     const task = getTaskById(board, taskId)
