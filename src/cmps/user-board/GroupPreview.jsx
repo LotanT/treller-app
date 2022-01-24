@@ -6,10 +6,12 @@ import { CgClose } from 'react-icons/cg';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
-export function GroupPreview({ group, boardId, onAddTask}) {
+export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle}) {
 
   const [isAddTask, setAddTask] = useState(false)
+  // const [isEditGroupTitle, setEditGroupTitle] = useState(false)
   const [taskTitle, setTaskTitle] = useState('')
+  const [gtoupTitle, setGroupTitle] = useState(group.title)
 
   useEffect(()=>{
       
@@ -21,8 +23,16 @@ export function GroupPreview({ group, boardId, onAddTask}) {
     setAddTask(!isAddTask)
   }
 
-  const handleChange = (ev) =>{
+  // const ToggleEditGroupTitle = () =>{
+  //   setEditGroupTitle(!isEditGroupTitle)
+  // }
+
+  const handleCardChange = (ev) =>{
     setTaskTitle(ev.target.value)
+  }
+
+  const handleGroupChange = (ev) =>{
+    setGroupTitle(ev.target.value)
   }
 
   const onAddTaskPreview = () =>{
@@ -30,12 +40,15 @@ export function GroupPreview({ group, boardId, onAddTask}) {
     setAddTask(false)
     setTaskTitle('')
   }
+
+ 
   
   return (
     <div className="group-container">
       <div className="group">
         <div className="group-header">
-          <span>{group.title}</span>
+          {/* {!isEditGroupTitle && <span onClick={ToggleEditGroupTitle}>{group.title}</span>} */}
+          <textarea onBlur={()=>onEditGroupTitle(group.id,gtoupTitle)} onChange={handleGroupChange} dir='auto' value={gtoupTitle} ></textarea>
           <div className="group-action">
             <div className="group-action-icon">
               <FiMoreHorizontal/>
@@ -48,7 +61,7 @@ export function GroupPreview({ group, boardId, onAddTask}) {
           ))}
           {isAddTask && <div className="card-composer">
             <div className="list-card-composer">
-              <textarea onChange={handleChange} dir='auto' value={taskTitle} autoFocus placeholder='Enter a title for this card...' ></textarea>
+              <textarea onChange={handleCardChange} dir='auto' value={taskTitle} autoFocus placeholder='Enter a title for this card...' ></textarea>
             </div>
             <div className="card-composer-control">
               <div className="cc-control-section">

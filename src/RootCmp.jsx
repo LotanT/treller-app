@@ -12,11 +12,6 @@ export class RootCmp extends React.Component {
       <div>
         <AppHeader />
         <main>
-            <Route
-              path="/:boardId/:taskId"
-              component={TaskEdit}
-              label="edit"
-            ></Route>
           <Switch>
             {routes.map((route) => (
               <Route
