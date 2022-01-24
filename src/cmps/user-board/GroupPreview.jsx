@@ -5,8 +5,9 @@ import { FiMoreHorizontal } from 'react-icons/fi';
 import { CgClose } from 'react-icons/cg';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import {Draggable} from 'react-beautiful-dnd'
 
-export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle}) {
+export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle, index }) {
 
   const [isAddTask, setAddTask] = useState(false)
   // const [isEditGroupTitle, setEditGroupTitle] = useState(false)
@@ -45,7 +46,11 @@ export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle}) {
   
   return (
     <div className="group-container">
-      <div className="group">
+    <Draggable key={group.id} draggableId={group.id} index={index}>
+      {(provided)=>(
+      <div className="group" {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      ref={provided.innerRef}>
         <div className="group-header">
           {/* {!isEditGroupTitle && <span onClick={ToggleEditGroupTitle}>{group.title}</span>} */}
           <textarea onBlur={()=>onEditGroupTitle(group.id,gtoupTitle)} onChange={handleGroupChange} dir='auto' value={gtoupTitle} ></textarea>
@@ -56,9 +61,9 @@ export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle}) {
           </div>
           </div>
         <div className="task-list">
-          {group.tasks.map((task) => (
+        {group.tasks && <div>{group.tasks.map((task) => (
             <TaskPreview key={task.id} task={task} boardId={boardId} />
-          ))}
+          ))}</div>}
           {isAddTask && <div className="card-composer">
             <div className="list-card-composer">
               <textarea onChange={handleCardChange} dir='auto' value={taskTitle} autoFocus placeholder='Enter a title for this card...' ></textarea>
@@ -71,6 +76,7 @@ export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle}) {
             </div>
           </div>}
         </div>
+        {provided.placeholder}
           {!isAddTask && <div className="compose-task">
             <div className="open-new-card" onClick={ToggleAddTask}>
               <div className="compose-icon"><HiOutlinePlus/></div>
@@ -81,6 +87,8 @@ export function GroupPreview({ group, boardId, onAddTask, onEditGroupTitle}) {
             </div>
           </div>}
       </div>
-    </div>
+  )}
+  </Draggable>
+  </div>
   );
 }
