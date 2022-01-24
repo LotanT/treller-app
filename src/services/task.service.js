@@ -1,3 +1,4 @@
+import { GrUp } from 'react-icons/gr'
 import { onEditBoard } from '../store/board.actions'
 import { utilService } from './util.service'
 
@@ -12,7 +13,9 @@ export const taskService = {
     toggleLabelToTask,
     addLabelToBoard,
     updateLabel,
-    removeLabel
+    removeLabel,
+    addGroup,
+    updateGroups
 }
 
 function getTaskById(board, taskId) {
@@ -46,10 +49,12 @@ function addTask(board, groupId, title) {
     };
     board.groups.map((group) => {
         if (group.id === groupId) {
-            group.tasks.push(task);
+            if (group.tasks) {
+                group.tasks.push(task);
+            } else group.tasks = [task]
         }
     });
-    console.log(board);
+    // console.log(board);
     return board;
 }
 
@@ -100,7 +105,7 @@ function getLabels(board) {
     }
 }
 
-function addLabelToBoard(board,color,title=null) {
+function addLabelToBoard(board, color, title = null) {
     const newLabel = {
         "id": utilService.makeId(),
         "title": title,
@@ -154,8 +159,21 @@ function removeLabel(board, labelToRemove) {
 
 }
 
+function addGroup(board, groupTitle) {
+    const group = {
+        id: utilService.makeId(),
+        title: groupTitle,
+        style: {},
+        isArchive: false
+    }
+    board.groups.push(group)
+    return board;
+}
 
-
+function updateGroups(board, groups) {
+    board.groups = groups
+    return board
+}
 
 // function toggleLabelToTask(board, taskId, labelId) {
 //     const task = getTaskById(board, taskId)

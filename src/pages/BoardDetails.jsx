@@ -20,15 +20,24 @@ function _BoardDetails(props) {
         props.loadBoard(boardId)
     }, [])
 
-    const onAddGroup = () => { }
+    const onAddGroup = (title) => { 
+        const updatedBoard = taskService.addGroup(board, title)
+        props.onEditBoard(updatedBoard)
+    }
+
     const onAddTask = async (groupId, title) => {
         const updatedBoard = taskService.addTask(board, groupId, title)
-        await props.onEditBoard(updatedBoard)
+        props.onEditBoard(updatedBoard)
     }
 
     const onEditGroupTitle = async (groupId,title) => {
         const updatedBoard = taskService.editGroupTitle(board,groupId,title)
-        await props.onEditBoard(updatedBoard)
+        props.onEditBoard(updatedBoard)
+    }
+    
+    const onUpdateGroups = (groups) =>{
+        const updatedBoard = taskService.updateGroups(board, groups)
+        props.onEditBoard(updatedBoard)
     }
    
     // console.log(board)
@@ -39,7 +48,7 @@ function _BoardDetails(props) {
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
-            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} />
+            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} onAddGroup={onAddGroup} onUpdateGroups={onUpdateGroups} />
             </div>
             </div>
             <Route
