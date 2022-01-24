@@ -5,16 +5,17 @@ export class TaskLabels extends React.Component {
   state = {};
 
   render() {
+    console.log(this.props.labels);
     if (!this.props.labels) return <span></span>;
     return (
       <section className="top-details">
         <h3>Members</h3>
         <div className="flex top-detail">
           {this.props.labels && (
-            <div className="labels-container">
+            <div className="labels-container flex">
               {this.props.labels.map((label) => (
                 <div key={label._id} className="label">
-                  <img src={label.imgUrl} />
+                  <div>{label.title}</div>
                 </div>
               ))}
             </div>

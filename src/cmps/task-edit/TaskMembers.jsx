@@ -1,5 +1,5 @@
 import React from "react";
-import { BsPlus } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export class TaskMembers extends React.Component {
   state = {};
@@ -19,8 +19,8 @@ export class TaskMembers extends React.Component {
               ))}
             </div>
           )}
-          <a className="grey-btn member">
-            <BsPlus />
+          <a className="grey-btn member plus-icon">
+            <AiOutlinePlus />
           </a>
         </div>
       </section>

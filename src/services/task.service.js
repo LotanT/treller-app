@@ -54,7 +54,6 @@ function addTask(board, groupId, title) {
             } else group.tasks = [task]
         }
     });
-    // console.log(board);
     return board;
 }
 
@@ -115,29 +114,25 @@ function addLabelToBoard(board, color, title = null) {
     return board
 }
 
-function toggleLabelToTask(board, taskId, labelId) {
+function toggleLabelToTask(board, taskId, label) {
 
     board.groups.map(group => {
         group.tasks = group.tasks.map(task => {
-            console.log(task);
             if (task.id === taskId) {
-                if (!task.labelIds) {
-                    task.labelIds = []
+                if (!task.labels) {
+                    task.labels = []
                     console.log('EMPTY LABELSIDS~!');
                 }
 
-                let isExist = task.labelIds.some(id => id === labelId)
-                console.log('isExist:', isExist);
+                let isExist = task.labels.some(taskLabel => taskLabel.id == label.id)
 
                 if (isExist) {
-                    task.labelIds = [...task.labelIds.filter(id => id !== labelId)]
-                    console.log('task.labelIds:', task.labelIds)
+                    task.labels = [...task.labels.filter(taskLabel => taskLabel.id !== label.id)]
 
                 }
                 else {
-                    task.labelIds.push(labelId)
+                    task.labels.push(label)
                 }
-                console.log('task.labelIds:', task.labelIds)
             }
             return task
         })
