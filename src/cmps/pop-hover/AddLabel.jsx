@@ -11,14 +11,14 @@ import { AddLabelToBoard } from './AddLabelToBoard'
 
 import { MdArrowBackIos } from "react-icons/md";
 import { BiPencil } from "react-icons/bi";
-import { AddLabelChange, AddLabelEdit } from './AddLabelEdit'
+import { GrClose } from "react-icons/gr";
+import { AddLabelEdit } from './AddLabelEdit'
 
 
 
 //MAP TO BOARD PREV
 
 function _AddLabel(props) {
-  const [CheckListTitle, setCheckListTitle] = useState('')
   const [task, setTask] = useState(taskService.getTaskById(props.board, props.taskId))
   const [label, setLabel] = useState('')
   const [BoardLabels, setBoardLabels] = useState(taskService.getLabels(props.board))
@@ -37,48 +37,49 @@ function _AddLabel(props) {
 
   }
 
-  const onToggleLabelToTask = async (labelId) => {
-    let updatedBoard = taskService.toggleLabelToTask(props.board, props.taskId, labelId)
+  const onToggleLabelToTask = async (label) => {
+    let updatedBoard = taskService.toggleLabelToTask(props.board, props.taskId, label)
     await props.onEditBoard(updatedBoard)
     setTaskLocal()
   }
 
   const moveToCreateLabel = () => {
     setOpenLabelPreview(false);
+    setOpenEditLabel(false)
+
     setOpenCreateLabel(true);
   }
-  
-  const goBackMain = ()=>{
+
+  const goBackMain = () => {
     setOpenCreateLabel(false)
     setOpenEditLabel(false)
-    
+
     setOpenLabelPreview(true)
   }
-  
-  const moveToEditLabel =(label)=>{
+
+  const moveToEditLabel = (label) => {
     setLabel(label)
-    console.log(label);
     setOpenEditLabel(true)
     setOpenCreateLabel(false)
     setOpenLabelPreview(false)
-    
+
   }
-  
-  const addLabel = async(color,title) => {
+
+  const addLabel = async (color, title) => {
     let updatedBoard = taskService.addLabelToBoard(props.board, color, title)
     await props.onEditBoard(updatedBoard)
     goBackMain()
   }
 
-  const updateLabel= async(updatedLabel)=>{
-    let updatedBoard= await taskService.updateLabel(props.board,updatedLabel)
+  const updateLabel = async (updatedLabel) => {
+    let updatedBoard = await taskService.updateLabel(props.board, updatedLabel)
     await props.onEditBoard(updatedBoard)
     setBoardLabels(taskService.getLabels(props.board))
     goBackMain()
   }
 
-  const removeLabel= async(labelToRemove)=>{
-    let updatedBoard= await taskService.removeLabel(props.board,labelToRemove)
+  const removeLabel = async (labelToRemove) => {
+    let updatedBoard = await taskService.removeLabel(props.board, labelToRemove)
     await props.onEditBoard(updatedBoard)
     setBoardLabels(taskService.getLabels(props.board))
     goBackMain()
@@ -86,15 +87,15 @@ function _AddLabel(props) {
 
   return (
     <div className="add-labels-pop">
-        <img className='exit-svg' onClick={props.toggleModal} src={ExitSvg}></img>
-        {openCreateLabel||openEditLabel&&<MdArrowBackIos className='go-back-label' onClick={goBackMain}/>}
       <div className="pop-content">
-        <div className='add-labels-title'>Labels</div>
+        <div className="header-container">
+          <GrClose stroke="#0079bf" fill="#0079bf" className='exit-svg' onClick={props.toggleModal} />
+          {(openCreateLabel || openEditLabel) && <MdArrowBackIos className='go-back-label' onClick={goBackMain} />}
+          <div className='add-labels-title'>Labels</div>
 
-        {openCreateLabel && <AddLabelToBoard addLabel={addLabel}/>}
-
-        {openEditLabel && <AddLabelEdit label={label} updateLabel={updateLabel} removeLabel={removeLabel}/>}
-
+        </div>
+        {openCreateLabel && <AddLabelToBoard addLabel={addLabel} />}
+        {openEditLabel && <AddLabelEdit label={label} updateLabel={updateLabel} removeLabel={removeLabel} />}
 
 
 
@@ -102,15 +103,14 @@ function _AddLabel(props) {
           <div className="add-label-preview">
             <div className="add-title">Labels</div>
             {BoardLabels &&
-              BoardLabels.map((label,idx) =>
-                <div className="label-container-pencil">
-                <AddLabelsPreview
-                  key={idx}
-                  label={label}
-                  task={task}
-                  onToggleLabelToTask={onToggleLabelToTask}
-                />
-                <BiPencil className='pencil-icon' onClick={()=>moveToEditLabel(label)}/>
+              BoardLabels.map((label) =>
+                <div key={label.id} className="label-container-pencil">
+                  <AddLabelsPreview
+                    label={label}
+                    task={task}
+                    onToggleLabelToTask={onToggleLabelToTask}
+                  />
+                  <BiPencil className='pencil-icon' onClick={() => moveToEditLabel(label)} />
                 </div>
               )}
             <button className='btn create-label' onClick={moveToCreateLabel}>Create New Label</button>

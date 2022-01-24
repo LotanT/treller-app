@@ -278,7 +278,7 @@ function _createBoards() {
                                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                                     }
                                 ],
-                                "labelIds": ["l101", "l102"],
+                                "labels": [],
                                 "createdAt": 1590999730348,
                                 "dueDate": 16156215211,
                                 "byMember": {
@@ -438,7 +438,7 @@ function _createBoards() {
                                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                                     }
                                 ],
-                                "labelIds": ["l101", "l102"],
+                                "labels": [],
                                 "createdAt": 1590999730348,
                                 "dueDate": 16156215211,
                                 "byMember": {

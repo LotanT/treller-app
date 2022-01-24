@@ -5,7 +5,7 @@ import { taskService } from '../../services/task.service';
 
 
 
-export function AddLabelToBoard({addLabel}) {
+export function AddLabelToBoard({ addLabel }) {
     const [labelName, setLabelName] = useState('')
     const [colorChoose, setColorChoose] = useState('')
     const colors = [
@@ -21,11 +21,11 @@ export function AddLabelToBoard({addLabel}) {
         '#b3bac5',
     ]
     const onChooseColor = (color) => {
-        if(color ===colorChoose){
+        if (color === colorChoose) {
             setColorChoose('')
-        }else setColorChoose(color);
+        } else setColorChoose(color);
     }
-  
+
 
     useEffect(() => {
     }, [])
@@ -37,14 +37,14 @@ export function AddLabelToBoard({addLabel}) {
 
             <div className="add-title">Select color</div>
             <div className="color-palette">
-                {colors.map((color) =>
-                    <div className="pick-color" style={{ backgroundColor: color }} onClick={()=>onChooseColor(color)}>
-                                    {colorChoose===color && <MdDone style={{ color: 'white'}} className='label-done'/>}
+                {colors.map((color, idx) =>
+                    <div key={idx} className="pick-color" style={{ backgroundColor: color }} onClick={() => onChooseColor(color)}>
+                        {colorChoose === color && <MdDone style={{ color: 'white' }} className='label-done' />}
                     </div>
                 )}
             </div>
 
-            <button className='create-label-btn' onClick={()=>addLabel(colorChoose,labelName)}>Create</button>
+            <button className='create-label-btn' onClick={() => addLabel(colorChoose, labelName)}>Create</button>
         </div>
 
     )

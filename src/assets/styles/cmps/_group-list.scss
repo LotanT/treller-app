@@ -11,6 +11,9 @@
     -webkit-user-select: none;
     user-select: none;
     white-space: nowrap;
+    display: flex;
+    gap: 8px;
+    margin-left: 6px;
 }
 
 .add-group{

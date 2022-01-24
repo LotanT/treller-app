@@ -10,6 +10,7 @@ import { taskService } from '../services/task.service'
 import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 
+
 function _BoardDetails(props) {
     // const [board, setBoard] = useState({board: null})
     // console.log(props)
@@ -39,6 +40,7 @@ function _BoardDetails(props) {
         const updatedBoard = taskService.updateGroups(board, groups)
         props.onEditBoard(updatedBoard)
     }
+    
    
     // console.log(board)
     if(!board) return <span>loading...</span>
@@ -48,7 +50,7 @@ function _BoardDetails(props) {
             <BoardHeader board={board}/>
             <div className="board-scroller"></div>
             <div className='board'>
-            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} onAddGroup={onAddGroup} onUpdateGroups={onUpdateGroups} />
+            <GroupList groups={board.groups} boardId={boardId} onAddTask={onAddTask} onEditGroupTitle={onEditGroupTitle} onUpdateGroups={onUpdateGroups} onAddGroup={onAddGroup}/>
             </div>
             </div>
             <Route
