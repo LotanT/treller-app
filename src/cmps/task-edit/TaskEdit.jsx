@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CheckList } from "./CheckList";
+import { TaskComments } from "./TaskComments";
 import { EditableText } from "./EditableText";
 import { EditMenu } from "./EditMenu";
 import { GrTextAlignFull } from "react-icons/gr";
@@ -8,6 +9,9 @@ import { GrClose } from "react-icons/gr";
 import { FaPager } from "react-icons/fa";
 import { taskService } from "../../services/task.service";
 import { loadBoard, onEditBoard } from "../../store/board.actions";
+import { TaskMembers } from "./TaskMembers";
+import { TaskDate } from "./TaskDate";
+import { TaskLabels } from "./TaskLabels";
 
 class _TaskEdit extends React.Component {
   state = {
@@ -49,6 +53,13 @@ class _TaskEdit extends React.Component {
   setIsEdit = (boolean) => {
     const isEdit = boolean;
     this.setState({ isEdit });
+  };
+
+  toggleIsDone = () => {
+    console.log("enterd isdone");
+    const isDone = !this.state.task.isDone;
+    let task = { ...this.state.task, isDone: isDone };
+    this.setState({ task });
   };
 
   updateTaskProperty = (property, value) => {
@@ -131,7 +142,13 @@ class _TaskEdit extends React.Component {
           <div className="flex">
             <div className="task">
               <div className="task-details">
-                <div className="flex"></div>
+                <div className="flex top-details-container">
+                  {task.members && <TaskMembers members={task.members} />}
+                  {task.labels && <TaskLabels labels={task.labels} />}
+                  {task.dueDate && (
+                    <TaskDate task={task} toggleIsDone={this.toggleIsDone} />
+                  )}
+                </div>
                 <div className="description">
                   <GrTextAlignFull />
                   <h3>Description</h3>
@@ -155,9 +172,12 @@ class _TaskEdit extends React.Component {
                   />
                 ))}
               </div>
-              <a></a>
+              <TaskComments />
             </div>
-            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList} taskId={task.id}/>
+            <EditMenu
+              onCreateNewTaskList={this.onCreateNewTaskList}
+              taskId={task.id}
+            />
           </div>
         </section>
       </React.Fragment>
