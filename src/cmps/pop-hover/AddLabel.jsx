@@ -103,9 +103,8 @@ function _AddLabel(props) {
             <div className="add-title">Labels</div>
             {BoardLabels &&
               BoardLabels.map((label,idx) =>
-                <div className="label-container-pencil">
+                <div className="label-container-pencil" key={label.id}>
                 <AddLabelsPreview
-                  key={idx}
                   label={label}
                   task={task}
                   onToggleLabelToTask={onToggleLabelToTask}
