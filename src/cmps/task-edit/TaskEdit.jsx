@@ -4,7 +4,7 @@ import { CheckList } from "./CheckList";
 import { EditableText } from "./EditableText";
 import { EditMenu } from "./EditMenu";
 import { GrTextAlignFull } from "react-icons/gr";
-import { AiOutlineClose } from "react-icons/ai";
+import { GrClose } from "react-icons/gr";
 import { FaPager } from "react-icons/fa";
 import { taskService } from "../../services/task.service";
 import { loadBoard, onEditBoard } from "../../store/board.actions";
@@ -80,11 +80,13 @@ class _TaskEdit extends React.Component {
     this.props.onEditBoard(updatedBoard);
   };
 
-  onCreateNewTaskList = ()=>{
-    const updatedBoard = taskService.createNewTaskList(this.props.board, this.props.match.params.taskId)
-    this.props.onEditBoard(updatedBoard)
-  }
-
+  onCreateNewTaskList = () => {
+    const updatedBoard = taskService.createNewTaskList(
+      this.props.board,
+      this.props.match.params.taskId
+    );
+    this.props.onEditBoard(updatedBoard);
+  };
 
   render() {
     let { isEdit, task } = this.state;
@@ -98,6 +100,7 @@ class _TaskEdit extends React.Component {
           }
         ></div>
         <section className="task-edit">
+          {}
           <div className="task-header">
             <div className="title flex">
               <div className="lower">
@@ -113,7 +116,7 @@ class _TaskEdit extends React.Component {
               />
             </div>
             <a className="close-edit-page-btn">
-              <AiOutlineClose
+              <GrClose
                 onClick={() =>
                   this.props.history.push(`/${this.props.match.params.boardId}`)
                 }
@@ -123,6 +126,7 @@ class _TaskEdit extends React.Component {
           <div className="flex">
             <div className="task">
               <div className="task-details">
+                <div className="flex"></div>
                 <div className="description">
                   <GrTextAlignFull />
                   <h3>Description</h3>
@@ -148,7 +152,7 @@ class _TaskEdit extends React.Component {
               </div>
               <a></a>
             </div>
-            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList}/>
+            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList} />
           </div>
         </section>
       </React.Fragment>
