@@ -152,7 +152,7 @@ class _TaskEdit extends React.Component {
               </div>
               <a></a>
             </div>
-            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList}/>
+            <EditMenu onCreateNewTaskList={this.onCreateNewTaskList} taskId={task.id}/>
           </div>
         </section>
       </React.Fragment>

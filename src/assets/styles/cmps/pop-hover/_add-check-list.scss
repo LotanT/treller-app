@@ -1,21 +1,22 @@
 .add-check-list-pop {
     position: absolute;
     top: 134px;
-    left: 732px;
-
+    left: 505px;
 
     height: 175px;
     border-radius: 3px;
     box-shadow: 0px 0px 1px 1px #091e4240;
-    color: #172b4d;
+
+    color: #5e6c84;
     font-size: 14px;
-    line-height: 20px;
-    font-weight: 400;
+    line-height: 16px;
+    font-weight: 700;
     background-color: #fff;
     border-radius: 3px;
+    margin-bottom: 4px;
     padding: 5px;
     box-sizing: border-box;
-    width: 200px;
+    width: 304px;
     // outline: 0;
     // overflow: hidden;
 
@@ -40,11 +41,11 @@
 
     .add-title {
         color: #5e6c84;
-        font-size: 10px;
+        font-size: 12px;
         line-height: 16px;
-        font-weight: 700;
-        padding-top: 5px;
+        font-weight: 600;
         padding-bottom: 5px;
+        margin-top: 16px;
     }
     .create-list {
         box-shadow: none;
@@ -55,6 +56,7 @@
         margin-top: 16px;
         height: 30px;
         display: flex;
+        justify-content: center;
 
         &:hover{
             cursor: pointer;
@@ -63,7 +65,10 @@
     img {
         position: relative;
         bottom: 135px;
-        left: 174px;
+        left: 266px;
         width: 10px !important;
+    }
+    input{
+        width: 100%
     }
 }

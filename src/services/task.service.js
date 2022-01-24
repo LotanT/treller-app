@@ -3,11 +3,16 @@ import { utilService } from './util.service'
 
 
 export const taskService = {
-  getTaskById,
-  updateTask,
-  addTask,
-  editGroupTitle, 
-  createNewTaskList,
+    getTaskById,
+    updateTask,
+    addTask,
+    editGroupTitle,
+    createNewTaskList,
+    getLabels,
+    toggleLabelToTask,
+    addLabelToBoard,
+    updateLabel,
+    removeLabel
 }
 
 function getTaskById(board, taskId) {
@@ -80,46 +85,101 @@ function createNewTaskList(board, taskId, title = "New Check List") {
 }
 
 
-function editGroupTitle (board,groupId,groupTitle){
-  board.groups.map((group) => {
-    if (group.id === groupId) {
-      group.title = groupTitle
+function editGroupTitle(board, groupId, groupTitle) {
+    board.groups.map((group) => {
+        if (group.id === groupId) {
+            group.title = groupTitle
+        }
+    });
+    return board;
+}
+
+function getLabels(board) {
+    if (board.labels) {
+        return board.labels
     }
-  });
-  // console.log(board);
-  return board;
+}
+
+function addLabelToBoard(board,color,title=null) {
+    const newLabel = {
+        "id": utilService.makeId(),
+        "title": title,
+        "color": color
+    }
+    board.labels.push(newLabel)
+    return board
+}
+
+function toggleLabelToTask(board, taskId, labelId) {
+
+    board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            console.log(task);
+            if (task.id === taskId) {
+                if (!task.labelIds) {
+                    task.labelIds = []
+                    console.log('EMPTY LABELSIDS~!');
+                }
+
+                let isExist = task.labelIds.some(id => id === labelId)
+                console.log('isExist:', isExist);
+
+                if (isExist) {
+                    task.labelIds = [...task.labelIds.filter(id => id !== labelId)]
+                    console.log('task.labelIds:', task.labelIds)
+
+                }
+                else {
+                    task.labelIds.push(labelId)
+                }
+                console.log('task.labelIds:', task.labelIds)
+            }
+            return task
+        })
+
+        return group.tasks
+    })
+    return board
+}
+
+function updateLabel(board, updatedLabel) {
+    board.labels = [...board.labels.map(label => label.id === updatedLabel.id ? updatedLabel : label)]
+    return board
+
+}
+
+function removeLabel(board, labelToRemove) {
+    board.labels = [...board.labels.filter(label => label.id !== labelToRemove.id)]
+    return board
+
 }
 
 
 
 
-
-
-
-// function getTaskById(boardId){
-//     const state = store.getState();
-//     // const authToken = state.currentUser.token;
-
-//     // Pass the token to the server
-//     return fetch(`/${boardId}`, {
-//       method: 'GET',
-//     }).then(res => res.json());
-
-// }
-
-// async function getTaskById(boardId, taskId) {
-//     const board = await storageService.get(STORAGE_KEY, boardId)
-//     for (let i = 0; i < board.groups.length; i++) {
-//         for(let j=0; j<board.groups[i].tasks.length;j++){
-//             if(board.groups[i].tasks[j].id===taskId){
-//                 console.log('task from TaskService:', board.groups[i].tasks[j])
-//                 return board.groups[i].tasks[j]
-//             }
+// function toggleLabelToTask(board, taskId, labelId) {
+//     const task = getTaskById(board, taskId)
+//     if (task) {
+//         if (!task.labelIds) {
+//             task.labelIds = []
+//             console.log('EMPTY LABELSIDS~!');
 //         }
+
+//         let isExist = task.labelIds.some(id => id == labelId)
+//         console.log('isExist:', isExist);
+
+//         if (isExist) {
+//             task.labelIds = task.labelIds.filter(id => id !== labelId)
+//             console.log('task.labelIds:', task.labelIds)
+
+//         }
+//         else {
+//             task.labelIds.push(labelId)
+//         }
+//         console.log('task.labelIds:', task.labelIds)
 //     }
-
+//     console.log('task:' ,task)
 // }
-
 
 
 

@@ -90,7 +90,7 @@ function getNewBoard(title) {
                         "isArchive": false
 
                     },
-                        ],
+                ],
                 "style": {
                 },
                 "isArchive": false
@@ -142,6 +142,51 @@ function _createBoards() {
                         "id": "l101",
                         "title": "Done",
                         "color": "#61bd4f"
+                    },
+                    {
+                        "id": "l102",
+                        "title": "Note",
+                        "color": "#f2d600"
+                    },
+                    {
+                        "id": "l103",
+                        "title": null,
+                        "color": "#ff9f1a"
+                    },
+                    {
+                        "id": "l104",
+                        "title": "Important",
+                        "color": "#eb5a46"
+                    },
+                    {
+                        "id": "l105",
+                        "title": null,
+                        "color": "#c377e0"
+                    },
+                    {
+                        "id": "l106",
+                        "title": "Cool",
+                        "color": "#0079bf"
+                    },
+                    {
+                        "id": "l107",
+                        "title": "Cool",
+                        "color": "#51e898"
+                    },
+                    {
+                        "id": "l108",
+                        "title": null,
+                        "color": "#ff78cb"
+                    },
+                    {
+                        "id": "l109",
+                        "title": null,
+                        "color": "#344563"
+                    },
+                    {
+                        "id": "l110",
+                        "title": null,
+                        "color": "##b3bac5"
                     }
                 ],
                 "members": [
@@ -290,6 +335,16 @@ function _createBoards() {
                         "id": "l101",
                         "title": "Done",
                         "color": "#61bd4f"
+                    },
+                    {
+                        "id": "l102",
+                        "title": "Note",
+                        "color": "#f2d600"
+                    },
+                    {
+                        "id": "l104",
+                        "title": "Important",
+                        "color": "#eb5a46"
                     }
                 ],
                 "members": [
