@@ -25,7 +25,7 @@ export class TaskDate extends React.Component {
     if (now.getMonth() === duDate.getMonth()) {
       if (now.getDate() === duDate.getDate()) date = "Today";
       else if (now.getDate() === duDate.getDate() - 1) date = "Tommorow";
-      else if (now.getDate() === duDate.getDate() - 1) date = "Yesterday";
+      else if (now.getDate() === duDate.getDate() + 1) date = "Yesterday";
     }
     return `${date} at ${duDate.getHours()}:${duDate.getMinutes()}`;
   };
@@ -49,9 +49,21 @@ export class TaskDate extends React.Component {
               )}
               <div className="grey-btn">
                 {this.getDateTemplate(task)}
-                {task.isDone && <h5 className="date-status">completed</h5>}
+                {task.isDone && (
+                  <h5
+                    style={{ backgroundColor: "#61BD4F", color: "white" }}
+                    className="date-status"
+                  >
+                    completed
+                  </h5>
+                )}
                 {!task.isDone && Date.now() > task.dueDate && (
-                  <h5 className="date-status">overdue</h5>
+                  <h5
+                    className="date-status"
+                    style={{ backgroundColor: "#EB5A46", color: "white" }}
+                  >
+                    overdue
+                  </h5>
                 )}
               </div>
             </div>

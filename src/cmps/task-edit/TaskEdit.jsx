@@ -56,7 +56,6 @@ class _TaskEdit extends React.Component {
   };
 
   toggleIsDone = () => {
-    console.log("enterd isdone");
     const isDone = !this.state.task.isDone;
     let task = { ...this.state.task, isDone: isDone };
     this.setState({ task });
@@ -108,7 +107,7 @@ class _TaskEdit extends React.Component {
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
     return (
-      <React.Fragment>
+      <section className="window-edit">
         <div
           className="screen"
           onClick={() =>
@@ -116,71 +115,92 @@ class _TaskEdit extends React.Component {
           }
         ></div>
         <section className="task-edit">
-          {}
-          <div className="task-header">
-            <div className="title flex">
-              <div className="lower">
-                <FaPager />
+          {task.cover && (
+            <div className="cover" style={{ backgroundColor: task.cover }}>
+              <a className="close-edit-page-btn">
+                <GrClose
+                  style={{ fill: "#1d3663" }}
+                  onClick={() =>
+                    this.props.history.push(
+                      `/${this.props.match.params.boardId}`
+                    )
+                  }
+                />
+              </a>
+            </div>
+          )}
+          <div className="no-cover-container">
+            <div className="task-header">
+              <div className="title flex">
+                <div className="lower">
+                  <FaPager style={{ fill: "#1d3663" }} />
+                </div>
+                <EditableText
+                  text={task.title}
+                  updateFunction={this.updateTaskProperty}
+                  property={"title"}
+                  setIsEdit={() => {
+                    return;
+                  }}
+                />
               </div>
-              <EditableText
-                text={task.title}
-                updateFunction={this.updateTaskProperty}
-                property={"title"}
-                setIsEdit={() => {
-                  return;
-                }}
+              {!task.cover && (
+                <a className="close-edit-page-btn">
+                  <GrClose
+                    style={{ fill: "#1d3663" }}
+                    onClick={() =>
+                      this.props.history.push(
+                        `/${this.props.match.params.boardId}`
+                      )
+                    }
+                  />
+                </a>
+              )}
+            </div>
+            <div className="flex">
+              <div className="task">
+                <div className="task-details">
+                  <div className="flex top-details-container">
+                    {task.members && <TaskMembers members={task.members} />}
+                    {task.labels && <TaskLabels labels={task.labels} />}
+                    {task.dueDate && (
+                      <TaskDate task={task} toggleIsDone={this.toggleIsDone} />
+                    )}
+                  </div>
+                  <div className="description">
+                    <GrTextAlignFull style={{ fill: "#1d3663" }} />
+                    <h3>Description</h3>
+                    {!isEdit && <a className="grey-btn">Edit</a>}
+                  </div>
+                  <div className="desc-editable-text">
+                    <EditableText
+                      text={task.description}
+                      updateFunction={this.updateTaskProperty}
+                      property={"description"}
+                      setIsEdit={this.setIsEdit}
+                    />
+                  </div>
+                  {task.checklists?.map((checklist) => (
+                    <CheckList
+                      key={checklist.id}
+                      checklist={checklist}
+                      checklistId={checklist.id}
+                      updateCheckListProperty={this.updateCheckListProperty}
+                      deleteCheckList={this.deleteCheckList}
+                    />
+                  ))}
+                </div>
+                <TaskComments />
+              </div>
+              <EditMenu
+                onCreateNewTaskList={this.onCreateNewTaskList}
+                taskId={task.id}
+                coverExist={task.cover}
               />
             </div>
-            <a className="close-edit-page-btn">
-              <GrClose
-                onClick={() =>
-                  this.props.history.push(`/${this.props.match.params.boardId}`)
-                }
-              />
-            </a>
-          </div>
-          <div className="flex">
-            <div className="task">
-              <div className="task-details">
-                <div className="flex top-details-container">
-                  {task.members && <TaskMembers members={task.members} />}
-                  {task.labels && <TaskLabels labels={task.labels} />}
-                  {task.dueDate && (
-                    <TaskDate task={task} toggleIsDone={this.toggleIsDone} />
-                  )}
-                </div>
-                <div className="description">
-                  <GrTextAlignFull />
-                  <h3>Description</h3>
-                  {!isEdit && <a className="grey-btn">Edit</a>}
-                </div>
-                <div className="desc-editable-text">
-                  <EditableText
-                    text={task.description}
-                    updateFunction={this.updateTaskProperty}
-                    property={"description"}
-                    setIsEdit={this.setIsEdit}
-                  />
-                </div>
-                {task.checklists?.map((checklist) => (
-                  <CheckList
-                    key={checklist.id}
-                    checklist={checklist}
-                    checklistId={checklist.id}
-                    updateCheckListProperty={this.updateCheckListProperty}
-                    deleteCheckList={this.deleteCheckList}
-                  />
-                ))}
-              </div>
-              <TaskComments />
-            </div>
-            <EditMenu
-              onCreateNewTaskList={this.onCreateNewTaskList}
-              taskId={task.id}
-            />
           </div>
         </section>
-      </React.Fragment>
+      </section>
     );
   }
 }
