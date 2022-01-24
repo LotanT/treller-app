@@ -159,7 +159,8 @@ function addGroup(board, groupTitle) {
         id: utilService.makeId(),
         title: groupTitle,
         style: {},
-        isArchive: false
+        isArchive: false,
+        tasks: []
     }
     board.groups.push(group)
     return board;

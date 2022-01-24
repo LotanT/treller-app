@@ -11,7 +11,12 @@ import { IoCheckboxSharp } from 'react-icons/io';
 import { Draggable } from 'react-beautiful-dnd';
 
 export function TaskPreview({ task, boardId, index }) {
- 
+  const getDragStyle = (isDragging, draggableStyle) => ({
+    
+    transform: [{ rotate: '10deg'}] ,
+    backgroundColor: isDragging? 'blue': 'white',
+    ...draggableStyle
+  });
   const getDateTemplate = () => {
     const month_names_short = [
       'Jan',
@@ -47,13 +52,17 @@ export function TaskPreview({ task, boardId, index }) {
 
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <Link
           className="card"
           to={`/${boardId}/${task.id}`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
+          style={getDragStyle(
+            snapshot.isDragging,
+            provided.draggableProps.style
+          )}
         >
           <div className="card-hover">
             <div className="card-edit-icon">
