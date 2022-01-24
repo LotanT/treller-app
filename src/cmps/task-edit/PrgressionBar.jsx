@@ -12,11 +12,11 @@ export const ProgressionBar = (props) => {
     marginBottom: 10,
     marginLeft: 13,
   };
-
+  const barColor = completed === 100 ? "#61bd4f" : "#0079bf";
   const fillerStyles = {
     height: "100%",
     width: `${completed}%`,
-    backgroundColor: "#0079bf",
+    backgroundColor: barColor,
     borderRadius: "inherit",
     textAlign: "right",
   };
