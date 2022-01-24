@@ -228,7 +228,7 @@ function _createBoards() {
                             {
                                 "id": "c104",
                                 "title": "Help me",
-                                "status": "in-progress", "isDone": false,
+                                "status": "in-progress", "isDone": false, "cover": "red",
                                 "description": "description",
                                 "comments": [
                                     {
@@ -386,7 +386,7 @@ function _createBoards() {
                             },
                             {
                                 "id": "c104",
-                                "title": "Help me", "isDone": false,
+                                "title": "Help me", "isDone": false, "cover": "red",
                                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbMZUssCb25YW6rL-kAkjfR7EgUkdCJoIFgw&usqp=CAU",
                                 "status": "in-progress",
                                 "description": "description",

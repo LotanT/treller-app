@@ -73,12 +73,14 @@ export class EditMenu extends React.Component {
           </span>
           <span className="menu-text">Dates</span>
         </a>
-        <a className="menu-btn">
-          <span className="menu-icon">
-            <FaRegWindowMaximize />
-          </span>
-          <span className="menu-text">Cover</span>
-        </a>
+        {!this.props.coverExists && (
+          <a className="menu-btn">
+            <span className="menu-icon">
+              <FaRegWindowMaximize />
+            </span>
+            <span className="menu-text">Cover</span>
+          </a>
+        )}
 
         <h3>Actions</h3>
         <a className="menu-btn">

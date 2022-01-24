@@ -1,27 +1,64 @@
 //MOBILE
 
+::-webkit-scrollbar {
+}
+
+.window-edit {
+  display: flex;
+  align-items: flex-start;
+  background-color: #000000a3;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 20;
+}
 //TASK
+
+.cover {
+  height: 116px;
+}
+
+.no-cover-container {
+  padding: 12px;
+}
+
 .close-edit-page-btn {
   height: 16px;
   width: 16px;
   font-size: 14px;
-  transform: translateY(-10px);
+  border-radius: 50%;
+  cursor: pointer;
+  box-sizing: unset;
+  padding: 10px;
+}
+
+.close-edit-page-btn:hover {
+  background-color: #091e420a;
 }
 
 .task-edit {
-  min-height: 600px;
-  padding: 11px;
-  padding-left: 17px;
-  padding-top: 17px;
+  background-color: #f4f5f7;
+  margin: 48px 0 80px;
+  position: relative;
   width: 768px;
-  background-color: rgb(243, 244, 246);
-  position: fixed;
-  top: 48.7%;
-  right: 50%;
-  transform: translate(50%, -50%);
-  z-index: 2;
-  border-radius: 3px;
-  color: #324669;
+  z-index: 20;
+  min-height: 600px;
+  // border-radius: 300px;
+  // padding: 11px;
+  // padding-left: 17px;
+  // padding-top: 17px;
+  // width: 768px;
+  // background-color: rgb(243, 244, 246);
+  // top: 53.5%;
+  // right: 50%;
+  // transform: translate(50%, -50%);
+  // z-index: 2;
+  // color: #324669;
+  // position: fixed;
 }
 
 .task-edit .lower {
@@ -118,6 +155,7 @@
   font-weight: 400;
   line-height: 20px;
   margin-left: 36px;
+  flex-wrap: wrap;
 }
 
 .top-details {
@@ -128,23 +166,53 @@
   margin-right: 0;
 }
 
+.label {
+  font-weight: 600;
+  height: 32px;
+  line-height: 32px;
+  margin: 0 4px 4px 0;
+  min-width: 40px;
+  padding: 0 12px;
+  width: auto;
+  border-radius: 3px;
+  color: white;
+}
+
 .member {
   height: 28px;
   margin: 0 0 4px 4px;
   width: 28px;
   font-size: 16px;
-  img {
-    border-radius: 50%;
-  }
+}
+
+.member img {
+  border-radius: 50%;
 }
 
 .top-details .plus-icon {
+  border-radius: 50%;
   font-size: 16px;
   padding: 3px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.top-details-container .top-details h3 {
+  color: #5e6c84;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-bottom: 5px;
 }
 
 .date-status {
   transform: translateX(5px);
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0 4px;
+  border-radius: 2px;
+  margin: auto 0 auto 8px;
+  padding-top: 0;
 }
 
 .task-details {
@@ -174,6 +242,7 @@
 
 .task-edit .description h3 {
   margin-left: 13px;
+  color: #172b4d;
 }
 
 .description .editable-text h5 {
@@ -441,7 +510,6 @@
   max-width: 300px;
   overflow: hidden;
   padding: 6px 12px;
-  // position: relative;
   text-decoration: none;
   text-overflow: ellipsis;
   transition-duration: 85ms;
@@ -477,4 +545,5 @@
 
 .desc-editable-text {
   margin-left: 40px;
+  margin-bottom: 40px;
 }
