@@ -222,7 +222,7 @@ function _createBoards() {
                             {
                                 "id": "c103",
                                 "title": "Do that",
-                                "isArchive": false, "isDone": false
+                                "isArchive": false, "isDone": false,"dueDate":1590999817436
 
                             },
                             {

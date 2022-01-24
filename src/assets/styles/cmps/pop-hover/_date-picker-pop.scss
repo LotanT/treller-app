@@ -1,0 +1,70 @@
+.MuiCalendarPicker-root{
+    width: 256px !important;
+    margin-left: 12px !important;
+
+    button{
+        padding:0px !important;
+    }
+}
+
+// .css-169iwlq-MuiCalendarPicker-root{
+//     width: 250px !important;
+// }
+
+.btn-due-date-create{
+    background-color: #0079bf;
+    color: whitesmoke !important;
+    box-shadow: none;
+    border: none;
+    color: inherit;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 16px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+
+    &:hover{
+        cursor: pointer;
+        background-color: #026aa7;
+    }
+}
+
+.btn-due-date-remove{
+    background-color: rgba(9, 30, 66, 0.04);
+    box-shadow: none;
+    border: none;
+    color: inherit;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 8px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    &:hover{
+        cursor: pointer;
+        background-color: rgba(9, 30, 66, 0.08);;
+    }
+}
+
+.color-palette-cover{
+    -webkit-transform: translate3d(0, 0, 0);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    padding: 4px;
+    margin: 0 -4px;
+    overflow-x: hidden;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.pick-color-cover{
+    display: flex;
+    float: left;
+    height: 32px;
+    margin: 0 8px 8px 0;
+    padding: 0;
+    width: 49px;
+    position: relative;
+    border-radius: 3px;
+}
