@@ -11,38 +11,120 @@ export function GroupList({
   onAddGroup,
   onUpdateGroups,
 }) {
-  // console.log(groups)
-  const [groupsOrder, setGroups] = useState(groups);
-
-
+  const queryAttr = 'data-rbd-drag-handle-draggable-id';
+  const [placeholderProps, setPlaceholderProps] = useState({});
 
   const handleOnDragEng = (result) => {
-      if(!result.destination) return
-      if(result.destination.droppableId === 'groups'){
-          const [groupToReorder] = groups.splice(result.source.index, 1);
-          groups.splice(result.destination.index, 0, groupToReorder);
-        }else {
-            let task = null;
-            groups = groups.map(group=>{
-                if(group.id === result.source.droppableId){
-                    [task] = group.tasks.splice(result.source.index, 1)
-                }
-                return group
-            })
-            groups = groups.map(group=>{
-                if(group.id === result.destination.droppableId){
-                    group.tasks.splice(result.destination.index, 0, task)
-                }
-                return group
-            })
+    setPlaceholderProps({});
+    if (!result.destination) return;
+    if (result.destination.droppableId === 'groups') {
+      const [groupToReorder] = groups.splice(result.source.index, 1);
+      groups.splice(result.destination.index, 0, groupToReorder);
+    } else {
+      let task = null;
+      groups = groups.map((group) => {
+        if (group.id === result.source.droppableId) {
+          [task] = group.tasks.splice(result.source.index, 1);
         }
-        onUpdateGroups(groups);
+        return group;
+      });
+      groups = groups.map((group) => {
+        if (group.id === result.destination.droppableId) {
+          group.tasks.splice(result.destination.index, 0, task);
+        }
+        return group;
+      });
+    }
+    onUpdateGroups(groups);
   };
- 
-// console.log(snapshot)
+
+  const getDraggedDom = (draggableId) => {
+    const domQuery = `[${queryAttr}='${draggableId}']`;
+    const draggedDOM = document.querySelector(domQuery);
+
+    return draggedDOM;
+  };
+
+  const handleDragStart = (event) => {
+    const draggedDOM = getDraggedDom(event.draggableId);
+
+    if (!draggedDOM) {
+      return;
+    }
+
+    const { clientHeight, clientWidth } = draggedDOM;
+    const sourceIndex = event.source.index;
+    var clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+      [...draggedDOM.parentNode.children]
+        .slice(0, sourceIndex)
+        .reduce((total, curr) => {
+          const style = curr.currentStyle || window.getComputedStyle(curr);
+          const marginBottom = parseFloat(style.marginBottom);
+          return total + curr.clientHeight + marginBottom;
+        }, 0);
+
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(
+        window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+      ),
+    });
+  };
+
+//   const handleDragEnd = (result) => {
+//     setPlaceholderProps({});
+//   };
+
+  const handleDragUpdate = (event) => {
+    if (!event.destination) {
+      return;
+    }
+
+    const draggedDOM = getDraggedDom(event.draggableId);
+
+    if (!draggedDOM) {
+      return;
+    }
+
+    const { clientHeight, clientWidth } = draggedDOM;
+    const destinationIndex = event.destination.index;
+    const sourceIndex = event.source.index;
+
+    const childrenArray = [...draggedDOM.parentNode.children];
+    const movedItem = childrenArray[sourceIndex];
+    childrenArray.splice(sourceIndex, 1);
+
+    const updatedArray = [
+      ...childrenArray.slice(0, destinationIndex),
+      movedItem,
+      ...childrenArray.slice(destinationIndex + 1),
+    ];
+
+    var clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode).paddingTop) +
+      updatedArray.slice(0, destinationIndex).reduce((total, curr) => {
+        const style = curr.currentStyle || window.getComputedStyle(curr);
+        const marginBottom = parseFloat(style.marginBottom);
+        return total + curr.clientHeight + marginBottom;
+      }, 0);
+
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(
+        window.getComputedStyle(draggedDOM.parentNode).paddingLeft
+      ),
+    });
+  };
   return (
-    <DragDropContext onDragEnd={handleOnDragEng}>
-      <Droppable droppableId="groups" direction="horizontal" type='group'>
+    <DragDropContext onDragEnd={handleOnDragEng}
+    onDragStart={handleDragStart}
+    onDragUpdate={handleDragUpdate}>
+      <Droppable droppableId="groups" direction="horizontal" type="group">
         {(provided, snapshot) => (
           <div
             className="group-list"
@@ -58,10 +140,12 @@ export function GroupList({
                 onEditGroupTitle={onEditGroupTitle}
                 groupIdx={index}
                 snapshot={snapshot}
-                />
-                ))}
-                {provided.placeholder}
-        <AddGroup onAddGroup={onAddGroup}/>
+                getDraggedDom={getDraggedDom}
+                placeholderProps={placeholderProps}
+              />
+            ))}
+            {provided.placeholder}
+            <AddGroup onAddGroup={onAddGroup} />
           </div>
         )}
       </Droppable>

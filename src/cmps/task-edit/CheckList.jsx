@@ -65,7 +65,7 @@ export class CheckList extends React.Component {
         doneTodosNum++;
       }
     });
-    return (doneTodosNum * 100) / todos.length;
+    return parseInt(`${(doneTodosNum * 100) / todos.length}`);
   };
 
   render() {
@@ -76,7 +76,7 @@ export class CheckList extends React.Component {
         <div className="title">
           <div className="left-title">
             <div className="checklist-icon">
-              <IoMdCheckboxOutline />
+              <IoMdCheckboxOutline style={{ fill: "#1d3663" }} />
             </div>
             <EditableText
               text={checklist.title}

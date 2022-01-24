@@ -6,6 +6,7 @@ import { CgClose } from 'react-icons/cg';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { isEmpty } from "lodash";
 
 export function GroupPreview({
   group,
@@ -13,10 +14,10 @@ export function GroupPreview({
   onAddTask,
   onEditGroupTitle,
   groupIdx,
-  snapshot
+  snapshot,
+  placeholderProps
 }) {
   const [isAddTask, setAddTask] = useState(false);
-  // const [isEditGroupTitle, setEditGroupTitle] = useState(false)
   const [taskTitle, setTaskTitle] = useState('');
   const [gtoupTitle, setGroupTitle] = useState(group.title);
 
@@ -25,10 +26,6 @@ export function GroupPreview({
   const ToggleAddTask = () => {
     setAddTask(!isAddTask);
   };
-
-  // const ToggleEditGroupTitle = () =>{
-  //   setEditGroupTitle(!isEditGroupTitle)
-  // }
 
   const handleCardChange = (ev) => {
     setTaskTitle(ev.target.value);
@@ -43,9 +40,7 @@ export function GroupPreview({
     setAddTask(false);
     setTaskTitle('');
   };
-console.log(snapshot)
   return (
-    // <div className="group-container">
     <Draggable key={group.id} draggableId={group.id} index={groupIdx}>
       {(provided) => (
         <div
@@ -70,7 +65,7 @@ console.log(snapshot)
           </div>
           {/* <DragDropContext > */}
           <Droppable droppableId={group.id}>
-            {(provided) => (
+            {(provided, snapshot) => (
               <div
                 className="task-list"
                 {...provided.droppableProps}
@@ -86,6 +81,17 @@ console.log(snapshot)
                     />
                   ))}
                 {provided.placeholder}
+                {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
+              <div
+                // className="placeholder"
+                style={{
+                  top: placeholderProps.clientY,
+                  left: placeholderProps.clientX,
+                  height: placeholderProps.clientHeight,
+                  width: placeholderProps.clientWidth
+                }}
+              />
+            )}
                 {isAddTask && (
                   <div className="card-composer">
                     <div className="list-card-composer">
@@ -118,8 +124,18 @@ console.log(snapshot)
               </div>
             )}
           </Droppable>
-          {/* </DragDropContext> */}
           {provided.placeholder}
+          {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
+              <div
+                // className="placeholder"
+                style={{
+                  top: placeholderProps.clientY,
+                  left: placeholderProps.clientX,
+                  height: placeholderProps.clientHeight,
+                  width: placeholderProps.clientWidth
+                }}
+              />
+            )}
           {!isAddTask && (
             <div className="compose-task">
               <div className="open-new-card" onClick={ToggleAddTask}>
@@ -136,6 +152,5 @@ console.log(snapshot)
         </div>
       )}
     </Draggable>
-    // </div>
   );
 }

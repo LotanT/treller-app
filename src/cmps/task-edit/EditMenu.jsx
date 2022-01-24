@@ -79,13 +79,16 @@ export class EditMenu extends React.Component {
         </a>
         {isDueDatePop && <DatePickerPop toggleModal={this.toggleModal} taskId={this.props.taskId} />}
 
+        {!this.props.coverExists && ( 
         <a className="menu-btn" onClick={() => this.toggleModal("isAddCover")}>
           <span className="menu-icon">
             <FaRegWindowMaximize />
           </span>
           <span className="menu-text">Cover</span>
         </a>
+        )}
         {isAddCover && <AddCover toggleModal={this.toggleModal} taskId={this.props.taskId} />}
+        
 
         <h3>Actions</h3>
         <a className="menu-btn">
