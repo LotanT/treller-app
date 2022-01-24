@@ -2,6 +2,7 @@ import React from "react";
 import { utilService } from "../../services/util.service";
 import { CheckListTodo } from "./CheckListTodo";
 import { EditableText } from "./EditableText";
+import { ProgressionBar } from "./PrgressionBar";
 import { IoMdCheckboxOutline } from "react-icons/io";
 
 export class CheckList extends React.Component {
@@ -56,6 +57,17 @@ export class CheckList extends React.Component {
     this.setState({ isEdit });
   };
 
+  getBarPercentage = () => {
+    const { todos } = this.state.checklist;
+    let doneTodosNum = 0;
+    todos.map((todo) => {
+      if (todo.isDone) {
+        doneTodosNum++;
+      }
+    });
+    return (doneTodosNum * 100) / todos.length;
+  };
+
   render() {
     const { checklist, isEdit } = this.state;
     if (!checklist) return <span>Loading..</span>;
@@ -83,6 +95,9 @@ export class CheckList extends React.Component {
             </a>
           )}
         </div>
+        {checklist.todos.length && (
+          <ProgressionBar completed={this.getBarPercentage()} />
+        )}
         {checklist.todos?.map((todo) => (
           <CheckListTodo
             key={todo.id}

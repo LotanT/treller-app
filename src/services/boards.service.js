@@ -204,12 +204,12 @@ function _createBoards() {
                             {
                                 "id": "c101",
                                 "title": "Replace logo",
-                                "isArchive": false
+                                "isArchive": false, "isDone": false
                             },
                             {
                                 "id": "c102",
                                 "title": "Add Samples",
-                                "isArchive": false
+                                "isArchive": false, "isDone": false
                             }
                         ],
                         "style": {},
@@ -222,13 +222,13 @@ function _createBoards() {
                             {
                                 "id": "c103",
                                 "title": "Do that",
-                                "isArchive": false
+                                "isArchive": false, "isDone": false
 
                             },
                             {
                                 "id": "c104",
                                 "title": "Help me",
-                                "status": "in-progress",
+                                "status": "in-progress", "isDone": false,
                                 "description": "description",
                                 "comments": [
                                     {
@@ -363,12 +363,12 @@ function _createBoards() {
                                 "id": "c101",
                                 "title": "Replace logo",
                                 "img": "https://static01.nyt.com/images/2022/01/05/technology/personaltech/05TECHTIP-GIF/05TECHTIP-GIF-mobileMasterAt3x.gif",
-                                "isArchive": false
+                                "isArchive": false, "isDone": false
                             },
                             {
                                 "id": "c102",
                                 "title": "Add Samples",
-                                "isArchive": false
+                                "isArchive": false, "isDone": false
                             }
                         ],
                         "style": {},
@@ -381,12 +381,12 @@ function _createBoards() {
                             {
                                 "id": "c103",
                                 "title": "Do that",
-                                "isArchive": false
+                                "isArchive": false, "isDone": false
 
                             },
                             {
                                 "id": "c104",
-                                "title": "Help me",
+                                "title": "Help me", "isDone": false,
                                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbMZUssCb25YW6rL-kAkjfR7EgUkdCJoIFgw&usqp=CAU",
                                 "status": "in-progress",
                                 "description": "description",
