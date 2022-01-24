@@ -115,8 +115,11 @@ class _TaskEdit extends React.Component {
           }
         ></div>
         <section className="task-edit">
-          {task.cover && (
-            <div className="cover" style={{ backgroundColor: task.cover }}>
+          {task.style.bgColor && (
+            <div
+              className="cover"
+              style={{ backgroundColor: task.style.bgColor }}
+            >
               <a className="close-edit-page-btn">
                 <GrClose
                   style={{ fill: "#1d3663" }}
