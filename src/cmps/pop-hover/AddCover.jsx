@@ -41,6 +41,8 @@ function _AddCover(props) {
     const toggleCover = async () => {
         let updatedBoard = taskService.toggleCoverToTask(props.board, props.taskId, colorChoose)
         await props.onEditBoard(updatedBoard)
+        props.toggleModal()
+
     }
 
     return (

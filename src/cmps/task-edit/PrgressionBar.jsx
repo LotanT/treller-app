@@ -10,7 +10,7 @@ export const ProgressionBar = (props) => {
     borderRadius: 50,
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: 13,
+    marginLeft: 13,    
   };
   const barColor = completed === 100 ? "#61bd4f" : "#0079bf";
   const fillerStyles = {
@@ -32,7 +32,7 @@ export const ProgressionBar = (props) => {
     <div className="prog-bar">
       <div className="percentage" style={labelStyles}>{`${completed}%`}</div>
       <div style={containerStyles}>
-        <div style={fillerStyles}></div>
+        <div className="prog-bar-dur" style={fillerStyles}></div>
       </div>
     </div>
   );
