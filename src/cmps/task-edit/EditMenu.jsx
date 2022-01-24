@@ -5,6 +5,7 @@ import { FiClock } from "react-icons/fi";
 import { FaRegWindowMaximize } from "react-icons/fa";
 import { BsTag } from "react-icons/bs";
 import { AddCheckList } from '../pop-hover/AddCheckList'
+import { AddLabel } from "../pop-hover/AddLabel";
 
 export class EditMenu extends React.Component {
   state = {
@@ -27,7 +28,7 @@ export class EditMenu extends React.Component {
 
 
   render() {
-    const { isAddCheckList } = this.state
+    const { isAddCheckList,isLabel } = this.state
     return (
       <section className="edit-menu" >
         <h3>Add to card</h3>
@@ -39,10 +40,11 @@ export class EditMenu extends React.Component {
           <span className="menu-text">Members</span>
         </a>
 
-        <a className="menu-btn">
+        <a className="menu-btn" onClick={() => this.toggleModal('isLabel')}>
           <BsTag />
           <span className="menu-text">Labels</span>
         </a>
+        {isLabel && <AddLabel toggleModal={this.toggleModal} taskId={this.props.taskId} />}
         
         <a className="menu-btn" onClick={() => this.toggleModal('isAddCheckList')}>
           <span className="menu-icon">
