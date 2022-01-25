@@ -12,9 +12,6 @@
   z-index: 0;
   overflow: hidden;
 
-  &.true{
-    transform: rotate(10deg)
-  }
   .card-label {
     float: left;
     font-size: 12px;
@@ -28,6 +25,16 @@
     text-shadow: none;
     width: auto;
     border-radius: 5px;
+    cursor: pointer;
+    transition: width 1s;
+    transition: height 1ms;
+    // transition: width 0.3ms; 
+    &.true{
+      height: 16px;
+      line-height: 16px;
+      max-width: 198px;
+      padding: 0 8px;
+    }
     // background-color: #61bd4f;
   }
   .pic{
@@ -76,12 +83,17 @@
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 11;
+  // z-index: 11;
 }
-.card-hover:hover{
-  background-color: rgba(197, 197, 197, 0.274);
+.card:hover{
+  .card-details{
+    background-color: rgba(211, 211, 211, 0.274);
+  }
   .card-edit-icon{
     opacity: 0.8;
+  }
+  .pic{
+    background-color: rgba(211, 211, 211, 0.274);
   }
 }
 

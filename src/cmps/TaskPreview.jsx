@@ -6,11 +6,12 @@ import { CgDetailsMore } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { BsCheck2Square } from 'react-icons/bs';
 import { MdAttachFile } from 'react-icons/md';
+import { BiCheckbox } from 'react-icons/bi';
 import { VscEdit } from 'react-icons/vsc';
 import { IoCheckboxSharp } from 'react-icons/io';
 import { Draggable } from 'react-beautiful-dnd';
 
-export function TaskPreview({ task, boardId, index }) {
+export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen }) {
   const getDragStyle = (isDragging, draggableStyle) => ({
     // transform: [{ rotate: '90deg'}],
     // transform: `{rotate(90deg)}`,
