@@ -15,7 +15,10 @@ export function GroupPreview({
   onEditGroupTitle,
   groupIdx,
   snapshot,
-  placeholderProps
+  placeholderProps,
+  toggleOpenLabel,
+  isLabelOpen,
+  toggleTaskDone,
 }) {
   const [isAddTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
@@ -78,6 +81,11 @@ export function GroupPreview({
                       task={task}
                       boardId={boardId}
                       index={index}
+                      toggleOpenLabel={toggleOpenLabel}
+                      isLabelOpen={isLabelOpen}
+                      toggleTaskDone={toggleTaskDone}
+                      handleCardChange={handleCardChange}
+                      taskTitle={taskTitle}
                     />
                   ))}
                 {provided.placeholder}

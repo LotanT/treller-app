@@ -1,19 +1,50 @@
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-// import {withRouter}  ReackRouterDOM;
+import { QuickBar } from './user-board/QuickBar';
+import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { CgDetailsMore } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { BsCheck2Square } from 'react-icons/bs';
 import { MdAttachFile } from 'react-icons/md';
-import { BiCheckbox } from 'react-icons/bi';
+import { MdCheckBoxOutlineBlank } from 'react-icons/md';
+import { MdCheckBox } from 'react-icons/md';
+import { IoMdCheckboxOutline } from 'react-icons/io';
 import { VscEdit } from 'react-icons/vsc';
-import { IoCheckboxSharp } from 'react-icons/io';
 import { Draggable } from 'react-beautiful-dnd';
 
-export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen }) {
+export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen, toggleTaskDone,handleCardChange,
+  taskTitle}) {
+  let history = useHistory()
+
+  const labelsRef = React.createRef();
+  const duDateRef = React.createRef();
+  const quickEditIconRef = React.createRef();
+  
+
+  const [isQuickEditOpen, setQuickEditOpen] = useState(false);
+  const [cardPos, setClickPos] = useState({});
+  
+  const toggleIsQuickEditOpen = () =>{
+      setQuickEditOpen(!isQuickEditOpen)
+  }
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClick);
+    return document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const handleClick = (e) => {
+    let {right,top} = e.target.getBoundingClientRect()
+    setClickPos({right,top})
+    if (labelsRef?.current?.contains(e.target)||
+    duDateRef?.current?.contains(e.target) ||
+    quickEditIconRef?.current?.contains(e.target) ) {
+      return;
+    }
+    history.push(`/${boardId}/${task.id}`);
+  };
+
   const getDragStyle = (isDragging, draggableStyle) => ({
-    
     transform: [{ rotate: '10deg'}] ,
     backgroundColor: isDragging? 'blue': 'white',
     ...draggableStyle
@@ -37,6 +68,7 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
     return `${month_names_short[duDate.getMonth()]} ${duDate.getDay()}`;
   };
 
+  let checkIsListDone
   const getCheckListCount = () => {
     let checkListCount = task.checklists.map(
       (checklist) => checklist.todos.length
@@ -46,15 +78,21 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
       (checklist) => checklist.todos.filter((todo) => todo.isDone).length
     );
     checkListDone = checkListDone.reduce((a, b) => a + b, 0);
+    if(checkListDone === checkListCount) checkIsListDone = 'complete';
     return `${checkListDone}/${checkListCount}`;
   };
-//  const index = getCounter(true)
- console.log(isLabelOpen)
 
+  const duDateStatus = task.isDone;
+  if(!duDateStatus && task.duDate>Date.now()) duDateStatus = 'late'
+
+  const openQuickEditor = () =>{}
+
+  // console.log(clickPos);
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
-        <Link
+        <div
+          onClick={handleClick}
           className="card"
           to={`/${boardId}/${task.id}`}
           {...provided.draggableProps}
@@ -66,23 +104,23 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
           )}
         >
           <div className="card-hover">
-            <div className="card-edit-icon">
+            <div className="card-edit-icon" ref={quickEditIconRef} onClick={toggleIsQuickEditOpen}>
               <VscEdit />
             </div>
           </div>
 
-          {task.img && (
-            <div className="pic">
+          {task.style.cover && (
+            <div className="pic" style={{backgroundColor: task.style?.bgColor}}>
               <img src={task.img} />
             </div>
           )}
           <div className="card-details">
-            <div className="labels" onMouseDown={toggleOpenLabel}>
+            <div className="labels" ref={labelsRef} onMouseDown={toggleOpenLabel}>
               {task.labels &&
                 task.labels.map((label) => {
                   return (
                     <span key={label.id} className={`card-label ${isLabelOpen}`} style={{backgroundColor: label.color}}>
-                     {isLabelOpen && <span>{label.title}</span>}
+                     <span className={`label-title ${isLabelOpen}`}>{label.title}</span>
                     </span>
                   );
                 })}
@@ -91,13 +129,14 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
             <div className="icons-container">
               <div className="card-icons">
                 {task.dueDate && (
-                  <div className="icon">
-                    <div className="duDate">
-                    <AiOutlineClockCircle className="svg" />
-                    <span>{getDateTemplate()}</span>
-                    </div>
-                    <div className="duDate-complete">
-                    <BiCheckbox className="svg" />
+                  <div className={`icon du-date-${duDateStatus}`}>
+                    <div className={`du-date ${task.isDone}`} 
+                    onClick={()=>toggleTaskDone(task)}
+                    ref={duDateRef}
+                    >
+                    {!task.isDone && <MdCheckBoxOutlineBlank className="svg isDone" />}
+                    {task.isDone && <BsCheck2Square className="svg isDone" />}
+                    <AiOutlineClockCircle className="svg clock" />
                     <span>{getDateTemplate()}</span>
                     </div>
                   </div>
@@ -114,7 +153,7 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
                   </div>
                 )}
                 {task.checklists && (
-                  <div className="icon">
+                  <div className={`icon checklist-${checkIsListDone}`}>
                     <BsCheck2Square className="svg" />
                     <span>{getCheckListCount()}</span>
                   </div>
@@ -137,7 +176,9 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
               </div>
             )}
           </div>
-        </Link>
+          {isQuickEditOpen && <QuickBar task={task} handleCardChange={handleCardChange}
+                          taskTitle={taskTitle} cardPos={cardPos}/>}
+        </div>
       )}
     </Draggable>
   );
