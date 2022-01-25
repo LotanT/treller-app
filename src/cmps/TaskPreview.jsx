@@ -6,11 +6,12 @@ import { CgDetailsMore } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { BsCheck2Square } from 'react-icons/bs';
 import { MdAttachFile } from 'react-icons/md';
+import { BiCheckbox } from 'react-icons/bi';
 import { VscEdit } from 'react-icons/vsc';
 import { IoCheckboxSharp } from 'react-icons/io';
 import { Draggable } from 'react-beautiful-dnd';
 
-export function TaskPreview({ task, boardId, index }) {
+export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen }) {
   const getDragStyle = (isDragging, draggableStyle) => ({
     
     transform: [{ rotate: '10deg'}] ,
@@ -48,7 +49,7 @@ export function TaskPreview({ task, boardId, index }) {
     return `${checkListDone}/${checkListCount}`;
   };
 //  const index = getCounter(true)
-//  console.log(index)
+ console.log(isLabelOpen)
 
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
@@ -76,11 +77,13 @@ export function TaskPreview({ task, boardId, index }) {
             </div>
           )}
           <div className="card-details">
-            <div className="labels">
-              {task.labelIds &&
-                task.labelIds.map((label) => {
+            <div className="labels" onMouseDown={toggleOpenLabel}>
+              {task.labels &&
+                task.labels.map((label) => {
                   return (
-                    <span key={label} className={`card-label ${label}`}></span>
+                    <span key={label.id} className={`card-label ${isLabelOpen}`} style={{backgroundColor: label.color}}>
+                     {isLabelOpen && <span>{label.title}</span>}
+                    </span>
                   );
                 })}
             </div>
@@ -89,8 +92,14 @@ export function TaskPreview({ task, boardId, index }) {
               <div className="card-icons">
                 {task.dueDate && (
                   <div className="icon">
+                    <div className="duDate">
                     <AiOutlineClockCircle className="svg" />
                     <span>{getDateTemplate()}</span>
+                    </div>
+                    <div className="duDate-complete">
+                    <BiCheckbox className="svg" />
+                    <span>{getDateTemplate()}</span>
+                    </div>
                   </div>
                 )}
                 {task.description && (
