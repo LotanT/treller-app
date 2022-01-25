@@ -83,7 +83,7 @@ export function GroupPreview({
                 {provided.placeholder}
                 {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
               <div
-                // className="placeholder"
+                className="placeholder"
                 style={{
                   top: placeholderProps.clientY,
                   left: placeholderProps.clientX,
@@ -125,9 +125,9 @@ export function GroupPreview({
             )}
           </Droppable>
           {provided.placeholder}
-          {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
+          {/* {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
               <div
-                // className="placeholder"
+                className="placeholder"
                 style={{
                   top: placeholderProps.clientY,
                   left: placeholderProps.clientX,
@@ -135,7 +135,7 @@ export function GroupPreview({
                   width: placeholderProps.clientWidth
                 }}
               />
-            )}
+            )} */}
           {!isAddTask && (
             <div className="compose-task">
               <div className="open-new-card" onClick={ToggleAddTask}>
