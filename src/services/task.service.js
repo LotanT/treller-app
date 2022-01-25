@@ -215,7 +215,8 @@ function toggleCoverToTask(board, taskId, cover) {
                 if (!task.style) {
                     task.style = { bgColor: null, img: null }
                     console.log('EMPTY LABELSIDS~!');
-                }else task.style.bgColor = cover;
+                }
+                task.style.bgColor = cover;
             }
             return task
         })

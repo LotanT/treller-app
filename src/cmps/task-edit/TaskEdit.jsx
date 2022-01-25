@@ -115,7 +115,7 @@ class _TaskEdit extends React.Component {
           }
         ></div>
         <section className="task-edit">
-          {task.style.bgColor && (
+          {task.style && (
             <div
               className="cover"
               style={{ backgroundColor: task.style.bgColor }}

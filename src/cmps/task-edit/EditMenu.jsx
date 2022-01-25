@@ -7,12 +7,14 @@ import { FaRegWindowMaximize } from "react-icons/fa";
 import { BsTag } from "react-icons/bs";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { MdOutlineContentCopy } from "react-icons/md";
+import { ImAttachment } from "react-icons/im";
 import { GrList } from "react-icons/gr";
 
 import { AddCheckList } from "../pop-hover/AddCheckList";
 import { AddLabel } from "../pop-hover/AddLabel";
 import { DatePickerPop } from "../pop-hover/DatePickerPop";
 import { AddCover } from "../pop-hover/AddCover";
+import { AddAttachment } from "../pop-hover/AddAtachment";
 
 export class EditMenu extends React.Component {
   state = {
@@ -21,6 +23,7 @@ export class EditMenu extends React.Component {
     isAddMembers: false,
     isDueDatePop: false,
     isAddCover: false,
+    isAttachment: false
   };
 
   toggleModal = (popHover) => {
@@ -32,7 +35,7 @@ export class EditMenu extends React.Component {
   };
 
   render() {
-    const { isAddCheckList, isLabel, isDueDatePop,isAddCover } = this.state;
+    const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment } = this.state;
     return (
       <section className="edit-menu">
         <h3>Add to card</h3>
@@ -79,16 +82,24 @@ export class EditMenu extends React.Component {
         </a>
         {isDueDatePop && <DatePickerPop toggleModal={this.toggleModal} taskId={this.props.taskId} />}
 
-        {!this.props.coverExists && ( 
-        <a className="menu-btn" onClick={() => this.toggleModal("isAddCover")}>
+        <a className="menu-btn" onClick={() => this.toggleModal("isAttachment")}>
           <span className="menu-icon">
-            <FaRegWindowMaximize />
+            <ImAttachment />
           </span>
-          <span className="menu-text">Cover</span>
+          <span className="menu-text">Attachment</span>
         </a>
+        {isAttachment && <AddAttachment toggleModal={this.toggleModal} taskId={this.props.taskId} />}
+
+        {!this.props.coverExists && (
+          <a className="menu-btn" onClick={() => this.toggleModal("isAddCover")}>
+            <span className="menu-icon">
+              <FaRegWindowMaximize />
+            </span>
+            <span className="menu-text">Cover</span>
+          </a>
         )}
         {isAddCover && <AddCover toggleModal={this.toggleModal} taskId={this.props.taskId} />}
-        
+
 
         <h3>Actions</h3>
         <a className="menu-btn">
