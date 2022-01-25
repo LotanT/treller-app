@@ -2,10 +2,10 @@
 
 
 const initialState = {
-    count: 10,
+    // count: 10,
     user: null,
-    users: [],
-    watchedUser: null
+    // users: [],
+    // watchedUser: null
 }
 export function userReducer(state = initialState, action) {
     var newState = state;

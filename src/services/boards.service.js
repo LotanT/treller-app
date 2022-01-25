@@ -11,8 +11,6 @@ export const boardService = {
     remove,
     getNewBoard,
 
-
-
 }
 window.cs = boardService;
 _createBoards()
