@@ -29,7 +29,7 @@ export class EditableText extends React.Component {
 
   render() {
     let { isEdit, text } = this.state;
-    if (!text && !isEdit) text = `Add ${this.props.property}`;
+    // if (!text && !isEdit) text = `Add ${this.props.property}`;
 
     return (
       <section

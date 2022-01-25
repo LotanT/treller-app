@@ -11,10 +11,10 @@ export const storageService = {
     put,
     remove,
     postMany,
-    
+
 }
 
-function query(entityType, delay = 600) {
+function query(entityType, delay = 1) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
 
     return new Promise((resolve, reject) => {

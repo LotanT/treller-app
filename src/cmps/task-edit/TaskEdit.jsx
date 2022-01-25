@@ -21,6 +21,10 @@ class _TaskEdit extends React.Component {
 
   componentDidMount() {
     this.props.loadBoard(this.props.match.params.boardId);
+    if (!this.state.task?.description) {
+      const isEdit = true;
+      this.setState({ isEdit });
+    }
   }
 
   loadTask = () => {
@@ -115,7 +119,7 @@ class _TaskEdit extends React.Component {
           }
         ></div>
         <section className="task-edit">
-          {task.style.bgColor && (
+          {task.style?.bgColor && (
             <div
               className="cover"
               style={{ backgroundColor: task.style.bgColor }}

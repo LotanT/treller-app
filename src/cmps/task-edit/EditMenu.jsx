@@ -32,7 +32,7 @@ export class EditMenu extends React.Component {
   };
 
   render() {
-    const { isAddCheckList, isLabel, isDueDatePop,isAddCover } = this.state;
+    const { isAddCheckList, isLabel, isDueDatePop, isAddCover } = this.state;
     return (
       <section className="edit-menu">
         <h3>Add to card</h3>
@@ -71,24 +71,36 @@ export class EditMenu extends React.Component {
           />
         )}
 
-        <a className="menu-btn" onClick={() => this.toggleModal("isDueDatePop")}>
+        <a
+          className="menu-btn"
+          onClick={() => this.toggleModal("isDueDatePop")}
+        >
           <span className="menu-icon">
             <FiClock />
           </span>
           <span className="menu-text">Dates</span>
         </a>
-        {isDueDatePop && <DatePickerPop toggleModal={this.toggleModal} taskId={this.props.taskId} />}
-
-        {!this.props.coverExists && ( 
-        <a className="menu-btn" onClick={() => this.toggleModal("isAddCover")}>
-          <span className="menu-icon">
-            <FaRegWindowMaximize />
-          </span>
-          <span className="menu-text">Cover</span>
-        </a>
+        {isDueDatePop && (
+          <DatePickerPop
+            toggleModal={this.toggleModal}
+            taskId={this.props.taskId}
+          />
         )}
-        {isAddCover && <AddCover toggleModal={this.toggleModal} taskId={this.props.taskId} />}
-        
+
+        {!this.props.coverExists && (
+          <a
+            className="menu-btn"
+            onClick={() => this.toggleModal("isAddCover")}
+          >
+            <span className="menu-icon">
+              <FaRegWindowMaximize />
+            </span>
+            <span className="menu-text">Cover</span>
+          </a>
+        )}
+        {isAddCover && (
+          <AddCover toggleModal={this.toggleModal} taskId={this.props.taskId} />
+        )}
 
         <h3>Actions</h3>
         <a className="menu-btn">

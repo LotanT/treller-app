@@ -24,6 +24,7 @@ export class CheckList extends React.Component {
   updateCheckListTodos = (todoToUpdate) => {
     const { checklist } = this.state;
     var { todos } = checklist;
+
     if (!todoToUpdate) {
       todoToUpdate = this.getEmptyTodo();
       todos[todos.length] = todoToUpdate;
@@ -35,6 +36,7 @@ export class CheckList extends React.Component {
     }
     checklist.todos = todos;
     this.setState({ checklist });
+    console.log(todos);
     this.props.updateCheckListProperty("todos", todos, checklist.id);
   };
 
@@ -46,8 +48,7 @@ export class CheckList extends React.Component {
   getEmptyTodo = () => {
     return {
       id: utilService.makeId(),
-      title: "",
-      description: "",
+      title: null,
       isDone: false,
     };
   };
@@ -58,14 +59,37 @@ export class CheckList extends React.Component {
   };
 
   getBarPercentage = () => {
-    const { todos } = this.state.checklist;
+    let { todos } = this.state.checklist;
+    let realTodos = [];
+    todos.forEach((todo) => {
+      if (todo.title) realTodos.push(todo);
+    });
+    const denominator = realTodos.length ? realTodos.length : 1;
     let doneTodosNum = 0;
     todos.map((todo) => {
       if (todo.isDone) {
         doneTodosNum++;
       }
     });
-    return parseInt(`${(doneTodosNum * 100) / todos.length}`);
+    return parseInt(`${(doneTodosNum * 100) / denominator}`);
+  };
+
+  getCheckedNum = () => {
+    const { todos } = this.state.checklist;
+    let count = 0;
+    todos.forEach((todo) => {
+      if (todo.isDone) count++;
+    });
+    return count;
+  };
+
+  toggleHide = () => {
+    let { checklist } = this.state;
+    let { isHide } = checklist;
+    checklist = { ...checklist, isHide: !isHide };
+    console.log(checklist.isHide);
+    this.setState({ checklist });
+    this.props.updateCheckListProperty("isHide", isHide, checklist.id);
   };
 
   render() {
@@ -87,24 +111,40 @@ export class CheckList extends React.Component {
             />
           </div>
           {!isEdit && (
-            <a
-              className="grey-btn delete-btn"
-              onClick={() => this.props.deleteCheckList(checklist.id)}
-            >
-              Delete
-            </a>
+            <div className="flex checklist-title-btns">
+              {!checklist.isHide && (
+                <a className="grey-btn delete-btn" onClick={this.toggleHide}>
+                  Hide checked items
+                </a>
+              )}
+              {checklist.isHide && (
+                <a className="grey-btn delete-btn" onClick={this.toggleHide}>
+                  Show checked Items({this.getCheckedNum()})
+                </a>
+              )}
+              <a
+                className="grey-btn delete-btn"
+                onClick={() => this.props.deleteCheckList(checklist.id)}
+              >
+                Delete
+              </a>
+            </div>
           )}
         </div>
-        {checklist.todos.length && (
-          <ProgressionBar completed={this.getBarPercentage()} />
-        )}
+        <ProgressionBar completed={this.getBarPercentage()} />
         {checklist.todos?.map((todo) => (
           <CheckListTodo
             key={todo.id}
             todo={todo}
             updateCheckListTodos={this.updateCheckListTodos}
+            isHide={checklist.isHide}
           />
         ))}
+        {checklist.isHide && this.getBarPercentage() === 100 && (
+          <h5 className="complete-str">
+            Everything in this checklist is complete!
+          </h5>
+        )}
         <a
           className="grey-btn add-checklist-todo"
           onClick={() => this.updateCheckListTodos()}
