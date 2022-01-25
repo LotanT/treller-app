@@ -10,13 +10,13 @@ export const ProgressionBar = (props) => {
     borderRadius: 50,
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: 13,    
+    marginLeft: 6,
   };
-
+  const barColor = completed === 100 ? "#61bd4f" : "#0079bf";
   const fillerStyles = {
     height: "100%",
     width: `${completed}%`,
-    backgroundColor: "#0079bf",
+    backgroundColor: barColor,
     borderRadius: "inherit",
     textAlign: "right",
   };

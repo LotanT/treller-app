@@ -45,10 +45,12 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
   };
 
   const getDragStyle = (isDragging, draggableStyle) => ({
-    transform: [{ rotate: '10deg'}] ,
-    backgroundColor: isDragging? 'blue': 'white',
+    // transform: [{ rotate: '90deg'}],
+    // transform: `{rotate(90deg)}`,
+    backgroundColor: isDragging ? 'blue' : 'white',
     ...draggableStyle
   });
+
   const getDateTemplate = () => {
     const month_names_short = [
       'Jan',
@@ -81,6 +83,8 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
     if(checkListDone === checkListCount) checkIsListDone = 'complete';
     return `${checkListDone}/${checkListCount}`;
   };
+  //  const index = getCounter(true)
+  //  console.log(index)
 
   const duDateStatus = task.isDone;
   if(!duDateStatus && task.duDate>Date.now()) duDateStatus = 'late'
@@ -109,7 +113,7 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
             </div>
           </div>
 
-          {task.style.cover && (
+          {task.img && (
             <div className="pic" style={{backgroundColor: task.style?.bgColor}}>
               <img src={task.img} />
             </div>
@@ -166,15 +170,6 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
                 )}
               </div>
             </div>
-            {task.members && (
-              <div className="member-container">
-                {task.members.map((member) => (
-                  <div key={member._id} className="member">
-                    <img src={member.imgUrl} />
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
           {isQuickEditOpen && <QuickBar task={task} handleCardChange={handleCardChange}
                           taskTitle={taskTitle} cardPos={cardPos}/>}

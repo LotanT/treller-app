@@ -32,7 +32,6 @@ export class TaskDate extends React.Component {
 
   render() {
     const { task, toggleIsDone } = this.props;
-    console.log(this.props);
     return (
       <section className="top-details">
         <h3>Due date</h3>

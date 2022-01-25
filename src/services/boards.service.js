@@ -42,21 +42,21 @@ function getNewBoard(title) {
         "title": title,
         "createdAt": 1589983468418,
         "createdBy": {
-            "_id": "u101",
+            "_id": "u1lksjdg01",
             "fullname": "Abi Abambi",
             "imgUrl": "http://some-img"
         },
         "style": {},
         "labels": [
             {
-                "id": "l101",
+                "id": "l1sdggds01",
                 "title": "Done",
                 "color": "#61bd4f"
             }
         ],
         "members": [
             {
-                "_id": "u101",
+                "_id": "u10sdgsdg1",
                 "fullname": "Tal Tarablus",
                 "imgUrl": "https://www.google.com"
             }
@@ -222,7 +222,7 @@ function _createBoards() {
                             {
                                 "id": "c103",
                                 "title": "Do that",
-                                "isArchive": false, "isDone": false,"dueDate":1590999817436
+                                "isArchive": false, "isDone": false, "dueDate": 1590999817436
 
                             },
                             {
@@ -246,6 +246,7 @@ function _createBoards() {
                                     {
                                         "id": "YEhmF",
                                         "title": "Checklist",
+                                        "isHide": false,
                                         "todos": [
                                             {
                                                 "id": "212jX",
@@ -259,8 +260,9 @@ function _createBoards() {
                                         ],
                                     },
                                     {
-                                        "id": "YEhmF",
+                                        "id": "YEhgfdgdgmF",
                                         "title": "Checklist",
+                                        "isHide": false,
                                         "todos": [
                                             {
                                                 "id": "212jX",
@@ -406,6 +408,7 @@ function _createBoards() {
                                     {
                                         "id": "YEhdsfgmF",
                                         "title": "Checklist",
+                                        "isHide": false,
                                         "todos": [
                                             {
                                                 "id": "2123etwjX",
@@ -421,6 +424,7 @@ function _createBoards() {
                                     {
                                         "id": "YEhmF",
                                         "title": "Checklist",
+                                        "isHide": false,
                                         "todos": [
                                             {
                                                 "id": "2df12jX",

@@ -23,7 +23,7 @@ export class TaskLabels extends React.Component {
               ))}
             </div>
           )}
-          <a className="grey-btn label">
+          <a className="grey-btn label label-btn">
             <BsPlus />
           </a>
         </div>

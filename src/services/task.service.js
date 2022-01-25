@@ -18,27 +18,68 @@ export const taskService = {
     updateGroups,
     saveDueDateToTask,
     removeDueDateToTask,
-    toggleCoverToTask
+    toggleCoverToTask,
+    isImg,
+    getImgsFromTask
+
+    
+}
+function isImg(attachSrc){
+    return(attachSrc.endsWith('.png')||attachSrc.endsWith('.jpg')||attachSrc.endsWith('.ico'||attachSrc.endsWith('.jpg"')||attachSrc.endsWith('.png"')))
+}
+
+function getImgsFromTask(task){
+    let imgs=[]
+    console.log(task);
+    if(task.attachments){
+        task.attachments.forEach((attach)=>{
+            if(attach.isImg){
+                console.log(attach);
+                imgs.push(attach)
+            }
+        })
+    }
+    if(imgs.length<=0) return null
+    console.log('imgs from service:' ,imgs)
+    
+    return imgs
 }
 
 function getTaskById(board, taskId) {
     if (!board) return
-    for (let i = 0; i < board.groups.length; i++) {
-        for (let j = 0; j < board.groups[i].tasks.length; j++) {
-            if (board.groups[i].tasks[j].id === taskId) {
-                return board.groups[i].tasks[j]
+    // for (let i = 0; i < board.groups.length; i++) {
+    //     for (let j = 0; j < board.groups[i].tasks.length; j++) {
+    //         if (board.groups[i].tasks[j].id === taskId) {
+    //             return board.groups[i].tasks[j]
+    //         }
+    //     }
+    // }
+    let taskToReturn = null
+    board.groups.map(group => {
+        
+        group.tasks = group.tasks.map(task => {
+            if (task.id === taskId) {
+                taskToReturn = task
+
             }
-        }
-    }
+            return task
+        })
+
+        return group.tasks
+    })
+    return taskToReturn
 }
 
 
 function updateTask(board, updatedTask) {
-    board.groups.tasks = board.groups.map(group => {
+    board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => {
-            return task.id === updatedTask.id ? updatedTask : task
+            if(task.id===updatedTask.id){
+                return updatedTask
+            }else return task
+            
         })
-        return group.tasks
+        return group
     })
     return board
 
@@ -215,7 +256,8 @@ function toggleCoverToTask(board, taskId, cover) {
                 if (!task.style) {
                     task.style = { bgColor: null, img: null }
                     console.log('EMPTY LABELSIDS~!');
-                }else task.style.bgColor = cover;
+                }
+                task.style.bgColor = cover;
             }
             return task
         })

@@ -7,7 +7,7 @@ export class TaskMembers extends React.Component {
   render() {
     if (!this.props.members) return <span></span>;
     return (
-      <section className="top-details">
+      <section className="members top-details">
         <h3>Members</h3>
         <div className="flex top-detail">
           {this.props.members && (

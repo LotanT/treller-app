@@ -21,6 +21,10 @@ class _TaskEdit extends React.Component {
 
   componentDidMount() {
     this.props.loadBoard(this.props.match.params.boardId);
+    if (!this.state.task?.description) {
+      const isEdit = true;
+      this.setState({ isEdit });
+    }
   }
 
   loadTask = () => {

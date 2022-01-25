@@ -24,7 +24,6 @@ export class CheckListTodo extends React.Component {
       const isEdit = true;
       this.setState({ isEdit });
     }
-    if (!todo.title) return <div></div>;
   }
 
   componentWillUnmount() {
@@ -41,6 +40,8 @@ export class CheckListTodo extends React.Component {
       return;
     }
     this.setState({ isEdit: false });
+    if (!this.state.todo.title)
+      this.props.updateCheckListTodos(this.state.todo);
   };
 
   setIsEdit = (boolean) => {
@@ -88,7 +89,7 @@ export class CheckListTodo extends React.Component {
   render() {
     const { isEdit, todo } = this.state;
     if (!todo) return <h1>Loading..</h1>;
-    if (!todo.title && !isEdit) todo.title = "Add title";
+    if (this.props.isHide && todo.isDone) return <span></span>;
     return (
       <section className={`checklist-todo ${isEdit ? " edit" : ""}`}>
         {!todo.isDone && (

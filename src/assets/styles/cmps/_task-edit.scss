@@ -1,6 +1,8 @@
 //MOBILE
 
-::-webkit-scrollbar {
+.text {
+  display: none;
+  font-size: 0;
 }
 
 .window-edit {
@@ -20,10 +22,17 @@
 
 .cover {
   height: 116px;
+  padding-left: 95%;
+  padding-top: 10px;
 }
 
+// .cover .close-edit-page-btn {
+//   margin-top: 20px;
+//   margin-left: 20px;
+// }
+
 .no-cover-container {
-  padding: 12px;
+  padding: 16px;
 }
 
 .close-edit-page-btn {
@@ -34,10 +43,15 @@
   cursor: pointer;
   box-sizing: unset;
   padding: 10px;
+  padding-bottom: 11px;
+}
+
+.close-edit-page-btn > svg {
+  transform: translateX(1px);
 }
 
 .close-edit-page-btn:hover {
-  background-color: #091e420a;
+  background-color: #091e422c;
 }
 
 .task-edit {
@@ -47,18 +61,6 @@
   width: 768px;
   z-index: 20;
   min-height: 600px;
-  // border-radius: 300px;
-  // padding: 11px;
-  // padding-left: 17px;
-  // padding-top: 17px;
-  // width: 768px;
-  // background-color: rgb(243, 244, 246);
-  // top: 53.5%;
-  // right: 50%;
-  // transform: translate(50%, -50%);
-  // z-index: 2;
-  // color: #324669;
-  // position: fixed;
 }
 
 .task-edit .lower {
@@ -136,12 +138,20 @@
   margin-left: 4px;
 }
 
+.members .top-detail {
+  transform: translateY(2.3px);
+}
+
+.top-detail .check-box {
+  transform: translateY(4.5px);
+}
+
 .task-header h5,
 .task-header textarea {
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  width: 95%;
+  width: 100;
   color: #172b4d;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
@@ -176,6 +186,10 @@
   width: auto;
   border-radius: 3px;
   color: white;
+}
+
+.task .label-btn {
+  margin-left: 0;
 }
 
 .member {
@@ -234,8 +248,9 @@
   display: flex;
   min-height: 32px;
   border-bottom: none;
-  margin: 0 0 0px 0px;
+  margin: 0;
   padding: 8px 0;
+  padding-bottom: 0;
   padding-left: 4px;
   position: relative;
 }
@@ -318,7 +333,7 @@
 
 //CHECKLIST
 .checklist .grey-btn {
-  margin-left: 40px;
+  margin-left: 10px;
 }
 
 .checklist h3 {
@@ -363,9 +378,14 @@
   color: #172b4d;
 }
 
+.checklist .left-title {
+  padding-top: 8px;
+}
+
 .checklist-icon {
   margin-right: 15px;
   margin-left: 4px;
+  transform: translateY(-2px);
 }
 
 .checklist .title h5,
@@ -376,12 +396,17 @@
   color: #172b4d;
 }
 
+.description svg {
+  transform: translateY(2px);
+}
+
 .checklist .title h5 {
   font-weight: 600;
 }
 
-.add-checklist-todo {
+.checklist .add-checklist-todo {
   margin-top: 10px;
+  margin-left: 38px;
 }
 
 .delete-btn {
@@ -390,8 +415,10 @@
 
 .prog-bar {
   display: flex;
-  // margin-top: 9px;
-  // padding-top: 5px;
+}
+
+.task .checklist .complete-str {
+  margin-left: 46px;
 }
 
 .percentage {
@@ -484,9 +511,10 @@
 .edit-menu {
   float: right;
   overflow: hidden;
-  padding: 0 8px 8px 8px;
+  padding: 0 0 8px 8px;
   width: calc(100% - 557px);
   z-index: 10;
+  margin-left: 16px;
 }
 
 .edit-menu h3 {
@@ -544,13 +572,27 @@
 }
 
 .desc-editable-text {
-  margin-left: 40px;
-  margin-bottom: 40px;
+  margin-left: 37px;
+  margin-bottom: 30px;
+  width: 97%;
+  // min-height: 300px;
 }
 
-
-.prog-bar-dur{
+.prog-bar-dur {
   transition-duration: 0.2s;
   transition-property: width, background;
   transition-timing-function: ease-in;
+}
+
+.task-comments {
+  margin-right: 8px;
+  margin-left: 2px;
+}
+
+.task-comments h5:hover {
+  cursor: default;
+}
+
+.task-comments .checklist-icon {
+  transform: translateY(2px);
 }
