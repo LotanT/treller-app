@@ -1,8 +1,8 @@
 export const cloudinaryService = {
-    uploadFile
+    doUploadFile
 }
 
-function uploadFile(ev, type = 'image', blob = null) {
+function doUploadFile(ev, type = 'image', blob = null) {
     const CLOUD_NAME = 'dz2tbouwn'
     const PRESET_NAME = 'gunig5xt'
     const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${type}/upload`

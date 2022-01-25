@@ -14,7 +14,11 @@ import { GrClose } from "react-icons/gr";
 //MAP TO BOARD PREV
 
 function _AddCover(props) {
-    const [colorChoose, setColorChoose] = useState(null)
+    const [coverChoose, setCoverChoose] = useState(null)
+    const [task, setTask] = useState(taskService.getTaskById(props.board, props.taskId))
+    const [imgs, setImgs] = useState(taskService.getImgsFromTask(task))
+    
+
 
 
     const colors = [
@@ -30,20 +34,31 @@ function _AddCover(props) {
         '#b3bac5',
     ]
 
+    useEffect(() => {
+        setImgs(taskService.getImgsFromTask(task))
+        onGetImgsFromTask()
+        console.log(imgs);
+    }, [])
 
-  
-    const onChooseColor = (color) => {
-        if (color === colorChoose) {
-            setColorChoose('')
-        } else setColorChoose(color);
+    const onChooseCover = (cover) => {
+        if (cover === coverChoose ) {
+            setCoverChoose('')
+        } else setCoverChoose(cover);
+        console.log('asdasdasd',coverChoose);
     }
 
     const toggleCover = async () => {
-        let updatedBoard = taskService.toggleCoverToTask(props.board, props.taskId, colorChoose)
+        let updatedBoard = taskService.toggleCoverToTask(props.board, props.taskId, coverChoose)
         await props.onEditBoard(updatedBoard)
         props.toggleModal()
 
     }
+    const onGetImgsFromTask = () => {
+        console.log((taskService.getImgsFromTask(task)))
+
+    }
+
+
 
     return (
         <div className="add-labels-pop">
@@ -59,14 +74,22 @@ function _AddCover(props) {
                     <div className="add-title">Colors</div>
                     <div className="color-palette-cover">
                         {colors.map((color, idx) =>
-                            <div key={idx} className="pick-color-cover" style={{ backgroundColor: color }} onClick={() => onChooseColor(color)}>
-                                {colorChoose === color && <MdDone style={{ color: 'white' }} className='label-done' />}
+                            <div key={idx} className="pick-color-cover" style={{ backgroundColor: color }} onClick={() => onChooseCover(color)}>
+                                {coverChoose === color && <MdDone style={{ color: 'white' }} className='label-done' />}
                             </div>
                         )}
                     </div>
+                    {imgs && <>
+                        <div className="add-title">Images</div>
+                        <div className="imgs-palette-cover">
+                            {imgs.map((img, idx) =>
+                                <div key={idx} className={coverChoose !== img.url? "pick-img-cover":"pick-img-cover add-blue"}  style={{ background: `url(${img.url})` }} onClick={() => onChooseCover(img.url)}>
+                                    {/* {coverChoose === img.url && <MdDone style={{ color: 'white' }} className='label-done' />} */}
+                                </div>
+                            )}
+                        </div></>}
                     <button className='btn create-label' onClick={toggleCover}>Save Cover</button>
                 </div>
-
 
             </div>
         </div >

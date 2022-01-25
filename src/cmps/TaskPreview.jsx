@@ -117,7 +117,7 @@ export function TaskPreview({ task, boardId, index, toggleOpenLabel, isLabelOpen
                   {task.attachments && (
                     <div className="icon">
                       <MdAttachFile className="svg" />
-                      <span>{task.attachment.length}</span>
+                      <span>{task.attachments.length}</span>
                     </div>
                   )}
                 </div>

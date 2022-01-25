@@ -11,7 +11,7 @@ import { onAddBoard } from '../../store/board.actions'
 function _AddBoard({ isOpenModal, closeModal,onAddBoard }) {
   const [boardTitle, setBoardTitle] = useState('')
 
-  const inputModal = useRef(null)
+  const inputModal = useRef(true)
 
   useEffect(() => {
     if (isOpenModal) {
