@@ -14,7 +14,7 @@ import { AddCheckList } from "../pop-hover/AddCheckList";
 import { AddLabel } from "../pop-hover/AddLabel";
 import { DatePickerPop } from "../pop-hover/DatePickerPop";
 import { AddCover } from "../pop-hover/AddCover";
-import { AddAttachment } from "../pop-hover/AddAtachment";
+import { AddAttachment } from "../pop-hover/AddAttachment";
 
 export class EditMenu extends React.Component {
   state = {

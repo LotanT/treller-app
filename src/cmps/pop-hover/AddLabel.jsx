@@ -29,6 +29,7 @@ function _AddLabel(props) {
   const [openEditLabel, setOpenEditLabel] = useState(false)
 
   useEffect(() => {
+    // console.log(props);
     setTaskLocal()
   }, [])
 
@@ -84,6 +85,7 @@ function _AddLabel(props) {
     setBoardLabels(taskService.getLabels(props.board))
     goBackMain()
   }
+
 
   return (
     <div className="add-labels-pop">

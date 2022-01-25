@@ -6,8 +6,6 @@ import { AddBoard } from "../pop-hover/AddBoard";
 
 export function CreateNewBoard({ openModal,closeModal, isOpenModal}) {
 
-
-
     return (
         <div className="new-board-preview" >
             <div className='board-details' onClick={openModal}>

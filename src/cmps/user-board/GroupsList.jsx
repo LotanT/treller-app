@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { AddGroup } from './AddGroup';
 
+
 export function GroupList({
   groups,
   boardId,
@@ -10,6 +11,9 @@ export function GroupList({
   onEditGroupTitle,
   onAddGroup,
   onUpdateGroups,
+  toggleOpenLabel,
+  isLabelOpen,
+  toggleTaskDone
 }) {
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
@@ -142,6 +146,9 @@ export function GroupList({
                 snapshot={snapshot}
                 getDraggedDom={getDraggedDom}
                 placeholderProps={placeholderProps}
+                toggleOpenLabel={toggleOpenLabel}
+                isLabelOpen={isLabelOpen}
+                toggleTaskDone={toggleTaskDone}
               />
             ))}
             {provided.placeholder}
