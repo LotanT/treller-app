@@ -61,6 +61,8 @@
   width: 768px;
   z-index: 20;
   min-height: 600px;
+  overflow: hidden;
+  border-radius: 3px;
 }
 
 .task-edit .lower {
