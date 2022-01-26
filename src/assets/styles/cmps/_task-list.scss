@@ -7,19 +7,21 @@
   padding: 0 4px;
   z-index: 1;
   min-height: 1px;
+  overflow: hidden;
+  border-radius: 3px;
 }
 
 .task-list::-webkit-scrollbar {
   width: 8px;
-} 
-.task-list::-webkit-scrollbar-track  {
-  background: #091e4218;; 
+}
+.task-list::-webkit-scrollbar-track {
+  background: #091e4218;
   border-radius: 20px;
-} 
-.task-list::-webkit-scrollbar-thumb  {
-  background-color: #091e4223; 
-  border-radius: 20px;    
-} 
+}
+.task-list::-webkit-scrollbar-thumb {
+  background-color: #091e4223;
+  border-radius: 20px;
+}
 
 .card-composer {
   padding-bottom: 8px;
@@ -58,8 +60,8 @@
 }
 
 .card-composer-control {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
   span {
     margin-right: 4px;
     align-items: center;
@@ -87,11 +89,11 @@
     border: none;
     box-shadow: none;
     color: #fff;
-    &:hover{
-        background-color: #0068a5 ;
+    &:hover {
+      background-color: #0068a5;
     }
   }
-  .control-close-icon{
+  .control-close-icon {
     cursor: pointer;
     color: #6b778c;
     font-size: 24px;
@@ -101,14 +103,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    &:hover{
-        color: #172b4b; 
+    &:hover {
+      color: #172b4b;
     }
   }
 }
 
-.cc-control-section{
-    display: flex;
+.cc-control-section {
+  display: flex;
 }
 // overflow: hidden;
 //     padding: 6px 8px 2px;

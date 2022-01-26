@@ -1,67 +1,122 @@
-import React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import { useState, useEffect } from "react";
+import { userService } from "../services/user.service";
 
-export const LoginPage = () => {
-  const validate = (values) => {
-    console.log("values", values);
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
-    }
-    if (values.password.length < 3) {
-      errors.password = "Too short";
-    }
-    return errors;
+export function LoginSignup(props) {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+    fullname: "",
+  });
+  const [isSignup, setIsSignup] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(async () => {
+    const users = await userService.getUsers();
+    setUsers(users);
+  }, []);
+
+  const clearState = () => {
+    setCredentials({ username: "", password: "", fullname: "" });
+    setIsSignup(false);
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+  const handleChange = (ev) => {
+    const field = ev.target.name;
+    const value = ev.target.value;
+    setCredentials({ ...credentials, [field]: value });
   };
 
-  const CustomInput = (props) => <TextField variant="outlined" {...props} />;
+  const onLogin = (ev = null) => {
+    if (ev) ev.preventDefault();
+    if (!credentials.username) return;
+    props.onLogin(credentials);
+    clearState();
+  };
+
+  const onSignup = (ev = null) => {
+    if (ev) ev.preventDefault();
+    if (!credentials.username || !credentials.password || !credentials.fullname)
+      return;
+    props.onSignup(credentials);
+    clearState();
+  };
+
+  const toggleSignup = () => {
+    setIsSignup(!isSignup);
+  };
 
   return (
-    <div>
-      <h1>My Form</h1>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validate={validate}
-        onSubmit={handleSubmit}
-      >
-        {(props) => {
-          return (
-            <Form className="login-form">
-              <Field
-                type="email"
-                name="email"
-                label="Email Address"
-                as={CustomInput}
-              />
-              <ErrorMessage name="email" component="div" />
-              <Field
-                type="password"
-                name="password"
-                label="Password"
-                as={CustomInput}
-              />
-              <ErrorMessage name="password" component="div" />
-              <Button
-                variant="contained"
-                type="submit"
-                disabled={props.isSubmitting}
-              >
-                Submit
-              </Button>
-            </Form>
-          );
-        }}
-      </Formik>
+    <div className="login-page">
+      <p>
+        <button className="btn-link" onClick={toggleSignup}>
+          {!isSignup ? "Signup" : "Login"}
+        </button>
+      </p>
+      {!isSignup && (
+        <form className="login-form" onSubmit={onLogin}>
+          <select
+            name="username"
+            value={credentials.username}
+            onChange={handleChange}
+          >
+            <option value="">Select User</option>
+            {users.map((user) => (
+              <option key={user._id} value={user.username}>
+                {user.fullname}
+              </option>
+            ))}
+          </select>
+          {/* <input
+                        type="text"
+                        name="username"
+                        value={username}
+                        placeholder="Username"
+                        onChange={this.handleChange}
+                        required
+                        autoFocus
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Password"
+                        onChange={this.handleChange}
+                        required
+                    /> */}
+          <button>Login!</button>
+        </form>
+      )}
+      <div className="signup-section">
+        {isSignup && (
+          <form className="signup-form" onSubmit={onSignup}>
+            <input
+              type="text"
+              name="fullname"
+              value={credentials.fullname}
+              placeholder="Fullname"
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="username"
+              value={credentials.username}
+              placeholder="Username"
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+            <button>Signup!</button>
+          </form>
+        )}
+      </div>
     </div>
   );
-};
+}
