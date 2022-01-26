@@ -11,14 +11,14 @@
   border-radius: 3px;
 }
 
-.task-list::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
 }
-.task-list::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #091e4218;
   border-radius: 20px;
 }
-.task-list::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background-color: #091e4223;
   border-radius: 20px;
 }

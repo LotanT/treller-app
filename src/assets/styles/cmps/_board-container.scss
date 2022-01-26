@@ -1,7 +1,7 @@
 .board-container{
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 44px);
+    height: 100vh;
     margin-right: 0;
     position: relative;
     transition: margin .1s ease-in;

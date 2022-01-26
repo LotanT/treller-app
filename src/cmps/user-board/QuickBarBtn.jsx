@@ -7,9 +7,9 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import { BsArchiveFill } from 'react-icons/bs';
 // BsStar
 
-export function QuickBarBtn ({}){
+export function QuickBarBtn ({sideBarRef}){
     return(
-        <div className='quick-bar-btn'>
+        <div className='quick-bar-btn' ref={sideBarRef}>
             <div className="quick-bar-btn-container">
             <span className='icon'><BsCreditCard2Back/></span>
                 <span>Open card</span>

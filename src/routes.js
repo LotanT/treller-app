@@ -1,6 +1,6 @@
 import { HomePage } from './pages/HomePage.jsx'
 import { BoardDetails } from './pages/BoardDetails.jsx';
-// import { LoginPage } from './pages/LoginPage.jsx'
+import { LoginSignup } from './pages/LoginPage.jsx'
 import { UserBoards } from './pages/UserBoards.jsx'
 
 const routes = [
@@ -9,11 +9,11 @@ const routes = [
         component: BoardDetails,
         label: 'BoardDetails',
     },
-    // {
-    //     path: '/loginPage',
-    //     component: LoginPage,
-    //     label: 'Home',
-    // },
+    {
+        path: '/loginPage',
+        component: LoginSignup,
+        label: 'Home',
+    },
     {
         path: '/userboards',
         component: UserBoards,
