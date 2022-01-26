@@ -59,7 +59,9 @@ export function onRemoveBoard(boardId) {
 export function onAddBoard(title) {
     return async (dispatch) => {
         try {
-            const board = boardService.getNewBoard(title);
+            const board = {
+                title
+            }
             const savedBoard = await boardService.save(board)
             console.log('Added Board', savedBoard);
             dispatch({
