@@ -46,27 +46,33 @@ export function LoginSignup(props) {
   };
 
   return (
-    <div className="login-page">
-      <p>
-        <button className="btn-link" onClick={toggleSignup}>
-          {!isSignup ? "Signup" : "Login"}
-        </button>
-      </p>
-      {!isSignup && (
-        <form className="login-form" onSubmit={onLogin}>
-          <select
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-          >
-            <option value="">Select User</option>
-            {users.map((user) => (
-              <option key={user._id} value={user.username}>
-                {user.fullname}
-              </option>
-            ))}
-          </select>
-          {/* <input
+    <section className="login-page">
+      <div className="login-cmp">
+        <p>
+          <a onClick={toggleSignup}>
+            {!isSignup
+              ? "Signup to Treller!"
+              : "Login into your Treller account"}
+          </a>
+        </p>
+        {!isSignup && (
+          <form className="login-form" onSubmit={onLogin}>
+            <div className="field">
+              <select
+                name="username"
+                value={credentials.username}
+                onChange={handleChange}
+                autoFocus
+              >
+                <option value="">Select User</option>
+                {users.map((user) => (
+                  <option key={user._id} value={user.username}>
+                    {user.fullname}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* <input
                         type="text"
                         name="username"
                         value={username}
@@ -83,40 +89,50 @@ export function LoginSignup(props) {
                         onChange={this.handleChange}
                         required
                     /> */}
-          <button>Login!</button>
-        </form>
-      )}
-      <div className="signup-section">
-        {isSignup && (
-          <form className="signup-form" onSubmit={onSignup}>
-            <input
-              type="text"
-              name="fullname"
-              value={credentials.fullname}
-              placeholder="Fullname"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="username"
-              value={credentials.username}
-              placeholder="Username"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              value={credentials.password}
-              placeholder="Password"
-              onChange={handleChange}
-              required
-            />
-            <button>Signup!</button>
+            <a className="grey-btn">Login!</a>
           </form>
         )}
+        <div className="signup-section">
+          {isSignup && (
+            <form className="signup-form" onSubmit={onSignup}>
+              <div className="fields">
+                <div className="field">
+                  <input
+                    type="text"
+                    name="fullname"
+                    value={credentials.fullname}
+                    placeholder="Fullname"
+                    onChange={handleChange}
+                    required
+                    autoFocus
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="text"
+                    name="username"
+                    value={credentials.username}
+                    placeholder="Username"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="field">
+                  <input
+                    type="password"
+                    name="password"
+                    value={credentials.password}
+                    placeholder="Password"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <a className="grey-btn">Signup!</a>
+            </form>
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
