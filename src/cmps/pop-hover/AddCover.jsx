@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 // import { Link, NavLink } from 'react-router-dom'
 import { taskService } from '../../services/task.service'
-import { loadBoard, onEditBoard } from '../../store/board.actions'
+import { onEditBoard } from '../../store/board.actions'
 
 
 import { MdDone } from "react-icons/md";
@@ -17,8 +17,6 @@ function _AddCover(props) {
     const [coverChoose, setCoverChoose] = useState(null)
     const [task, setTask] = useState(taskService.getTaskById(props.board, props.taskId))
     const [imgs, setImgs] = useState(taskService.getImgsFromTask(task))
-    
-
 
 
     const colors = [
@@ -41,10 +39,9 @@ function _AddCover(props) {
     }, [])
 
     const onChooseCover = (cover) => {
-        if (cover === coverChoose ) {
+        if (cover === coverChoose) {
             setCoverChoose('')
         } else setCoverChoose(cover);
-        console.log('asdasdasd',coverChoose);
     }
 
     const toggleCover = async () => {
@@ -83,7 +80,7 @@ function _AddCover(props) {
                         <div className="add-title">Images</div>
                         <div className="imgs-palette-cover">
                             {imgs.map((img, idx) =>
-                                <div key={idx} className={coverChoose !== img.url? "pick-img-cover":"pick-img-cover add-blue"}  style={{ background: `url(${img.url})` }} onClick={() => onChooseCover(img.url)}>
+                                <div key={idx} className={coverChoose !== img.url ? "pick-img-cover" : "pick-img-cover add-blue"} style={{ background: `url(${img.url})` }} onClick={() => onChooseCover(img.url)}>
                                     {/* {coverChoose === img.url && <MdDone style={{ color: 'white' }} className='label-done' />} */}
                                 </div>
                             )}

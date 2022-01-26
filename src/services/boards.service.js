@@ -29,7 +29,7 @@ function save(board) {
     if (board._id) {
         return storageService.put(STORAGE_KEY, board)
     } else {
-        // board.owner = userService.getLoggedinUser()
+        // board= userService.getLoggedinUser()
         return storageService.post(STORAGE_KEY, board)
     }
 }
@@ -528,30 +528,6 @@ function _createBoards() {
     console.log('boards:', boards)
 
 }
-
-
-
-
-// function subscribe(listener) {
-//     listeners.push(listener)
-// }
-
-// function _notifySubscribersBoardsChanged(boards) {
-//     console.log('Notifying Listeners');
-//     listeners.forEach(listener => listener(boards))
-// }
-
-// window.addEventListener('storage', () => {
-//     console.log('Storage Changed from another Browser!');
-//     query()
-//         .then(boards => {
-//             _notifySubscribersBoardsChanged(boards)
-//         })
-// })
-
-// TEST DATA
-// storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
 
 
 

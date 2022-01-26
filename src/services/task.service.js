@@ -25,7 +25,7 @@ export const taskService = {
     
 }
 function isImg(attachSrc){
-    return(attachSrc.endsWith('.png')||attachSrc.endsWith('.jpg')||attachSrc.endsWith('.ico'||attachSrc.endsWith('.jpg"')||attachSrc.endsWith('.png"')))
+    return(attachSrc.endsWith('.png')||attachSrc.endsWith('.jpg')||attachSrc.endsWith('.ico'||attachSrc.endsWith('.jpg"')))
 }
 
 function getImgsFromTask(task){
@@ -47,13 +47,6 @@ function getImgsFromTask(task){
 
 function getTaskById(board, taskId) {
     if (!board) return
-    // for (let i = 0; i < board.groups.length; i++) {
-    //     for (let j = 0; j < board.groups[i].tasks.length; j++) {
-    //         if (board.groups[i].tasks[j].id === taskId) {
-    //             return board.groups[i].tasks[j]
-    //         }
-    //     }
-    // }
     let taskToReturn = null
     board.groups.map(group => {
         
@@ -168,7 +161,7 @@ function toggleLabelToTask(board, taskId, label) {
             if (task.id === taskId) {
                 if (!task.labels) {
                     task.labels = []
-                    console.log('EMPTY LABELSIDS~!');
+                    console.log('EMPTY LABELS~!');
                 }
 
                 let isExist = task.labels.some(taskLabel => taskLabel.id == label.id)
@@ -269,34 +262,6 @@ function toggleCoverToTask(board, taskId, cover) {
     })
     return board
 }
-
-
-// function toggleLabelToTask(board, taskId, labelId) {
-//     const task = getTaskById(board, taskId)
-//     if (task) {
-//         if (!task.labelIds) {
-//             task.labelIds = []
-//             console.log('EMPTY LABELSIDS~!');
-//         }
-
-//         let isExist = task.labelIds.some(id => id == labelId)
-//         console.log('isExist:', isExist);
-
-//         if (isExist) {
-//             task.labelIds = task.labelIds.filter(id => id !== labelId)
-//             console.log('task.labelIds:', task.labelIds)
-
-//         }
-//         else {
-//             task.labelIds.push(labelId)
-//         }
-//         console.log('task.labelIds:', task.labelIds)
-//     }
-//     console.log('task:' ,task)
-// }
-
-
-
 
 
 

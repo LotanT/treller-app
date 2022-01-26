@@ -1,21 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
-// import { Link, NavLink } from 'react-router-dom'
 import { utilService } from '../../services/util.service'
 import { taskService } from '../../services/task.service'
-import { loadBoard, onEditBoard } from '../../store/board.actions'
+import { onEditBoard } from '../../store/board.actions'
 import { cloudinaryService } from '../../services/cloudinary-service'
 
 // import { fileTypeFromFile } from 'file-type';
 
 
-import { MdDone } from "react-icons/md";
 import { GrClose } from "react-icons/gr";
 
 
 
-//MAP TO BOARD PREV
 
 function _AddAttachment(props) {
     const [currTask, setCurrTask] = useState(taskService.getTaskById(props.board, props.taskId))
@@ -24,7 +21,6 @@ function _AddAttachment(props) {
 
     useEffect(() => {
         setCurrTask(taskService.getTaskById(props.board, props.taskId))
-        console.log(currTask);
     }, [])
 
 
@@ -41,20 +37,13 @@ function _AddAttachment(props) {
             }
             currTask.attachments = (currTask.attachments) ? [...currTask.attachments, attach] : [attach]
             setCurrTask(currTask)
-            console.log(currTask);
             updateBoard()
         }
         catch (err) {
             console.log('error while connect server', err)
         }
     }
-    const updateBoard = async () => {
-        const updateBoard = taskService.updateTask(props.board, currTask)
-        await props.onEditBoard(updateBoard)
-        console.log('updated!', props.board);
-        props.toggleModal()
-    }
-
+    
     const onAttachmentClick = async () => {
         if (attachSrc) {
             const attach = {
@@ -71,15 +60,12 @@ function _AddAttachment(props) {
             updateBoard()
         }
     }
+    const updateBoard = async () => {
+        const updateBoard = taskService.updateTask(props.board, currTask)
+        await props.onEditBoard(updateBoard)
+        props.toggleModal()
+    }
 
-
-
-    // const getIsImg = async () => {
-    //     if (attachSrc) {
-    //                 const isImg = await fileTypeFromFile(attachSrc)
-    //                 console.log(isImg);
-    //     }
-    // }
 
     return (
         <div className="add-labels-pop">
@@ -95,11 +81,9 @@ function _AddAttachment(props) {
                 </div>
 
 
-                {/* <label htmlFor="url-upload">Attach a link</label> */}
 
                 <div className="add-label-preview">
                     <div className="add-title">Attach a link</div>
-                    {/* <div className="color-palette-cover"> */}
                     <input type="text" id="url-upload" placeholder="Enter link url" value={attachSrc} name='webUrlSrc' onChange={e => setAttachSrc(e.target.value)} />
                     {attachSrc &&
                         <>
@@ -115,7 +99,6 @@ function _AddAttachment(props) {
                         </>
                     }
 
-                    {/* </div> */}
                     <button className="attach-btn" onClick={onAttachmentClick}>Attach</button>
                 </div>
 
