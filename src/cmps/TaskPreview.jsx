@@ -137,7 +137,7 @@ export function TaskPreview({
                 backgroundColor: task.style ? task.style.bgColor : 'none',
               }}
             >
-              {isColor && <div className="cover" style={{backgroundColor: task.style.cover}}></div>}
+              {isColor && <div className="card-cover" style={{backgroundColor: task.style.cover}}></div>}
               {!isColor && <img src={task.style.cover} alt="" />}
             </div>
           )}

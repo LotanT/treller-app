@@ -5,6 +5,7 @@
     top: 0;
     bottom: 0;
     background-color: rgba(95, 95, 95, 0.342);
+    z-index: 50;
 }
 
 .quick-edit-card-container{
@@ -13,9 +14,49 @@
     width: 256px;
     border-radius: 3px;
     padding: 2px;
+    z-index: 55;
     .textarea{
         border: none;
         margin: -1px;
         padding: 0;
     }
+}
+
+.quick-bar-btn-container{
+    position: relative;
+    background: #0009;
+    border-radius: 3px;
+    clear: both;
+    color: #e6e6e6;
+    display: block;
+    float: left;
+    margin: 0 0 4px 8px;
+    padding: 6px 12px 6px 8px;
+    text-decoration: none;
+    transition: transform 85ms ease-in;
+    &:hover{
+        background: #000c;
+        color: #fff;
+        transform: translateX(5px);
+    }
+    .icon{
+        font-size: 16px;
+        position: relative;
+        top: 2px;
+    }
+    :last-child{
+        margin-left: 4px;
+    }
+}
+
+.quick-bar-btn{
+    left: 100%;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 272px;
+    transform: translateX(-20px);
+    transition: opacity 85ms ease-in,transform 85ms ease-in;
+    width: 240px;
+    z-index: 20;
 }
