@@ -90,6 +90,9 @@ function addTask(board, groupId, title) {
         id: utilService.makeId(),
         isArchive: false,
         title,
+        style: {
+            cover: null
+        },
     };
     board.groups.map((group) => {
         if (group.id === groupId) {
@@ -254,10 +257,10 @@ function toggleCoverToTask(board, taskId, cover) {
         group.tasks = group.tasks.map(task => {
             if (task.id === taskId) {
                 if (!task.style) {
-                    task.style = { bgColor: null, img: null }
+                    task.style = { color: null, img: null }
                     console.log('EMPTY LABELSIDS~!');
                 }
-                task.style.bgColor = cover;
+                task.style.cover = cover;
             }
             return task
         })

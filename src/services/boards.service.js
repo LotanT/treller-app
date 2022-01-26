@@ -67,12 +67,18 @@ function getNewBoard(title) {
                     {
                         "id": "c101",
                         "title": "Replace logo",
-                        "isArchive": false
+                        "isArchive": false,
+                        "style": {
+                            "cover": null
+                        },
                     },
                     {
                         "id": "c102",
                         "title": "Add Samples",
-                        "isArchive": false
+                        "isArchive": false,
+                        "style": {
+                            "cover": null
+                        },
                     }
                 ],
                 "style": {},
@@ -85,7 +91,10 @@ function getNewBoard(title) {
                     {
                         "id": "c103",
                         "title": "Do that",
-                        "isArchive": false
+                        "isArchive": false,
+                        "style": {
+                            "cover": null
+                        },
 
                     },
                 ],
@@ -202,12 +211,18 @@ function _createBoards() {
                             {
                                 "id": "c101",
                                 "title": "Replace logo",
-                                "isArchive": false, "isDone": false
+                                "isArchive": false, "isDone": false,
+                                "style": {
+                                    "cover": null
+                                },
                             },
                             {
                                 "id": "c102",
                                 "title": "Add Samples",
-                                "isArchive": false, "isDone": false
+                                "isArchive": false, "isDone": false,
+                                "style": {
+                                    "cover": null
+                                },
                             }
                         ],
                         "style": {},
@@ -220,7 +235,10 @@ function _createBoards() {
                             {
                                 "id": "c103",
                                 "title": "Do that",
-                                "isArchive": false, "isDone": false, "dueDate": 1590999817436
+                                "isArchive": false, "isDone": false, "dueDate": 1590999817436,
+                                "style": {
+                                    "cover": null
+                                },
 
                             },
                             {
@@ -249,11 +267,17 @@ function _createBoards() {
                                             {
                                                 "id": "212jX",
                                                 "title": "To Do 1",
-                                                "isDone": false
+                                                "isDone": false,
+                                                "style": {
+                                                    "cover": null
+                                                },
                                             }, {
                                                 "id": "213jX",
                                                 "title": "To Do 1",
-                                                "isDone": false
+                                                "isDone": false,
+                                                "style": {
+                                                    "cover": null
+                                                },
                                             }
                                         ],
                                     },
@@ -265,7 +289,10 @@ function _createBoards() {
                                             {
                                                 "id": "212jX",
                                                 "title": "To Do 1",
-                                                "isDone": false
+                                                "isDone": false,
+                                                "style": {
+                                                    "cover": null
+                                                },
                                             }
                                         ],
                                     }
@@ -288,7 +315,7 @@ function _createBoards() {
                                     "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                                 },
                                 "style": {
-                                    "bgColor": "#26de81"
+                                    "cover": "#26de81"
                                 },
                                 "isArchive": false
                             }
@@ -311,6 +338,9 @@ function _createBoards() {
                         "task": {
                             "id": "c101",
                             "title": "Replace Logo",
+                            "style": {
+                                "cover": null
+                            },
 
                         }
                     }
@@ -363,12 +393,18 @@ function _createBoards() {
                                 "id": "c101",
                                 "title": "Replace logo",
                                 "img": "https://static01.nyt.com/images/2022/01/05/technology/personaltech/05TECHTIP-GIF/05TECHTIP-GIF-mobileMasterAt3x.gif",
-                                "isArchive": false, "isDone": false
+                                "isArchive": false, "isDone": false,
+                                "style": {
+                                    "cover": null
+                                },
                             },
                             {
                                 "id": "c102",
                                 "title": "Add Samples",
-                                "isArchive": false, "isDone": false
+                                "isArchive": false, "isDone": false,
+                                "style": {
+                                    "cover": null
+                                },
                             }
                         ],
                         "style": {},
@@ -381,7 +417,10 @@ function _createBoards() {
                             {
                                 "id": "c103",
                                 "title": "Do that",
-                                "isArchive": false, "isDone": false
+                                "isArchive": false, "isDone": false,
+                                "style": {
+                                    "cover": null
+                                },
 
                             },
                             {
@@ -450,7 +489,7 @@ function _createBoards() {
                                     "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                                 },
                                 "style": {
-                                    "bgColor": "#26de81",
+                                    "cover": "#26de81",
                                     "img": "https://cdn.pixabay.com/photo/2018/09/30/16/26/sun-3713835__340.jpg",
                                 },
                                 "isArchive": false
