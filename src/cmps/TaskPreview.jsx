@@ -22,6 +22,7 @@ export function TaskPreview({
   toggleTaskDone,
   handleCardChange,
   taskTitle,
+  setZIndex,
 }) {
   let history = useHistory();
 
@@ -34,6 +35,8 @@ export function TaskPreview({
   const [cardPos, setClickPos] = useState({});
 
   const toggleIsQuickEditOpen = () => {
+    if(!isQuickEditOpen) setZIndex(20);
+    else setZIndex(0)
     setQuickEditOpen(!isQuickEditOpen);
   };
   useEffect(() => {
@@ -42,6 +45,7 @@ export function TaskPreview({
   }, []);
 
   const handleClick = (e) => {
+    if(isQuickEditOpen) return
     let { right, top } = e.target.getBoundingClientRect();
     setClickPos({ right, top });
     if (
@@ -56,8 +60,8 @@ export function TaskPreview({
   };
 
   const getDragStyle = (isDragging, draggableStyle) => ({
-    // transform: [{ rotate: '90deg'}],
-    // transform: `{rotate(90deg)}`,
+  // transform: `{rotate(90deg)}`,
+    zIndex: isQuickEditOpen? '50' : '0',
     backgroundColor: isDragging ? 'blue' : 'white',
     ...draggableStyle,
   });
@@ -145,7 +149,6 @@ export function TaskPreview({
             <div
               className="labels"
               ref={labelsRef}
-              onMouseDown={toggleOpenLabel}
             >
               {task.labels &&
                 task.labels.map((label) => {
@@ -154,6 +157,7 @@ export function TaskPreview({
                       key={label.id}
                       className={`card-label ${isLabelOpen}`}
                       style={{ backgroundColor: label.color }}
+                      onClick={toggleOpenLabel}
                     >
                       <span className={`label-title ${isLabelOpen}`}>
                         {label.title}
@@ -220,6 +224,7 @@ export function TaskPreview({
             getDateTemplate={getDateTemplate}
             checkIsListDone={checkIsListDone}
             getCheckListCount={getCheckListCount}
+            isColor={isColor}
             />
             )}     
         </div>       

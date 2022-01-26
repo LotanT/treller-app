@@ -6,9 +6,8 @@ import { BiMessageRounded } from 'react-icons/bi';
 import { BsCheck2Square } from 'react-icons/bs';
 import { MdAttachFile } from 'react-icons/md';
 import { MdCheckBoxOutlineBlank } from 'react-icons/md';
-import { VscEdit } from 'react-icons/vsc';
-import { Draggable } from 'react-beautiful-dnd';
 import {QuickBarBtn} from './QuickBarBtn'
+import React from 'react';
 
 export function QuickBar({
   task,
@@ -22,14 +21,31 @@ export function QuickBar({
   getDateTemplate,
   checkIsListDone,
   getCheckListCount,
+  isColor
 }) {
+
+  const saveBtnRef = React.createRef();
+  const cardRef = React.createRef();
+  const sideBarRef = React.createRef();
+
   const top = cardPos.top;
   const left = cardPos.right - 250;
-  console.log(cardPos);
+
+  const handleClick = (e) => {
+    if (
+      saveBtnRef?.current?.contains(e.target) ||
+      cardRef?.current?.contains(e.target) ||
+      sideBarRef?.current?.contains(e.target)
+    ) {
+      return;
+    }
+    toggleIsQuickEditOpen()
+  };
+
   return (
     <div
       className="quick-bar-editor"
-      onClick={toggleIsQuickEditOpen}
+      onClick={handleClick}
       ref={quickEditRef}
     >
       <div className="quick-bar-exit">
@@ -42,7 +58,19 @@ export function QuickBar({
         <div
           className="quick-bar-editor-card"
           style={{ backgroundColor: 'white' }}
+          ref={cardRef}
         >
+          {task.style?.cover && (
+            <div
+              className="pic"
+              style={{
+                backgroundColor: task.style ? task.style.bgColor : 'none',
+              }}
+            >
+              {isColor && <div className="card-cover" style={{backgroundColor: task.style.cover}}></div>}
+              {!isColor && <img src={task.style.cover} alt="" />}
+            </div>
+          )}
           <div className="labels" style={{ backgroundColor: '#ffffff' }}>
             {task.labels &&
               task.labels.map((label) => {
@@ -108,8 +136,8 @@ export function QuickBar({
               )}
             </div>
           </div>
-        </div>
-        <div className="card-composer-control" style={{ display: 'block' }}>
+      </div>
+        <div className="card-composer-control quick-edit-btn-save" ref={saveBtnRef}>
           <div className="cc-control-section">
             <span
               className="control-section-add-btn"
@@ -119,8 +147,8 @@ export function QuickBar({
             </span>
           </div>
         </div>
-        <QuickBarBtn/>
-      </div>
+        <QuickBarBtn sideBarRef={sideBarRef}/>
+        </div>
     </div>
   );
 }

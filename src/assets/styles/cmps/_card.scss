@@ -26,10 +26,10 @@
     border-radius: 5px;
     overflow: hidden;
     cursor: pointer;
-    transition: max-width .6s,  height .6s .6s;
+    transition: max-width .3s .3s,  height .3s ;
     padding: 0 8px;
     &.true {
-      transition: max-width .6s .6s,  height .6s;
+      transition: max-width .3s ,  height .3s .3s;
       height: 16px;
       // line-height: 16px;
       max-width: 198px;
@@ -37,10 +37,10 @@
     .label-title {
       opacity: 0;
       // transition: all 0s;
-      transition: opacity .6s;
+      transition: opacity .3s;
       &.true {
         opacity: 1;
-        transition: opacity .6s 1.2s;
+        transition: opacity .3s .4s;
       }
     }
 
@@ -69,7 +69,7 @@
   position: absolute;
   right: 2px;
   top: 2px;
-  z-index: 40;
+  z-index: 5;
   color: #4a5569;
   font-size: 18px;
   height: 25px;
@@ -86,6 +86,7 @@
   padding: 6px 8px 2px;
   position: relative;
   z-index: 10;
+  cursor: pointer;
 }
 .card-hover {
   border-radius: 3px;
@@ -102,7 +103,7 @@
     background-color: rgba(211, 211, 211, 0.274);
   }
   .card-edit-icon {
-    opacity: 0.8;
+    opacity: 0.8; 
   }
   .pic {
     background-color: rgba(211, 211, 211, 0.274);
@@ -111,6 +112,7 @@
 
 .card-cover{
   height: 29px;
+  cursor: pointer;
 }
 
 .icons-container {
@@ -134,11 +136,11 @@
       color: #5e6c84;
       display: flex;
       align-items: center;
-      margin: 0 6px 4px 0;
+      margin: 0 2px 4px 0;
       max-width: 100%;
       min-height: 20px;
       overflow: hidden;
-      padding: 2px;
+      padding: 2px 5px;
       position: relative;
       text-decoration: none;
       text-overflow: ellipsis;
