@@ -63,6 +63,7 @@ class _TaskEdit extends React.Component {
     const isDone = !this.state.task.isDone;
     let task = { ...this.state.task, isDone: isDone };
     this.setState({ task });
+    this.updateTaskProperty("isDone", isDone);
   };
 
   updateTaskProperty = (property, value) => {
