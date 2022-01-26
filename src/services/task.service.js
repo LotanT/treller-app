@@ -90,6 +90,7 @@ function addTask(board, groupId, title) {
         id: utilService.makeId(),
         isArchive: false,
         title,
+        cover: null
     };
     board.groups.map((group) => {
         if (group.id === groupId) {
