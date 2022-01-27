@@ -43,7 +43,6 @@
         transition: opacity .3s .4s;
       }
     }
-
     // background-color: #61bd4f;
   }
   .pic {
@@ -55,7 +54,7 @@
       z-index: 15;
       overflow: hidden;
       display: block;
-      // object-fit: cover;
+      object-fit: cover;
     }
   }
 }
@@ -69,7 +68,7 @@
   position: absolute;
   right: 2px;
   top: 2px;
-  z-index: 5;
+  z-index: 15;
   color: #4a5569;
   font-size: 18px;
   height: 25px;

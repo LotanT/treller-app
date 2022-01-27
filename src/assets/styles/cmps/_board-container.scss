@@ -14,11 +14,14 @@
     height: auto;
     padding: 8px 4px 4px 6px;
     position: relative;
-    // padding-left: 32px;
-    background: #ffffff3d;
+    background: #ffffff60;
     display: flex;
-    *{
-        margin-right: 15px;
+    justify-content: space-between;
+    color: #172b4d;
+    .icon{
+      position: relative;
+      top: 2px;
+      margin-right: 5px;
     }
    .board-members{
     // float: right;
@@ -33,4 +36,24 @@
       }
     }
    }
+}
+
+.board-header-left{
+  display: flex;
+  &>*{
+    margin-right: 15px;
+}
+}
+.board-header-right{ 
+  display: flex;
+  &>*{  
+    border-radius: 3px;
+    font-size: 14px; 
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 4px 0;
+    padding: 1px 5px;
+    position: relative;
+    background-color: #00000014;
+}
 }
