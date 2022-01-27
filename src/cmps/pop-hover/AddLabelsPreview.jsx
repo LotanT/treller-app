@@ -12,7 +12,7 @@ export function AddLabelsPreview({ label, task, onToggleLabelToTask }) {
 
     useEffect(() => {
         isLabelOnTask()
-    }, [])
+    }, [task])
 
 
     const doOnToggleLabelToTask = () => {

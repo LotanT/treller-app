@@ -9,7 +9,7 @@ import { CreateNewBoard } from '../cmps/user-boards/CreateNewBoard'
 import starIcon from '../assets/imgs/user-boards/star.png'
 import { AddBoard } from '../cmps/pop-hover/AddBoard'
 
-class _UserBoards extends React.Component {
+class _UserBoards extends React.Component {8
     state = {
         isOpenModal: false
     }

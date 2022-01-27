@@ -22,26 +22,26 @@ export const taskService = {
     isImg,
     getImgsFromTask
 
-    
+
 }
-function isImg(attachSrc){
-    return(attachSrc.endsWith('.png')||attachSrc.endsWith('.jpg')||attachSrc.endsWith('.ico'||attachSrc.endsWith('.jpg"')))
+function isImg(attachSrc) {
+    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico' || attachSrc.endsWith('.jpg"')))
 }
 
-function getImgsFromTask(task){
-    let imgs=[]
+function getImgsFromTask(task) {
+    let imgs = []
     console.log(task);
-    if(task.attachments){
-        task.attachments.forEach((attach)=>{
-            if(attach.isImg){
+    if (task.attachments) {
+        task.attachments.forEach((attach) => {
+            if (attach.isImg) {
                 console.log(attach);
                 imgs.push(attach)
             }
         })
     }
-    if(imgs.length<=0) return null
-    console.log('imgs from service:' ,imgs)
-    
+    if (imgs.length <= 0) return null
+    console.log('imgs from service:', imgs)
+
     return imgs
 }
 
@@ -49,7 +49,7 @@ function getTaskById(board, taskId) {
     if (!board) return
     let taskToReturn = null
     board.groups.map(group => {
-        
+
         group.tasks = group.tasks.map(task => {
             if (task.id === taskId) {
                 taskToReturn = task
@@ -67,10 +67,10 @@ function getTaskById(board, taskId) {
 function updateTask(board, updatedTask) {
     board.groups = board.groups.map(group => {
         group.tasks = group.tasks.map(task => {
-            if(task.id===updatedTask.id){
+            if (task.id === updatedTask.id) {
                 return updatedTask
-            }else return task
-            
+            } else return task
+
         })
         return group
     })
@@ -249,11 +249,10 @@ function toggleCoverToTask(board, taskId, cover) {
     board.groups.map(group => {
         group.tasks = group.tasks.map(task => {
             if (task.id === taskId) {
-                if (!task.style) {
-                    task.style = { color: null, img: null }
-                    console.log('EMPTY LABELSIDS~!');
-                }
-                task.style.cover = cover;
+                if (task.style.cover == cover) {
+                    delete task.style.cover
+                    console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
+                }else task.style.cover = cover;
             }
             return task
         })

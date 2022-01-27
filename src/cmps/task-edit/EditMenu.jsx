@@ -9,6 +9,7 @@ import { AiOutlineArrowRight } from "react-icons/ai";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { ImAttachment } from "react-icons/im";
 import { GrList } from "react-icons/gr";
+import { BsArchiveFill } from "react-icons/bs";
 
 import { AddCheckList } from "../pop-hover/AddCheckList";
 import { AddLabel } from "../pop-hover/AddLabel";
@@ -33,6 +34,10 @@ export class EditMenu extends React.Component {
     stateCopy[popHover] = nextValue;
     this.setState(stateCopy);
   };
+
+  toggleArchive =()=>{
+    
+  } 
 
   render() {
     const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment } =
@@ -135,6 +140,16 @@ export class EditMenu extends React.Component {
           </span>
           <span className="menu-text">Copy</span>
         </a>
+        <hr/>
+
+
+        <a className="menu-btn">
+          <span className="menu-icon">
+            <BsArchiveFill/>
+          </span>
+          <span className="menu-text">Archive</span>
+        </a>
+
       </section>
     );
   }

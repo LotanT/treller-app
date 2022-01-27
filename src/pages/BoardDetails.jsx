@@ -45,13 +45,12 @@ function _BoardDetails(props) {
     props.onEditBoard(board);
   };
 
-  const toggleTaskDone = (task) =>{
-    task.isDone = !task.isDone
+  const onUpdateTask = (task) =>{
     const updatedBoard = taskService.updateTask(board, task);
     props.onEditBoard(updatedBoard);
 }
 
-  console.log(board)
+  // console.log(board)
   if (!board) return <span>loading...</span>;
   return (
     <>
@@ -71,7 +70,7 @@ function _BoardDetails(props) {
             onAddGroup={onAddGroup}
             toggleOpenLabel={toggleOpenLabel}
             isLabelOpen={board.isLabelOpen}
-            toggleTaskDone={toggleTaskDone}
+            onUpdateTask={onUpdateTask}
           />
         </div>
       </div>

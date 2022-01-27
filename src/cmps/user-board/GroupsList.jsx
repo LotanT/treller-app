@@ -13,8 +13,9 @@ export function GroupList({
   onUpdateGroups,
   toggleOpenLabel,
   isLabelOpen,
-  toggleTaskDone
+  onUpdateTask
 }) {
+  groups = groups.filter(group=>!group.isArchive)
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
 
@@ -148,7 +149,7 @@ export function GroupList({
                 placeholderProps={placeholderProps}
                 toggleOpenLabel={toggleOpenLabel}
                 isLabelOpen={isLabelOpen}
-                toggleTaskDone={toggleTaskDone}
+                onUpdateTask={onUpdateTask}
               />
             ))}
             {provided.placeholder}

@@ -33,9 +33,7 @@ function _AddCover(props) {
     ]
 
     useEffect(() => {
-        setImgs(taskService.getImgsFromTask(task))
-        onGetImgsFromTask()
-        console.log(imgs);
+        setCoverChoose((task.style.cover) ? task.style.cover : null)
     }, [])
 
     const onChooseCover = (cover) => {
@@ -50,15 +48,13 @@ function _AddCover(props) {
         props.toggleModal()
 
     }
-    const onGetImgsFromTask = () => {
-        console.log((taskService.getImgsFromTask(task)))
-
-    }
 
 
+    const top = props.top? props.top: '134px';
+    const left = props.left? props.left: '540px';
 
     return (
-        <div className="add-labels-pop">
+        <div className="add-labels-pop" style={{top: top,left: left}}>
             <div className="pop-content">
                 <div className="header-container">
                     <GrClose stroke="#0079bf" fill="#0079bf" className='exit-svg' onClick={props.toggleModal} />

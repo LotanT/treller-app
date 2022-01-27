@@ -25,14 +25,14 @@ function _LoginSignup(props) {
   };
 
   const handleGoogleLogin = (data) => {
-    // console.log(data);
-    // clearState();
+    console.log(data);
     const password = data.googleId;
     const username = data.profileObj.givenName;
     const fullname = data.profileObj.name;
     const credentials = { username, password, fullname };
     console.log(credentials);
-    // props.onGoogleLogin(credentials);
+    props.onGoogleLogin(credentials);
+    clearState();
     props.history.push("/userboards");
   };
 
@@ -52,6 +52,7 @@ function _LoginSignup(props) {
   };
 
   const onSignup = (ev = null) => {
+    console.log('signup',credentials);
     if (ev) ev.preventDefault();
     if (
       !credentials.username ||
@@ -126,7 +127,11 @@ function _LoginSignup(props) {
           )}
           <div className="signup-section">
             {isSignup && (
+<<<<<<< HEAD
               <form className="signup-form" >
+=======
+              <form className="signup-form">
+>>>>>>> a635e08965085915afc54498337fd634a5d15656
                 <div className="fields">
                   <div className="field">
                     <input
@@ -142,9 +147,9 @@ function _LoginSignup(props) {
                   <div className="field">
                     <input
                       type="text"
-                      name="Enter username"
+                      name="username"
                       // value={credentials.username}
-                      placeholder="Username"
+                      placeholder="Enter username"
                       onChange={handleChange}
                       required
                     />

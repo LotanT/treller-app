@@ -14,12 +14,13 @@ export function GroupPreview({
   onAddTask,
   onEditGroupTitle,
   groupIdx,
-  snapshot,
   placeholderProps,
   toggleOpenLabel,
   isLabelOpen,
-  toggleTaskDone,
+  onUpdateTask,
 }) {
+  group.tasks = group.tasks.filter(task=>!task.isArchive)
+
   const [isAddTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [gtoupTitle, setGroupTitle] = useState(group.title);
@@ -90,14 +91,13 @@ export function GroupPreview({
                       index={index}
                       toggleOpenLabel={toggleOpenLabel}
                       isLabelOpen={isLabelOpen}
-                      toggleTaskDone={toggleTaskDone}
+                      onUpdateTask={onUpdateTask}
                       handleCardChange={handleCardChange}
-                      taskTitle={taskTitle}
                       setZIndex={setZIndex}
                     />
                   ))}
                 {provided.placeholder}
-                {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
+                {/* {!isEmpty(placeholderProps) && snapshot.isDraggingOver && (
               <div
                 className="placeholder"
                 style={{
@@ -107,7 +107,7 @@ export function GroupPreview({
                   width: placeholderProps.clientWidth
                 }}
               />
-            )}
+            )} */}
                 {isAddTask && (
                   <div className="card-composer">
                     <div className="list-card-composer">

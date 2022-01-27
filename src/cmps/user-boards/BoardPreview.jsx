@@ -10,16 +10,10 @@ export function BoardPreview(props) {
     const {_id,title,style} = board
     const {bgImg} = style
 
-    const onToggleStar = async()=>{
+    const onToggleStar = ()=>{
         const newBoard = {...board}
         newBoard.isStarred = !newBoard.isStarred
-        
-        try{
-            onEditBoard(newBoard);
-        }
-        catch(err){
-            console.log("error", err);
-        }
+        onEditBoard(newBoard);
     }
 
     return (
