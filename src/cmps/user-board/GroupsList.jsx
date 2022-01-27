@@ -5,7 +5,7 @@ import { AddGroup } from './AddGroup';
 
 
 export function GroupList({
-  groups,
+  groupsFromBoard,
   boardId,
   onAddTask,
   onEditGroupTitle,
@@ -15,10 +15,13 @@ export function GroupList({
   isLabelOpen,
   onUpdateTask
 }) {
-  groups = groups.filter(group=>!group.isArchive)
+  
+  groupsFromBoard = groupsFromBoard.filter(group=>!group.isArchive)
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
-
+  const [groups, setGroups] = useState(groupsFromBoard);
+  // const [zIndex, setzIndex] = useState(0);
+  
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
@@ -40,6 +43,8 @@ export function GroupList({
         return group;
       });
     }
+    console.log(groups)
+    setGroups(groups)
     onUpdateGroups(groups);
   };
 
@@ -52,7 +57,6 @@ export function GroupList({
 
   const handleDragStart = (event) => {
     const draggedDOM = getDraggedDom(event.draggableId);
-
     if (!draggedDOM) {
       return;
     }
@@ -125,10 +129,12 @@ export function GroupList({
       ),
     });
   };
+  // console.log(groups)
   return (
     <DragDropContext onDragEnd={handleOnDragEng}
-    onDragStart={handleDragStart}
-    onDragUpdate={handleDragUpdate}>
+    // onDragStart={handleDragStart}
+    // onDragUpdate={handleDragUpdate}
+    >
       <Droppable droppableId="groups" direction="horizontal" type="group">
         {(provided, snapshot) => (
           <div
@@ -150,6 +156,7 @@ export function GroupList({
                 toggleOpenLabel={toggleOpenLabel}
                 isLabelOpen={isLabelOpen}
                 onUpdateTask={onUpdateTask}
+                // zIndex={zIndex}
               />
             ))}
             {provided.placeholder}

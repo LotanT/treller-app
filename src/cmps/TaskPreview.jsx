@@ -42,7 +42,8 @@ export function TaskPreview({
     return document.removeEventListener('mousedown', handleClick);
   }, []);
 
-  const handleClick = (e) => {
+  const handleClick = (e,isDragging) => {
+    if(isDragging) setZIndex(30)
     if(isQuickEditOpen) return
     let { right, top } = e.target.getBoundingClientRect();
     setClickPos({ right, top });
@@ -63,8 +64,9 @@ export function TaskPreview({
 
   const getDragStyle = (isDragging, draggableStyle) => ({
   // transform: `{rotate(90deg)}`,
-    zIndex: isQuickEditOpen? '50' : '0',
+    zIndex: isDragging? '50' : '0',
     // backgroundColor: isDragging ? 'blue' : 'white',
+
     ...draggableStyle,
   });
 
@@ -132,7 +134,7 @@ export function TaskPreview({
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
         <div
-          onClick={handleClick}
+          onClick={(ev)=>handleClick(ev,snapshot.isDragging)}
           className="card"
           to={`/${boardId}/${task.id}`}
           {...provided.draggableProps}

@@ -18,13 +18,14 @@ export function GroupPreview({
   toggleOpenLabel,
   isLabelOpen,
   onUpdateTask,
+  zIndex
 }) {
   group.tasks = group.tasks.filter(task=>!task.isArchive)
-
+  console.log(zIndex)
   const [isAddTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [gtoupTitle, setGroupTitle] = useState(group.title);
-  const [listZIndex, setlistZIndex] = useState(0);
+  const [listZIndex, setlistZIndex] = useState(zIndex);
 
   useEffect(() => {}, []);
 
@@ -50,6 +51,7 @@ export function GroupPreview({
     setAddTask(false);
     setTaskTitle('');
   };
+  
   return (
     <Draggable key={group.id} draggableId={group.id} index={groupIdx}>
       {(provided) => (

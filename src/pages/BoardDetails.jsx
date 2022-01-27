@@ -62,7 +62,7 @@ function _BoardDetails(props) {
         <div className="board-scroller"></div>
         <div className="board">
           <GroupList
-            groups={board.groups}
+            groupsFromBoard={board.groups}
             boardId={boardId}
             onAddTask={onAddTask}
             onEditGroupTitle={onEditGroupTitle}
