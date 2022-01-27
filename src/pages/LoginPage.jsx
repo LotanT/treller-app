@@ -85,7 +85,7 @@ function _LoginSignup(props) {
             </a>
           </p>
           {!isSignup && (
-            <form className="login-form" onSubmit={onLogin}>
+            <form className="login-form">
               <div className="fields">
                 <input
                   type="text"
@@ -126,7 +126,7 @@ function _LoginSignup(props) {
           )}
           <div className="signup-section">
             {isSignup && (
-              <form className="signup-form" onSubmit={onSignup}>
+              <form className="signup-form" >
                 <div className="fields">
                   <div className="field">
                     <input
