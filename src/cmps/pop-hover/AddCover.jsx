@@ -33,9 +33,7 @@ function _AddCover(props) {
     ]
 
     useEffect(() => {
-        setImgs(taskService.getImgsFromTask(task))
-        onGetImgsFromTask()
-        console.log(imgs);
+        setCoverChoose((task.style.cover) ? task.style.cover : null)
     }, [])
 
     const onChooseCover = (cover) => {
@@ -50,10 +48,7 @@ function _AddCover(props) {
         props.toggleModal()
 
     }
-    const onGetImgsFromTask = () => {
-        console.log((taskService.getImgsFromTask(task)))
 
-    }
 
 
 
