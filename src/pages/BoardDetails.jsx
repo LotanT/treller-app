@@ -4,19 +4,31 @@ import { Route } from 'react-router';
 import { useState } from 'react';
 
 import { GroupList } from '../cmps/user-board/GroupsList';
+import { socketService } from '../services/socket.service';
 import { loadBoard, onEditBoard } from '../store/board.actions';
 import { BoardHeader } from '../cmps/user-board/BoardHeader';
 import { taskService } from '../services/task.service';
 import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 function _BoardDetails(props) {
-  // const [board, setBoard] = useState({board: null})
-  const { board } = props;
+  // const { board } = props;
+  const [board, setBoard] = useState(props.board)
   const boardId = props.match.params.boardId;
 
   useEffect(() => {
-      props.loadBoard(boardId)
-  }, []);
+    props.loadBoard(boardId)
+    // setBoard(props.board)
+    console.log('props:' ,props)
+    
+    onLoadBoard(boardId)
+    socketService.on('board-update', onLoadBoard)
+  },[]);
+
+  const onLoadBoard = async (boardId) => {
+    await props.loadBoard(boardId)
+    console.log('dodod',props.board);
+    setBoard(props.board)
+  }
 
   const onAddGroup = (title) => {
     const updatedBoard = taskService.addGroup(board, title);
@@ -44,12 +56,12 @@ function _BoardDetails(props) {
     props.onEditBoard(board);
   };
 
-  const onUpdateTask = (task) =>{
+  const onUpdateTask = (task) => {
     const updatedBoard = taskService.updateTask(board, task);
     props.onEditBoard(updatedBoard);
-}
+  }
 
-  // console.log(board)
+  console.log(board)
   if (!board) return <span>loading...</span>;
   return (
     <>
@@ -88,7 +100,4 @@ const mapDispatchToProps = {
   onEditBoard,
 };
 
-export const BoardDetails = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_BoardDetails);
+export const BoardDetails = connect(mapStateToProps,mapDispatchToProps)(_BoardDetails);

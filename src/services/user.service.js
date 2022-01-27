@@ -1,7 +1,7 @@
 import { httpService } from './http.service'
+import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_LOGIN, SOCKET_EMIT_LOGOUT } from './socket.service'
 const axios = require('axios');
 
-// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_LOGIN, SOCKET_EMIT_LOGOUT } from './socket.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 var gWatchedUser = null;
 
@@ -45,7 +45,7 @@ async function login(userCred) {
         const user = await httpService.post('auth/login', userCred)
         console.log('user from user.service:' ,user)
         
-        // socketService.emit(SOCKET_EMIT_LOGIN, user._id);
+        socketService.emit(SOCKET_EMIT_LOGIN, user._id);
         if (user) return _saveLocalUser(user)
 
     }catch(err){
@@ -68,13 +68,13 @@ async function signup(userCred) {
 
     const user = await httpService.post('auth/signup', userCred)
     // if (!user)
-        // socketService.emit(SOCKET_EMIT_LOGIN, user._id);
+    socketService.emit(SOCKET_EMIT_LOGIN, user._id);
     return _saveLocalUser(user)
 }
 
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // socketService.emit(SOCKET_EMIT_LOGOUT);
+    socketService.emit(SOCKET_EMIT_LOGOUT);
     return await httpService.post('auth/logout')
 }
 

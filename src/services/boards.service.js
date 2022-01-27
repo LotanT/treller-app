@@ -2,6 +2,8 @@ import { storageService } from './async-storage.service.js'
 import { httpService } from './http.service.js'
 import { utilService } from './util.service.js'
 // import { userService } from './user.service.js'
+import { socketService, SOCKET_EVENT_BOARD_ADDED } from './socket.service'
+
 
 const STORAGE_KEY = 'boardDB'
 
@@ -38,7 +40,7 @@ async function save(board) {
     if (board._id) {
         // return storageService.put(STORAGE_KEY, board)
 
-        // socketService.emit("board-change", board)
+        socketService.emit("board-update", board._id)
         const updatedBoard = await httpService.put('board', board)
         return updatedBoard
 
@@ -74,6 +76,7 @@ async function save(board) {
             "isStarred": false
     
         }
+        socketService.emit(SOCKET_EVENT_BOARD_ADDED, newBoard)
         const savedBoard = await httpService.post('board', newBoard)
         return savedBoard
     }
