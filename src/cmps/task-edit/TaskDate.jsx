@@ -56,7 +56,7 @@ export class TaskDate extends React.Component {
                     completed
                   </h5>
                 )}
-                {!task.isDone && Date.now() > task.dueDate && (
+                {(!task.isDone && Date.now() > task.dueDate) && (
                   <h5
                     className="date-status"
                     style={{ backgroundColor: "#EB5A46", color: "white" }}

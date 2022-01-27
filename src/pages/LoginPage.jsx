@@ -1,26 +1,43 @@
-import { useState, useEffect } from "react";
-import { userService } from "../services/user.service";
+import { useState } from "react";
+import { connect } from "react-redux";
+import { onLogin, onSignup, onGoogleLogin } from "../store/user.actions";
+import { GoogleLogin } from "react-google-login";
+// import { useGoogleLogin } from 'react-google-login'
+import MainLogo from "../assets/imgs/header/main-logo.png";
+import rightImg from "../assets/imgs/login/right.png";
+import leftImg from "../assets/imgs/login/left.png";
 
-export function LoginSignup(props) {
+function _LoginSignup(props) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
     fullname: "",
   });
   const [isSignup, setIsSignup] = useState(false);
-  const [users, setUsers] = useState([]);
-
-  useEffect(async () => {
-    const users = await userService.getUsers();
-    setUsers(users);
-  }, []);
 
   const clearState = () => {
     setCredentials({ username: "", password: "", fullname: "" });
     setIsSignup(false);
   };
 
+  const handleGoogleFaliure = (res) => {
+    alert(res);
+  };
+
+  const handleGoogleLogin = (data) => {
+    console.log(data);
+    const password = data.googleId;
+    const username = data.profileObj.givenName;
+    const fullname = data.profileObj.name;
+    const credentials = { username, password, fullname };
+    console.log(credentials);
+    props.onGoogleLogin(credentials);
+    clearState();
+    props.history.push("/userboards");
+  };
+
   const handleChange = (ev) => {
+    console.log(credentials);
     const field = ev.target.name;
     const value = ev.target.value;
     setCredentials({ ...credentials, [field]: value });
@@ -31,14 +48,22 @@ export function LoginSignup(props) {
     if (!credentials.username) return;
     props.onLogin(credentials);
     clearState();
+    props.history.push("/userboards");
   };
 
   const onSignup = (ev = null) => {
+    console.log('signup',credentials);
     if (ev) ev.preventDefault();
-    if (!credentials.username || !credentials.password || !credentials.fullname)
+    if (
+      !credentials.username ||
+      !credentials.password ||
+      !credentials.fullname
+    ) {
       return;
+    }
     props.onSignup(credentials);
     clearState();
+    props.history.push("/userboards");
   };
 
   const toggleSignup = () => {
@@ -47,92 +72,135 @@ export function LoginSignup(props) {
 
   return (
     <section className="login-page">
-      <div className="login-cmp">
-        <p>
-          <a onClick={toggleSignup}>
-            {!isSignup
-              ? "Signup to Treller!"
-              : "Login into your Treller account"}
-          </a>
-        </p>
-        {!isSignup && (
-          <form className="login-form" onSubmit={onLogin}>
-            <div className="field">
-              <select
-                name="username"
-                value={credentials.username}
-                onChange={handleChange}
-                autoFocus
-              >
-                <option value="">Select User</option>
-                {users.map((user) => (
-                  <option key={user._id} value={user.username}>
-                    {user.fullname}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* <input
-                        type="text"
-                        name="username"
-                        value={username}
-                        placeholder="Username"
-                        onChange={this.handleChange}
-                        required
-                        autoFocus
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={this.handleChange}
-                        required
-                    /> */}
-            <a className="grey-btn">Login!</a>
-          </form>
-        )}
-        <div className="signup-section">
-          {isSignup && (
-            <form className="signup-form" onSubmit={onSignup}>
+      <div className="header-logo">
+        <img src={MainLogo}></img>
+      </div>
+      <div className="login-main">
+        <div className="left-img-container">
+          <img className="login-img" src={leftImg}></img>
+        </div>
+        <div className="login-cmp">
+          <p>
+            <a className="login-title">
+              {!isSignup ? "Log in to Treller" : "Sign up for your account"}
+            </a>
+          </p>
+          {!isSignup && (
+            <form className="login-form" onSubmit={onLogin}>
               <div className="fields">
-                <div className="field">
-                  <input
-                    type="text"
-                    name="fullname"
-                    value={credentials.fullname}
-                    placeholder="Fullname"
-                    onChange={handleChange}
-                    required
-                    autoFocus
-                  />
-                </div>
-                <div className="field">
-                  <input
-                    type="text"
-                    name="username"
-                    value={credentials.username}
-                    placeholder="Username"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="field">
-                  <input
-                    type="password"
-                    name="password"
-                    value={credentials.password}
-                    placeholder="Password"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="username"
+                  // value={credentials.username}
+                  placeholder="Enter username"
+                  onChange={handleChange}
+                  required
+                  autoFocus
+                />
+                <input
+                  type="password"
+                  name="password"
+                  // value={credentials.password}
+                  placeholder="Enter password"
+                  onChange={handleChange}
+                  required
+                />
               </div>
-              <a className="grey-btn">Signup!</a>
+
+              <a className="grey-btn" onClick={onLogin}>
+                Log in
+              </a>
+              <div className="or">OR</div>
+              <GoogleLogin
+                // style={{ width: 300 }}
+                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                buttonText={"Continue with Google"}
+                onSuccess={handleGoogleLogin}
+                onFailure={handleGoogleFaliure}
+                cookiePolicy="single_host_origin"
+              ></GoogleLogin>
+              <hr></hr>
+              <h5 className="go-to-btn" onClick={toggleSignup}>
+                Sign up for an account
+              </h5>
             </form>
           )}
+          <div className="signup-section">
+            {isSignup && (
+              <form className="signup-form">
+                <div className="fields">
+                  <div className="field">
+                    <input
+                      type="text"
+                      name="fullname"
+                      // value={credentials.fullname}
+                      placeholder="Enter full name"
+                      onChange={handleChange}
+                      required
+                      autoFocus
+                    />
+                  </div>
+                  <div className="field">
+                    <input
+                      type="text"
+                      name="username"
+                      // value={credentials.username}
+                      placeholder="Enter username"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  <div className="field">
+                    <input
+                      type="password"
+                      name="password"
+                      // value={credentials.password}
+                      placeholder="Enter password"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+                <a className="grey-btn" onClick={onSignup}>
+                  Sign up
+                </a>
+                <div className="or">OR</div>
+                <GoogleLogin
+                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  buttonText={"Continue with Google"}
+                  onSuccess={handleGoogleLogin}
+                  onFailure={handleGoogleFaliure}
+                  cookiePolicy="single_host_origin"
+                ></GoogleLogin>
+                <hr></hr>
+                <h5 className="go-to-btn" onClick={toggleSignup}>
+                  Already have an account? Log In
+                </h5>
+              </form>
+            )}
+          </div>
+        </div>
+        <div className="right-img-container">
+          <img className="login-img" src={rightImg}></img>
         </div>
       </div>
     </section>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.userModule.user,
+  };
+}
+
+const mapDispatchToProps = {
+  onLogin,
+  onSignup,
+  onGoogleLogin,
+};
+
+export const LoginSignup = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_LoginSignup);

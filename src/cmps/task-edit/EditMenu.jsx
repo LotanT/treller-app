@@ -35,6 +35,10 @@ export class EditMenu extends React.Component {
     this.setState(stateCopy);
   };
 
+  toggleArchive =()=>{
+    
+  } 
+
   render() {
     const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment } =
       this.state;
@@ -137,12 +141,15 @@ export class EditMenu extends React.Component {
           <span className="menu-text">Copy</span>
         </a>
         <hr/>
+
+
         <a className="menu-btn">
           <span className="menu-icon">
             <BsArchiveFill/>
           </span>
           <span className="menu-text">Archive</span>
         </a>
+
       </section>
     );
   }
