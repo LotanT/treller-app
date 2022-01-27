@@ -18,6 +18,12 @@ class _Homepage extends React.Component {
               From high rises to the home office, the way your team works is
               unique—accomplish it all with Treller.
             </p>
+            <a
+              onClick={() => this.props.history.push("/userboards")}
+              className="btn btn-start-doing"
+            >
+              Start doing →
+            </a>
           </div>
           <div>
             <img src={heroImg} alt="" />
@@ -30,12 +36,6 @@ class _Homepage extends React.Component {
             with more features as your teamwork grows. Manage projects, organize
             tasks, and build team spirit—all in one place.
           </p>
-          <a
-            onClick={() => this.props.history.push("/userboards")}
-            className="btn btn-start-doing"
-          >
-            Start doing →
-          </a>
         </div>
         <div>
           <img src={BoardImg} className="board-img" alt="" />

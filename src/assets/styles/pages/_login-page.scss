@@ -1,22 +1,41 @@
 .login-page {
   padding-top: 44px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background-color: #f9fafc;
+}
+
+.login-page .header-logo img {
+  width: 220px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.login-page .login-main {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
 }
 
 .login-page .login-cmp {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-  height: 380px;
-  background-color: #d8d8d8;
+  width: 385px;
+  min-height: 470px;
+  max-height: 533px;
+  background-color: #ffffff;
   border-radius: 4px;
+  box-shadow: 0px 0px 4px 0px #cdcdcd;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .login-page a {
+  color: #5e6c84;
   font-weight: bold;
   font-family: "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -26,36 +45,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 280px;
+  min-height: 370px;
 }
 
 .login-page input {
-  height: 40px;
-  width: 400px;
+  cursor: pointer;
+  height: 44px;
+  width: 300px;
   border-radius: 3px;
   background-color: #fafbfc;
   border: 2px solid #dfe1e6;
-  transition: background-color 0.2s ease-in-out 0s,
-    border-color 0.2s ease-in-out 0s;
-}
-
-.login-page input:hover {
-  background-color: hsl(202, 100%, 95%);
-  border-color: hsl(202, 100%, 90%);
-  outline: none;
+  border-color: 0.2s ease-in-out 0s;
+  margin-bottom: 20px;
+  font: inherit;
+  font-weight: 100;
+  font-size: 14px;
+  padding-left: 6px;
 }
 
 .login-page input:focus-visible {
-  background-color: hsl(201, 100%, 91%);
   border-color: hsl(202, 100%, 50%);
   outline: none;
+  cursor: default;
 }
 
 .login-page .fields {
-  padding: 20px;
+  padding: 10px;
 
   margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -63,11 +81,76 @@
 }
 
 .login-page form .grey-btn {
-  margin-top: 15px;
-  width: 400px;
+  margin-top: 0;
+  margin-left: 0;
+  width: 300px;
   background-color: #5aac44;
   color: white;
   font-weight: bold;
   font-family: "-apple-system", BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.login-title {
+  padding: 6px;
+  font-size: 16px;
+}
+
+.login-page button {
+  width: 300px;
+}
+
+.login-page button span {
+  margin-left: 15px;
+  font-size: 14px;
+  font-weight: bold !important;
+}
+
+.login-page .go-to-btn {
+  text-decoration: none;
+  color: #0052cc;
+  font-size: 14px;
+  font-weight: 100;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.login-page .go-to-btn:hover {
+  text-decoration: underline;
+}
+
+.login-page .left-img-container {
+  width: 400px;
+  margin-top: 45vh;
+}
+
+.login-page .right-img-container {
+  width: 400px;
+  margin-top: 45vh;
+  padding-right: 10px;
+}
+
+.login-page .right-img-container img {
+  height: 220px;
+}
+
+.login-page .left-img-container img {
+  height: 220px;
+}
+
+.login-page .or {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.login-page hr {
+  width: 300px;
+  margin-top: 25px;
+  height: 1px;
+  border: 0;
+  padding: 0;
+  border-top: 1px solid hsl(0, 0%, 80%);
+  margin-bottom: 0;
 }

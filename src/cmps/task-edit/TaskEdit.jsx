@@ -1,17 +1,18 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { CheckList } from './CheckList';
-import { TaskComments } from './TaskComments';
-import { EditableText } from './EditableText';
-import { EditMenu } from './EditMenu';
-import { GrTextAlignFull } from 'react-icons/gr';
-import { GrClose } from 'react-icons/gr';
-import { FaPager } from 'react-icons/fa';
-import { taskService } from '../../services/task.service';
-import { loadBoard, onEditBoard } from '../../store/board.actions';
-import { TaskMembers } from './TaskMembers';
-import { TaskDate } from './TaskDate';
-import { TaskLabels } from './TaskLabels';
+import React from "react";
+import { connect } from "react-redux";
+import { CheckList } from "./CheckList";
+import { TaskComments } from "./TaskComments";
+import { EditableText } from "./EditableText";
+import { EditMenu } from "./EditMenu";
+import { GrTextAlignFull } from "react-icons/gr";
+import { GrClose } from "react-icons/gr";
+import { FaPager } from "react-icons/fa";
+import { taskService } from "../../services/task.service";
+import { loadBoard, onEditBoard } from "../../store/board.actions";
+import { TaskMembers } from "./TaskMembers";
+import { TaskDate } from "./TaskDate";
+import { TaskLabels } from "./TaskLabels";
+import { TaskAttachments } from "./TaskAttachments";
 
 class _TaskEdit extends React.Component {
   state = {
@@ -121,6 +122,7 @@ class _TaskEdit extends React.Component {
     console.log(this.isColor);
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
+    console.log(this.state.task.dueDate);
     return (
       <section className="window-edit">
         <div
@@ -192,6 +194,9 @@ class _TaskEdit extends React.Component {
                       setIsEdit={this.setIsEdit}
                     />
                   </div>
+
+                   {task.attachments && <TaskAttachments task={task}/>}   
+
                   {task.checklists?.map((checklist) => (
                     <CheckList
                       key={checklist.id}
