@@ -49,7 +49,7 @@
   background-color: #f4f5f756;
   top: 5px;
   z-index: 30;
-  &:hover{
+  &:hover {
     background-color: #091e422c;
   }
 }
@@ -57,7 +57,6 @@
 .close-edit-page-btn > svg {
   transform: translateX(1px);
 }
-
 
 .task-edit {
   background-color: #f4f5f7;
@@ -74,10 +73,11 @@
       z-index: 15;
       overflow: hidden;
       display: block;
-      object-fit: cover;
+      object-fit: contain;
+      background-color: rgb(233, 230, 222);
     }
   }
-  .card-cover{
+  .card-cover {
     height: 116px;
   }
 }
@@ -124,8 +124,8 @@
   margin-bottom: 4px;
   width: 100%;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
@@ -138,8 +138,8 @@
   word-break: break-word;
   cursor: pointer;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -172,14 +172,14 @@
   line-height: 30px;
   width: 100;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   margin-left: 12px;
 }
 
 .top-details-container {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -226,8 +226,8 @@
   border-radius: 50%;
   font-size: 16px;
   padding: 3px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
 }
 
 .top-details-container .top-details h3 {
@@ -311,8 +311,8 @@
   border-radius: 3px;
   box-sizing: border-box;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
   font-weight: 400;
   justify-content: center;
@@ -333,8 +333,8 @@
   color: #172b4d;
   cursor: pointer;
   display: inline-flex;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
   font-weight: 400;
   justify-content: center;
@@ -462,8 +462,8 @@
 .checklist-todo textarea {
   transform: translateY(-16px);
   font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
 }
 
@@ -566,8 +566,8 @@
   user-select: none;
   white-space: nowrap;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
