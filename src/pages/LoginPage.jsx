@@ -127,11 +127,7 @@ function _LoginSignup(props) {
           )}
           <div className="signup-section">
             {isSignup && (
-<<<<<<< HEAD
               <form className="signup-form" >
-=======
-              <form className="signup-form">
->>>>>>> a635e08965085915afc54498337fd634a5d15656
                 <div className="fields">
                   <div className="field">
                     <input
