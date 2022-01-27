@@ -44,15 +44,20 @@
   box-sizing: unset;
   padding: 10px;
   padding-bottom: 11px;
+  position: absolute;
+  right: 5px;
+  background-color: #f4f5f756;
+  top: 5px;
+  z-index: 30;
+  &:hover{
+    background-color: #091e422c;
+  }
 }
 
 .close-edit-page-btn > svg {
   transform: translateX(1px);
 }
 
-.close-edit-page-btn:hover {
-  background-color: #091e422c;
-}
 
 .task-edit {
   background-color: #f4f5f7;
@@ -61,8 +66,21 @@
   width: 768px;
   z-index: 20;
   min-height: 600px;
-  overflow: hidden;
   border-radius: 3px;
+  .pic {
+    height: 160px;
+    overflow: hidden;
+    img {
+      height: 100%;
+      z-index: 15;
+      overflow: hidden;
+      display: block;
+      object-fit: cover;
+    }
+  }
+  .card-cover{
+    height: 116px;
+  }
 }
 
 .task-edit .lower {

@@ -1,4 +1,4 @@
-import { CgClose } from 'react-icons/cg';
+import { GrClose } from 'react-icons/gr';
 import { BsStar } from 'react-icons/bs';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { CgDetailsMore } from 'react-icons/cg';
@@ -7,12 +7,10 @@ import { BsCheck2Square } from 'react-icons/bs';
 import { MdAttachFile } from 'react-icons/md';
 import { MdCheckBoxOutlineBlank } from 'react-icons/md';
 import {QuickBarBtn} from './QuickBarBtn'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function QuickBar({
   task,
-  handleCardChange,
-  taskTitle,
   cardPos,
   toggleIsQuickEditOpen,
   quickEditRef,
@@ -21,16 +19,38 @@ export function QuickBar({
   getDateTemplate,
   checkIsListDone,
   getCheckListCount,
-  isColor
+  isColor,
+  updateTaskTitle,
+  openEditCard,
+  onTaskArchived
 }) {
+
+  const [taskTitle, setTaskTitle] = useState(task.title);
 
   const saveBtnRef = React.createRef();
   const cardRef = React.createRef();
   const sideBarRef = React.createRef();
 
-  const top = cardPos.top;
-  const left = cardPos.right - 250;
-
+  let top = cardPos.top -5;
+  const left = cardPos.right - 252;
+  let pos 
+  let side 
+  let posTop 
+  if(window.innerWidth-cardPos.right < 310){
+    side = 'right'
+    pos = '-200px'
+  }
+  console.log(top,window.innerHeight,cardPos.top)
+  if(window.innerHeight-cardPos.top < 250){
+    posTop = '-150px'
+  }
+  if(window.innerHeight-cardPos.top < 180){
+    top = window.innerHeight - 200
+    console.log(top);
+  }else if(window.innerHeight-cardPos.top < 350 && isColor === false){
+    top = window.innerHeight-360
+    console.log(top,isColor);
+  }
   const handleClick = (e) => {
     if (
       saveBtnRef?.current?.contains(e.target) ||
@@ -42,6 +62,10 @@ export function QuickBar({
     toggleIsQuickEditOpen()
   };
 
+  const handleEditTitle = (ev) =>{
+    setTaskTitle(ev.target.value)
+  }
+
   return (
     <div
       className="quick-bar-editor"
@@ -49,7 +73,7 @@ export function QuickBar({
       ref={quickEditRef}
     >
       <div className="quick-bar-exit">
-        <BsStar />
+        <GrClose />
       </div>
       <div
         className="quick-edit-card-container"
@@ -71,7 +95,7 @@ export function QuickBar({
               {!isColor && <img src={task.style.cover} alt="" />}
             </div>
           )}
-          <div className="labels" style={{ backgroundColor: '#ffffff' }}>
+          <div className="labels quick-edit-labels" style={{ backgroundColor: '#ffffff' }}>
             {task.labels &&
               task.labels.map((label) => {
                 return (
@@ -86,7 +110,7 @@ export function QuickBar({
           <div className="card-composer title">
             <div className="list-card-composer">
               <textarea
-                onChange={handleCardChange}
+                onChange={handleEditTitle}
                 dir="auto"
                 value={taskTitle}
                 autoFocus
@@ -100,7 +124,7 @@ export function QuickBar({
                 <div className={`icon du-date-${duDateStatus}`}>
                   <div
                     className={`du-date ${task.isDone}`}
-                    onClick={() => toggleTaskDone(task)}
+                    onClick={toggleTaskDone}
                   >
                     {!task.isDone && (
                       <MdCheckBoxOutlineBlank className="svg isDone" />
@@ -137,7 +161,7 @@ export function QuickBar({
             </div>
           </div>
       </div>
-        <div className="card-composer-control quick-edit-btn-save" ref={saveBtnRef}>
+        <div className="card-composer-control quick-edit-btn-save" ref={saveBtnRef} onClick={()=>updateTaskTitle(taskTitle)}>
           <div className="cc-control-section">
             <span
               className="control-section-add-btn"
@@ -147,7 +171,7 @@ export function QuickBar({
             </span>
           </div>
         </div>
-        <QuickBarBtn sideBarRef={sideBarRef}/>
+        <QuickBarBtn task={task} sideBarRef={sideBarRef} openEditCard={openEditCard} left={pos} float={side} posTop={posTop} onTaskArchived={onTaskArchived}/>
         </div>
     </div>
   );

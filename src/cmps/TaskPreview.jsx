@@ -19,9 +19,7 @@ export function TaskPreview({
   index,
   toggleOpenLabel,
   isLabelOpen,
-  toggleTaskDone,
-  handleCardChange,
-  taskTitle,
+  onUpdateTask,
   setZIndex,
 }) {
   let history = useHistory();
@@ -35,7 +33,7 @@ export function TaskPreview({
   const [cardPos, setClickPos] = useState({});
 
   const toggleIsQuickEditOpen = () => {
-    if(!isQuickEditOpen) setZIndex(20);
+    if(!isQuickEditOpen) setZIndex(30);
     else setZIndex(0)
     setQuickEditOpen(!isQuickEditOpen);
   };
@@ -56,13 +54,17 @@ export function TaskPreview({
     ) {
       return;
     }
-    history.push(`/${boardId}/${task.id}`);
+    openEditCard()
   };
+
+  const openEditCard = () =>{
+    history.push(`/${boardId}/${task.id}`);
+  }
 
   const getDragStyle = (isDragging, draggableStyle) => ({
   // transform: `{rotate(90deg)}`,
     zIndex: isQuickEditOpen? '50' : '0',
-    backgroundColor: isDragging ? 'blue' : 'white',
+    // backgroundColor: isDragging ? 'blue' : 'white',
     ...draggableStyle,
   });
 
@@ -98,6 +100,23 @@ export function TaskPreview({
     if (checkListDone === checkListCount) checkIsListDone = 'complete';
     return `${checkListDone}/${checkListCount}`;
   };
+
+  const toggleTaskDone = () =>{
+    task.isDone = !task.isDone
+    onUpdateTask(task)
+  }
+
+  const updateTaskTitle = (title) =>{
+    task.title = title
+    toggleIsQuickEditOpen()
+    onUpdateTask(task)
+  }
+  
+  const onTaskArchived = () =>{
+    task.isArchive = true
+    onUpdateTask(task)
+  }
+
   let isColor;
   if(task.style.cover){isColor = task.style.cover.startsWith('#')? true:false }
 
@@ -173,7 +192,7 @@ export function TaskPreview({
                   <div className={`icon du-date-${duDateStatus}`}>
                     <div
                       className={`du-date ${task.isDone}`}
-                      onClick={() => toggleTaskDone(task)}
+                      onClick={toggleTaskDone}
                       ref={duDateRef}
                     >
                       {!task.isDone && (
@@ -214,8 +233,6 @@ export function TaskPreview({
           {isQuickEditOpen && (
             <QuickBar
             task={task}
-            handleCardChange={handleCardChange}
-            taskTitle={taskTitle}
             cardPos={cardPos}
             toggleIsQuickEditOpen={toggleIsQuickEditOpen}
             quickEditRef={quickEditRef}
@@ -225,6 +242,9 @@ export function TaskPreview({
             checkIsListDone={checkIsListDone}
             getCheckListCount={getCheckListCount}
             isColor={isColor}
+            updateTaskTitle={updateTaskTitle}
+            openEditCard={openEditCard}
+            onTaskArchived={onTaskArchived}
             />
             )}     
         </div>       

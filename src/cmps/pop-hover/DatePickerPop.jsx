@@ -52,8 +52,12 @@ function _DatePickerPop(props) {
         await props.onEditBoard(updatedBoard)
         props.toggleModal()
     }
+    
+    const top = props.top? props.top: '134px';
+     const left = props.left? props.left: '540px';
+  
     return (
-        <div className="add-labels-pop">
+        <div className="add-labels-pop" style={{top: top,left: left}}>
             <div className="pop-content">
                 <div className="header-container">
             <GrClose stroke="#0079bf" fill="#0079bf" className='exit-svg' onClick={props.toggleModal} />
