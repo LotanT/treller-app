@@ -25,6 +25,7 @@
     width: auto;
     border-radius: 5px;
     overflow: hidden;
+    color: white;
     cursor: pointer;
     transition: max-width .3s .3s,  height .3s ;
     padding: 0 8px;
@@ -116,7 +117,7 @@
 
 .icons-container {
   float: left;
-  margin-left: -2px;
+  margin-left: -4px;
   max-width: 100%;
   .card-icons {
     display: flex;
