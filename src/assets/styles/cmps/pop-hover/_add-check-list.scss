@@ -1,6 +1,6 @@
 .add-check-list-pop {
     position: absolute;
-    top: 134px;
+    top: 175px;
     left: 505px;
 
     height: 175px;
@@ -69,6 +69,17 @@
         width: 10px !important;
     }
     input{
-        width: 100%
+        margin: 4px 0 12px;
+        width: 100%;
+        outline: none;
+        border: none;
+        box-shadow: inset 0 0 0 2px #dfe1e6;
+        background-color: #fafbfc;
+        border-radius: 3px;
+        display: block;
+        line-height: 20px;
+        padding: 8px 12px;
+        color: #172b4d;
+        font-size: 14px;
     }
 }

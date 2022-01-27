@@ -31,7 +31,7 @@ function _AddLabel(props) {
   useEffect(() => {
     // console.log(props);
     setTaskLocal()
-  }, [])
+  }, [props.board])
 
   const setTaskLocal = () => {
     setTask(taskService.getTaskById(props.board, props.taskId))

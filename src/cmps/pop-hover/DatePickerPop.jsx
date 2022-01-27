@@ -42,7 +42,7 @@ function _DatePickerPop(props) {
 
     const onSaveDueDate = async () => {
         console.log('date:', date)
-        let updatedBoard = taskService.saveDueDateToTask(props.board, props.taskId, date)
+        let updatedBoard = taskService.saveDueDateToTask(props.board, props.taskId, date.getTime())
         await props.onEditBoard(updatedBoard)
         props.toggleModal()
     }

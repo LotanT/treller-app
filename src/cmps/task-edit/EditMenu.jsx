@@ -1,4 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
+
+import { AddCheckList } from "../pop-hover/AddCheckList";
+import { AddLabel } from "../pop-hover/AddLabel";
+import { DatePickerPop } from "../pop-hover/DatePickerPop";
+import { AddCover } from "../pop-hover/AddCover";
+import { AddAttachment } from "../pop-hover/AddAttachment";
+import { onEditBoard } from "../../store/board.actions";
+import { taskService } from "../../services/task.service";
+
 
 import { BsPerson } from "react-icons/bs";
 import { IoMdCheckboxOutline } from "react-icons/io";
@@ -11,13 +21,8 @@ import { ImAttachment } from "react-icons/im";
 import { GrList } from "react-icons/gr";
 import { BsArchiveFill } from "react-icons/bs";
 
-import { AddCheckList } from "../pop-hover/AddCheckList";
-import { AddLabel } from "../pop-hover/AddLabel";
-import { DatePickerPop } from "../pop-hover/DatePickerPop";
-import { AddCover } from "../pop-hover/AddCover";
-import { AddAttachment } from "../pop-hover/AddAttachment";
 
-export class EditMenu extends React.Component {
+class _EditMenu extends React.Component {
   state = {
     isAddCheckList: false,
     isLabel: false,
@@ -35,9 +40,13 @@ export class EditMenu extends React.Component {
     this.setState(stateCopy);
   };
 
-  toggleArchive =()=>{
-    
-  } 
+  toggleArchive = () => {
+    let task = taskService.getTaskById(this.props.board, this.props.taskId)
+    task.isArchive = !task.isArchive
+    console.log(task);
+    const updatedBoard = taskService.updateTask(this.props.board, task);
+    this.props.onEditBoard(updatedBoard);
+  }
 
   render() {
     const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment } =
@@ -140,12 +149,12 @@ export class EditMenu extends React.Component {
           </span>
           <span className="menu-text">Copy</span>
         </a>
-        <hr/>
+        <hr />
 
 
-        <a className="menu-btn">
+        <a className="menu-btn" onClick={this.toggleArchive}>
           <span className="menu-icon">
-            <BsArchiveFill/>
+            <BsArchiveFill />
           </span>
           <span className="menu-text">Archive</span>
         </a>
@@ -154,3 +163,15 @@ export class EditMenu extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    board: state.boardModule.board,
+  };
+}
+
+const mapDispatchToProps = {
+  onEditBoard
+};
+
+export const EditMenu = connect(mapStateToProps, mapDispatchToProps)(_EditMenu);

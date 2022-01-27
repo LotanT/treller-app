@@ -47,7 +47,7 @@ class _TaskEdit extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.task === null) {
+    if (!prevState.task) {
       this.loadTask();
     }
 
@@ -133,8 +133,8 @@ class _TaskEdit extends React.Component {
         ></div>
         <section className="task-edit">
           <div className="close-edit-page-btn" onClick={() =>
-                this.props.history.push(`/${this.props.match.params.boardId}`)
-              }>
+            this.props.history.push(`/${this.props.match.params.boardId}`)
+          }>
             <GrClose
               style={{ fill: '#1d3663' }}
             />
@@ -195,7 +195,7 @@ class _TaskEdit extends React.Component {
                     />
                   </div>
 
-                   {task.attachments && <TaskAttachments task={task}/>}   
+                  {task.attachments && <TaskAttachments task={task} />}
 
                   {task.checklists?.map((checklist) => (
                     <CheckList

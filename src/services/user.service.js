@@ -38,15 +38,22 @@ async function update(user) {
 }
 
 async function login(userCred) {
-    const user = await httpService.post('auth/login', userCred)
-    // socketService.emit(SOCKET_EMIT_LOGIN, user._id);
-    if (user) return _saveLocalUser(user)
+    try{
+        const user = await httpService.post('auth/login', userCred)
+        // socketService.emit(SOCKET_EMIT_LOGIN, user._id);
+        if (user) return _saveLocalUser(user)
+
+    }catch(err){
+        console.log('err to login:' ,err)
+        
+    }
 }
 
 async function googleLogin(userCred) {
+    console.log(userCred);
     const user = await httpService.post('auth/login', userCred);
     console.log(user);
-    if (!user) signup(userCred);
+    // if (!user) signup(userCred);
 }
 
 async function signup(userCred) {
