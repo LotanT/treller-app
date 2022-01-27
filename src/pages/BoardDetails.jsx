@@ -11,7 +11,6 @@ import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 function _BoardDetails(props) {
   // const [board, setBoard] = useState({board: null})
-  console.log(props)
   const { board } = props;
   const boardId = props.match.params.boardId;
 
