@@ -13,6 +13,7 @@ function _LoginSignup(props) {
     password: "",
     fullname: "",
   });
+
   const [isSignup, setIsSignup] = useState(false);
 
   const clearState = () => {
@@ -26,18 +27,17 @@ function _LoginSignup(props) {
 
   const handleGoogleLogin = (data) => {
     console.log(data);
-    const password = data.googleId;
     const username = data.profileObj.givenName;
+    const password = data.googleId;
     const fullname = data.profileObj.name;
-    const credentials = { username, password, fullname };
-    console.log(credentials);
+    const avatar = data.profileObj.imageUrl
+    const credentials = { username, password, fullname, avatar };
     props.onGoogleLogin(credentials);
     clearState();
     props.history.push("/userboards");
   };
 
   const handleChange = (ev) => {
-    console.log(credentials);
     const field = ev.target.name;
     const value = ev.target.value;
     setCredentials({ ...credentials, [field]: value });
@@ -52,7 +52,7 @@ function _LoginSignup(props) {
   };
 
   const onSignup = (ev = null) => {
-    console.log('signup',credentials);
+    console.log('signup', credentials);
     if (ev) ev.preventDefault();
     if (
       !credentials.username ||

@@ -41,11 +41,31 @@ export function onLogin(credentials) {
         }
     }
 }
+export function onLoginDefault() {
+    const credentials = {
+        username: "guest",
+        password: "1234",
+        fullname: "Mr Guest",
+
+    }
+    return async (dispatch) => {
+        try {
+            const user = await userService.login(credentials)
+            dispatch({
+                type: 'SET_USER',
+                user
+            })
+        } catch (err) {
+            // showErrorMsg('Cannot login')
+            console.log('Cannot login', err)
+        }
+    }
+}
 
 export function onGoogleLogin(credentials) {
     return async (dispatch) => {
         try {
-            const user = await userService.googleLogin(credentials)
+            const user = await userService.signup(credentials)
             dispatch({
                 type: 'SET_USER',
                 user

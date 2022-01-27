@@ -12,7 +12,7 @@ import { CreateNewBoard } from '../user-boards/CreateNewBoard'
 
 
 
-function _AppHeaderUser() {
+function _AppHeaderUser(props) {
 
     const [isBoardsPage, setIsBoardsPage] = useState((window.location.hash === '#/userboards'))
     const history = useHistory()
@@ -25,20 +25,20 @@ function _AppHeaderUser() {
         isAttachment: false,
     };
 
-    
+
     useEffect(() => {
         return history.listen((location) => {
             setIsBoardsPage((window.location.hash === '#/userboards'))
-            
+
         })
     }, [history])
-    
+
     const toggleModal = (popHover) => {
         const stateCopy = { ...modals };
         const nextValue = !stateCopy[popHover];
         Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false));
         stateCopy[popHover] = nextValue;
-        modals = {...stateCopy}
+        modals = { ...stateCopy }
     };
 
     return (
@@ -67,14 +67,15 @@ function _AppHeaderUser() {
                     <a className='nav-link-btn'>Templates </a>
                     <img className='arrow' src={DownArrow} />
                 </div>
-                <div className="nav-btn" onClick={()=>toggleModal('isAddBoard')}>
+                <div className="nav-btn" onClick={() => toggleModal('isAddBoard')}>
                     <a>Create</a>
                 </div>
-            {modals.isAddBoard&& <CreateNewBoard />
-}
+                {modals.isAddBoard && <CreateNewBoard />
+                }
 
                 <div className='user-container'>
-                    <div className="user-profile "></div>
+                    {(props.user) ? <img className='user-avatar' src={props.user.avatar} /> : <div className="user-profile"></div>
+                    }
                 </div>
             </div>
         </header >
@@ -83,6 +84,7 @@ function _AppHeaderUser() {
 
 function mapStateToProps(state) {
     return {
+        user: state.userModule.user
     }
 }
 const mapDispatchToProps = {

@@ -1,4 +1,6 @@
 import { httpService } from './http.service'
+const axios = require('axios');
+
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_LOGIN, SOCKET_EMIT_LOGOUT } from './socket.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 var gWatchedUser = null;
@@ -12,7 +14,7 @@ export const userService = {
     getById,
     remove,
     update,
-    googleLogin
+    askAvatar
 }
 
 
@@ -38,8 +40,11 @@ async function update(user) {
 }
 
 async function login(userCred) {
+    console.log('userCred from user service:' ,userCred)
     try{
         const user = await httpService.post('auth/login', userCred)
+        console.log('user from user.service:' ,user)
+        
         // socketService.emit(SOCKET_EMIT_LOGIN, user._id);
         if (user) return _saveLocalUser(user)
 
@@ -49,18 +54,22 @@ async function login(userCred) {
     }
 }
 
-async function googleLogin(userCred) {
-    console.log(userCred);
-    const user = await httpService.post('auth/login', userCred);
-    console.log(user);
-    // if (!user) signup(userCred);
-}
+// async function googleLogin(userCred) {
+//     const user = await httpService.post('auth/signup', userCred);
+//     return _saveLocalUser(user)
+
+// }
 
 async function signup(userCred) {
+    console.log(userCred);
+    if(!userCred.avatar){
+        userCred.avatar = `https://ui-avatars.com/api/?name=${userCred.fullname}&&rounded=true`
+    }
+
     const user = await httpService.post('auth/signup', userCred)
-    if (!user)
+    // if (!user)
         // socketService.emit(SOCKET_EMIT_LOGIN, user._id);
-        return _saveLocalUser(user)
+    return _saveLocalUser(user)
 }
 
 async function logout() {
@@ -76,4 +85,13 @@ function _saveLocalUser(user) {
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
+}
+
+function askAvatar(fullname) {
+    return axios.get(`https://ui-avatars.com/api/?name=${fullname}&rounded=true`)
+        .then(users => users.data)
+        .catch(err => {
+            console.log('Cannot get ans', err);
+            throw err
+        })
 }
