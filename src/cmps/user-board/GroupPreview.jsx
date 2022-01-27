@@ -18,21 +18,15 @@ export function GroupPreview({
   toggleOpenLabel,
   isLabelOpen,
   onUpdateTask,
-  zIndex
+  
 }) {
   group.tasks = group.tasks.filter(task=>!task.isArchive)
-  console.log(zIndex)
   const [isAddTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [gtoupTitle, setGroupTitle] = useState(group.title);
-  const [listZIndex, setlistZIndex] = useState(zIndex);
-
-  useEffect(() => {}, []);
-
-  const setZIndex = (newZIndex) => {
-    setlistZIndex(newZIndex)
-    console.log(newZIndex)
-  }
+  
+  useEffect(() => {
+  }, []);
 
   const ToggleAddTask = () => {
     setAddTask(!isAddTask);
@@ -82,7 +76,7 @@ export function GroupPreview({
                 className="task-list"
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                style={{zIndex: listZIndex}}
+                // style={{zIndex: listZIndex}}
               >
                 {group.tasks &&
                   group.tasks.map((task, index) => (
@@ -95,7 +89,6 @@ export function GroupPreview({
                       isLabelOpen={isLabelOpen}
                       onUpdateTask={onUpdateTask}
                       handleCardChange={handleCardChange}
-                      setZIndex={setZIndex}
                     />
                   ))}
                 {provided.placeholder}

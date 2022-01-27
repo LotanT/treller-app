@@ -44,14 +44,16 @@ export function QuickBar({
   if(window.innerHeight-cardPos.top < 250){
     posTop = '-150px'
   }
-  if(window.innerHeight-cardPos.top < 180){
-    top = window.innerHeight - 200
+  if(window.innerHeight-cardPos.top < 220){
+    top = window.innerHeight - 230
     console.log(top);
-  }else if(window.innerHeight-cardPos.top < 350 && isColor === false){
-    top = window.innerHeight-360
-    console.log(top,isColor);
   }
-  const handleClick = (e) => {
+    if(window.innerHeight-cardPos.top < 350 && isColor === false){
+      top = window.innerHeight-380
+      posTop = '0px'
+      console.log(top,isColor);
+    }
+    const handleClick = (e) => {
     if (
       saveBtnRef?.current?.contains(e.target) ||
       cardRef?.current?.contains(e.target) ||

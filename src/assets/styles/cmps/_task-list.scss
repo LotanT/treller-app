@@ -5,7 +5,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   padding: 0 4px;
-  z-index: 1;
+  // z-index: 1;
   min-height: 1px;
   border-radius: 3px;
 }
@@ -14,11 +14,11 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #091e4218;
+  background: #575f6c63;;
   border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #091e4223;
+  background-color: #576f975e;
   border-radius: 20px;
 }
 
@@ -36,7 +36,7 @@
   min-height: 20px;
   position: relative;
   text-decoration: none;
-  z-index: 0;
+  // z-index: 0;
   overflow: hidden; //
   padding: 6px 8px 2px; //
   textarea {
