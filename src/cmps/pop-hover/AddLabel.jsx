@@ -69,6 +69,7 @@ function _AddLabel(props) {
   const addLabel = async (color, title) => {
     let updatedBoard = taskService.addLabelToBoard(props.board, color, title)
     await props.onEditBoard(updatedBoard)
+    setTaskLocal()
     goBackMain()
   }
 

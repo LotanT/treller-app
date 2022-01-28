@@ -26,11 +26,11 @@ function _LoginSignup(props) {
   };
 
   const handleGoogleLogin = (data) => {
-    console.log(data);
+    // console.log(data);
     const username = data.profileObj.givenName;
     const password = data.googleId;
     const fullname = data.profileObj.name;
-    const avatar = data.profileObj.imageUrl
+    const avatar = data.profileObj.imageUrl;
     const credentials = { username, password, fullname, avatar };
     props.onGoogleLogin(credentials);
     clearState();
@@ -38,6 +38,7 @@ function _LoginSignup(props) {
   };
 
   const handleChange = (ev) => {
+    // console.log(credentials);
     const field = ev.target.name;
     const value = ev.target.value;
     setCredentials({ ...credentials, [field]: value });
@@ -52,7 +53,7 @@ function _LoginSignup(props) {
   };
 
   const onSignup = (ev = null) => {
-    console.log('signup', credentials);
+    // console.log('signup', credentials);
     if (ev) ev.preventDefault();
     if (
       !credentials.username ||
@@ -112,7 +113,6 @@ function _LoginSignup(props) {
               </a>
               <div className="or">OR</div>
               <GoogleLogin
-                // style={{ width: 300 }}
                 clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                 buttonText={"Continue with Google"}
                 onSuccess={handleGoogleLogin}
@@ -127,7 +127,7 @@ function _LoginSignup(props) {
           )}
           <div className="signup-section">
             {isSignup && (
-              <form className="signup-form" >
+              <form className="signup-form">
                 <div className="fields">
                   <div className="field">
                     <input

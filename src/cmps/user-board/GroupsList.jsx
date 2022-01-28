@@ -1,5 +1,5 @@
+import { useState,useEffect } from 'react';
 import { GroupPreview } from './GroupPreview';
-import { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { AddGroup } from './AddGroup';
 
@@ -14,34 +14,40 @@ export function GroupList({
   isLabelOpen,
   onUpdateTask,
 }) {
-  groupsFromBoard = groupsFromBoard.filter((group) => !group.isArchive);
+  let groupsFromBoardFiltered = groupsFromBoard.filter((group) => !group.isArchive);
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [changeGroups, setChangeGroups] = useState(groupsFromBoard);
-  let groups = groupsFromBoard
+  const [groups, setGroups] = useState(groupsFromBoardFiltered);
+  // const [zIndex, setzIndex] = useState(0);
+
+
+  useEffect(() => {
+    setGroups(groupsFromBoardFiltered)
+  }, [groupsFromBoard])
+
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
+    let groupsToUpdate = groups
     if (result.destination.droppableId === 'groups') {
-      const [groupToReorder] = groups.splice(result.source.index, 1);
-      groups.splice(result.destination.index, 0, groupToReorder);
+      const [groupToReorder] = groupsToUpdate.splice(result.source.index, 1);
+      groupsToUpdate.splice(result.destination.index, 0, groupToReorder);
     } else {
       let task = null;
-      groups = groups.map((group) => {
+      groupsToUpdate = groupsToUpdate.map((group) => {
         if (group.id === result.source.droppableId) {
           [task] = group.tasks.splice(result.source.index, 1);
         }
         return group;
       });
-      groups = groups.map((group) => {
+      groupsToUpdate = groupsToUpdate.map((group) => {
         if (group.id === result.destination.droppableId) {
           group.tasks.splice(result.destination.index, 0, task);
         }
         return group;
       });
     }
-    setChangeGroups(groups)
-    onUpdateGroups(groups);
+    onUpdateGroups(groupsToUpdate);
   };
 
   const getDraggedDom = (draggableId) => {
@@ -126,16 +132,12 @@ export function GroupList({
       ),
     });
   };
-  if(changeGroups !== groups){
-    groups = changeGroups
-    console.log('hi')
-  }
   // console.log(groups)
   return (
     <DragDropContext
       onDragEnd={handleOnDragEng}
-      // onDragStart={handleDragStart}
-      // onDragUpdate={handleDragUpdate}
+    // onDragStart={handleDragStart}
+    // onDragUpdate={handleDragUpdate}
     >
       <Droppable droppableId="groups" direction="horizontal" type="group">
         {(provided, snapshot) => (

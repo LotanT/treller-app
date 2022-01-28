@@ -1,6 +1,7 @@
 import { storageService } from './async-storage.service.js'
 import { httpService } from './http.service.js'
 import { utilService } from './util.service.js'
+import { userService } from './user.service.js'
 // import { userService } from './user.service.js'
 import { socketService, SOCKET_EVENT_BOARD_ADDED } from './socket.service'
 
@@ -22,13 +23,13 @@ async function query() {
 
     // return httpService.get(`board`)
     const boards = await httpService.get('board')
-    console.log(boards);
     return boards
 }
 
 async function getById(boardId) {
     // return storageService.get(STORAGE_KEY, boardId)
     const board = await httpService.get(`board/${boardId}`)
+    
     return board
 }
 
@@ -46,6 +47,7 @@ async function save(board) {
 
     } else {
         // return storageService.post(STORAGE_KEY, board)
+        let userId = userService.getLoggedinUser() || null
         const newBoard ={
             "title": board.title,
             "createdAt": Date.now(),
@@ -73,7 +75,8 @@ async function save(board) {
             "style": {
                 "bgImg": "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg"
             },
-            "isStarred": false
+            "isStarred": false,
+            "byUserId": userId._id
     
         }
         socketService.emit(SOCKET_EVENT_BOARD_ADDED, newBoard)

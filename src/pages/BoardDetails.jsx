@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router';
-import { useState } from 'react';
 
 import { GroupList } from '../cmps/user-board/GroupsList';
 import { socketService } from '../services/socket.service';
@@ -11,23 +10,22 @@ import { taskService } from '../services/task.service';
 import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 function _BoardDetails(props) {
-  // const { board } = props;
-  // const [board, setBoard] = useState(props.board)
+  const [board, setBoard] = useState(null);
+  // const {board} = props
   const boardId = props.match.params.boardId;
-  let board = props.board
   
-  useEffect(() => {
-    // props.loadBoard(boardId)
-    // setBoard(props.board)
-    // console.log('props:' ,props)
+  useEffect(() => {    
     onLoadBoard(boardId)
     socketService.on('board-update', onLoadBoard)
   },[]);
 
+  useEffect(()=>{
+    setBoard(props.board)
+  },[props.board])
+
   const onLoadBoard = async (boardId) => {
-    await props.loadBoard(boardId)
-    // console.log('dodod',props.board);
-    // setBoard(props.board)
+    await props.loadBoard(boardId);
+    // setBoard(props.board);
   }
 
   const onAddGroup = (title) => {
@@ -67,7 +65,8 @@ function _BoardDetails(props) {
     <>
       <div
         className="board-container"
-        style={{ backgroundImage: `url(${board.style.bgImg})` }}
+        style={{ backgroundImage: `url(${board.style?.bgImg})` }}
+        // style={{ background: `url(${board.style?.bgImg})` }}
       >
         <BoardHeader board={board} />
         {/* <div className="board-scroller"></div> */}

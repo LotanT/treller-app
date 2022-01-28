@@ -29,7 +29,7 @@ class _TaskEdit extends React.Component {
       this.setState({ isEdit });
     }
     if (this.state.task?.style.cover) {
-      this.isColor = this.state.task?.style.cover.startsWith('#')
+      this.isColor = this.state.task?.style.cover.startsWith("#")
         ? true
         : false;
     }
@@ -41,7 +41,7 @@ class _TaskEdit extends React.Component {
       this.props.match.params.taskId
     );
     if (task?.style.cover) {
-      this.isColor = task?.style.cover.startsWith('#') ? true : false;
+      this.isColor = task?.style.cover.startsWith("#") ? true : false;
     }
     this.setState({ task });
   };
@@ -74,7 +74,7 @@ class _TaskEdit extends React.Component {
     const isDone = !this.state.task.isDone;
     let task = { ...this.state.task, isDone: isDone };
     this.setState({ task });
-    this.updateTaskProperty('isDone', isDone);
+    this.updateTaskProperty("isDone", isDone);
   };
 
   updateTaskProperty = (property, value) => {
@@ -119,7 +119,6 @@ class _TaskEdit extends React.Component {
     await this.props.onEditBoard(updatedBoard);
   };
   render() {
-    console.log(this.isColor);
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
     console.log(this.state.task.dueDate);
@@ -132,39 +131,40 @@ class _TaskEdit extends React.Component {
           }
         ></div>
         <section className="task-edit">
-          <div className="close-edit-page-btn" onClick={() =>
-            this.props.history.push(`/${this.props.match.params.boardId}`)
-          }>
-            <GrClose
-              style={{ fill: '#1d3663' }}
-            />
+          <div
+            className="close-edit-page-btn"
+            onClick={() =>
+              this.props.history.push(`/${this.props.match.params.boardId}`)
+            }
+          >
+            <GrClose style={{ fill: "#1d3663" }} />
           </div>
           {task.style?.cover && (
-            <div
-              className="pic"
-              style={{
-                backgroundColor: task.style ? task.style.bgColor : 'none',
-              }}
-            >
+            <div className="cover-container-img">
               {this.isColor && (
                 <div
                   className="card-cover"
                   style={{ backgroundColor: task.style.cover }}
                 ></div>
               )}
-              {!this.isColor && <img src={task.style.cover} alt="" />}
+              {!this.isColor && (
+                <div
+                  className="card-cover-img"
+                  style={{ background: `url(${task.style.cover})` }}
+                ></div>
+              )}
             </div>
           )}
           <div className="no-cover-container">
             <div className="task-header">
               <div className="title flex">
                 <div className="lower">
-                  <FaPager style={{ fill: '#1d3663' }} />
+                  <FaPager style={{ fill: "#1d3663" }} />
                 </div>
                 <EditableText
                   text={task.title}
                   updateFunction={this.updateTaskProperty}
-                  property={'title'}
+                  property={"title"}
                   setIsEdit={() => {
                     return;
                   }}
@@ -176,13 +176,15 @@ class _TaskEdit extends React.Component {
                 <div className="task-details">
                   <div className="flex top-details-container">
                     {task.members && <TaskMembers members={task.members} />}
-                    {task.labels && <TaskLabels labels={task.labels} />}
+                    {Boolean(task.labels.length) && (
+                      <TaskLabels labels={task.labels} />
+                    )}
                     {task.dueDate && (
                       <TaskDate task={task} toggleIsDone={this.toggleIsDone} />
                     )}
                   </div>
                   <div className="description">
-                    <GrTextAlignFull style={{ fill: '#1d3663' }} />
+                    <GrTextAlignFull style={{ fill: "#1d3663" }} />
                     <h3>Description</h3>
                     {!isEdit && <a className="grey-btn">Edit</a>}
                   </div>
@@ -190,7 +192,7 @@ class _TaskEdit extends React.Component {
                     <EditableText
                       text={task.description}
                       updateFunction={this.updateTaskProperty}
-                      property={'description'}
+                      property={"description"}
                       setIsEdit={this.setIsEdit}
                     />
                   </div>
