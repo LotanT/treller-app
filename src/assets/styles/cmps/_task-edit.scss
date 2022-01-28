@@ -69,17 +69,41 @@
   .pic {
     overflow: hidden;
     img {
-      height: 100%;
-      z-index: 15;
-      overflow: hidden;
-      display: block;
-      object-fit: contain;
-      background-color: rgb(233, 230, 222);
+      // height: 100%;
+      // z-index: 15;
+      // overflow: hidden;
+      // display: block;
+      // object-fit: contain;
+      height: 160px;
+      min-height: 160px;
+      background-size: contain;
+      background-origin: content-box;
+      padding: 0px;
+      box-sizing: border-box;
+      background-position: center center;
     }
   }
   .card-cover {
     height: 116px;
+    width: 100%;
   }
+  .card-cover-img{
+    background-color: rgb(233, 230, 222) ;
+    height: 160px;
+    width: 220px;
+    min-height: 160px;
+    background-size: cover !important;
+    background-origin: content-box !important;
+    padding: 0px;
+    box-sizing: border-box;
+    background-position: center center !important;
+  }
+}
+.cover-container-img{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(233, 230, 222) ;
+
 }
 
 .task-edit .lower {

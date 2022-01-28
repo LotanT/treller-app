@@ -84,6 +84,7 @@ class _TaskEdit extends React.Component {
     this.props.onEditBoard(updatedBoard);
   };
 
+
   updateCheckListProperty = (property, value, checklistId) => {
     var { task } = this.state;
     var { checklists } = task;
@@ -119,7 +120,6 @@ class _TaskEdit extends React.Component {
     await this.props.onEditBoard(updatedBoard);
   };
   render() {
-    console.log(this.isColor);
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
     console.log(this.state.task.dueDate);
@@ -140,19 +140,14 @@ class _TaskEdit extends React.Component {
             />
           </div>
           {task.style?.cover && (
-            <div
-              className="pic"
-              style={{
-                backgroundColor: task.style ? task.style.bgColor : 'none',
-              }}
-            >
+            <div className="cover-container-img">
               {this.isColor && (
                 <div
                   className="card-cover"
                   style={{ backgroundColor: task.style.cover }}
                 ></div>
               )}
-              {!this.isColor && <img src={task.style.cover} alt="" />}
+              {!this.isColor && <div className="card-cover-img" style={{background:`url(${task.style.cover})`}}></div>}
             </div>
           )}
           <div className="no-cover-container">

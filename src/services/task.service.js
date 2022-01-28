@@ -151,6 +151,8 @@ function addLabelToBoard(board, color, title = null) {
         "color": color
     }
     board.labels.push(newLabel)
+    console.log('board:' ,board)
+    
     return board
 }
 

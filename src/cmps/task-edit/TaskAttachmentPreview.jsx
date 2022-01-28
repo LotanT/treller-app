@@ -29,6 +29,8 @@ function _TaskAttachmentsPreview(props) {
         console.log('props.board:', props)
         let updatedBoard = taskService.toggleCoverToTask(props.board, task.id, attachImg)
         await props.onEditBoard(updatedBoard)
+        setMakeItCoverTxt((!isCover) ? 'Make Cover' : 'Remove cover')
+
 
     }
 
