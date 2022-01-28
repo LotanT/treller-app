@@ -118,7 +118,7 @@ export class CheckListTodo extends React.Component {
               onChange={this.setTitle}
               value={todo.title}
               ref={this.todoTextareaRef}
-              placeholder={"Add Title..."}
+              placeholder={"Add an item"}
               autoFocus
             ></textarea>
             <div className="space-between">

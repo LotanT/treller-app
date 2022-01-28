@@ -12,22 +12,22 @@ import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 function _BoardDetails(props) {
   // const { board } = props;
-  const [board, setBoard] = useState(props.board)
+  // const [board, setBoard] = useState(props.board)
   const boardId = props.match.params.boardId;
-
+  let board = props.board
+  
   useEffect(() => {
-    props.loadBoard(boardId)
+    // props.loadBoard(boardId)
     // setBoard(props.board)
-    console.log('props:' ,props)
-    
+    // console.log('props:' ,props)
     onLoadBoard(boardId)
     socketService.on('board-update', onLoadBoard)
   },[]);
 
   const onLoadBoard = async (boardId) => {
     await props.loadBoard(boardId)
-    console.log('dodod',props.board);
-    setBoard(props.board)
+    // console.log('dodod',props.board);
+    // setBoard(props.board)
   }
 
   const onAddGroup = (title) => {
@@ -35,19 +35,19 @@ function _BoardDetails(props) {
     props.onEditBoard(updatedBoard);
   };
 
-  const onAddTask = async (groupId, title) => {
+  const onAddTask = (groupId, title) => {
     const updatedBoard = taskService.addTask(board, groupId, title);
     props.onEditBoard(updatedBoard);
   };
 
-  const onEditGroupTitle = async (groupId, title) => {
+  const onEditGroupTitle = (groupId, title) => {
     const updatedBoard = taskService.editGroupTitle(board, groupId, title);
     props.onEditBoard(updatedBoard);
   };
 
-  const onUpdateGroups = (groups) => {
+  const onUpdateGroups = async (groups) => {
     const updatedBoard = taskService.updateGroups(board, groups);
-    props.onEditBoard(updatedBoard);
+    await props.onEditBoard(updatedBoard);
   };
 
   const toggleOpenLabel = (ev) => {
@@ -60,17 +60,17 @@ function _BoardDetails(props) {
     const updatedBoard = taskService.updateTask(board, task);
     props.onEditBoard(updatedBoard);
   }
-
-  console.log(board)
-  if (!board) return <span>loading...</span>;
+  // if(!board) onLoadBoard(boardId);
+  if (!board) return <span>loading...</span>
+  // console.log(board.groups)
   return (
     <>
       <div
         className="board-container"
-        style={{ background: `url(${board.style.bgImg})` }}
+        style={{ backgroundImage: `url(${board.style.bgImg})` }}
       >
         <BoardHeader board={board} />
-        <div className="board-scroller"></div>
+        {/* <div className="board-scroller"></div> */}
         <div className="board">
           <GroupList
             groupsFromBoard={board.groups}

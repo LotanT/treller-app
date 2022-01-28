@@ -31,16 +31,17 @@ export function TaskPreview({
   const [isQuickEditOpen, setQuickEditOpen] = useState(false);
   const [cardPos, setClickPos] = useState({});
 
-  const toggleIsQuickEditOpen = () => {
-    setQuickEditOpen(!isQuickEditOpen);
-  };
   useEffect(() => {
     document.addEventListener('mousedown', handleClick);
     return document.removeEventListener('mousedown', handleClick);
   }, []);
 
-  const handleClick = (e,isDragging) => {
-    if(isQuickEditOpen) return
+  const toggleIsQuickEditOpen = () => {
+    setQuickEditOpen(!isQuickEditOpen);
+  };
+
+  const handleClick = (e, isDragging) => {
+    if (isQuickEditOpen) return;
     let { right, top } = e.target.getBoundingClientRect();
     setClickPos({ right, top });
     if (
@@ -51,15 +52,15 @@ export function TaskPreview({
     ) {
       return;
     }
-    openEditCard()
+    openEditCard();
   };
 
-  const openEditCard = () =>{
+  const openEditCard = () => {
     history.push(`/${boardId}/${task.id}`);
-  }
+  };
 
   const getDragStyle = (isDragging, draggableStyle) => ({
-  // transform: `{rotate(90deg)}`,
+    // transform: `{rotate(90deg)}`,
     // zIndex: isDragging? '50' : '0',
     // backgroundColor: isDragging ? 'blue' : 'white',
 
@@ -99,24 +100,26 @@ export function TaskPreview({
     return `${checkListDone}/${checkListCount}`;
   };
 
-  const toggleTaskDone = () =>{
-    task.isDone = !task.isDone
-    onUpdateTask(task)
-  }
+  const toggleTaskDone = () => {
+    task.isDone = !task.isDone;
+    onUpdateTask(task);
+  };
 
-  const updateTaskTitle = (title) =>{
-    task.title = title
-    toggleIsQuickEditOpen()
-    onUpdateTask(task)
-  }
-  
-  const onTaskArchived = () =>{
-    task.isArchive = true
-    onUpdateTask(task)
-  }
+  const updateTaskTitle = (title) => {
+    task.title = title;
+    toggleIsQuickEditOpen();
+    onUpdateTask(task);
+  };
+
+  const onTaskArchived = () => {
+    task.isArchive = true;
+    onUpdateTask(task);
+  };
 
   let isColor;
-  if(task.style.cover){isColor = task.style.cover.startsWith('#')? true:false }
+  if (task.style.cover) {
+    isColor = task.style.cover.startsWith('#') ? true : false;
+  }
 
   //  const index = getCounter(true)
   //  console.log(index)
@@ -125,7 +128,7 @@ export function TaskPreview({
   if (!duDateStatus && task.duDate > Date.now()) duDateStatus = 'late';
 
   const openQuickEditor = () => {};
-
+  // console.log(task)
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
@@ -158,15 +161,23 @@ export function TaskPreview({
                 backgroundColor: task.style ? task.style.bgColor : 'none',
               }}
             >
-              {isColor && <div className="card-cover" style={{backgroundColor: task.style.cover}}></div>}
-              {!isColor && <div className='img-cover' style={{backgroundImage: `url(${task.style.cover})`}} alt="" />}
+              {isColor && (
+                <div
+                  className="card-cover"
+                  style={{ backgroundColor: task.style.cover }}
+                ></div>
+              )}
+              {!isColor && (
+                <div
+                  className="img-cover"
+                  style={{ backgroundImage: `url(${task.style.cover})` }}
+                  alt=""
+                />
+              )}
             </div>
           )}
           <div className="card-details">
-            <div
-              className="labels"
-              ref={labelsRef}
-            >
+            <div className="labels" ref={labelsRef}>
               {task.labels &&
                 task.labels.map((label) => {
                   return (
@@ -230,22 +241,22 @@ export function TaskPreview({
           </div>
           {isQuickEditOpen && (
             <QuickBar
-            task={task}
-            cardPos={cardPos}
-            toggleIsQuickEditOpen={toggleIsQuickEditOpen}
-            quickEditRef={quickEditRef}
-            duDateStatus={duDateStatus}
-            toggleTaskDone={toggleTaskDone}
-            getDateTemplate={getDateTemplate}
-            checkIsListDone={checkIsListDone}
-            getCheckListCount={getCheckListCount}
-            isColor={isColor}
-            updateTaskTitle={updateTaskTitle}
-            openEditCard={openEditCard}
-            onTaskArchived={onTaskArchived}
+              task={task}
+              cardPos={cardPos}
+              toggleIsQuickEditOpen={toggleIsQuickEditOpen}
+              quickEditRef={quickEditRef}
+              duDateStatus={duDateStatus}
+              toggleTaskDone={toggleTaskDone}
+              getDateTemplate={getDateTemplate}
+              checkIsListDone={checkIsListDone}
+              getCheckListCount={getCheckListCount}
+              isColor={isColor}
+              updateTaskTitle={updateTaskTitle}
+              openEditCard={openEditCard}
+              onTaskArchived={onTaskArchived}
             />
-            )}     
-        </div>       
+          )}
+        </div>
       )}
     </Draggable>
   );

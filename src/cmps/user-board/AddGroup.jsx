@@ -11,6 +11,11 @@ export function AddGroup({onAddGroup}) {
     setGroupTitle(ev.target.value);
   };
 
+  const addingGroup = () =>{
+    ToggleAddTask()
+    onAddGroup(groupTitle)
+  }
+
   const ToggleAddTask = () => {
     setAddGroup(!isAddGroup);
   };
@@ -29,7 +34,7 @@ export function AddGroup({onAddGroup}) {
               <div className="cc-control-section">
                 <span
                   className="control-section-add-btn"
-                  onClick={() => onAddGroup(groupTitle)}
+                  onClick={addingGroup}
                 >
                   Add list
                 </span>

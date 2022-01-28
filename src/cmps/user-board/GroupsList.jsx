@@ -17,33 +17,31 @@ export function GroupList({
   groupsFromBoard = groupsFromBoard.filter((group) => !group.isArchive);
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [groups, setGroups] = useState(groupsFromBoard);
-  // const [zIndex, setzIndex] = useState(0);
-
+  const [changeGroups, setChangeGroups] = useState(groupsFromBoard);
+  let groups = groupsFromBoard
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
-    let newGroups = groups;
     if (result.destination.droppableId === 'groups') {
-      const [groupToReorder] = newGroups.splice(result.source.index, 1);
-      newGroups.splice(result.destination.index, 0, groupToReorder);
+      const [groupToReorder] = groups.splice(result.source.index, 1);
+      groups.splice(result.destination.index, 0, groupToReorder);
     } else {
       let task = null;
-      newGroups = groups.map((group) => {
+      groups = groups.map((group) => {
         if (group.id === result.source.droppableId) {
           [task] = group.tasks.splice(result.source.index, 1);
         }
         return group;
       });
-      newGroups = newGroups.map((group) => {
+      groups = groups.map((group) => {
         if (group.id === result.destination.droppableId) {
           group.tasks.splice(result.destination.index, 0, task);
         }
         return group;
       });
     }
-    setGroups(newGroups);
-    onUpdateGroups(newGroups);
+    setChangeGroups(groups)
+    onUpdateGroups(groups);
   };
 
   const getDraggedDom = (draggableId) => {
@@ -128,6 +126,10 @@ export function GroupList({
       ),
     });
   };
+  if(changeGroups !== groups){
+    groups = changeGroups
+    console.log('hi')
+  }
   // console.log(groups)
   return (
     <DragDropContext
@@ -156,7 +158,6 @@ export function GroupList({
                 toggleOpenLabel={toggleOpenLabel}
                 isLabelOpen={isLabelOpen}
                 onUpdateTask={onUpdateTask}
-                // zIndex={zIndex}
               />
             ))}
             {provided.placeholder}

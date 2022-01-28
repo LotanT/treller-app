@@ -85,13 +85,16 @@
     }
   }
 }
-
+.add-group{
+  width: 272px;
+}
 .compose-task {
   display: flex;
   justify-content: space-between;
   // align-items: center;
   max-height: 38px;
   min-height: 38px;
+  
   .open-new-card {
     border-radius: 3px;
     color: #5e6c84;
