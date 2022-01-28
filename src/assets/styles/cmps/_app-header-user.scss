@@ -7,7 +7,7 @@
     width: 100%;
     padding: 6px 4px;
     position: fixed;
-    z-index: 10;
+    z-index: 1;
     top: 0;
     a{
         display: flex;
@@ -146,4 +146,11 @@
 
 .user-boards{
     background-color: #026AA7;
+}
+
+.user-avatar{
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+    border-radius: 20px;
 }

@@ -49,4 +49,5 @@ function mapStateToProps() {
 }
 
 const mapDispatchToProps = {};
+
 export const HomePage = connect(mapStateToProps, mapDispatchToProps)(_Homepage);

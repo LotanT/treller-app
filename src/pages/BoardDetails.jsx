@@ -1,23 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router';
-import { useState } from 'react';
 
 import { GroupList } from '../cmps/user-board/GroupsList';
+import { socketService } from '../services/socket.service';
 import { loadBoard, onEditBoard } from '../store/board.actions';
 import { BoardHeader } from '../cmps/user-board/BoardHeader';
 import { taskService } from '../services/task.service';
 import { TaskEdit } from '../cmps/task-edit/TaskEdit';
 
 function _BoardDetails(props) {
-  // const [board, setBoard] = useState({board: null})
-  console.log(props)
-  const { board } = props;
+  const [board, setBoard] = useState(null);
+  // const {board} = props
   const boardId = props.match.params.boardId;
 
-  useEffect(() => {
-      props.loadBoard(boardId)
-  }, []);
+  useEffect(() => {    
+    onLoadBoard(boardId)
+    socketService.on('board-update', onLoadBoard)
+  },[]);
+
+  useEffect(()=>{
+    setBoard(props.board)
+  },[props.board])
+
+  const onLoadBoard = async (boardId) => {
+    await props.loadBoard(boardId);
+    // setBoard(props.board);
+  }
 
   const onAddGroup = (title) => {
     const updatedBoard = taskService.addGroup(board, title);
@@ -45,18 +54,18 @@ function _BoardDetails(props) {
     props.onEditBoard(board);
   };
 
-  const onUpdateTask = (task) =>{
+  const onUpdateTask = (task) => {
     const updatedBoard = taskService.updateTask(board, task);
     props.onEditBoard(updatedBoard);
-}
+  }
 
-  // console.log(board)
+  console.log(board)
   if (!board) return <span>loading...</span>;
   return (
     <>
       <div
         className="board-container"
-        style={{ background: `url(${board.style.bgImg})` }}
+        style={{ background: `url(${board.style?.bgImg})` }}
       >
         <BoardHeader board={board} />
         <div className="board-scroller"></div>
@@ -89,7 +98,4 @@ const mapDispatchToProps = {
   onEditBoard,
 };
 
-export const BoardDetails = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(_BoardDetails);
+export const BoardDetails = connect(mapStateToProps,mapDispatchToProps)(_BoardDetails);

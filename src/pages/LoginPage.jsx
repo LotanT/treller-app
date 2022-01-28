@@ -13,6 +13,7 @@ function _LoginSignup(props) {
     password: "",
     fullname: "",
   });
+
   const [isSignup, setIsSignup] = useState(false);
 
   const clearState = () => {
@@ -26,11 +27,11 @@ function _LoginSignup(props) {
 
   const handleGoogleLogin = (data) => {
     // console.log(data);
-    const password = data.googleId;
     const username = data.profileObj.givenName;
+    const password = data.googleId;
     const fullname = data.profileObj.name;
-    const credentials = { username, password, fullname };
-    // console.log(credentials);
+    const avatar = data.profileObj.imageUrl;
+    const credentials = { username, password, fullname, avatar };
     props.onGoogleLogin(credentials);
     clearState();
     props.history.push("/userboards");
@@ -52,7 +53,7 @@ function _LoginSignup(props) {
   };
 
   const onSignup = (ev = null) => {
-    // console.log('signup',credentials);
+    // console.log('signup', credentials);
     if (ev) ev.preventDefault();
     if (
       !credentials.username ||
@@ -126,7 +127,7 @@ function _LoginSignup(props) {
           )}
           <div className="signup-section">
             {isSignup && (
-              <form className="signup-form" >
+              <form className="signup-form">
                 <div className="fields">
                   <div className="field">
                     <input

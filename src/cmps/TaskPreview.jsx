@@ -20,7 +20,6 @@ export function TaskPreview({
   toggleOpenLabel,
   isLabelOpen,
   onUpdateTask,
-  setZIndex,
 }) {
   let history = useHistory();
 
@@ -33,8 +32,6 @@ export function TaskPreview({
   const [cardPos, setClickPos] = useState({});
 
   const toggleIsQuickEditOpen = () => {
-    if(!isQuickEditOpen) setZIndex(30);
-    else setZIndex(0)
     setQuickEditOpen(!isQuickEditOpen);
   };
   useEffect(() => {
@@ -43,7 +40,6 @@ export function TaskPreview({
   }, []);
 
   const handleClick = (e,isDragging) => {
-    if(isDragging) setZIndex(30)
     if(isQuickEditOpen) return
     let { right, top } = e.target.getBoundingClientRect();
     setClickPos({ right, top });
@@ -64,7 +60,7 @@ export function TaskPreview({
 
   const getDragStyle = (isDragging, draggableStyle) => ({
   // transform: `{rotate(90deg)}`,
-    zIndex: isDragging? '50' : '0',
+    // zIndex: isDragging? '50' : '0',
     // backgroundColor: isDragging ? 'blue' : 'white',
 
     ...draggableStyle,
@@ -134,7 +130,7 @@ export function TaskPreview({
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
         <div
-          onClick={(ev)=>handleClick(ev,snapshot.isDragging)}
+          onClick={handleClick}
           className="card"
           to={`/${boardId}/${task.id}`}
           {...provided.draggableProps}
@@ -163,7 +159,7 @@ export function TaskPreview({
               }}
             >
               {isColor && <div className="card-cover" style={{backgroundColor: task.style.cover}}></div>}
-              {!isColor && <img src={task.style.cover} alt="" />}
+              {!isColor && <div className='img-cover' style={{backgroundImage: `url(${task.style.cover})`}} alt="" />}
             </div>
           )}
           <div className="card-details">

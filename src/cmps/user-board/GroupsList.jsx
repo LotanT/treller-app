@@ -1,8 +1,7 @@
+import { useState,useEffect } from 'react';
 import { GroupPreview } from './GroupPreview';
-import { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { AddGroup } from './AddGroup';
-
 
 export function GroupList({
   groupsFromBoard,
@@ -13,39 +12,43 @@ export function GroupList({
   onUpdateGroups,
   toggleOpenLabel,
   isLabelOpen,
-  onUpdateTask
+  onUpdateTask,
 }) {
-  
-  groupsFromBoard = groupsFromBoard.filter(group=>!group.isArchive)
+  let groupsFromBoardFiltered = groupsFromBoard.filter((group) => !group.isArchive);
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [groups, setGroups] = useState(groupsFromBoard);
+  const [groups, setGroups] = useState(groupsFromBoardFiltered);
   // const [zIndex, setzIndex] = useState(0);
-  
+
+
+  useEffect(() => {
+    setGroups(groupsFromBoardFiltered)
+  }, [groupsFromBoard])
+
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
+    let newGroups = groups;
     if (result.destination.droppableId === 'groups') {
-      const [groupToReorder] = groups.splice(result.source.index, 1);
-      groups.splice(result.destination.index, 0, groupToReorder);
+      const [groupToReorder] = newGroups.splice(result.source.index, 1);
+      newGroups.splice(result.destination.index, 0, groupToReorder);
     } else {
       let task = null;
-      groups = groups.map((group) => {
+      newGroups = groups.map((group) => {
         if (group.id === result.source.droppableId) {
           [task] = group.tasks.splice(result.source.index, 1);
         }
         return group;
       });
-      groups = groups.map((group) => {
+      newGroups = newGroups.map((group) => {
         if (group.id === result.destination.droppableId) {
           group.tasks.splice(result.destination.index, 0, task);
         }
         return group;
       });
     }
-    console.log(groups)
-    setGroups(groups)
-    onUpdateGroups(groups);
+    setGroups(newGroups);
+    onUpdateGroups(newGroups);
   };
 
   const getDraggedDom = (draggableId) => {
@@ -56,6 +59,7 @@ export function GroupList({
   };
 
   const handleDragStart = (event) => {
+    console.log(event)
     const draggedDOM = getDraggedDom(event.draggableId);
     if (!draggedDOM) {
       return;
@@ -83,9 +87,9 @@ export function GroupList({
     });
   };
 
-//   const handleDragEnd = (result) => {
-//     setPlaceholderProps({});
-//   };
+  //   const handleDragEnd = (result) => {
+  //     setPlaceholderProps({});
+  //   };
 
   const handleDragUpdate = (event) => {
     if (!event.destination) {
@@ -131,7 +135,8 @@ export function GroupList({
   };
   // console.log(groups)
   return (
-    <DragDropContext onDragEnd={handleOnDragEng}
+    <DragDropContext
+      onDragEnd={handleOnDragEng}
     // onDragStart={handleDragStart}
     // onDragUpdate={handleDragUpdate}
     >
@@ -156,7 +161,7 @@ export function GroupList({
                 toggleOpenLabel={toggleOpenLabel}
                 isLabelOpen={isLabelOpen}
                 onUpdateTask={onUpdateTask}
-                // zIndex={zIndex}
+              // zIndex={zIndex}
               />
             ))}
             {provided.placeholder}

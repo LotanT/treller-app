@@ -8,9 +8,9 @@ import { CreateNewBoard } from "../cmps/user-boards/CreateNewBoard";
 import { TiStarOutline } from "react-icons/ti";
 // import starIcon from "../assets/imgs/user-boards/star.png";
 import { AddBoard } from "../cmps/pop-hover/AddBoard";
+import { onLoginDefault } from "../store/user.actions";
 
 class _UserBoards extends React.Component {
-  8;
   state = {
     isOpenModal: false,
   };
@@ -24,6 +24,12 @@ class _UserBoards extends React.Component {
   };
   closeModal = () => {
     this.setState({ isOpenModal: false });
+  };
+
+  logInDiffUser = () => {
+    if (!this.props.user) {
+      this.props.onLoginDefault();
+    }
   };
 
   render() {
@@ -69,13 +75,14 @@ class _UserBoards extends React.Component {
 function mapStateToProps(state) {
   return {
     boards: state.boardModule.boards,
-    task: state.boardModule.task,
+    user: state.userModule.user,
   };
 }
 
 const mapDispatchToProps = {
   loadBoards,
   onEditBoard,
+  onLoginDefault,
 };
 export const UserBoards = connect(
   mapStateToProps,
