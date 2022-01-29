@@ -20,7 +20,7 @@ export function GroupPreview({
   onUpdateTask,
   setGroupIsArchive,
 }) {
-  group.tasks = group.tasks.filter((task) => !task.isArchive);
+  // group.tasks = group.tasks.filter((task) => !task.isArchive);
   const [isEditGroupTitle, setIsEditGroupTitle] = useState(false);
   const [isAddTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
@@ -71,7 +71,7 @@ export function GroupPreview({
     group.isArchive = !group.isArchive;
     setGroupIsArchive(group);
   };
-
+  const taskToRender = group.tasks.filter((task) => !task.isArchive);
   return (
     <Draggable key={group.id} draggableId={group.id} index={groupIdx}>
       {(provided) => (
@@ -86,14 +86,15 @@ export function GroupPreview({
               <span onClick={ToggleEditGroupTitle}>{gtoupTitle}</span>
             )}
             {isEditGroupTitle && (
-              <textarea
+              <input
+                type="text"
                 onBlur={updateGroupTitle}
                 onChange={handleGroupChange}
                 dir="auto"
                 value={gtoupTitle}
                 ref={editGroupTitleRef}
                 autoFocus
-              ></textarea>
+              ></input>
             )}
             <div className="group-action">
               <div className="group-action-icon" onClick={setIsArchive}>
@@ -110,8 +111,8 @@ export function GroupPreview({
                 ref={provided.innerRef}
                 // style={{zIndex: listZIndex}}
               >
-                {group.tasks &&
-                  group.tasks.map((task, index) => (
+                {taskToRender &&
+                  taskToRender.map((task, index) => (
                     <TaskPreview
                       key={task.id}
                       task={task}

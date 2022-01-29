@@ -6,7 +6,7 @@ import { MdMoreHoriz } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { BsArchiveFill } from "react-icons/bs";
 
-export function BoardHeader({ board, onUpdateBoard }) {
+export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
   const [boardTitle, setBoardTitle] = useState(board.title);
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false);
 
@@ -38,13 +38,14 @@ export function BoardHeader({ board, onUpdateBoard }) {
           </div>
         )}
         {isEditBoardTitle && (
-          <textarea
+          <input
+            type='text'
             onBlur={updateBoardTitle}
             onChange={handleBaordChange}
             dir="auto"
             value={boardTitle}
             autoFocus
-          ></textarea>
+          ></input>
         )}
         <div className={`starred ${board.isStarred}`} onClick={toggleStarred}>
           {!board.isStarred && <BsStar />}
@@ -79,13 +80,13 @@ export function BoardHeader({ board, onUpdateBoard }) {
         </div>
       </div>
       <div className="board-header-right">
-        <div className="show-menu">
+        <div className="show-menu btn" onClick={toggleIsArchiveOpen}>
           <span className="icon">
             <MdMoreHoriz />
           </span>
-          <span>Show menu</span>
+          <span>Archive</span>
         </div>
-        <div className="Filter">
+        <div className="Filter btn">
           <span className="icon">
             <BiFilter />
           </span>
