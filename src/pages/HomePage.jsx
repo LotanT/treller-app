@@ -22,7 +22,7 @@ class _Homepage extends React.Component {
               onClick={() => this.props.history.push("/userboards")}
               className="btn btn-start-doing"
             >
-              Start doing →
+              Start demo →
             </a>
           </div>
           <div>

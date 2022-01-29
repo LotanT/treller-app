@@ -2,7 +2,7 @@ import React from "react";
 
 import { GrList } from "react-icons/gr";
 
-export class TaskComments extends React.Component {
+export class TaskActivities extends React.Component {
   state = {};
 
   render() {
@@ -13,7 +13,7 @@ export class TaskComments extends React.Component {
             <a className="checklist-icon">
               <GrList />
             </a>
-            <h5>Comments</h5>
+            <h5>Activities</h5>
           </div>
           <a className="grey-btn delete-btn">Show details</a>
         </div>

@@ -1,32 +1,38 @@
-import React, { useEffect,useState } from 'react';
-import { connect } from 'react-redux';
-import { Route } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Route } from "react-router";
 
-import { GroupList } from '../cmps/user-board/GroupsList';
-import { socketService } from '../services/socket.service';
-import { loadBoard, onEditBoard } from '../store/board.actions';
-import { BoardHeader } from '../cmps/user-board/BoardHeader';
-import { taskService } from '../services/task.service';
-import { TaskEdit } from '../cmps/task-edit/TaskEdit';
+import { GroupList } from "../cmps/user-board/GroupsList";
+import { socketService } from "../services/socket.service";
+import { loadBoard, onEditBoard } from "../store/board.actions";
+import { BoardHeader } from "../cmps/user-board/BoardHeader";
+import { taskService } from "../services/task.service";
+import { TaskEdit } from "../cmps/task-edit/TaskEdit";
+import { Archive } from "../cmps/user-board/Archive/Archive";
 
 function _BoardDetails(props) {
   const [board, setBoard] = useState(null);
+  const [isArchiveOpen, toggleIsArchiveOpen] = useState(false);
   // const {board} = props
   const boardId = props.match.params.boardId;
-  
-  useEffect(() => {    
-    onLoadBoard(boardId)
-    socketService.on('board-update', onLoadBoard)
-  },[]);
 
-  useEffect(()=>{
-    setBoard(props.board)
-  },[props.board])
+  useEffect(() => {
+    onLoadBoard(boardId);
+    socketService.on("board-update", onLoadBoard);
+  }, []);
+
+  useEffect(() => {
+    setBoard(props.board);
+  }, [props.board]);
 
   const onLoadBoard = async (boardId) => {
     await props.loadBoard(boardId);
     // setBoard(props.board);
-  }
+  };
+
+  const openEditCard = (boardId, task) => {
+    props.history.push(`/${boardId}/${task.id}`);
+  };
 
   const onAddGroup = (title) => {
     const updatedBoard = taskService.addGroup(board, title);
@@ -57,9 +63,9 @@ function _BoardDetails(props) {
   const onUpdateTask = (task) => {
     const updatedBoard = taskService.updateTask(board, task);
     props.onEditBoard(updatedBoard);
-  }
+  };
   // if(!board) onLoadBoard(boardId);
-  if (!board) return <span>loading...</span>
+  if (!board) return <span>loading...</span>;
   // console.log(board.groups)
   return (
     <>
@@ -68,7 +74,10 @@ function _BoardDetails(props) {
         style={{ backgroundImage: `url(${board.style?.bgImg})` }}
         // style={{ background: `url(${board.style?.bgImg})` }}
       >
-        <BoardHeader board={board} />
+        <BoardHeader
+          board={board}
+          // openArchive={openArchive}
+        />
         {/* <div className="board-scroller"></div> */}
         <div className="board">
           <GroupList
@@ -84,6 +93,7 @@ function _BoardDetails(props) {
           />
         </div>
       </div>
+      <Archive board={board} openEditCard={openEditCard} />
       <Route path="/:boardId/:taskId" component={TaskEdit} label="edit" />
     </>
   );
@@ -99,4 +109,7 @@ const mapDispatchToProps = {
   onEditBoard,
 };
 
-export const BoardDetails = connect(mapStateToProps,mapDispatchToProps)(_BoardDetails);
+export const BoardDetails = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_BoardDetails);

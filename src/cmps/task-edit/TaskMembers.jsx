@@ -14,7 +14,11 @@ export class TaskMembers extends React.Component {
             <div className="members-container">
               {this.props.members.map((member) => (
                 <div key={member._id} className="member">
-                  <img src={member.imgUrl} />
+                  {member.avatar ? (
+                    <img className="user-avatar" src={member.avatar} />
+                  ) : (
+                    <div className="user-profile"></div>
+                  )}
                 </div>
               ))}
             </div>

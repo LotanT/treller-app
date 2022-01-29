@@ -26,10 +26,30 @@
   padding-top: 10px;
 }
 
-// .cover .close-edit-page-btn {
-//   margin-top: 20px;
-//   margin-left: 20px;
-// }
+.archive-cover {
+  svg {
+    margin-right: 10px;
+  }
+  path {
+    fill: rgb(29, 54, 99);
+  }
+  font-size: 16px;
+  background-color: #fdfae5;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.05) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.05) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 14px 14px;
+  min-height: 30px;
+  padding: 12px 12px 12px 15px;
+  color: #172b4d;
+}
 
 .no-cover-container {
   padding: 16px;
@@ -87,8 +107,8 @@
     height: 116px;
     width: 100%;
   }
-  .card-cover-img{
-    background-color: rgb(233, 230, 222) ;
+  .card-cover-img {
+    background-color: rgb(233, 230, 222);
     height: 160px;
     width: 220px;
     min-height: 160px;
@@ -99,11 +119,10 @@
     background-position: center center !important;
   }
 }
-.cover-container-img{
+.cover-container-img {
   display: flex;
   justify-content: center;
-  background-color: rgb(233, 230, 222) ;
-
+  background-color: rgb(233, 230, 222);
 }
 
 .task-edit .lower {
@@ -146,8 +165,8 @@
   box-shadow: inset 0 0 0 1px #091e4221;
   width: 100%;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
@@ -160,8 +179,8 @@
   word-break: break-word;
   cursor: pointer;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -179,6 +198,19 @@
   margin-left: 4px;
 }
 
+.group-title {
+  color: #172b4d;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 37px;
+}
+
+.group-title span {
+  text-decoration: underline;
+}
+
 .members .top-detail {
   transform: translateY(2.3px);
 }
@@ -194,14 +226,14 @@
   line-height: 30px;
   width: 100;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   margin-left: 12px;
 }
 
 .top-details-container {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -231,6 +263,13 @@
 
 .task .label-btn {
   margin-left: 0;
+  padding: 0;
+  font-size: 25px;
+  color: #5e6c84;
+}
+
+.task .top-detail .label-btn {
+  width: 10px;
 }
 
 .member {
@@ -248,8 +287,8 @@
   border-radius: 50%;
   font-size: 16px;
   padding: 3px;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .top-details-container .top-details h3 {
@@ -332,8 +371,8 @@
   border-radius: 3px;
   box-sizing: border-box;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   font-weight: 400;
   justify-content: center;
@@ -353,8 +392,8 @@
   color: #172b4d;
   cursor: pointer;
   display: inline-flex;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   font-weight: 400;
   justify-content: center;
@@ -427,7 +466,7 @@
   transform: translateY(-2px);
 }
 
-.checklist .title textarea{
+.checklist .title textarea {
   overflow: hidden;
   overflow-wrap: break-word;
   resize: none;
@@ -443,15 +482,13 @@
   padding: 8px 12px;
 }
 
-
 .checklist .title h5,
 .description .title h3,
 .title textarea {
-  font-size: 16px; 
+  font-size: 16px;
   line-height: 20px;
   color: #172b4d;
 }
-
 
 .description svg {
   transform: translateY(2px);
@@ -500,8 +537,8 @@
 .checklist-todo textarea {
   transform: translateY(-16px);
   font-weight: 400;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
 }
 
@@ -604,8 +641,8 @@
   user-select: none;
   white-space: nowrap;
   color: #172b4d;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;

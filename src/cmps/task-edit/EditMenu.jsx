@@ -9,7 +9,6 @@ import { AddAttachment } from "../pop-hover/AddAttachment";
 import { onEditBoard } from "../../store/board.actions";
 import { taskService } from "../../services/task.service";
 
-
 import { BsPerson } from "react-icons/bs";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { FiClock } from "react-icons/fi";
@@ -20,7 +19,6 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import { ImAttachment } from "react-icons/im";
 import { GrList } from "react-icons/gr";
 import { BsArchiveFill } from "react-icons/bs";
-
 
 class _EditMenu extends React.Component {
   state = {
@@ -41,12 +39,13 @@ class _EditMenu extends React.Component {
   };
 
   toggleArchive = () => {
-    let task = taskService.getTaskById(this.props.board, this.props.taskId)
-    task.isArchive = !task.isArchive
+    let task = taskService.getTaskById(this.props.board, this.props.taskId);
+    console.log(task);
+    task.isArchived = !task.isArchived;
     console.log(task);
     const updatedBoard = taskService.updateTask(this.props.board, task);
     this.props.onEditBoard(updatedBoard);
-  }
+  };
 
   render() {
     const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment } =
@@ -151,14 +150,12 @@ class _EditMenu extends React.Component {
         </a>
         <hr />
 
-
         <a className="menu-btn" onClick={this.toggleArchive}>
           <span className="menu-icon">
             <BsArchiveFill />
           </span>
           <span className="menu-text">Archive</span>
         </a>
-
       </section>
     );
   }
@@ -171,7 +168,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  onEditBoard
+  onEditBoard,
 };
 
 export const EditMenu = connect(mapStateToProps, mapDispatchToProps)(_EditMenu);

@@ -20,17 +20,17 @@ export const taskService = {
     removeDueDateToTask,
     toggleCoverToTask,
     isImg,
-    getImgsFromTask
-
-
+    getImgsFromTask,
+    getGroupTitle
 }
+
 function isImg(attachSrc) {
     return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico' || attachSrc.endsWith('.jpg"')))
 }
 
 function getImgsFromTask(task) {
     let imgs = []
-    console.log(task);
+    // console.log(task);
     if (task.attachments) {
         task.attachments.forEach((attach) => {
             if (attach.isImg) {
@@ -40,8 +40,7 @@ function getImgsFromTask(task) {
         })
     }
     if (imgs.length <= 0) return null
-    console.log('imgs from service:', imgs)
-
+    // console.log('imgs from service:', imgs)
     return imgs
 }
 
@@ -63,6 +62,13 @@ function getTaskById(board, taskId) {
     return taskToReturn
 }
 
+function getGroupTitle(board, taskId) {
+    if (!board) return;
+    const group = board.groups.find(group => group.tasks.find(task => task.id === taskId))
+    const groupTitle = group.title;
+    // console.log(groupDetails);
+    return groupTitle;
+}
 
 function updateTask(board, updatedTask) {
     board.groups = board.groups.map(group => {
@@ -75,7 +81,6 @@ function updateTask(board, updatedTask) {
         return group
     })
     return board
-
 }
 
 function addTask(board, groupId, title) {
@@ -96,8 +101,6 @@ function addTask(board, groupId, title) {
     });
     return board;
 }
-
-
 
 function createNewTaskList(board, taskId, title = "New Check List") {
     const newTask =
@@ -128,7 +131,6 @@ function createNewTaskList(board, taskId, title = "New Check List") {
     return board
 }
 
-
 function editGroupTitle(board, groupId, groupTitle) {
     board.groups.map((group) => {
         if (group.id === groupId) {
@@ -151,8 +153,7 @@ function addLabelToBoard(board, color, title = null) {
         "color": color
     }
     board.labels.push(newLabel)
-    console.log('board:' ,board)
-    
+    // console.log('board:', board)
     return board
 }
 
@@ -163,7 +164,7 @@ function toggleLabelToTask(board, taskId, label) {
             if (task.id === taskId) {
                 if (!task.labels) {
                     task.labels = []
-                    console.log('EMPTY LABELS~!');
+                    // console.log('EMPTY LABELS~!');
                 }
 
                 let isExist = task.labels.some(taskLabel => taskLabel.id == label.id)
@@ -187,13 +188,11 @@ function toggleLabelToTask(board, taskId, label) {
 function updateLabel(board, updatedLabel) {
     board.labels = [...board.labels.map(label => label.id === updatedLabel.id ? updatedLabel : label)]
     return board
-
 }
 
 function removeLabel(board, labelToRemove) {
     board.labels = [...board.labels.filter(label => label.id !== labelToRemove.id)]
     return board
-
 }
 
 function addGroup(board, groupTitle) {
@@ -213,24 +212,18 @@ function updateGroups(board, groups) {
     return board
 }
 
-
-
 function saveDueDateToTask(board, taskId, dueDate) {
     board.groups.map(group => {
         group.tasks = group.tasks.map(task => {
             if (task.id === taskId) {
                 task.dueDate = dueDate
-
             }
             return task
         })
-
         return group.tasks
     })
     return board
 }
-
-
 
 function removeDueDateToTask(board, taskId) {
     board.groups.map(group => {
@@ -238,13 +231,12 @@ function removeDueDateToTask(board, taskId) {
             if (task.id === taskId) {
                 task.dueDate = null
             }
-            return task
+            return task;
         })
 
-        return group.tasks
+        return group.tasks;
     })
-    return board
-
+    return board;
 }
 
 function toggleCoverToTask(board, taskId, cover) {
@@ -254,14 +246,13 @@ function toggleCoverToTask(board, taskId, cover) {
                 if (task.style.cover == cover) {
                     delete task.style.cover
                     console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
-                }else task.style.cover = cover;
+                } else task.style.cover = cover;
             }
-            return task
+            return task;
         })
-
-        return group.tasks
+        return group.tasks;
     })
-    return board
+    return board;
 }
 
 

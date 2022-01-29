@@ -20,41 +20,32 @@ export function BoardPreview(props) {
   };
 
   const handleClick = (e) => {
-    console.log(e);
     if (
       starRef?.current?.contains(e.target) ||
       goldStarRef?.current?.contains(e.target)
     ) {
-      return;
-    }
-    history.push(`/${_id}`);
+      onToggleStar();
+    } else history.push(`/${_id}`);
   };
 
   return (
     <div className="board-preview" style={{ background: `url(${bgImg})` }}>
       <div className="link" onClick={handleClick}>
         <div className="board-preview-screen"></div>
-        <div className="board-preview-content">
-          {/* <div className="board-details"> */}
-          <h2>{title}</h2>
-          {/* </div> */}
-          {board?.isStarred ? (
-            <img
-              src={goldStarIcon}
-              ref={goldStarRef}
-              className="star-btn"
-              onClick={onToggleStar}
-            />
-          ) : (
-            <div ref={starRef} className="gold-btn">
-              <TiStarOutline
-                color="white"
-                className="star-btn"
-                onClick={onToggleStar}
-              />
-            </div>
-          )}
-        </div>
+        <h2>{title}</h2>
+        {board?.isStarred ? (
+          // <div ref={goldStarRef} className="star-container">
+          <img
+            src={goldStarIcon}
+            ref={goldStarRef}
+            className="star-btn star-container"
+          />
+        ) : (
+          // </div>
+          <div className="test" ref={starRef}>
+            <TiStarOutline color="white" className="star-btn" />
+          </div>
+        )}
       </div>
     </div>
   );

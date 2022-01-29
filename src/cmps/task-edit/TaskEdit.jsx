@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CheckList } from "./CheckList";
-import { TaskComments } from "./TaskComments";
+import { TaskActivities } from "./TaskActivities";
 import { EditableText } from "./EditableText";
 import { EditMenu } from "./EditMenu";
 import { GrTextAlignFull } from "react-icons/gr";
+import { BsArchiveFill } from "react-icons/bs";
 import { GrClose } from "react-icons/gr";
 import { FaPager } from "react-icons/fa";
 import { taskService } from "../../services/task.service";
@@ -18,6 +19,7 @@ class _TaskEdit extends React.Component {
   state = {
     task: null,
     isEdit: false,
+    groupTitle: null,
   };
 
   isColor;
@@ -44,6 +46,11 @@ class _TaskEdit extends React.Component {
       this.isColor = task?.style.cover.startsWith("#") ? true : false;
     }
     this.setState({ task });
+    const groupTitle = taskService.getGroupTitle(
+      this.props.board,
+      this.props.match.params.taskId
+    );
+    this.setState({ groupTitle });
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -118,10 +125,11 @@ class _TaskEdit extends React.Component {
     );
     await this.props.onEditBoard(updatedBoard);
   };
+
   render() {
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
-    console.log(this.state.task.dueDate);
+    // console.log(this.state.task.dueDate);
     return (
       <section className="window-edit">
         <div
@@ -155,6 +163,13 @@ class _TaskEdit extends React.Component {
               )}
             </div>
           )}
+          {task.isArchived && (
+            <div className="archive-cover">
+              <div className="archive-cover-text">
+                <BsArchiveFill /> <span>This card is archived.</span>
+              </div>
+            </div>
+          )}
           <div className="no-cover-container">
             <div className="task-header">
               <div className="title flex">
@@ -174,9 +189,12 @@ class _TaskEdit extends React.Component {
             <div className="flex">
               <div className="task">
                 <div className="task-details">
+                  <div className="group-title">
+                    in list <span>{`${this.state.groupTitle}`}</span>
+                  </div>
                   <div className="flex top-details-container">
                     {task.members && <TaskMembers members={task.members} />}
-                    {Boolean(task.labels.length) && (
+                    {Boolean(task.labels?.length) && (
                       <TaskLabels labels={task.labels} />
                     )}
                     {task.dueDate && (
@@ -209,7 +227,7 @@ class _TaskEdit extends React.Component {
                     />
                   ))}
                 </div>
-                <TaskComments />
+                <TaskActivities />
               </div>
               <EditMenu
                 onCreateNewTaskList={this.onCreateNewTaskList}

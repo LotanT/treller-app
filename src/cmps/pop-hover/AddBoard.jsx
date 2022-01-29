@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 // import { Link, NavLink } from 'react-router-dom'
 import { GrClose } from "react-icons/gr";
+import { CgAsterisk } from "react-icons/cg";
 import { onAddBoard } from "../../store/board.actions";
 
 //MAP TO BOARD PREV
@@ -31,11 +32,14 @@ function _AddBoard({ isOpenModal, closeModal, onAddBoard }) {
     <div ref={inputModal} className="add-board-pop">
       <div className="add-board-header flex">
         <div className="add-board-title">Create board</div>
-        <GrClose fill="#5e6c84" stroke="#5e6c84" />
+        <GrClose fill="#5e6c84" stroke="#5e6c84" onClick={closeModal} />
       </div>
       <hr />
       <div className="add-title">
-        <h5>Board Title:</h5>
+        <h5>
+          Board Title
+          <CgAsterisk />
+        </h5>
         <input
           type="text"
           required=""
@@ -44,6 +48,9 @@ function _AddBoard({ isOpenModal, closeModal, onAddBoard }) {
           onChange={(e) => setBoardTitle(e.target.value)}
         ></input>
       </div>
+      <h5>
+        👋 <span>Board title is required</span>
+      </h5>
       <button className="btn create-board" onClick={createNewBoard}>
         Create
       </button>
