@@ -6,7 +6,6 @@ import { taskService } from "../../services/task.service";
 import { onEditBoard } from "../../store/board.actions";
 import { cloudinaryService } from "../../services/cloudinary-service";
 
-// import { fileTypeFromFile } from 'file-type';
 
 import { GrClose } from "react-icons/gr";
 
@@ -53,13 +52,11 @@ function _AddAttachment(props) {
         isWeb: true,
         isImg: taskService.isImg(attachSrc),
       };
-      // currTask.attachments = (currTask.attachments) ? [...currTask.attachments, attach] : [attach]
       setCurrTask(
         (currTask.attachments = currTask.attachments
           ? [...currTask.attachments, attach]
           : [attach])
       );
-      // console.log(currTask);
       updateBoard();
     }
   };

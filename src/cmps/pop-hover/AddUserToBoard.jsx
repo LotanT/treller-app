@@ -14,20 +14,12 @@ import { GrClose } from "react-icons/gr";
 //MAP TO BOARD PREV
 
 function _AddUserToBoard(props) {
-  const [task, setTask] = useState(
-    taskService.getTaskById(props.board, props.taskId)
-  );
   const [UserAttached, setUserAttached] = useState([]);
 
   useEffect(() => {
     // console.log(props);
-    setTaskLocal();
     setUsers();
   }, [props.board]);
-
-  const setTaskLocal = () => {
-    setTask(taskService.getTaskById(props.board, props.taskId));
-  };
 
   const setUsers = async () => {
     setUserAttached(await userService.getUsers());
@@ -36,7 +28,6 @@ function _AddUserToBoard(props) {
   const onToggleUserToBoard = async (user) => {
     let updatedBoard = taskService.toggleUserToBoard(props.board, user);
     await props.onEditBoard(updatedBoard);
-    setTaskLocal();
   };
 
   return (
@@ -59,7 +50,6 @@ function _AddUserToBoard(props) {
               <div key={user._id} className="label-container-pencil">
                 <AddUserToTaskPreview
                   user={user}
-                  task={task}
                   onToggleUserToTask={onToggleUserToBoard}
                 />
                 {/* <BiPencil className='pencil-icon' onClick={() => moveToEditLabel(user)} /> */}

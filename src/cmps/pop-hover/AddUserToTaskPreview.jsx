@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import { taskService } from "../../services/task.service";
 import { connect } from "react-redux";
+import { taskService } from "../../services/task.service";
 
 import { MdDone } from "react-icons/md";
 

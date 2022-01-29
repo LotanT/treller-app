@@ -1,11 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
-import { connect } from "react-redux";
-
-// import { Link, NavLink } from 'react-router-dom'
-import { taskService } from "../../services/task.service";
-import { userService } from "../../services/user.service";
-import { onEditBoard } from "../../store/board.actions";
-import { AddUserToTaskPreview } from "./AddUserToTaskPreview";
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { taskService } from '../../services/task.service'
+import { userService } from '../../services/user.service'
+import {  onEditBoard } from '../../store/board.actions'
+import { AddUserToTaskPreview } from './AddUserToTaskPreview'
 
 import { MdArrowBackIos } from "react-icons/md";
 import { BiPencil } from "react-icons/bi";

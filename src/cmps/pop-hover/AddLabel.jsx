@@ -2,9 +2,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 // import { Link, NavLink } from 'react-router-dom'
-import ExitSvg from '../../assets/imgs/user-boards/exit.svg'
 import { taskService } from '../../services/task.service'
-import { loadBoard, onEditBoard } from '../../store/board.actions'
+import { onEditBoard } from '../../store/board.actions'
 import { AddLabelsPreview } from './AddLabelsPreview'
 import { AddLabelToBoard } from './AddLabelToBoard'
 
