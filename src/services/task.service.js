@@ -20,7 +20,9 @@ export const taskService = {
     removeDueDateToTask,
     toggleCoverToTask,
     isImg,
-    getImgsFromTask
+    getImgsFromTask,
+    toggleUserToTask,
+    toggleUserToBoard
 
 
 }
@@ -151,8 +153,8 @@ function addLabelToBoard(board, color, title = null) {
         "color": color
     }
     board.labels.push(newLabel)
-    console.log('board:' ,board)
-    
+    console.log('board:', board)
+
     return board
 }
 
@@ -181,6 +183,42 @@ function toggleLabelToTask(board, taskId, label) {
 
         return group.tasks
     })
+    return board
+}
+
+function toggleUserToTask(board, taskId, user) {
+
+    board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            if (task.id === taskId) {
+                if (!task.members) {
+                    task.members = []
+                    console.log('EMPTY members~!');
+                }
+
+                let isExist = task.members.some(taskMember => taskMember._id == user._id)
+
+                if (isExist) {
+                    task.members = [...task.members.filter(taskMember => taskMember._id !== user._id)]
+
+                }
+                else {
+                    task.members.push(user)
+                }
+            }
+            return task
+        })
+
+        return group.tasks
+    })
+    return board
+}
+function toggleUserToBoard(board, user) {
+
+    if (!board.members) {
+        board.members = []
+    }
+    board.members.push(user)
     return board
 }
 
@@ -254,7 +292,7 @@ function toggleCoverToTask(board, taskId, cover) {
                 if (task.style.cover == cover) {
                     delete task.style.cover
                     console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
-                }else task.style.cover = cover;
+                } else task.style.cover = cover;
             }
             return task
         })

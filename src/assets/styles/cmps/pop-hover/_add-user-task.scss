@@ -1,0 +1,20 @@
+
+.user-task-container {
+    border-radius: 3px;
+    display: flex;
+    height: 40px;
+    line-height: 32px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    padding: 4px;
+    position: relative;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    cursor: pointer;
+
+    .full-name{
+        padding-left: 5px;
+    }
+}

@@ -121,7 +121,6 @@ class _TaskEdit extends React.Component {
   render() {
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
-    console.log(this.state.task.dueDate);
     return (
       <section className="window-edit">
         <div

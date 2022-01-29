@@ -20,6 +20,7 @@ import { MdOutlineContentCopy } from "react-icons/md";
 import { ImAttachment } from "react-icons/im";
 import { GrList } from "react-icons/gr";
 import { BsArchiveFill } from "react-icons/bs";
+import { AddUserToTask } from "../pop-hover/AddUserToTask";
 
 
 class _EditMenu extends React.Component {
@@ -31,6 +32,8 @@ class _EditMenu extends React.Component {
     isAddCover: false,
     isAttachment: false,
   };
+
+
 
   toggleModal = (popHover) => {
     const stateCopy = { ...this.state };
@@ -49,12 +52,13 @@ class _EditMenu extends React.Component {
   }
 
   render() {
-    const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment } =
+    const { isAddCheckList, isLabel, isDueDatePop, isAddCover, isAttachment, isAddMembers } =
       this.state;
     return (
       <section className="edit-menu">
-        <h3>Add to card</h3>
+        <h3>Suggestion</h3>
 
+        <h3>Add to card</h3>
         <a
           className="menu-btn"
           onClick={() => this.toggleModal("isAddMembers")}
@@ -64,6 +68,9 @@ class _EditMenu extends React.Component {
           </span>
           <span className="menu-text">Members</span>
         </a>
+        {isAddMembers && (
+          <AddUserToTask toggleModal={this.toggleModal} taskId={this.props.taskId} />
+        )}
 
         <a className="menu-btn" onClick={() => this.toggleModal("isLabel")}>
           <BsTag />
@@ -167,6 +174,8 @@ class _EditMenu extends React.Component {
 function mapStateToProps(state) {
   return {
     board: state.boardModule.board,
+    user: state.userModule.user
+
   };
 }
 
