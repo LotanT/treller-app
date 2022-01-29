@@ -38,7 +38,7 @@ function getImgsFromTask(task) {
     if (task.attachments) {
         task.attachments.forEach((attach) => {
             if (attach.isImg) {
-                console.log(attach);
+                // console.log(attach);
                 imgs.push(attach)
             }
         })

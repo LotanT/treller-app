@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { GroupPreview } from './GroupPreview';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { AddGroup } from './AddGroup';
+import { useState, useEffect } from "react";
+import { GroupPreview } from "./GroupPreview";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { AddGroup } from "./AddGroup";
 
 export function GroupList({
   groupsFromBoard,
@@ -17,7 +17,7 @@ export function GroupList({
   let groupsFromBoardFiltered = groupsFromBoard.filter(
     (group) => !group.isArchive
   );
-  const queryAttr = 'data-rbd-drag-handle-draggable-id';
+  const queryAttr = "data-rbd-drag-handle-draggable-id";
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [groups, setGroups] = useState(groupsFromBoardFiltered);
   // const [zIndex, setzIndex] = useState(0);
@@ -30,14 +30,14 @@ export function GroupList({
     const groupsToUpdate = groups.map((group) =>
       group.id === groupToUpdate.id ? groupToUpdate : group
     );
-    onUpdateGroups(groupsToUpdate)
+    onUpdateGroups(groupsToUpdate);
   };
 
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
     let groupsToUpdate = groups;
-    if (result.destination.droppableId === 'groups') {
+    if (result.destination.droppableId === "groups") {
       const [groupToReorder] = groupsToUpdate.splice(result.source.index, 1);
       groupsToUpdate.splice(result.destination.index, 0, groupToReorder);
     } else {
@@ -66,7 +66,7 @@ export function GroupList({
   };
 
   const handleDragStart = (event) => {
-    console.log(event);
+    // console.log(event);
     const draggedDOM = getDraggedDom(event.draggableId);
     if (!draggedDOM) {
       return;

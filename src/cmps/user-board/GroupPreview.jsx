@@ -1,11 +1,11 @@
-import { TaskPreview } from '../TaskPreview';
-import { HiOutlinePlus } from 'react-icons/hi';
-import { RiKeyboardBoxLine } from 'react-icons/ri';
-import { FiMoreHorizontal } from 'react-icons/fi';
-import { CgClose } from 'react-icons/cg';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { TaskPreview } from "../TaskPreview";
+import { HiOutlinePlus } from "react-icons/hi";
+import { RiKeyboardBoxLine } from "react-icons/ri";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { CgClose } from "react-icons/cg";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { isEmpty } from "lodash";
 
 export function GroupPreview({
@@ -18,37 +18,37 @@ export function GroupPreview({
   toggleOpenLabel,
   isLabelOpen,
   onUpdateTask,
-  setGroupIsArchive
+  setGroupIsArchive,
 }) {
-  group.tasks = group.tasks.filter(task=>!task.isArchive)
+  group.tasks = group.tasks.filter((task) => !task.isArchive);
   const [isEditGroupTitle, setIsEditGroupTitle] = useState(false);
   const [isAddTask, setAddTask] = useState(false);
-  const [taskTitle, setTaskTitle] = useState('');
+  const [taskTitle, setTaskTitle] = useState("");
   const [gtoupTitle, setGroupTitle] = useState(group.title);
-  
+
   const editGroupTitleRef = React.createRef();
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleDeyEnter);
-    return  document.removeEventListener('mousedown',handleDeyEnter)
+    document.addEventListener("mousedown", handleDeyEnter);
+    return document.removeEventListener("mousedown", handleDeyEnter);
   }, []);
 
-  const handleDeyEnter = (e) =>{
-    console.log(e)
-    if (editGroupTitleRef?.current?.contains(e.target) && e.key === 'Enter'){
-      updateGroupTitle()
+  const handleDeyEnter = (e) => {
+    // console.log(e)
+    if (editGroupTitleRef?.current?.contains(e.target) && e.key === "Enter") {
+      updateGroupTitle();
     }
-  }
+  };
 
-  const updateGroupTitle = () =>{
-    ToggleEditGroupTitle()
-    onEditGroupTitle(group.id, gtoupTitle)
-  }
+  const updateGroupTitle = () => {
+    ToggleEditGroupTitle();
+    onEditGroupTitle(group.id, gtoupTitle);
+  };
 
   const ToggleAddTask = () => {
     setAddTask(!isAddTask);
   };
-  
+
   const ToggleEditGroupTitle = () => {
     setIsEditGroupTitle(!isEditGroupTitle);
   };
@@ -64,14 +64,14 @@ export function GroupPreview({
   const onAddTaskPreview = () => {
     onAddTask(group.id, taskTitle);
     setAddTask(false);
-    setTaskTitle('');
+    setTaskTitle("");
   };
 
   const setIsArchive = () => {
-    group.isArchive = !group.isArchive
-    setGroupIsArchive(group)
-  }
-  
+    group.isArchive = !group.isArchive;
+    setGroupIsArchive(group);
+  };
+
   return (
     <Draggable key={group.id} draggableId={group.id} index={groupIdx}>
       {(provided) => (
@@ -82,15 +82,19 @@ export function GroupPreview({
           ref={provided.innerRef}
         >
           <div className="group-header">
-            {!isEditGroupTitle && <span onClick={ToggleEditGroupTitle}>{gtoupTitle}</span>}
-           { isEditGroupTitle && <textarea
-              onBlur={updateGroupTitle}
-              onChange={handleGroupChange}
-              dir="auto"
-              value={gtoupTitle}
-              ref={editGroupTitleRef}
-              autoFocus
-            ></textarea>}
+            {!isEditGroupTitle && (
+              <span onClick={ToggleEditGroupTitle}>{gtoupTitle}</span>
+            )}
+            {isEditGroupTitle && (
+              <textarea
+                onBlur={updateGroupTitle}
+                onChange={handleGroupChange}
+                dir="auto"
+                value={gtoupTitle}
+                ref={editGroupTitleRef}
+                autoFocus
+              ></textarea>
+            )}
             <div className="group-action">
               <div className="group-action-icon" onClick={setIsArchive}>
                 <FiMoreHorizontal />

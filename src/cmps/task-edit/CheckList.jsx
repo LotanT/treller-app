@@ -36,7 +36,7 @@ export class CheckList extends React.Component {
     }
     checklist.todos = todos;
     this.setState({ checklist });
-    console.log(todos);
+    // console.log(todos);
     this.props.updateCheckListProperty("todos", todos, checklist.id);
   };
 
@@ -87,7 +87,7 @@ export class CheckList extends React.Component {
     let { checklist } = this.state;
     let { isHide } = checklist;
     checklist = { ...checklist, isHide: !isHide };
-    console.log(checklist.isHide);
+    // console.log(checklist.isHide);
     this.setState({ checklist });
     this.props.updateCheckListProperty("isHide", isHide, checklist.id);
   };
