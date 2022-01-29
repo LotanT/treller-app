@@ -76,11 +76,11 @@ async function save(board) {
                 "bgImg": "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg"
             },
             "isStarred": false,
-            "byUserId": (user._id) ? user._id : "61f2c40f9faf574c74ecac86"
+            "byUserId": (user?._id) ? user._id : "61f2c40f9faf574c74ecac86"
 
         }
-        socketService.emit(SOCKET_EVENT_BOARD_ADDED, newBoard)
         const savedBoard = await httpService.post('board', newBoard)
+        socketService.emit(SOCKET_EVENT_BOARD_ADDED, savedBoard)
         return savedBoard
     }
 }
