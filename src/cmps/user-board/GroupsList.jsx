@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { GroupPreview } from './GroupPreview';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { AddGroup } from './AddGroup';
+import { useState, useEffect } from "react";
+import { GroupPreview } from "./GroupPreview";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { AddGroup } from "./AddGroup";
 
 export function GroupList({
   groupsFromBoard,
@@ -14,37 +14,30 @@ export function GroupList({
   isLabelOpen,
   onUpdateTask,
 }) {
-
-  const queryAttr = 'data-rbd-drag-handle-draggable-id';
+  let groupsFromBoardFiltered = groupsFromBoard.filter(
+    (group) => !group.isArchive
+  );
+  const queryAttr = "data-rbd-drag-handle-draggable-id";
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [groups, setGroups] = useState(groupsFromBoard);
+  const [groups, setGroups] = useState(groupsFromBoardFiltered);
   // const [zIndex, setzIndex] = useState(0);
 
   useEffect(() => {
-    setGroups(groupsFromBoard);
+    setGroups(groupsFromBoardFiltered);
   }, [groupsFromBoard]);
-  // useEffect(() => {
-  //   document.addEventListener('keypress', EnterFeyPressed);
-  //   return  document.removeEventListener('mousedown',EnterFeyPressed)
-  // }, []);
-
-  const EnterFeyPressed = () =>{
-    console.log('hi')
-  }
-
 
   const setGroupIsArchive = (groupToUpdate) => {
     const groupsToUpdate = groups.map((group) =>
       group.id === groupToUpdate.id ? groupToUpdate : group
     );
-    onUpdateGroups(groupsToUpdate)
+    onUpdateGroups(groupsToUpdate);
   };
 
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
     let groupsToUpdate = groups;
-    if (result.destination.droppableId === 'groups') {
+    if (result.destination.droppableId === "groups") {
       const [groupToReorder] = groupsToUpdate.splice(result.source.index, 1);
       groupsToUpdate.splice(result.destination.index, 0, groupToReorder);
     } else {
@@ -73,7 +66,7 @@ export function GroupList({
   };
 
   const handleDragStart = (event) => {
-    console.log(event);
+    // console.log(event);
     const draggedDOM = getDraggedDom(event.draggableId);
     if (!draggedDOM) {
       return;
@@ -147,7 +140,7 @@ export function GroupList({
       ),
     });
   };
-  const groupsToRender = groups.filter(group=>!group.isArchive)
+  // console.log(groups)
   return (
     <DragDropContext
       onDragEnd={handleOnDragEng}
@@ -161,7 +154,7 @@ export function GroupList({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {groupsToRender.map((group, index) => (
+            {groups.map((group, index) => (
               <GroupPreview
                 key={group.id}
                 group={group}
