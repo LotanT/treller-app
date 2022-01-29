@@ -1,6 +1,6 @@
-import { QuickBar } from './user-board/QuickBar';
 import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { QuickBar } from './QuickBar';
 
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { ImAttachment } from 'react-icons/im';
