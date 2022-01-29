@@ -162,7 +162,7 @@ class _TaskEdit extends React.Component {
               )}
             </div>
           )}
-          {task.isArchived && (
+          {task.isArchive && (
             <div className="archive-cover">
               <div className="archive-cover-text">
                 <BsArchiveFill /> <span>This card is archived.</span>

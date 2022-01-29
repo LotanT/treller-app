@@ -13,6 +13,7 @@ import { TaskEdit } from "../cmps/task-edit/TaskEdit";
 
 function _BoardDetails(props) {
   const [board, setBoard] = useState(null);
+  const [isArchiveShown, setIsArchiveShown] = useState(false);
   const boardId = props.match.params.boardId;
 
   useEffect(() => {
@@ -28,6 +29,10 @@ function _BoardDetails(props) {
     await props.loadBoard(boardId);
     // setBoard(props.board);
   };
+
+  const toggleIsArchiveOpen = () =>{
+    setIsArchiveShown(!isArchiveShown)
+  }
 
   const openEditCard = (boardId, task) => {
     props.history.push(`/${boardId}/${task.id}`);
@@ -69,12 +74,12 @@ function _BoardDetails(props) {
   if (!board) return <span>loading...</span>;
   // console.log(board)
   return (
-    <>
+    <div className='board-modal'>
       <div
         className="board-container"
         style={{ backgroundImage: `url(${board.style?.bgImg})` }}
       >
-        <BoardHeader board={board} onUpdateBoard={onUpdateBoard} />
+        <BoardHeader board={board} onUpdateBoard={onUpdateBoard} toggleIsArchiveOpen={toggleIsArchiveOpen} />
         <div className="board">
           <GroupList
             groupsFromBoard={board.groups}
@@ -89,9 +94,9 @@ function _BoardDetails(props) {
           />
         </div>
       </div>
-      <Archive board={board} openEditCard={openEditCard} />
+      <Archive board={board} openEditCard={openEditCard} isArchiveShown={isArchiveShown} toggleIsArchiveOpen={toggleIsArchiveOpen}/>
       <Route path="/:boardId/:taskId" component={TaskEdit} label="edit" />
-    </>
+    </div>
   );
 }
 

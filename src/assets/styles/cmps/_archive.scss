@@ -3,11 +3,19 @@
   width: 339px;
   height: 93.8%;
   top: 44px;
-  right: 0;
+  right: -350px;
   background-color: #f4f5f7;
-  //   z-index: 2;
   padding: 12px;
   padding-top: 6px;
+  // display: none;
+  transition: right 0.6s;
+  &.true{
+    right: 0;
+    // display: inline;
+  }
+  .close-archive{
+    cursor: pointer;
+  }
   header {
     .close-archive {
       position: relative;
@@ -77,5 +85,14 @@
   .option {
     text-decoration: underline;
     cursor: pointer;
+  }
+}
+
+.archive-screen{
+  position: fixed;
+  inset: 0;
+  display: none;
+  &.true{
+    display: inline;
   }
 }

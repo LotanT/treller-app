@@ -17,7 +17,7 @@ export class ArchivedGroupsList extends React.Component {
     return (
       <section className="archived-groups-list">
         {groups.map((group) => (
-          <div className="archived-group">
+          <div className="archived-group" key={group.id}>
             <span>{group.title}</span>
             <a className="grey-btn">
               <MdRefresh />
