@@ -10,6 +10,8 @@ import { loadBoard, onEditBoard } from "../store/board.actions";
 import { BoardHeader } from "../cmps/user-board/BoardHeader";
 import { taskService } from "../services/task.service";
 import { TaskEdit } from "../cmps/task-edit/TaskEdit";
+import { onLoginDefault } from "../store/user.actions";
+
 
 function _BoardDetails(props) {
   const [board, setBoard] = useState(null);
@@ -18,6 +20,7 @@ function _BoardDetails(props) {
 
   useEffect(() => {
     onLoadBoard(boardId);
+    logInDiffUser()
     socketService.on("board-update", onLoadBoard);
   }, []);
 
@@ -71,6 +74,12 @@ function _BoardDetails(props) {
   const onUpdateBoard = (board) => {
     props.onEditBoard(board);
   };
+
+  const logInDiffUser = () => {
+    if (!props.user) {
+      props.onLoginDefault();
+    }
+  };
   if (!board) return <span>loading...</span>;
   // console.log(board)
   return (
@@ -103,11 +112,13 @@ function _BoardDetails(props) {
 function mapStateToProps(state) {
   return {
     board: state.boardModule.board,
+    user: state.userModule.user,
   };
 }
 const mapDispatchToProps = {
   loadBoard,
   onEditBoard,
+  onLoginDefault
 };
 
 export const BoardDetails = connect(
