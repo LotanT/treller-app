@@ -220,19 +220,7 @@
     font-weight: 400;
     font-size: 14px;
   }
-  input {
-    &:focus-visible {
-      // background-color: -internal-light-dark(
-      //   rgb(255, 255, 255),
-      //   rgb(38, 0, 255)
-      // );
-      // color: -internal-light-dark(rgb(11, 57, 211), white);
-      // border-color: -internal-light-dark(
-      //   rgba(19, 15, 236, 0.966),
-      //   rgb(16, 12, 233)
-      // );
-    }
-  }
+
   border-radius: 3px;
   box-shadow: 0px 0px 1px 1px #091e4240;
   color: #172b4d;
@@ -301,11 +289,12 @@
   .create-board {
     box-shadow: none;
     border: none;
-    color: #a5adba;
+    background-color: #0079bf;
     font-size: 14px;
     width: 100%;
     margin-top: 16px;
     height: 30px;
+    color: white;
   }
   img {
     position: relative;

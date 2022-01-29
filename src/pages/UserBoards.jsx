@@ -1,30 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { boardService } from "../services/boards.service";
+
 import { loadBoards, onEditBoard } from "../store/board.actions";
 import { BoardList } from "../cmps/user-boards/BoardList";
 import { CreateNewBoard } from "../cmps/user-boards/CreateNewBoard";
 import { TiStarOutline } from "react-icons/ti";
-// import starIcon from "../assets/imgs/user-boards/star.png";
-import { AddBoard } from "../cmps/pop-hover/AddBoard";
 import { onLoginDefault } from "../store/user.actions";
 
 class _UserBoards extends React.Component {
-  state = {
-    isOpenModal: false,
-  };
 
   componentDidMount() {
     this.props.loadBoards();
+    this.logInDiffUser()
   }
-
-  openModal = () => {
-    this.setState({ isOpenModal: true });
-  };
-  closeModal = () => {
-    this.setState({ isOpenModal: false });
-  };
 
   logInDiffUser = () => {
     if (!this.props.user) {
@@ -34,7 +22,6 @@ class _UserBoards extends React.Component {
 
   render() {
     const { boards } = this.props;
-    const { isOpenModal } = this.state;
     return (
       <div className="user-boards-container">
         <section className="user-boards-list">
@@ -59,12 +46,7 @@ class _UserBoards extends React.Component {
                 boards={boards.filter((board) => !board.isStarred)}
                 onEditBoard={this.props.onEditBoard}
               />
-              <CreateNewBoard
-                closeModal={this.closeModal}
-                isOpenModal={isOpenModal}
-                openModal={this.openModal}
-              />
-              {/* <AddBoard closeModal={this.closeModal} isOpenModal={isOpenModal}/> */}
+              <CreateNewBoard/>
             </div>
           </div>
         </section>
