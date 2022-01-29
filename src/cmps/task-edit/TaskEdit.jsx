@@ -176,7 +176,7 @@ class _TaskEdit extends React.Component {
                 <div className="task-details">
                   <div className="flex top-details-container">
                     {task.members && <TaskMembers members={task.members} />}
-                    {Boolean(task.labels.length) && (
+                    {Boolean(task.labels?.length) && (
                       <TaskLabels labels={task.labels} />
                     )}
                     {task.dueDate && (

@@ -65,7 +65,7 @@
 }
 .card-edit-icon {
   background-clip: padding-box;
-  background-color: rgb(238, 238, 238);
+  background-color: rgba(238, 238, 238, 0.692);
   background-origin: initial;
   border-radius: 3px;
   opacity: 0;
@@ -82,6 +82,7 @@
   cursor: pointer;
   &:hover {
     color: #172b4b;
+    background-color: rgb(211, 211, 211);
   }
 }
 
@@ -89,9 +90,10 @@
   overflow: hidden;
   padding: 6px 8px 2px;
   position: relative;
-  // z-index: 10;
+  font-size: 14px;
   cursor: pointer;
 }
+
 .card-hover {
   border-radius: 3px;
   bottom: 0;
@@ -154,6 +156,10 @@
       .svg {
         height: 15px;
         margin-right: 4px;
+        &.clock{
+          position: relative;
+          top: 2px;
+        } 
       }
       span {
         font-size: 14px;
@@ -205,6 +211,8 @@
   &:hover {
     .isDone {
       display: inline;
+      position: relative;
+      top: 2px;
     }
     .clock {
       display: none;
@@ -216,4 +224,8 @@
   background-color: rgb(1, 165, 1);
   color: white;
   border-radius: 3px;
+}
+
+.attachment{
+  font-size: 13px;
 }
