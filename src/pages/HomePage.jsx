@@ -1,10 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { boardService } from "../services/boards.service";
 
-import heroImg from "../assets/imgs/home-page/hero.png";
-import BoardImg from "../assets/imgs/home-page/board.png";
 
 class _Homepage extends React.Component {
   render() {
@@ -26,7 +22,7 @@ class _Homepage extends React.Component {
             </a>
           </div>
           <div>
-            <img src={heroImg} alt="" />
+            <img src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/hero/6a3ccd8e5c9a0e8ebea4235d12da6b24/hero.png" width="445" height="575" alt="" />
           </div>
         </div>
         <div className="second-container text-center">
@@ -38,7 +34,7 @@ class _Homepage extends React.Component {
           </p>
         </div>
         <div>
-          <img src={BoardImg} className="board-img" alt="" />
+          <img src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/product/89d378b845766a8f0c48e955336266f8/board.png" width="1100" height="778" alt="Board view" />
         </div>
       </section>
     );

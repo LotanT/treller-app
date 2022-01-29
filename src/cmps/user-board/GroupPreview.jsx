@@ -30,7 +30,7 @@ export function GroupPreview({
 
   useEffect(() => {
     document.addEventListener('mousedown', handleDeyEnter);
-    return  document.removeEventListener('mousedown',handleDeyEnter)
+    return document.removeEventListener('mousedown',handleDeyEnter)
   }, []);
 
   const handleDeyEnter = (e) =>{

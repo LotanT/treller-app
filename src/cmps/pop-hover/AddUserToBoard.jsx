@@ -35,7 +35,7 @@ function _AddUserToBoard(props) {
     }
 
     const setUsers = async() => {
-            setUserAttached(await userService.getUsers())
+        setUserAttached(await userService.getUsers())
     }
     
   const onToggleUserToBoard = async (user) => {

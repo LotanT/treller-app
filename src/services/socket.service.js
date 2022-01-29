@@ -12,13 +12,10 @@ export const SOCKET_EVENT_BOARD_ADDED = 'board-added';
 export const SOCKET_EMIT_LOGIN = 'set-user-socket';
 export const SOCKET_EMIT_LOGOUT = 'unset-user-socket';
 
-
-const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//localhost:3030'
 export const socketService = createSocketService()
-// export const socketService = createDummySocketService()
 
-// for debugging from console
-// window.socketService = socketService
+const baseUrl = (process.env.NODE_ENV === 'production')? '/api/' : '//localhost:3030'
+
 
 socketService.setup()
 

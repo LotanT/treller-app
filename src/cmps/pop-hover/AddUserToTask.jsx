@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 // import { Link, NavLink } from 'react-router-dom'
@@ -8,9 +8,6 @@ import {  onEditBoard } from '../../store/board.actions'
 import { AddUserToTaskPreview } from './AddUserToTaskPreview'
 
 
-
-import { MdArrowBackIos } from "react-icons/md";
-import { BiPencil } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
 
 

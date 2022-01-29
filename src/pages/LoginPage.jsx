@@ -4,8 +4,8 @@ import { onLogin, onSignup, onGoogleLogin } from "../store/user.actions";
 import { GoogleLogin } from "react-google-login";
 // import { useGoogleLogin } from 'react-google-login'
 import MainLogo from "../assets/imgs/header/main-logo.png";
-import rightImg from "../assets/imgs/login/right.png";
-import leftImg from "../assets/imgs/login/left.png";
+import rightImg from "../assets/imgs/login/right.svg";
+import leftImg from "../assets/imgs/login/left.svg";
 
 function _LoginSignup(props) {
   const [credentials, setCredentials] = useState({

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { connect } from "react-redux";
 // import { Link, NavLink } from 'react-router-dom'
 import { GrClose } from "react-icons/gr";
@@ -12,11 +12,6 @@ function _AddBoard({ toggleModal, onAddBoard }) {
   const inputModal = useRef(true);
 
 
-  // useEffect(() => {
-  //   if (isOpenModal) {
-  //     inputModal.current.classList.remove("hidden");
-  //   } else if (!isOpenModal) inputModal.current.classList.add("hidden");
-  // }, [isOpenModal]);
 
 
   const createNewBoard = () => {

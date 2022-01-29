@@ -1,24 +1,17 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, {  useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { taskService } from '../../services/task.service'
-import { loadBoard, onEditBoard } from '../../store/board.actions'
+import { onEditBoard } from '../../store/board.actions'
 
 import { GrClose } from "react-icons/gr";
 
-// import { CalendarPicker } from '@mui/lab';
-// import AdapterDateFns from '@mui/lab/AdapterDateFns';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import { styled } from '@mui/material/styles';
+
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import StaticDatePicker from '@mui/lab/StaticDatePicker';
-// import PickersDay from '@mui/lab/PickersDay';
-// import endOfWeek from 'date-fns/endOfWeek';
-// import isSameDay from 'date-fns/isSameDay';
-// import isWithinInterval from 'date-fns/isWithinInterval';
-// import startOfWeek from 'date-fns/startOfWeek';
+
 
 
 //MAP TO BOARD PREV
@@ -31,7 +24,6 @@ function _DatePickerPop(props) {
     useEffect(() => {
         setTaskLocal()
         setDate(task.dueDate ? new Date(task.dueDate) : new Date())
-        console.log(date);
     }, [])
 
     const setTaskLocal = () => {
@@ -41,7 +33,6 @@ function _DatePickerPop(props) {
 
 
     const onSaveDueDate = async () => {
-        console.log('date:', date)
         let updatedBoard = taskService.saveDueDateToTask(props.board, props.taskId, date.getTime())
         await props.onEditBoard(updatedBoard)
         props.toggleModal()
