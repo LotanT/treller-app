@@ -38,14 +38,14 @@ class _TaskEdit extends React.Component {
   }
 
   loadTask = () => {
-    const task = taskService.getTaskById(
+    const taskToUpdate = taskService.getTaskById(
       this.props.board,
       this.props.match.params.taskId
     );
-    if (task?.style.cover) {
-      this.isColor = task?.style.cover.startsWith("#") ? true : false;
+    if (taskToUpdate?.style.cover) {
+      this.isColor = taskToUpdate?.style.cover.startsWith("#") ? true : false;
     }
-    this.setState({ task });
+    this.setState({ task:taskToUpdate });
     const groupTitle = taskService.getGroupTitle(
       this.props.board,
       this.props.match.params.taskId

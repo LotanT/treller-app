@@ -239,6 +239,19 @@ export function TaskPreview({
                 )}
               </div>
             </div>
+            {task.members && (
+            <div className="board-members">
+              {task.members.map((member) => {
+                return (
+                  <div
+                    key={member._id}
+                    className="member">
+                    <img src={member.avatar} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
           </div>
           {isQuickEditOpen && (
             <QuickBar
