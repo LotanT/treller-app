@@ -1,45 +1,91 @@
 import { BsStar } from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { BiFilter } from "react-icons/bi";
 import { MdMoreHoriz } from "react-icons/md";
+import React, { useEffect, useState } from "react";
 import { BsArchiveFill } from "react-icons/bs";
-// BsStar
 
-export function BoardHeader({ board }) {
+export function BoardHeader({ board, onUpdateBoard }) {
+  const [boardTitle, setBoardTitle] = useState(board.title);
+  const [isEditBoardTitle, setIsEditBoardTitle] = useState(false);
+
+  const updateBoardTitle = () => {
+    toggleEditGroupTitle();
+    board.title = boardTitle;
+    onUpdateBoard(board);
+  };
+
+  const handleBaordChange = (ev) => {
+    setBoardTitle(ev.target.value);
+  };
+
+  const toggleEditGroupTitle = () => {
+    setIsEditBoardTitle(!isEditBoardTitle);
+  };
+
+  const toggleStarred = () => {
+    board.isStarred = !board.isStarred;
+    onUpdateBoard(board);
+  };
+
   return (
     <div className="board-header">
       <div className="board-header-left">
-        <div className="board-name">{board.title}</div>
-        <div className={`starred ${board.isStarred}`}>
-          <BsStar />
-        </div>
-        {board.members && (
-          <div className="board-members">
-            {board.members.map((member) => (
-              <div key={member._id} className="member">
-                {" "}
-                <img src={member.imgUrl} />
-              </div>
-            ))}
+        {!isEditBoardTitle && (
+          <div className="board-name" onClick={toggleEditGroupTitle}>
+            {board.title}
           </div>
         )}
-        <div className="card-composer-control board-header-invite-btn">
-          <div className="cc-control-section">
-            <span className="control-section-add-btn">
-              <BsFillPeopleFill />
-              Invite
-            </span>
+        {isEditBoardTitle && (
+          <textarea
+            onBlur={updateBoardTitle}
+            onChange={handleBaordChange}
+            dir="auto"
+            value={boardTitle}
+            autoFocus
+          ></textarea>
+        )}
+        <div className={`starred ${board.isStarred}`} onClick={toggleStarred}>
+          {!board.isStarred && <BsStar />}
+          {board.isStarred && <BsStarFill />}
+        </div>
+        <span className="board-header-divider"></span>
+        <div className="members-container">
+          {board.members && (
+            <div className="board-members">
+              {board.members.map((member, Idx) => {
+                const z = board.members.length - Idx;
+                return (
+                  <div
+                    key={member._id}
+                    className="member"
+                    style={{ zIndex: z }}
+                  >
+                    <img src={member.avatar} />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          <div className="card-composer-control board-header-invite-btn">
+            <div className="cc-control-section">
+              <span className="control-section-add-btn">
+                <BsFillPeopleFill />
+                Invite
+              </span>
+            </div>
           </div>
         </div>
       </div>
       <div className="board-header-right">
         <div className="show-menu">
           <span className="icon">
-            <BsArchiveFill />
+            <MdMoreHoriz />
           </span>
-          <span>Archive</span>
+          <span>Show menu</span>
         </div>
-        <div className="filter">
+        <div className="Filter">
           <span className="icon">
             <BiFilter />
           </span>

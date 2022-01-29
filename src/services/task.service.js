@@ -21,7 +21,11 @@ export const taskService = {
     toggleCoverToTask,
     isImg,
     getImgsFromTask,
-    getGroupTitle
+    getGroupTitle,
+    toggleUserToTask,
+    toggleUserToBoard
+
+
 }
 
 function isImg(attachSrc) {
@@ -182,6 +186,42 @@ function toggleLabelToTask(board, taskId, label) {
 
         return group.tasks
     })
+    return board
+}
+
+function toggleUserToTask(board, taskId, user) {
+
+    board.groups.map(group => {
+        group.tasks = group.tasks.map(task => {
+            if (task.id === taskId) {
+                if (!task.members) {
+                    task.members = []
+                    console.log('EMPTY members~!');
+                }
+
+                let isExist = task.members.some(taskMember => taskMember._id == user._id)
+
+                if (isExist) {
+                    task.members = [...task.members.filter(taskMember => taskMember._id !== user._id)]
+
+                }
+                else {
+                    task.members.push(user)
+                }
+            }
+            return task
+        })
+
+        return group.tasks
+    })
+    return board
+}
+function toggleUserToBoard(board, user) {
+
+    if (!board.members) {
+        board.members = []
+    }
+    board.members.push(user)
     return board
 }
 

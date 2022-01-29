@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { ImAttachment } from 'react-icons/im';
 import { CgDetailsMore } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { BsCheck2Square } from 'react-icons/bs';
@@ -83,7 +84,7 @@ export function TaskPreview({
       'Dec',
     ];
     const duDate = new Date(task.dueDate);
-    return `${month_names_short[duDate.getMonth()]} ${duDate.getDay()}`;
+    return `${month_names_short[duDate.getMonth()]} ${duDate.getDate()}`;
   };
 
   let checkIsListDone;
@@ -232,7 +233,7 @@ export function TaskPreview({
                 )}
                 {task.attachments && (
                   <div className="icon">
-                    <MdAttachFile className="svg" />
+                    <ImAttachment className="svg attachment" />
                     <span>{task.attachments.length}</span>
                   </div>
                 )}

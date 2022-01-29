@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { GroupPreview } from './GroupPreview';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { AddGroup } from './AddGroup';
@@ -14,21 +14,29 @@ export function GroupList({
   isLabelOpen,
   onUpdateTask,
 }) {
-  let groupsFromBoardFiltered = groupsFromBoard.filter((group) => !group.isArchive);
+  let groupsFromBoardFiltered = groupsFromBoard.filter(
+    (group) => !group.isArchive
+  );
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [groups, setGroups] = useState(groupsFromBoardFiltered);
   // const [zIndex, setzIndex] = useState(0);
 
-
   useEffect(() => {
-    setGroups(groupsFromBoardFiltered)
-  }, [groupsFromBoard])
+    setGroups(groupsFromBoardFiltered);
+  }, [groupsFromBoard]);
+
+  const setGroupIsArchive = (groupToUpdate) => {
+    const groupsToUpdate = groups.map((group) =>
+      group.id === groupToUpdate.id ? groupToUpdate : group
+    );
+    onUpdateGroups(groupsToUpdate)
+  };
 
   const handleOnDragEng = (result) => {
     setPlaceholderProps({});
     if (!result.destination) return;
-    let groupsToUpdate = groups
+    let groupsToUpdate = groups;
     if (result.destination.droppableId === 'groups') {
       const [groupToReorder] = groupsToUpdate.splice(result.source.index, 1);
       groupsToUpdate.splice(result.destination.index, 0, groupToReorder);
@@ -58,7 +66,7 @@ export function GroupList({
   };
 
   const handleDragStart = (event) => {
-    console.log(event)
+    console.log(event);
     const draggedDOM = getDraggedDom(event.draggableId);
     if (!draggedDOM) {
       return;
@@ -136,8 +144,8 @@ export function GroupList({
   return (
     <DragDropContext
       onDragEnd={handleOnDragEng}
-    // onDragStart={handleDragStart}
-    // onDragUpdate={handleDragUpdate}
+      // onDragStart={handleDragStart}
+      // onDragUpdate={handleDragUpdate}
     >
       <Droppable droppableId="groups" direction="horizontal" type="group">
         {(provided, snapshot) => (
@@ -160,6 +168,7 @@ export function GroupList({
                 toggleOpenLabel={toggleOpenLabel}
                 isLabelOpen={isLabelOpen}
                 onUpdateTask={onUpdateTask}
+                setGroupIsArchive={setGroupIsArchive}
               />
             ))}
             {provided.placeholder}

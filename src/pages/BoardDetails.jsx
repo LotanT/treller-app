@@ -1,19 +1,18 @@
+import { Archive } from "../cmps/user-board/Archive/Archive";
+
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router";
-
+import { userService } from "../services/user.service";
 import { GroupList } from "../cmps/user-board/GroupsList";
 import { socketService } from "../services/socket.service";
 import { loadBoard, onEditBoard } from "../store/board.actions";
 import { BoardHeader } from "../cmps/user-board/BoardHeader";
 import { taskService } from "../services/task.service";
 import { TaskEdit } from "../cmps/task-edit/TaskEdit";
-import { Archive } from "../cmps/user-board/Archive/Archive";
 
 function _BoardDetails(props) {
   const [board, setBoard] = useState(null);
-  const [isArchiveOpen, toggleIsArchiveOpen] = useState(false);
-  // const {board} = props
   const boardId = props.match.params.boardId;
 
   useEffect(() => {
@@ -64,21 +63,18 @@ function _BoardDetails(props) {
     const updatedBoard = taskService.updateTask(board, task);
     props.onEditBoard(updatedBoard);
   };
-  // if(!board) onLoadBoard(boardId);
+  const onUpdateBoard = (board) => {
+    props.onEditBoard(board);
+  };
   if (!board) return <span>loading...</span>;
-  // console.log(board.groups)
+  // console.log(board)
   return (
     <>
       <div
         className="board-container"
         style={{ backgroundImage: `url(${board.style?.bgImg})` }}
-        // style={{ background: `url(${board.style?.bgImg})` }}
       >
-        <BoardHeader
-          board={board}
-          // openArchive={openArchive}
-        />
-        {/* <div className="board-scroller"></div> */}
+        <BoardHeader board={board} onUpdateBoard={onUpdateBoard} />
         <div className="board">
           <GroupList
             groupsFromBoard={board.groups}

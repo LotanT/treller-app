@@ -18,18 +18,39 @@ export function GroupPreview({
   toggleOpenLabel,
   isLabelOpen,
   onUpdateTask,
-  
+  setGroupIsArchive
 }) {
   group.tasks = group.tasks.filter(task=>!task.isArchive)
+  const [isEditGroupTitle, setIsEditGroupTitle] = useState(false);
   const [isAddTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState('');
   const [gtoupTitle, setGroupTitle] = useState(group.title);
   
+  const editGroupTitleRef = React.createRef();
+
   useEffect(() => {
+    document.addEventListener('mousedown', handleDeyEnter);
+    return  document.removeEventListener('mousedown',handleDeyEnter)
   }, []);
+
+  const handleDeyEnter = (e) =>{
+    console.log(e)
+    if (editGroupTitleRef?.current?.contains(e.target) && e.key === 'Enter'){
+      updateGroupTitle()
+    }
+  }
+
+  const updateGroupTitle = () =>{
+    ToggleEditGroupTitle()
+    onEditGroupTitle(group.id, gtoupTitle)
+  }
 
   const ToggleAddTask = () => {
     setAddTask(!isAddTask);
+  };
+  
+  const ToggleEditGroupTitle = () => {
+    setIsEditGroupTitle(!isEditGroupTitle);
   };
 
   const handleCardChange = (ev) => {
@@ -45,6 +66,11 @@ export function GroupPreview({
     setAddTask(false);
     setTaskTitle('');
   };
+
+  const setIsArchive = () => {
+    group.isArchive = !group.isArchive
+    setGroupIsArchive(group)
+  }
   
   return (
     <Draggable key={group.id} draggableId={group.id} index={groupIdx}>
@@ -56,15 +82,17 @@ export function GroupPreview({
           ref={provided.innerRef}
         >
           <div className="group-header">
-            {/* {!isEditGroupTitle && <span onClick={ToggleEditGroupTitle}>{group.title}</span>} */}
-            <textarea
-              onBlur={() => onEditGroupTitle(group.id, gtoupTitle)}
+            {!isEditGroupTitle && <span onClick={ToggleEditGroupTitle}>{gtoupTitle}</span>}
+           { isEditGroupTitle && <textarea
+              onBlur={updateGroupTitle}
               onChange={handleGroupChange}
               dir="auto"
               value={gtoupTitle}
-            ></textarea>
+              ref={editGroupTitleRef}
+              autoFocus
+            ></textarea>}
             <div className="group-action">
-              <div className="group-action-icon">
+              <div className="group-action-icon" onClick={setIsArchive}>
                 <FiMoreHorizontal />
               </div>
             </div>

@@ -22,26 +22,23 @@
 }
 
 .group-header {
-  // flex: 0 0 auto;
-  // min-height: 20px;
-  // padding: 10px 8px;
-  // position: relative;
-  // padding-left: 15px;
-  flex: 0 0 auto;
+    flex: 0 0 auto;
     min-height: 20px;
     padding: 10px 8px;
     position: relative;
+    font-weight: 600;
   span {
     overflow: hidden;
     overflow-wrap: break-word;
     height: 28px;
-    padding-left: 6px;
+    padding-left: 7px;
+    cursor: pointer;
   }
   .group-action {
     position: absolute;
     right: 4px;
     top: 4px;
-    // z-index: 1;
+    border-radius: 3px;
     cursor: pointer;
     .group-action-icon {
       color: #6b778c;
