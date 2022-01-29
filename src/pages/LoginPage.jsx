@@ -22,7 +22,7 @@ function _LoginSignup(props) {
   };
 
   const handleGoogleFaliure = (res) => {
-    alert(res);
+    console.log(res)
   };
 
   const handleGoogleLogin = (data) => {

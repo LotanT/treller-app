@@ -14,17 +14,24 @@ export function GroupList({
   isLabelOpen,
   onUpdateTask,
 }) {
-  let groupsFromBoardFiltered = groupsFromBoard.filter(
-    (group) => !group.isArchive
-  );
+
   const queryAttr = 'data-rbd-drag-handle-draggable-id';
   const [placeholderProps, setPlaceholderProps] = useState({});
-  const [groups, setGroups] = useState(groupsFromBoardFiltered);
+  const [groups, setGroups] = useState(groupsFromBoard);
   // const [zIndex, setzIndex] = useState(0);
 
   useEffect(() => {
-    setGroups(groupsFromBoardFiltered);
+    setGroups(groupsFromBoard);
   }, [groupsFromBoard]);
+  // useEffect(() => {
+  //   document.addEventListener('keypress', EnterFeyPressed);
+  //   return  document.removeEventListener('mousedown',EnterFeyPressed)
+  // }, []);
+
+  const EnterFeyPressed = () =>{
+    console.log('hi')
+  }
+
 
   const setGroupIsArchive = (groupToUpdate) => {
     const groupsToUpdate = groups.map((group) =>
@@ -140,7 +147,7 @@ export function GroupList({
       ),
     });
   };
-  // console.log(groups)
+  const groupsToRender = groups.filter(group=>!group.isArchive)
   return (
     <DragDropContext
       onDragEnd={handleOnDragEng}
@@ -154,7 +161,7 @@ export function GroupList({
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {groups.map((group, index) => (
+            {groupsToRender.map((group, index) => (
               <GroupPreview
                 key={group.id}
                 group={group}

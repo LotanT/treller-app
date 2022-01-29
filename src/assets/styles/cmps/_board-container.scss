@@ -24,20 +24,6 @@
     top: 2px;
     margin-right: 5px;
   }
-  .show-menu {
-    cursor: pointer;
-  }
-  .filter {
-    cursor: pointer;
-  }
-  // .board-members {
-  //   // float: right;
-  //   margin: 0 -2px 0 0;
-  //   .member {
-  //     // float: right;
-  //     height: 28px;
-  //     margin: 0 0 4px 4px;
-  //     width: 28px;
   .board-members {
     display: flex;
     margin: 0 -2px 0 0;
@@ -55,76 +41,72 @@
 
 .board-header-left {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
   & > * {
-    margin-right: 15px;
+    // margin-right: 15px;
   }
-}
-.board-header-right {
-  display: flex;
-  & > * {
-    border-radius: 3px;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-  }
-  &:first-child {
+  &:first-child{
     margin-left: 10px;
   }
-  textarea {
+  input{
     box-shadow: inset 0 0 0 1px #0079bf;
     border: none;
-    height: 32px;
-    width: 150px;
+    height: 24px;
+    width: 150px; 
     resize: none;
-    font-size: 16px;
-    line-height: 14px;
-    padding-top: 8px;
+    font-size: 18px;
+    // line-height: 14px;
+    padding-bottom: 2px;
+    margin-left: 12px;
     font-family: inherit;
     font-weight: 600;
     outline: none;
     border-radius: 5px;
   }
-  .starred {
+  .starred{
     color: #42526e;
     background-clip: content-box;
     background-color: #00000020;
     border-radius: 3px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 18px; 
     height: 32px;
     width: 32px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    &:hover {
+    justify-content: center; 
+    &:hover{
       color: #f2d600;
-      background-color: #00000040;
+      background-color: #00000040
     }
-    &.true {
+    &.true{
       color: #f2d600;
     }
   }
 }
 
-.board-name {
+.board-name{
   font-size: 18px;
   font-weight: 700;
   line-height: 32px;
   padding: 0 12px;
 }
 
-.board-header-divider {
+.board-header-divider{
   border-color: rgba(0, 0, 0, 0.425);
   border-left: 1px solid #acacacb9;
-  float: left;
-  height: 16px;
-  margin: 8px 8px 12px 4px;
+    float: left;
+    height: 16px;
+    margin: 8px 8px 12px 4px;
 }
 
-.members-container {
+.members-container{
   display: flex;
   gap: 15px;
 }
+
 
 .board-header-right {
   display: flex;
@@ -137,5 +119,8 @@
     padding: 1px 5px;
     position: relative;
     background-color: #00000014;
+  }
+  .btn{
+    cursor: pointer;
   }
 }

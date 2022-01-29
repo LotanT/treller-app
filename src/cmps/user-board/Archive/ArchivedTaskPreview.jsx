@@ -76,7 +76,7 @@ class _ArchivedTaskPreview extends React.Component {
 
   toggleArchive = () => {
     let task = taskService.getTaskById(this.props.board, this.props.task.id);
-    task.isArchived = !task.isArchived;
+    task.isArchive = !task.isArchive;
     const updatedBoard = taskService.updateTask(this.props.board, task);
     this.props.onEditBoard(updatedBoard);
   };

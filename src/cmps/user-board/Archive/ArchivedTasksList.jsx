@@ -11,6 +11,13 @@ export class ArchivedTasksList extends React.Component {
     this.setState({ tasks });
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.tasks !== this.props.tasks){
+      const { tasks } = this.props;
+    this.setState({ tasks });
+    }
+  }
+
   render() {
     const { tasks } = this.state;
     const { board } = this.props;
