@@ -69,7 +69,7 @@ function getTaskById(board, taskId) {
 function getGroupTitle(board, taskId) {
     if (!board) return;
     const group = board.groups.find(group => group.tasks.find(task => task.id === taskId))
-    const groupTitle = group.title;
+    const groupTitle = group?.title;
     // console.log(groupDetails);
     return groupTitle;
 }

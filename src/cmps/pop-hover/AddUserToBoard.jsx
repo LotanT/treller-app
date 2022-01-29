@@ -25,6 +25,15 @@ function _AddUserToBoard(props) {
     setUserAttached(await userService.getUsers());
   };
 
+  const setTaskLocal = () => {
+    setTask(taskService.getTaskById(props.board, props.taskId))
+
+  }
+
+  const setUsers = async () => {
+    setUserAttached(await userService.getUsers())
+  }
+
   const onToggleUserToBoard = async (user) => {
     let updatedBoard = taskService.toggleUserToBoard(props.board, user);
     await props.onEditBoard(updatedBoard);

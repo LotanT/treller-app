@@ -1,6 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { taskService } from '../../services/task.service'
-import { connect } from 'react-redux'
+import React, { useState, useEffect } from 'react'
 
 import { MdDone } from "react-icons/md";
 
@@ -22,7 +20,7 @@ export function AddLabelsPreview({ label, task, onToggleLabelToTask }) {
 
     const isLabelOnTask = () => {
         if (task.labels) {
-            let bol = task.labels.some((taskLabel) => (taskLabel.id === label.id))            
+            let bol = task.labels.some((taskLabel) => (taskLabel.id === label.id))
             setIsOnTask(bol)
         }
     }
@@ -30,7 +28,7 @@ export function AddLabelsPreview({ label, task, onToggleLabelToTask }) {
     return (
         <div className='label-container' style={{ backgroundColor: label.color }} onClick={doOnToggleLabelToTask}>
             {label.title}
-            {isOnTask && <MdDone className='label-done'/>}
+            {isOnTask && <MdDone className='label-done' />}
         </div>
 
     )

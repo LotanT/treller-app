@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
-// import { Link, NavLink } from 'react-router-dom'
 import { taskService } from '../../services/task.service'
 import { onEditBoard } from '../../store/board.actions'
 
