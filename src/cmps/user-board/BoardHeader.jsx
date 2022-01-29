@@ -5,6 +5,7 @@ import { BiFilter } from "react-icons/bi";
 import { MdMoreHoriz } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { BsArchiveFill } from "react-icons/bs";
+import {AddUserToBoard} from "../pop-hover/AddUserToBoard";
 
 export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
   const [boardTitle, setBoardTitle] = useState(board.title);
@@ -76,6 +77,7 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
                 Invite
               </span>
             </div>
+            {/* <AddUserToBoard /> */}
           </div>
         </div>
       </div>
