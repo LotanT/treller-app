@@ -29,7 +29,7 @@ async function query() {
 async function getById(boardId) {
     // return storageService.get(STORAGE_KEY, boardId)
     const board = await httpService.get(`board/${boardId}`)
-    
+
     return board
 }
 
@@ -47,8 +47,8 @@ async function save(board) {
 
     } else {
         // return storageService.post(STORAGE_KEY, board)
-        let userId = userService.getLoggedinUser() || null
-        const newBoard ={
+        let user = userService.getLoggedinUser() || null
+        const newBoard = {
             "title": board.title,
             "createdAt": Date.now(),
             "createdBy": null,
@@ -76,8 +76,8 @@ async function save(board) {
                 "bgImg": "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg"
             },
             "isStarred": false,
-            "byUserId": userId._id
-    
+            "byUserId": (user._id) ? user._id : "61f2c40f9faf574c74ecac86"
+
         }
         socketService.emit(SOCKET_EVENT_BOARD_ADDED, newBoard)
         const savedBoard = await httpService.post('board', newBoard)

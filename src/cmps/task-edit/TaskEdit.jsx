@@ -121,7 +121,6 @@ class _TaskEdit extends React.Component {
   render() {
     let { isEdit, task } = this.state;
     if (!task) return <span></span>;
-    console.log(this.state.task.dueDate);
     return (
       <section className="window-edit">
         <div
@@ -176,7 +175,7 @@ class _TaskEdit extends React.Component {
                 <div className="task-details">
                   <div className="flex top-details-container">
                     {task.members && <TaskMembers members={task.members} />}
-                    {Boolean(task.labels.length) && (
+                    {Boolean(task.labels?.length) && (
                       <TaskLabels labels={task.labels} />
                     )}
                     {task.dueDate && (
