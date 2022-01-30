@@ -1,4 +1,4 @@
-import { TaskPreview } from "../TaskPreview";
+import { TaskPreview } from "./TaskPreview";
 import { HiOutlinePlus } from "react-icons/hi";
 import { RiKeyboardBoxLine } from "react-icons/ri";
 import { FiMoreHorizontal } from "react-icons/fi";
