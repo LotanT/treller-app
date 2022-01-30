@@ -34,7 +34,7 @@ export function GroupList({
   };
 
   const handleOnDragEng = (result) => {
-    setPlaceholderProps({});
+    // setPlaceholderProps({});
     if (!result.destination) return;
     let groupsToUpdate = groups;
     if (result.destination.droppableId === "groups") {
