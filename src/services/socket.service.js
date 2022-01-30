@@ -14,7 +14,7 @@ export const SOCKET_EMIT_LOGOUT = 'unset-user-socket';
 
 export const socketService = createSocketService()
 
-const baseUrl = (process.env.NODE_ENV === 'production')? '/api/' : '//localhost:3030'
+const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//localhost:3030'
 
 
 socketService.setup()

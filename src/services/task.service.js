@@ -29,7 +29,7 @@ export const taskService = {
 }
 
 function isImg(attachSrc) {
-    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico' || attachSrc.endsWith('.jpg"')))
+    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico') || attachSrc.endsWith('.gif'))
 }
 
 function getImgsFromTask(task) {
@@ -221,7 +221,17 @@ function toggleUserToBoard(board, user) {
     if (!board.members) {
         board.members = []
     }
-    board.members.push(user)
+    let isExist = board.members.some(boardMember => boardMember._id == user._id)
+
+    if (isExist) {
+        board.members = [...board.members.filter(boardMember => boardMember._id !== user._id)]
+
+    }
+    else {
+        board.members.push(user)
+    }
+
+
     return board
 }
 
@@ -285,7 +295,7 @@ function toggleCoverToTask(board, taskId, cover) {
             if (task.id === taskId) {
                 if (task.style.cover == cover) {
                     delete task.style.cover
-                    console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
+                    // console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
                 } else task.style.cover = cover;
             }
             return task;
