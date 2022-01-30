@@ -13,6 +13,7 @@ export function AddGroup({onAddGroup}) {
 
   const addingGroup = () =>{
     ToggleAddTask()
+    setGroupTitle('')
     onAddGroup(groupTitle)
   }
 

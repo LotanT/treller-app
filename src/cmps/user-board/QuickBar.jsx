@@ -35,6 +35,8 @@ export function QuickBar({
   let pos;
   let side;
   let posTop;
+  const cardHeight = 250
+  const cardHeightWithPic = 350
   if (window.innerWidth - cardPos.right < 310) {
     side = "right";
     pos = "-200px";
