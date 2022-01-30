@@ -61,6 +61,18 @@
     } 
 }
 
+.board-members{
+    .member{
+        float: right;
+    // margin: 0 -2px 0 0;
+    img{
+        float: right;
+        height: 28px;
+        margin: 0 0 4px 4px;
+        width: 28px;
+    }
+    }
+}
 
 // background-color: #ebecf0;
 //     border-radius: 3px;
