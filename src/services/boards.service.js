@@ -73,7 +73,7 @@ async function save(board) {
             "groups": [],
             "activities": [],
             "style": {
-                "bgImg": "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg"
+                "bgImg": board.background
             },
             "isStarred": false,
             "byUserId": (user?._id) ? user._id : "61f2c40f9faf574c74ecac86"

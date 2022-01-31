@@ -23,9 +23,13 @@ export const taskService = {
     getImgsFromTask,
     getGroupTitle,
     toggleUserToTask,
-    toggleUserToBoard
+    toggleUserToBoard,
+    changeBackground,
+}
 
-
+function changeBackground(board, backgroundUrl) {
+    board.style.bgImg = backgroundUrl;
+    return board;
 }
 
 function isImg(attachSrc) {

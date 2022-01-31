@@ -1,13 +1,20 @@
 import { BsStar } from "react-icons/bs";
 import { BsStarFill } from "react-icons/bs";
+import { CgScreen } from "react-icons/cg";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { BiFilter } from "react-icons/bi";
 import { MdMoreHoriz } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { BsArchiveFill } from "react-icons/bs";
-import {AddUserToBoard} from "../pop-hover/AddUserToBoard";
+import { AddUserToBoard } from "../pop-hover/AddUserToBoard";
+import { BackgroundSelect } from "../pop-hover/AddBoard/BackgroundSelect";
 
-export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
+export function BoardHeader({
+  board,
+  onUpdateBoard,
+  toggleIsArchiveOpen,
+  toggleIsChangeBackgroundOpen,
+}) {
   const [boardTitle, setBoardTitle] = useState(board.title);
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false);
 
@@ -40,7 +47,7 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
         )}
         {isEditBoardTitle && (
           <input
-            type='text'
+            type="text"
             onBlur={updateBoardTitle}
             onChange={handleBaordChange}
             dir="auto"
@@ -81,7 +88,16 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
           </div>
         </div>
       </div>
-      <div className="board-header-right">
+      <div
+        className="board-header-right"
+        onClick={toggleIsChangeBackgroundOpen}
+      >
+        <div className="bg-cover btn">
+          <span className="icon">
+            <CgScreen />
+          </span>
+          <span>Choose cover</span>
+        </div>
         <div className="show-menu btn" onClick={toggleIsArchiveOpen}>
           <span className="icon">
             <MdMoreHoriz />
