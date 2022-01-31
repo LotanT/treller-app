@@ -71,7 +71,7 @@ export function GroupPreview({
     group.isArchive = !group.isArchive;
     setGroupIsArchive(group);
   };
-  const taskToRender = group.tasks.filter((task) => !task.isArchive);
+  const taskToRender = group.tasks?.filter((task) => !task.isArchive);
   return (
     <Draggable key={group.id} draggableId={group.id} index={groupIdx}>
       {(provided) => (

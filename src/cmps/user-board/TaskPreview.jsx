@@ -44,7 +44,7 @@ export function TaskPreview({
   const handleClick = (e, isDragging) => {
     if (isQuickEditOpen) return;
     let { right, top } = e.target.getBoundingClientRect();
-    setClickPos({ right, top });
+    setClickPos({ right: right - 252, top: top - 5 });
     if (
       labelsRef?.current?.contains(e.target) ||
       duDateRef?.current?.contains(e.target) ||
@@ -129,7 +129,7 @@ export function TaskPreview({
   if (!duDateStatus && task.duDate > Date.now()) duDateStatus = 'late';
 
   const openQuickEditor = () => {};
-  // console.log(task)
+  // console.log(task.checklists)
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
@@ -225,7 +225,7 @@ export function TaskPreview({
                     <span>{task.comments.length}</span>
                   </div>
                 )}
-                {task.checklists && (
+                {task.checklists && Boolean(task.checklists.length) && (
                   <div className={`icon checklist-${checkIsListDone}`}>
                     <BsCheck2Square className="svg" />
                     <span>{getCheckListCount()}</span>
@@ -240,18 +240,16 @@ export function TaskPreview({
               </div>
             </div>
             {task.members && (
-            <div className="board-members">
-              {task.members.map((member) => {
-                return (
-                  <div
-                    key={member._id}
-                    className="member">
-                    <img src={member.avatar} />
-                  </div>
-                );
-              })}
-            </div>
-          )}
+              <div className="task-members">
+                {task.members.map((member) => {
+                  return (
+                    <div key={member._id} className="member">
+                      <img src={member.avatar} />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
           {isQuickEditOpen && (
             <QuickBar

@@ -24,6 +24,9 @@ function _BoardDetails(props) {
     onLoadBoard(boardId);
     logInDiffUser();
     socketService.on("board-update", onLoadBoard);
+  //   socketService.on('board-update', boardId => {
+  //    props.loadBoard(boardId)
+  // })
   }, []);
 
   useEffect(() => {

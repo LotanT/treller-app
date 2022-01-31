@@ -7,12 +7,14 @@ import { CreateNewBoard } from "../cmps/user-boards/CreateNewBoard";
 import { TiStarOutline } from "react-icons/ti";
 import { onLoginDefault } from "../store/user.actions";
 
+
 class _UserBoards extends React.Component {
 
   componentDidMount() {
     this.props.loadBoards();
     this.logInDiffUser()
   }
+
 
   logInDiffUser = () => {
     if (!this.props.user) {

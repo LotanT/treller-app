@@ -7,7 +7,7 @@ import { MdMoreHoriz } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import { BsArchiveFill } from "react-icons/bs";
 import { AddUserToBoard } from "../pop-hover/AddUserToBoard";
-import { BackgroundSelect } from "../pop-hover/AddBoard/BackgroundSelect";
+import { DashBoard } from "../../pages/DashBoard";
 
 export function BoardHeader({
   board,
@@ -17,6 +17,8 @@ export function BoardHeader({
 }) {
   const [boardTitle, setBoardTitle] = useState(board.title);
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false);
+  const [isUserOnBoard, setIsUserOnBoard] = useState(false);
+  const [isDashBoard, setIsDashBoard] = useState(false);
 
   const updateBoardTitle = () => {
     toggleEditGroupTitle();
@@ -35,6 +37,13 @@ export function BoardHeader({
   const toggleStarred = () => {
     board.isStarred = !board.isStarred;
     onUpdateBoard(board);
+  };
+
+  const toggleUserBoard = () => {
+    setIsUserOnBoard(!isUserOnBoard);
+  };
+  const toggleDashBoard = () => {
+    setIsDashBoard(!isDashBoard);
   };
 
   return (
@@ -79,24 +88,32 @@ export function BoardHeader({
           )}
           <div className="card-composer-control board-header-invite-btn">
             <div className="cc-control-section">
-              <span className="control-section-add-btn">
+              <span
+                className="control-section-add-btn"
+                onClick={toggleUserBoard}
+              >
                 <BsFillPeopleFill />
                 Invite
               </span>
             </div>
-            {/* <AddUserToBoard /> */}
           </div>
+          {isUserOnBoard && (
+            <AddUserToBoard toggleUserBoard={toggleUserBoard} />
+          )}
         </div>
       </div>
-      <div
-        className="board-header-right"
-        onClick={toggleIsChangeBackgroundOpen}
-      >
-        <div className="bg-cover btn">
+      <div className="board-header-right">
+        <div className="bg-cover btn" onClick={toggleIsChangeBackgroundOpen}>
           <span className="icon">
             <CgScreen />
           </span>
           <span>Choose cover</span>
+        </div>
+        <div className="show-menu btn" onClick={toggleDashBoard}>
+          <span className="icon">
+            <MdMoreHoriz />
+          </span>
+          <span>Dashboard</span>
         </div>
         <div className="show-menu btn" onClick={toggleIsArchiveOpen}>
           <span className="icon">
@@ -111,6 +128,9 @@ export function BoardHeader({
           <span>Filter</span>
         </div>
       </div>
+      {isDashBoard && (
+        <DashBoard toggleDashBoard={toggleDashBoard} board={board} />
+      )}
     </div>
   );
 }

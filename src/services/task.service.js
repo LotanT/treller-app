@@ -25,7 +25,10 @@ export const taskService = {
     toggleUserToTask,
     toggleUserToBoard,
     changeBackground,
+    labelsBoardCount,
+    MembersTaskCount
 }
+
 
 function changeBackground(board, backgroundUrl) {
     board.style.bgImg = backgroundUrl;
@@ -33,7 +36,7 @@ function changeBackground(board, backgroundUrl) {
 }
 
 function isImg(attachSrc) {
-    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico' || attachSrc.endsWith('.jpg"')))
+    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico') || attachSrc.endsWith('.gif'))
 }
 
 function getImgsFromTask(task) {
@@ -225,7 +228,17 @@ function toggleUserToBoard(board, user) {
     if (!board.members) {
         board.members = []
     }
-    board.members.push(user)
+    let isExist = board.members.some(boardMember => boardMember._id == user._id)
+
+    if (isExist) {
+        board.members = [...board.members.filter(boardMember => boardMember._id !== user._id)]
+
+    }
+    else {
+        board.members.push(user)
+    }
+
+
     return board
 }
 
@@ -289,7 +302,7 @@ function toggleCoverToTask(board, taskId, cover) {
             if (task.id === taskId) {
                 if (task.style.cover == cover) {
                     delete task.style.cover
-                    console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
+                    // console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
                 } else task.style.cover = cover;
             }
             return task;
@@ -300,4 +313,46 @@ function toggleCoverToTask(board, taskId, cover) {
 }
 
 
+function labelsBoardCount(board, boardLabels) {
+    let count = 0;
+    let boardLabelCount = []
+    boardLabels.forEach(boardLabel => {
+        board.groups.forEach(group => {
+            group.tasks.forEach(task => {
+                if (task.labels?.length > 0) {
+                    task.labels.forEach(label => {
+                        if (label.title === boardLabel) {
+                            if (!boardLabelCount[count]) boardLabelCount[count] = 0
+                            boardLabelCount[count]++
+                        }
+                    })
+                }
+            })
+        })
+        count++
+    })
 
+    return boardLabelCount
+}
+
+function MembersTaskCount(board, members) {
+    let count = 0;
+    let tasksPerMember = []
+    members.forEach(memberName => {
+        board.groups.forEach(group => {
+            group.tasks.forEach(task => {
+                if (task.members?.length > 0) {
+                    task.members.forEach(member => {
+                        if (member.fullname === memberName) {
+                            if (!tasksPerMember[count]) tasksPerMember[count] = 0
+                            tasksPerMember[count]++
+                        }
+                    })
+                }
+            })
+        })
+        count++
+    })
+
+    return tasksPerMember
+}

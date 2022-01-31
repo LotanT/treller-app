@@ -41,8 +41,8 @@ async function save(board) {
     if (board._id) {
         // return storageService.put(STORAGE_KEY, board)
 
-        socketService.emit("board-update", board._id)
         const updatedBoard = await httpService.put('board', board)
+        socketService.emit("board-update", board._id)
         return updatedBoard
 
     } else {
