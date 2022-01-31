@@ -64,12 +64,12 @@
     }
 }
 .exit-dashboard-svg {
-    bottom: 900px;
+    top: 22px;
     right: 22px;
     position: absolute;
     z-index: 30;
 }
-.chart-title{
+.chart-title {
     color: white;
     font-size: 24px;
     font-weight: 600;
@@ -108,7 +108,6 @@
                 font-size: 34px;
                 padding-bottom: 9px;
                 font-weight: 1000;
-
             }
         }
         div {
@@ -130,7 +129,7 @@
         color: white;
         margin-left: 45px;
         margin-right: 45px;
-        
+
         .texts {
             display: flex;
             justify-content: space-between;
@@ -173,14 +172,14 @@
         border-radius: 5px;
         text-align: center;
         color: white;
-   
+
         .texts {
             display: flex;
             justify-content: space-between;
             flex-direction: column;
             position: relative;
             left: 15px;
-            
+
             .title {
                 display: flex;
                 padding-top: 9px;
@@ -192,7 +191,6 @@
                 font-size: 34px;
                 padding-bottom: 9px;
                 font-weight: 1000;
-
             }
         }
         div {
@@ -209,12 +207,12 @@
     }
 }
 
-.board-title{
+.board-title {
     color: white;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     font-size: 50px;
-    padding-bottom: 67px;
-    position: absolute;
+    // padding-bottom: 67px;
+    // position: absolute;
     display: flex;
     top: 72px;
     z-index: 20;

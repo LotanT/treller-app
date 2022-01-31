@@ -171,6 +171,7 @@
     h2 {
       margin-top: 10px;
       font-weight: 400;
+      top: 22px;
     }
   }
 
@@ -206,7 +207,7 @@
 
 .add-board-pop {
   text-align: center;
-  z-index: 4;
+  z-index: 30;
   padding: 14px;
   padding-top: 5px;
   position: absolute;
@@ -249,8 +250,9 @@
   .add-board-header {
     justify-content: center;
     svg {
-      margin-left: 56px;
-      margin-top: 12px;
+      left: 120px;
+      position: relative;
+      bottom: -6px;
       cursor: pointer;
       &:hover {
         stroke: black;

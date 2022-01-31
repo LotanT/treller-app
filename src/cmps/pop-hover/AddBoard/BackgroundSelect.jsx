@@ -36,8 +36,13 @@ export class BackgroundSelect extends React.Component {
   };
 
   render() {
-    let { backgrounds, selectedBackgroundId } = this.state;
-    if (this.props.cutShort) backgrounds = backgrounds.slice(0, 6);
+    let { backgrounds, selectedBackgroundId } = this.state;    
+    let splicedBackground =backgrounds
+    if (this.props.cutShort){
+      splicedBackground = backgrounds.slice(0, 6);
+    } else{
+      splicedBackground = backgrounds.slice(0, 20);
+    }
     return (
       <section className={`background-select`}>
         <input

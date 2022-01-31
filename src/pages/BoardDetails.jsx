@@ -138,6 +138,7 @@ function _BoardDetails(props) {
           board={board}
           isChangeBackgroundOpen={isChangeBackgroundOpen}
           onChangeBoardBackground={onChangeBoardBackground}
+          numOfBackgrounds={30}
         />
         <Route path="/:boardId/:taskId" component={TaskEdit} label="edit" />
       </div>

@@ -159,8 +159,8 @@ function _DashBoard({ toggleDashBoard, board }) {
         <section className="window-dashboard-charts">
             <div className="screen-dashboard" onClick={toggleDashBoard}></div>
             <GrClose className='exit-dashboard-svg' onClick={toggleDashBoard} />
-            <span className="board-title">{board.title}</span>
             <div className="dashboard-container">
+            <span className="board-title">{board.title}</span>
                 <div className="upper-prog-bar flex">
                     <div className="left">
                         <span className="texts">
