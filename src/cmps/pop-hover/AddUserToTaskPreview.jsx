@@ -17,14 +17,16 @@ export function AddUserToTaskPreview({ user, task, onToggleUserToTask }) {
   };
 
   const isUserOnTask = () => {
-    if (task.members) {
-      // console.log('task:' ,task)
+    if (task) {
+      if (task.members) {
+        // console.log('task:' ,task)
 
-      let bol = task.members.some((member) => member._id === user._id);
-      setIsOnTask(bol);
+        let bol = task.members.some((member) => member._id === user._id);
+        setIsOnTask(bol);
+      }
     }
   };
-
+  if (!user) return <></>
   return (
     <div className="user-task-container" onClick={doOnToggleUserToTask}>
       {user ? (

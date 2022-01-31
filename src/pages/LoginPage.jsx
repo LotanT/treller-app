@@ -15,7 +15,7 @@ function _LoginSignup(props) {
   });
 
   const [isSignup, setIsSignup] = useState(false);
-
+  const CLIENT_ID ="406612332940-4mqv79mrl54e698rlt5ihvlc66t8ovp8.apps.googleusercontent.com"
   const clearState = () => {
     setCredentials({ username: "", password: "", fullname: "" });
     setIsSignup(false);
@@ -26,7 +26,7 @@ function _LoginSignup(props) {
   };
 
   const handleGoogleLogin = (data) => {
-    // console.log(data);
+    console.log(data);
     const username = data.profileObj.givenName;
     const password = data.googleId;
     const fullname = data.profileObj.name;
@@ -113,7 +113,8 @@ function _LoginSignup(props) {
               </a>
               <div className="or">OR</div>
               <GoogleLogin
-                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                clientId={CLIENT_ID}
+                // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                 buttonText={"Continue with Google"}
                 onSuccess={handleGoogleLogin}
                 onFailure={handleGoogleFaliure}
@@ -166,7 +167,8 @@ function _LoginSignup(props) {
                 </a>
                 <div className="or">OR</div>
                 <GoogleLogin
-                  clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                  clientId={CLIENT_ID}
+                  // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                   buttonText={"Continue with Google"}
                   onSuccess={handleGoogleLogin}
                   onFailure={handleGoogleFaliure}

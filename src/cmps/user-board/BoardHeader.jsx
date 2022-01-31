@@ -10,6 +10,7 @@ import {AddUserToBoard} from "../pop-hover/AddUserToBoard";
 export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
   const [boardTitle, setBoardTitle] = useState(board.title);
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false);
+  const [isUserOnBoard, setIsUserOnBoard] = useState(false);
 
   const updateBoardTitle = () => {
     toggleEditGroupTitle();
@@ -29,6 +30,10 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
     board.isStarred = !board.isStarred;
     onUpdateBoard(board);
   };
+
+  const toggleUserBoard = ()=>{
+    setIsUserOnBoard(!isUserOnBoard)
+  } 
 
   return (
     <div className="board-header">
@@ -72,13 +77,13 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
           )}
           <div className="card-composer-control board-header-invite-btn">
             <div className="cc-control-section">
-              <span className="control-section-add-btn">
+              <span className="control-section-add-btn" onClick={toggleUserBoard}>
                 <BsFillPeopleFill />
                 Invite
               </span>
             </div>
-            {/* <AddUserToBoard /> */}
           </div>
+           {isUserOnBoard&&<AddUserToBoard toggleUserBoard={toggleUserBoard}/>}
         </div>
       </div>
       <div className="board-header-right">

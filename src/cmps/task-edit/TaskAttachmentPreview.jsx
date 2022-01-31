@@ -9,21 +9,18 @@ import { CgScreenWide } from "react-icons/cg";
 
 function _TaskAttachmentsPreview(props) {
   let { attach, task } = props;
-  const [attachImg, setAttachImg] = useState(
-    attach.url ? attach.url : "https://i.ibb.co/cJq4Hbk/file.jpg"
-  );
-  const [isAttachImg, setIsAttachImg] = useState(
-    attachImg !== "https://i.ibb.co/cJq4Hbk/file.jpg"
-  );
+  const [attachImg, setAttachImg] = useState(attach.isImg ? attach.url : "https://i.ibb.co/cJq4Hbk/file.jpg");
+  const [isAttachImg, setIsAttachImg] = useState(attachImg !== "https://i.ibb.co/cJq4Hbk/file.jpg");
   const [makeItCoverTxt, setMakeItCoverTxt] = useState("");
   const [isCover, setIsCover] = useState(false);
 
   useEffect(() => {
-    setAttachImg(attach.url ? attach.url : "https://i.ibb.co/cJq4Hbk/file.jpg");
+    setAttachImg(attach.isImg ? attach.url : "https://i.ibb.co/cJq4Hbk/file.jpg");
     setIsCover(attachImg === task.style?.cover);
     // console.log('isCover:', isCover)
     setMakeItCoverTxt(!isCover ? "Make Cover" : "Remove cover");
   }, [props.board]);
+
 
   const toggleCover = async () => {
     // console.log('props.board:', props)
@@ -31,9 +28,11 @@ function _TaskAttachmentsPreview(props) {
       props.board,
       task.id,
       attachImg
-    );
-    await props.onEditBoard(updatedBoard);
-    setMakeItCoverTxt(!isCover ? "Make Cover" : "Remove cover");
+      );
+      await props.onEditBoard(updatedBoard);
+      setIsCover(attach.url === task.style?.cover);
+      setMakeItCoverTxt(!isCover ? "Make Cover" : "Remove cover");
+
   };
 
   return (

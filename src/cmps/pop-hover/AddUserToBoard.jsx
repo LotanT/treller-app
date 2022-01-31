@@ -10,19 +10,22 @@ import { AddUserToTaskPreview } from "./AddUserToTaskPreview";
 import { MdArrowBackIos } from "react-icons/md";
 import { BiPencil } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
+import { AddUserToBoardPreview } from "./AddUserToBoardPreview";
 
 //MAP TO BOARD PREV
 
 function _AddUserToBoard(props) {
-  const [UserAttached, setUserAttached] = useState([]);
+  const [UserAttached, setUserAttached] = useState(null);
 
   useEffect(() => {
-    // console.log(props);
+    console.log(props);
+    
     setUsers();
   }, [props.board]);
 
   const setUsers = async () => {
     setUserAttached(await userService.getUsers());
+    
   };
 
   const onToggleUserToBoard = async (user) => {
@@ -30,15 +33,18 @@ function _AddUserToBoard(props) {
     await props.onEditBoard(updatedBoard);
   };
 
+  if (!UserAttached) return <div></div>
+  console.log('userAttached:' ,UserAttached)
+
   return (
-    <div className="add-labels-pop">
+    <div className="add-labels-pop" style={{top:'2px' ,left:'415px'}}>
       <div className="pop-content">
         <div className="header-container">
           <GrClose
             stroke="#0079bf"
             fill="#0079bf"
             className="exit-svg"
-            onClick={props.toggleModal}
+            onClick={props.toggleUserBoard}
           />
           <div className="add-labels-title">Members</div>
         </div>
@@ -48,9 +54,10 @@ function _AddUserToBoard(props) {
           {UserAttached.length > 0 &&
             UserAttached.map((user) => (
               <div key={user._id} className="label-container-pencil">
-                <AddUserToTaskPreview
+                <AddUserToBoardPreview
                   user={user}
-                  onToggleUserToTask={onToggleUserToBoard}
+                  board={props.board}
+                  onToggleUserToBoard={onToggleUserToBoard}
                 />
                 {/* <BiPencil className='pencil-icon' onClick={() => moveToEditLabel(user)} /> */}
               </div>
