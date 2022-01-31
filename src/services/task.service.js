@@ -23,7 +23,9 @@ export const taskService = {
     getImgsFromTask,
     getGroupTitle,
     toggleUserToTask,
-    toggleUserToBoard
+    toggleUserToBoard,
+    labelsBoardCount,
+    MembersTaskCount
 
 
 }
@@ -306,4 +308,46 @@ function toggleCoverToTask(board, taskId, cover) {
 }
 
 
+function labelsBoardCount(board, boardLabels) {
+    let count = 0;
+    let boardLabelCount =[]
+    boardLabels.forEach(boardLabel => {
+        board.groups.forEach(group => {
+            group.tasks.forEach(task => {
+                if (task.labels?.length > 0) {
+                    task.labels.forEach(label => {
+                        if (label.title === boardLabel) {
+                            if (!boardLabelCount[count]) boardLabelCount[count] = 0
+                            boardLabelCount[count]++
+                        }
+                    })
+                }
+            })
+        })
+        count++
+    })
 
+    return boardLabelCount
+}
+
+function MembersTaskCount(board, members) {
+    let count = 0;
+    let tasksPerMember =[]
+    members.forEach(memberName => {
+        board.groups.forEach(group => {
+            group.tasks.forEach(task => {
+                if (task.members?.length > 0) {
+                    task.members.forEach(member => {
+                        if (member.fullname === memberName) {
+                            if (!tasksPerMember[count]) tasksPerMember[count] = 0
+                            tasksPerMember[count]++
+                        }
+                    })
+                }
+            })
+        })
+        count++
+    })
+
+    return tasksPerMember
+}

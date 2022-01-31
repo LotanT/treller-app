@@ -84,19 +84,14 @@ export function QuickBar({
           ref={cardRef}
         >
           {task.style?.cover && (
-            <div
-              className="pic"
-              style={{
-                backgroundColor: task.style ? task.style.bgColor : "none",
-              }}
-            >
+            <div className="pic">
               {isColor && (
                 <div
                   className="card-cover"
-                  style={{ backgroundColor: task.style.cover }}
-                ></div>
+                  style={{ backgroundColor: task.style.cover }}></div>
               )}
-              {!isColor && <img src={task.style.cover} alt="" />}
+              {!isColor && (<div className="img-cover" style={{ backgroundImage: `url(${task.style.cover})` }}></div>)}
+
             </div>
           )}
           <div
