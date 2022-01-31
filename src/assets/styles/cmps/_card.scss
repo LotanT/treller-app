@@ -128,9 +128,7 @@
   .card-icons {
     display: flex;
     color: #5e6c84;
-    margin: 0 4px 4px 0;
     max-width: 100%;
-    // min-height: 20px;
     overflow: hidden;
     padding: 2px;
     position: relative;
@@ -173,9 +171,9 @@
   position: relative;
 }
 
-.member-container {
+.task-members {
   float: right;
-  margin: 0 -2px 0 0;
+  // margin: 0 -2px 0 0;
   .member {
     float: right;
     height: 28px;
@@ -183,6 +181,7 @@
     width: 28px;
     img {
       border-radius: 50%;
+      height: 100%;
     }
   }
 }

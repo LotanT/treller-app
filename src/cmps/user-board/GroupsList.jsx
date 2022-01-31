@@ -55,6 +55,8 @@ export function GroupList({
         return group;
       });
     }
+    console.log(groups,groupsToUpdate)
+    setGroups(groupsToUpdate)
     onUpdateGroups(groupsToUpdate);
   };
 
