@@ -4,7 +4,7 @@ import { userService } from "../services/user.service.js";
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 export function loadBoards() {
-    
+
     return async dispatch => {
         try {
             const boards = await boardService.query()
@@ -57,12 +57,9 @@ export function onRemoveBoard(boardId) {
     }
 }
 
-export function onAddBoard(title) {
+export function onAddBoard(board) {
     return async (dispatch) => {
         try {
-            const board = {
-                title
-            }
             const savedBoard = await boardService.save(board)
             console.log('Added Board', savedBoard);
             dispatch({
@@ -80,7 +77,7 @@ export function onAddBoard(title) {
     }
 }
 
-export function onEditBoard(boardToSave) {    
+export function onEditBoard(boardToSave) {
     return async (dispatch) => {
         try {
             const savedBoard = await boardService.save(boardToSave)
