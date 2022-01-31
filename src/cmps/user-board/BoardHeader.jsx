@@ -3,6 +3,7 @@ import { BsStarFill } from "react-icons/bs";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { BiFilter } from "react-icons/bi";
 import { MdMoreHoriz } from "react-icons/md";
+import { BiBarChart } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import {AddUserToBoard} from "../pop-hover/AddUserToBoard";
 import { DashBoard } from "../../pages/DashBoard";
@@ -93,7 +94,7 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
       <div className="board-header-right">
         <div className="show-menu btn" onClick={toggleDashBoard}>
           <span className="icon">
-            <MdMoreHoriz />
+            <BiBarChart />
           </span>
           <span>Dashboard</span>
         </div>

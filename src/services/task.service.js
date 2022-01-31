@@ -25,13 +25,14 @@ export const taskService = {
     toggleUserToTask,
     toggleUserToBoard,
     labelsBoardCount,
-    MembersTaskCount
+    MembersTaskCount,
+    taskTimeCheck
 
 
 }
 
 function isImg(attachSrc) {
-    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico') || attachSrc.endsWith('.gif'))
+    return (attachSrc.endsWith('.png') || attachSrc.endsWith('.jpg') || attachSrc.endsWith('.ico') || attachSrc.endsWith('.gif') || attachSrc.endsWith('.svg'))
 }
 
 function getImgsFromTask(task) {
@@ -310,7 +311,7 @@ function toggleCoverToTask(board, taskId, cover) {
 
 function labelsBoardCount(board, boardLabels) {
     let count = 0;
-    let boardLabelCount =[]
+    let boardLabelCount = []
     boardLabels.forEach(boardLabel => {
         board.groups.forEach(group => {
             group.tasks.forEach(task => {
@@ -332,7 +333,7 @@ function labelsBoardCount(board, boardLabels) {
 
 function MembersTaskCount(board, members) {
     let count = 0;
-    let tasksPerMember =[]
+    let tasksPerMember = []
     members.forEach(memberName => {
         board.groups.forEach(group => {
             group.tasks.forEach(task => {
@@ -350,4 +351,42 @@ function MembersTaskCount(board, members) {
     })
 
     return tasksPerMember
+}
+
+function taskTimeCheck(board) {
+    let countBoardTimeMap = {
+        countDueDate: 0,
+        countDueSoon: 0,
+        taskCount: 0
+    }
+    const day = 1000 * 60 * 60 * 24
+
+
+
+    board.groups.forEach((group) => {
+        group.tasks.forEach((task) => {
+            countBoardTimeMap.taskCount++
+            if (task.dueDate) {
+                // const duDate = new Date(task.dueDate);
+                // const now = new Date();
+                if (!task.isDone && Date.now() > task.dueDate) {
+                    countBoardTimeMap.countDueDate++
+                    return
+                }
+                if (!task.isDone && Date.now() + 3 * day > task.dueDate && Date.now() < task.dueDate) {
+                    countBoardTimeMap.countDueSoon++
+                }
+
+
+
+
+            }
+        })
+    })
+
+    // countBoardTimeMap.countDueDate = (countBoardTimeMap.countDueDate / countBoardTimeMap.taskCount) * 100
+    // countBoardTimeMap.countDueSoon = (countBoardTimeMap.countDueSoon / countBoardTimeMap.taskCount) * 100
+
+    return countBoardTimeMap
+
 }

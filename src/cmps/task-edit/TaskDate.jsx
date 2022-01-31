@@ -24,7 +24,7 @@ export class TaskDate extends React.Component {
     let date = `${month_names_short[duDate.getMonth()]} ${duDate.getDate()}`;
     if (now.getMonth() === duDate.getMonth()) {
       if (now.getDate() === duDate.getDate()) date = "Today";
-      else if (now.getDate() === duDate.getDate() - 1) date = "Tommorow";
+      else if (now.getDate() === duDate.getDate() - 1) date = "Tomorrow";
       else if (now.getDate() === duDate.getDate() + 1) date = "Yesterday";
     }
     return `${date} at ${duDate.getHours()}:${duDate.getMinutes()}`;
