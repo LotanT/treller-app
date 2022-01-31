@@ -1,5 +1,6 @@
 import { Archive } from "../cmps/user-board/Archive/Archive";
-
+import { BackgroundSelect } from "../cmps/pop-hover/AddBoard/BackgroundSelect";
+import { GrClose } from "react-icons/gr";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Route } from "react-router";
@@ -11,16 +12,17 @@ import { BoardHeader } from "../cmps/user-board/BoardHeader";
 import { taskService } from "../services/task.service";
 import { TaskEdit } from "../cmps/task-edit/TaskEdit";
 import { onLoginDefault } from "../store/user.actions";
-
+import { boardService } from "../services/boards.service";
 
 function _BoardDetails(props) {
   const [board, setBoard] = useState(null);
   const [isArchiveShown, setIsArchiveShown] = useState(false);
+  const [isChangeBackgroundOpen, setIsChangeBackgroundOpen] = useState(false);
   const boardId = props.match.params.boardId;
 
   useEffect(() => {
     onLoadBoard(boardId);
-    logInDiffUser()
+    logInDiffUser();
     socketService.on("board-update", onLoadBoard);
   //   socketService.on('board-update', boardId => {
   //    props.loadBoard(boardId)
@@ -36,9 +38,13 @@ function _BoardDetails(props) {
     // setBoard(props.board);
   };
 
-  const toggleIsArchiveOpen = () =>{
-    setIsArchiveShown(!isArchiveShown)
-  }
+  const toggleIsArchiveOpen = () => {
+    setIsArchiveShown(!isArchiveShown);
+  };
+
+  const toggleIsChangeBackgroundOpen = () => {
+    setIsChangeBackgroundOpen(!isChangeBackgroundOpen);
+  };
 
   const openEditCard = (boardId, task) => {
     props.history.push(`/${boardId}/${task.id}`);
@@ -77,6 +83,10 @@ function _BoardDetails(props) {
   const onUpdateBoard = (board) => {
     props.onEditBoard(board);
   };
+  const onChangeBoardBackground = (backgroundImage) => {
+    board.style.bgImg = backgroundImage;
+    props.onEditBoard(board);
+  };
 
   const logInDiffUser = () => {
     if (!props.user) {
@@ -86,12 +96,18 @@ function _BoardDetails(props) {
   if (!board) return <span>loading...</span>;
   // console.log(board)
   return (
-    <div className='board-modal'>
+    <div className="board-modal">
       <div
         className="board-container"
         style={{ backgroundImage: `url(${board.style?.bgImg})` }}
       >
-        <BoardHeader board={board} onUpdateBoard={onUpdateBoard} toggleIsArchiveOpen={toggleIsArchiveOpen} />
+        <BoardHeader
+          board={board}
+          onChangeBoardBackground={onChangeBoardBackground}
+          onUpdateBoard={onUpdateBoard}
+          toggleIsArchiveOpen={toggleIsArchiveOpen}
+          toggleIsChangeBackgroundOpen={toggleIsChangeBackgroundOpen}
+        />
         <div className="board">
           <GroupList
             groupsFromBoard={board.groups}
@@ -106,8 +122,25 @@ function _BoardDetails(props) {
           />
         </div>
       </div>
-      <Archive board={board} openEditCard={openEditCard} isArchiveShown={isArchiveShown} toggleIsArchiveOpen={toggleIsArchiveOpen}/>
-      <Route path="/:boardId/:taskId" component={TaskEdit} label="edit" />
+      <Archive
+        board={board}
+        openEditCard={openEditCard}
+        isArchiveShown={isArchiveShown}
+        toggleIsArchiveOpen={toggleIsArchiveOpen}
+      />
+      <div className={`background-select-window ${isChangeBackgroundOpen}`}>
+        <div className="exit-cover">
+          <span onClick={toggleIsChangeBackgroundOpen}>
+            <GrClose />
+          </span>
+        </div>
+        <BackgroundSelect
+          board={board}
+          isChangeBackgroundOpen={isChangeBackgroundOpen}
+          onChangeBoardBackground={onChangeBoardBackground}
+        />
+        <Route path="/:boardId/:taskId" component={TaskEdit} label="edit" />
+      </div>
     </div>
   );
 }
@@ -121,7 +154,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   loadBoard,
   onEditBoard,
-  onLoginDefault
+  onLoginDefault,
 };
 
 export const BoardDetails = connect(

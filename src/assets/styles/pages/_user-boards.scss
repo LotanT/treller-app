@@ -205,14 +205,18 @@
 }
 
 .add-board-pop {
+  text-align: center;
+  z-index: 4;
   padding: 14px;
   padding-top: 5px;
   position: absolute;
   top: -30px;
   left: -201px;
-  svg {
-    path {
-      fill: #eb5a46;
+  .add-title {
+    svg {
+      path {
+        fill: #eb5a46;
+      }
     }
   }
   span {
@@ -230,7 +234,7 @@
   background-color: #fff;
   border-radius: 3px;
   box-sizing: border-box;
-  width: 200px;
+  width: 400px;
   hr {
     margin-top: 0;
     margin-bottom: 8px;
@@ -243,8 +247,9 @@
     margin: 0;
   }
   .add-board-header {
+    justify-content: center;
     svg {
-      margin-left: 30px;
+      margin-left: 56px;
       margin-top: 12px;
       cursor: pointer;
       &:hover {
@@ -296,12 +301,6 @@
     height: 30px;
     color: white;
   }
-  img {
-    position: relative;
-    bottom: 140px;
-    left: 90px;
-    width: 10px !important;
-  }
 }
 .boards-list {
   display: grid;
@@ -309,4 +308,58 @@
   grid-auto-rows: 100px;
   grid-gap: 16px;
   gap: 16px;
+}
+
+.backgrounds-container {
+  svg {
+    path {
+      stroke: white;
+      color: white;
+      display: none;
+    }
+  }
+}
+
+.selected {
+  filter: brightness(0.8);
+  svg {
+    width: 50%;
+    height: 50%;
+    path {
+      display: inline;
+    }
+  }
+}
+
+.backgrounds-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  justify-content: space-evenly;
+  overflow-y: auto;
+  .choice-container {
+    margin-top: 5px;
+    overflow: hidden;
+    .background-choice {
+      display: inline;
+      overflow: hidden;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+      height: 96px;
+      width: 160px;
+      background-size: cover !important;
+      background-position: center !important;
+      cursor: pointer;
+    }
+  }
+}
+
+.background-select input {
+  border: none;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px #dfe1e6;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  transform: translateY(-2px);
 }

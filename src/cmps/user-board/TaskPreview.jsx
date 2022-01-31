@@ -117,6 +117,19 @@ export function TaskPreview({
     onUpdateTask(task);
   };
 
+  const getDueDateStyle = () => {
+    if (task.isDone) return;
+    const day = 1000 * 60 * 60 * 24;
+    let style = {};
+    if (Date.now() + 3 * day > task.dueDate) {
+      style = { backgroundColor: '#F2D600', color: 'white' };
+    }
+    if (Date.now() > task.dueDate) {
+      style = { backgroundColor: '#EB5A46', color: 'white' };
+    }
+    return style;
+  };
+
   let isColor;
   if (task.style.cover) {
     isColor = task.style.cover.startsWith('#') ? true : false;
@@ -199,7 +212,10 @@ export function TaskPreview({
             <div className="icons-container">
               <div className="card-icons">
                 {task.dueDate && (
-                  <div className={`icon du-date-${duDateStatus}`}>
+                  <div
+                    className={`icon du-date-${duDateStatus}`}
+                    style={getDueDateStyle()}
+                  >
                     <div
                       className={`du-date ${task.isDone}`}
                       onClick={toggleTaskDone}

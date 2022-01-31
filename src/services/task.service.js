@@ -24,11 +24,17 @@ export const taskService = {
     getGroupTitle,
     toggleUserToTask,
     toggleUserToBoard,
+    changeBackground,
     labelsBoardCount,
     MembersTaskCount,
-    taskTimeCheck
+    taskTimeCheck,
+    MembersTaskCount
+}
 
 
+function changeBackground(board, backgroundUrl) {
+    board.style.bgImg = backgroundUrl;
+    return board;
 }
 
 function isImg(attachSrc) {
