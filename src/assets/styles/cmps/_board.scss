@@ -32,9 +32,15 @@
   padding-top: 6px;
   transition: right 0.6s;
   overflow-y: auto;
-  z-index: 1;
   &.true{
     right: 0;
+  }
+  // .backgrounds-container{
+  //   z-index: 1 ;
+  // }
+
+  .choice-container{
+    z-index: 5;
   }
 }
 
