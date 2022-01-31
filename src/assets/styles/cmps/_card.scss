@@ -52,13 +52,12 @@
     overflow: hidden;
     .img-cover {
       height: 100%;
-      // z-index: 15;
       overflow: hidden;
       display: block;
       object-fit: cover;
       height: 150px;
       background-size: cover !important;
-        background-position: center !important;
+      background-position: center !important;
 
     }
   }
@@ -151,6 +150,7 @@
       vertical-align: top;
       color: #6b778c;
       vertical-align: top;
+      border-radius: 3px;
       .svg {
         height: 15px;
         margin-right: 4px;
@@ -202,7 +202,6 @@
   &.true {
     background-color: rgb(1, 165, 1);
     color: white;
-    border-radius: 3px;
   }
   .isDone {
     display: none;

@@ -5,14 +5,22 @@
   padding: 100px 10%;
   color: #091e42;
   background: linear-gradient(0deg, #fff, #eae6ff 100%);
-
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  // justify-content: center;
+  .hero{
+    max-width: 960px;
+  }
+  
   p {
     font-family: "Charlie Text", sans-serif;
+    width: 420px;
   }
   h1 {
     font-family: "Charlie Display", sans-serif;
     margin-top: 0;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
     font-family: "Charlie Display", sans-serif;
     font-weight: 500;
     font-size: 3rem;
@@ -33,16 +41,18 @@
   }
 
   .btn-start-doing {
-    color: #0065ff;
-    background-color: transparent;
+    position: relative;
+    top: 50px;
+    color: #f9fafc;
+    background-color: #0065ff;
     background-image: none;
-    border-color: #0065ff;
+    border-color: #f9fafc;
     padding-left: 1.3rem;
     padding-right: 1.3rem;
     width: 230px;
     &:hover {
       color: #f9fafc;
-      border-color: #0065ff;
+      border-color: #005ae0;
       background-color: #0065ff;
       cursor: pointer;
     }

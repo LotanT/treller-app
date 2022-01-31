@@ -2,7 +2,19 @@ import React from "react";
 import { ImCheckboxChecked } from "react-icons/im";
 
 export class TaskDate extends React.Component {
-  state = {};
+  state = {
+    style: {display: false}
+  };
+
+  componentDidMount(){
+    this.getDueDateStyle()
+  }
+  componentDidUpdate(prevProps,prevState){
+    if(prevProps.task !== this.props.task){
+      this.getDueDateStyle()
+    }
+  }
+
 
   getDateTemplate = (task) => {
     const month_names_short = [
@@ -24,13 +36,28 @@ export class TaskDate extends React.Component {
     let date = `${month_names_short[duDate.getMonth()]} ${duDate.getDate()}`;
     if (now.getMonth() === duDate.getMonth()) {
       if (now.getDate() === duDate.getDate()) date = "Today";
-      else if (now.getDate() === duDate.getDate() - 1) date = "Tommorow";
+      else if (now.getDate() === duDate.getDate()-1) date = "Tommorow";
       else if (now.getDate() === duDate.getDate() + 1) date = "Yesterday";
     }
     return `${date} at ${duDate.getHours()}:${duDate.getMinutes()}`;
   };
+  
+  getDueDateStyle(){
+    const {task} = this.props
+    const day = 1000*60*60*24
+    let style = {display: false}
+    if (Date.now() + 3*day > task.dueDate){
+      style = {backgroundColor: '#F2D600', txt: 'due soon', display: true}
+    }
+    if(Date.now() > task.dueDate){
+     style = {backgroundColor: '#EB5A46', txt: 'overdue', display: true}
+    }
+    this.setState({style})
+  }
+ 
 
   render() {
+    const {style} = this.state
     const { task, toggleIsDone } = this.props;
     return (
       <section className="top-details">
@@ -56,12 +83,12 @@ export class TaskDate extends React.Component {
                     completed
                   </h5>
                 )}
-                {(!task.isDone && Date.now() > task.dueDate) && (
+                {(!task.isDone && style.display) && (
                   <h5
                     className="date-status"
-                    style={{ backgroundColor: "#EB5A46", color: "white" }}
+                    style={{ backgroundColor: style.backgroundColor, color: "white" }}
                   >
-                    overdue
+                    {style.txt}
                   </h5>
                 )}
               </div>

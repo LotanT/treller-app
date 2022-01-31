@@ -93,12 +93,6 @@ export function BoardHeader({ board, onUpdateBoard, toggleIsArchiveOpen}) {
           </span>
           <span>Archive</span>
         </div>
-        <div className="Filter btn">
-          <span className="icon">
-            <BiFilter />
-          </span>
-          <span>Filter</span>
-        </div>
       </div>
     </div>
   );

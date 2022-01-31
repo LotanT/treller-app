@@ -31,18 +31,18 @@ export function QuickBar({
     const space = 20
     const btnsBarHeight = 310
     const btnsBarWidth = 180 + space
-    const cardHeight = 220 + space
+    const cardHeight = 240 + space
     const cardHeightWithPic = 380 + space
 
-    const getStyle = () => {
-        const style = { backgroundColor: 'white', top: cardPos.top, left: cardPos.right }
+    const getPos = () => {
+        const pos = {top: cardPos.top, left: cardPos.right }
         if (window.innerHeight - cardPos.top < cardHeight) {
-            style.top = window.innerHeight - cardHeight;
+            pos.top = window.innerHeight - cardHeight;
         }
         if (window.innerHeight - cardPos.top < cardHeightWithPic && isColor === false) {
-          style.top = window.innerHeight - cardHeightWithPic;
+          pos.top = window.innerHeight - cardHeightWithPic;
         }
-        return style
+        return pos
     }
 
     const getQuickBarPos = () => {
@@ -82,7 +82,7 @@ export function QuickBar({
             </div>
             <div
                 className="quick-edit-card-container"
-                style={getStyle()}
+                style={getPos()}
             >
                 <div
                     className="quick-bar-editor-card"
@@ -173,6 +173,17 @@ export function QuickBar({
                             )}
                         </div>
                     </div>
+                    {task.members && (
+              <div className="task-members quick-bar">
+                {task.members.map((member) => {
+                  return (
+                    <div key={member._id} className="member">
+                      <img src={member.avatar} />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
                 </div>
                 <div
                     className="card-composer-control quick-edit-btn-save"
