@@ -1,3 +1,4 @@
+//MOBILE
 .login-page {
   padding-top: 44px;
   display: flex;
@@ -119,25 +120,6 @@
   text-decoration: underline;
 }
 
-.login-page .left-img-container {
-  width: 400px;
-  margin-top: 45vh;
-}
-
-.login-page .right-img-container {
-  width: 400px;
-  margin-top: 45vh;
-  padding-right: 10px;
-}
-
-.login-page .right-img-container img {
-  height: 220px;
-}
-
-.login-page .left-img-container img {
-  height: 220px;
-}
-
 .login-page .or {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -153,4 +135,26 @@
   padding: 0;
   border-top: 1px solid hsl(0, 0%, 80%);
   margin-bottom: 0;
+}
+
+//TABLET
+@media only screen and (min-width: 650px) {
+  .login-page .left-img-container {
+    width: 30vw;
+    margin-top: 45vh;
+  }
+
+  .login-page .right-img-container {
+    width: 30vw;
+    margin-top: 45vh;
+    padding-right: 10px;
+  }
+
+  .login-page .right-img-container img {
+    height: 18vw;
+  }
+
+  .login-page .left-img-container img {
+    height: 18vw;
+  }
 }

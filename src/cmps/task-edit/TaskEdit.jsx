@@ -45,7 +45,7 @@ class _TaskEdit extends React.Component {
     if (taskToUpdate?.style.cover) {
       this.isColor = taskToUpdate?.style.cover.startsWith("#") ? true : false;
     }
-    this.setState({ task:taskToUpdate });
+    this.setState({ task: taskToUpdate });
     const groupTitle = taskService.getGroupTitle(
       this.props.board,
       this.props.match.params.taskId
@@ -185,7 +185,7 @@ class _TaskEdit extends React.Component {
                 />
               </div>
             </div>
-            <div className="flex">
+            <div className="flex main-edit">
               <div className="task">
                 <div className="task-details">
                   <div className="group-title">

@@ -74,6 +74,10 @@
   }
 }
 
+.main-edit {
+  flex-direction: column;
+}
+
 .close-edit-page-btn > svg {
   transform: translateX(1px);
 }
@@ -82,7 +86,7 @@
   background-color: #f4f5f7;
   margin: 48px 0 80px;
   position: relative;
-  width: 768px;
+  max-width: 768px;
   z-index: 20;
   min-height: 600px;
   border-radius: 3px;
@@ -689,4 +693,11 @@
 
 .task-comments .checklist-icon {
   transform: translateY(2px);
+}
+
+//TABLET
+@media only screen and (min-width: 600px) {
+  .main-edit {
+    flex-direction: row;
+  }
 }
