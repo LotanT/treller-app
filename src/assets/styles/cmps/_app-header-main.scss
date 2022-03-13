@@ -1,49 +1,50 @@
 .app-header {
-    background-color: #ecf3f64d;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    max-height: 44px;
-    width: 100%;
-    padding: 16px;
-    position: fixed;
-    top: 0;
+  .sign-up-btn,
+  .login-btn {
+    font-size: 12px;
+  }
 
-    img {
-        height: 36px;
+  background-color: #ecf3f64d;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  max-height: 44px;
+  width: 100%;
+  padding: 16px;
+  position: fixed;
+  top: 0;
 
+  img {
+    height: 36px;
+  }
+
+  button {
+    font-size: 1.09375rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+    padding: 0.25rem 0.5rem;
+    display: inline-block;
+    border: 1px solid transparent;
+
+    &:hover {
+      cursor: pointer;
     }
+  }
+  .login-btn {
+    color: $clr1;
+    background-color: rgba(255, 255, 255, 0);
+    padding-right: 13px;
 
-    button {
-        font-size: 1.09375rem;
-        line-height: 1.5;
-        border-radius: 0.2rem;
-        padding: 0.25rem 0.5rem;
-        display: inline-block;
-        border: 1px solid transparent;
-
-
-
-        &:hover{
-            cursor: pointer;
-        }
-        
+    &:hover {
+      text-decoration: underline;
+      color: #0051cc;
     }
-    .login-btn {
-        color: $clr1;
-        background-color: rgba(255, 255, 255, 0);
-        padding-right: 13px;
+  }
+  .sign-up-btn {
+    color: $clr5;
+    background-color: $clr1;
 
-        &:hover{
-            text-decoration: underline;
-            color:#0051cc
-        }
+    &:hover {
+      background-color: #0051cc;
     }
-    .sign-up-btn {
-        color: $clr5;
-        background-color: $clr1;
-        
-        &:hover{
-            background-color: #0051cc;
-        }
-    }
+  }
 }

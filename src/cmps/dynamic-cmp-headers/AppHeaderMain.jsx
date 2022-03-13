@@ -16,7 +16,7 @@ function _AppHeaderMain() {
         </div>
 
         {!isLogin && (
-          <NavLink to="/loginPage">
+          <NavLink className="login" to="/loginPage">
             <button className="btn login-btn">Log in</button>
             <button className="btn sign-up-btn">Sign up</button>
           </NavLink>
