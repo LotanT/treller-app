@@ -34,7 +34,6 @@ function _AddUserToBoard(props) {
   };
 
   if (!UserAttached) return <div></div>
-  console.log('userAttached:' ,UserAttached)
 
   return (
     <div className="add-labels-pop" style={{top:'2px' ,left:'415px'}}>

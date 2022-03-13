@@ -39,13 +39,9 @@ class _EditMenu extends React.Component {
   };
 
   toggleArchive = () => {
-    console.log("h");
     let task = taskService.getTaskById(this.props.board, this.props.taskId);
-    // console.log(task);
     task.isArchive = !task.isArchive;
-    // console.log(task);
     const updatedBoard = taskService.updateTask(this.props.board, task);
-    console.log(this.props.onEditBoard);
     this.props.onEditBoard(updatedBoard);
   };
 

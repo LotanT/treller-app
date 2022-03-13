@@ -13,7 +13,6 @@ import { AddUserToTask } from '../pop-hover/AddUserToTask';
 
 
 export function QuickBarBtn ({task, sideBarRef, openEditCard, onTaskArchived, quickBarPos}){
-    console.log(quickBarPos)
     const [isPopOpen, setPopOpen] = useState({
         isAddCheckList: false,
         isLabel: false,
@@ -25,7 +24,6 @@ export function QuickBarBtn ({task, sideBarRef, openEditCard, onTaskArchived, qu
 
 
     const toggleModal = (popHover) => {
-        console.log(popHover)
         const stateCopy = { ...isPopOpen };
         const nextValue = !stateCopy[popHover];
         Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false));
@@ -33,7 +31,6 @@ export function QuickBarBtn ({task, sideBarRef, openEditCard, onTaskArchived, qu
         setPopOpen(stateCopy);
       };
 
-    console.log(isPopOpen.isAddMembers)
     return(
         <div className='quick-bar-btn' ref={sideBarRef} style={{left: quickBarPos.btnsLeft, top: quickBarPos.btnsTop}}>
             <div className="quick-bar-btn-container" style={{float: quickBarPos.btnFloat}} onClick={openEditCard}>

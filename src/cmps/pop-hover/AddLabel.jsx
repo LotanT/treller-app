@@ -28,7 +28,6 @@ function _AddLabel(props) {
   const [openEditLabel, setOpenEditLabel] = useState(false)
 
   useEffect(() => {
-    // console.log(props);
     setTaskLocal()
   }, [props.board])
 

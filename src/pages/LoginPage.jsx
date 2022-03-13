@@ -22,11 +22,9 @@ function _LoginSignup(props) {
   };
 
   const handleGoogleFaliure = (res) => {
-    console.log(res)
   };
 
   const handleGoogleLogin = (data) => {
-    console.log(data);
     const username = data.profileObj.givenName;
     const password = data.googleId;
     const fullname = data.profileObj.name;
@@ -38,7 +36,7 @@ function _LoginSignup(props) {
   };
 
   const handleChange = (ev) => {
-    // console.log(credentials);
+
     const field = ev.target.name;
     const value = ev.target.value;
     setCredentials({ ...credentials, [field]: value });
@@ -53,7 +51,6 @@ function _LoginSignup(props) {
   };
 
   const onSignup = (ev = null) => {
-    // console.log('signup', credentials);
     if (ev) ev.preventDefault();
     if (
       !credentials.username ||

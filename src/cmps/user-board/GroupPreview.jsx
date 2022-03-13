@@ -34,7 +34,6 @@ export function GroupPreview({
   }, []);
 
   const handleDeyEnter = (e) => {
-    // console.log(e)
     if (editGroupTitleRef?.current?.contains(e.target) && e.key === "Enter") {
       updateGroupTitle();
     }

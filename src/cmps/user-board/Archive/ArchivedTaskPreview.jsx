@@ -18,7 +18,6 @@ class _ArchivedTaskPreview extends React.Component {
   componentDidMount() {
     const { task } = this.props;
     this.setState({ task });
-    // console.log(task);
   }
 
   getDateTemplate = (task) => {

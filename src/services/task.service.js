@@ -43,17 +43,14 @@ function isImg(attachSrc) {
 
 function getImgsFromTask(task) {
     let imgs = []
-    // console.log(task);
     if (task.attachments) {
         task.attachments.forEach((attach) => {
             if (attach.isImg) {
-                // console.log(attach);
                 imgs.push(attach)
             }
         })
     }
     if (imgs.length <= 0) return null
-    // console.log('imgs from service:', imgs)
     return imgs
 }
 
@@ -79,7 +76,6 @@ function getGroupTitle(board, taskId) {
     if (!board) return;
     const group = board.groups.find(group => group.tasks.find(task => task.id === taskId))
     const groupTitle = group?.title;
-    // console.log(groupDetails);
     return groupTitle;
 }
 
@@ -166,7 +162,6 @@ function addLabelToBoard(board, color, title = null) {
         "color": color
     }
     board.labels.push(newLabel)
-    // console.log('board:', board)
     return board
 }
 
@@ -177,7 +172,6 @@ function toggleLabelToTask(board, taskId, label) {
             if (task.id === taskId) {
                 if (!task.labels) {
                     task.labels = []
-                    // console.log('EMPTY LABELS~!');
                 }
 
                 let isExist = task.labels.some(taskLabel => taskLabel.id == label.id)
@@ -205,7 +199,6 @@ function toggleUserToTask(board, taskId, user) {
             if (task.id === taskId) {
                 if (!task.members) {
                     task.members = []
-                    console.log('EMPTY members~!');
                 }
 
                 let isExist = task.members.some(taskMember => taskMember._id == user._id)
@@ -304,7 +297,6 @@ function toggleCoverToTask(board, taskId, cover) {
             if (task.id === taskId) {
                 if (task.style.cover == cover) {
                     delete task.style.cover
-                    // console.log('delete!@#!@#!@#!@#!@#!@#!@#!@#!@#');
                 } else task.style.cover = cover;
             }
             return task;

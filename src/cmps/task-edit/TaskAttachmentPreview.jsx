@@ -17,13 +17,11 @@ function _TaskAttachmentsPreview(props) {
   useEffect(() => {
     setAttachImg(attach.isImg ? attach.url : "https://i.ibb.co/cJq4Hbk/file.jpg");
     setIsCover(attachImg === task.style?.cover);
-    // console.log('isCover:', isCover)
     setMakeItCoverTxt(!isCover ? "Make Cover" : "Remove cover");
   }, [props.board]);
 
 
   const toggleCover = async () => {
-    // console.log('props.board:', props)
     let updatedBoard = taskService.toggleCoverToTask(
       props.board,
       task.id,

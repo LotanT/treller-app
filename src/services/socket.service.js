@@ -35,8 +35,11 @@ function createSocketService() {
   return socketService
 }
 
+<<<<<<< HEAD
+=======
 
 // socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, review => {
 //   console.log('Review about me!', review);
 // })
 
+>>>>>>> 5b45f516ddec673de5b6ff9431cdbf71698cb38c

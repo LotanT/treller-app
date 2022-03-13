@@ -94,7 +94,6 @@ function _BoardDetails(props) {
     }
   };
   if (!board) return <span>loading...</span>;
-  // console.log(board)
   return (
     <div className="board-modal">
       <div
