@@ -8,7 +8,6 @@ export function loadBoards() {
     return async dispatch => {
         try {
             const boards = await boardService.query()
-            // console.log('Boards from DB:', boards)
             dispatch({
                 type: 'SET_BOARDS',
                 boards
@@ -16,7 +15,6 @@ export function loadBoards() {
 
         } catch (err) {
             showErrorMsg('Cannot load boards')
-            console.log('Cannot load boards', err)
         }
     }
 }
@@ -25,7 +23,6 @@ export function loadBoard(boardId) {
     return async (dispatch) => {
         try {
             const board = await boardService.getById(boardId)
-            // console.log('Board from DB:', board)
             dispatch({
                 type: 'SET_BOARD',
                 board
@@ -34,7 +31,6 @@ export function loadBoard(boardId) {
 
         } catch (err) {
             showErrorMsg('Cannot load boards')
-            console.log('Cannot load boards', err)
         }
     }
 }
@@ -43,7 +39,6 @@ export function onRemoveBoard(boardId) {
     return async (dispatch, getState) => {
         try {
             await boardService.remove(boardId)
-            console.log('Deleted Succesfully!');
             dispatch({
                 type: 'REMOVE_BOARD',
                 boardId
@@ -52,7 +47,6 @@ export function onRemoveBoard(boardId) {
         }
         catch (err) {
             showErrorMsg('Cannot remove board')
-            console.log('Cannot remove board', err)
         }
     }
 }
@@ -88,7 +82,6 @@ export function onEditBoard(boardToSave) {
         }
         catch (err) {
             showErrorMsg('Cannot update board');
-            console.log('Cannot save board', err);
         }
     }
 }

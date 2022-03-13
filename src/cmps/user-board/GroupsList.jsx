@@ -55,7 +55,6 @@ export function GroupList({
         return group;
       });
     }
-    console.log(groups,groupsToUpdate)
     setGroups(groupsToUpdate)
     onUpdateGroups(groupsToUpdate);
   };
@@ -68,7 +67,6 @@ export function GroupList({
   };
 
   const handleDragStart = (event) => {
-    // console.log(event);
     const draggedDOM = getDraggedDom(event.draggableId);
     if (!draggedDOM) {
       return;
@@ -142,12 +140,9 @@ export function GroupList({
       ),
     });
   };
-  // console.log(groups)
   return (
     <DragDropContext
       onDragEnd={handleOnDragEng}
-      // onDragStart={handleDragStart}
-      // onDragUpdate={handleDragUpdate}
     >
       <Droppable droppableId="groups" direction="horizontal" type="group">
         {(provided, snapshot) => (

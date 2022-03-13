@@ -23,7 +23,6 @@ export class BackgroundSelect extends React.Component {
     try {
       const { search } = this.state;
       const backgrounds = await unsplashService.getImgs(search);
-      console.log(backgrounds.results);
       this.setState({ backgrounds: backgrounds.results });
     } catch (err) {
       console.log("error while connect server", err);

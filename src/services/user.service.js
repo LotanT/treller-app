@@ -40,11 +40,8 @@ async function update(user) {
 }
 
 async function login(userCred) {
-    console.log('userCred from user service:' ,userCred)
     try{
         const user = await httpService.post('auth/login', userCred)
-        console.log('user from user.service:' ,user)
-        
         socketService.emit(SOCKET_EMIT_LOGIN, user._id);
         if (user) return _saveLocalUser(user)
 

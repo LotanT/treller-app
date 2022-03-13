@@ -38,8 +38,7 @@ function _DashBoard({ toggleDashBoard, board }) {
         setLabels()
         setTaskCountPerMember()
         setTimeBoardCounts()
-        // console.log('membersNames:', membersNames)
-        // console.log('tasksPerMember:', tasksPerMember)
+
 
 
 
@@ -119,7 +118,6 @@ function _DashBoard({ toggleDashBoard, board }) {
 
     const setTimeBoardCounts = () => {
         let boardTimes = taskService.taskTimeCheck(board)
-        console.log(boardTimes);
         setBoardTimeCounts(boardTimes)
     }
 

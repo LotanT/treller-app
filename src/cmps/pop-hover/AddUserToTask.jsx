@@ -18,7 +18,6 @@ function _AddUserToTask(props) {
   const [UserAttached, setUserAttached] = useState([]);
 
   useEffect(() => {
-    // console.log(props);
     setTaskLocal();
     setUsers();
   }, [props.board]);
@@ -31,7 +30,6 @@ function _AddUserToTask(props) {
     if (props.board.members.length > 0) {
       setUserAttached(props.board.members);
     } else {
-      console.log(await userService.getUsers());
       setUserAttached(await userService.getUsers());
     }
   };

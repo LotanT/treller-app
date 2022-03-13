@@ -135,14 +135,12 @@ export function TaskPreview({
     isColor = task.style.cover.startsWith('#') ? true : false;
   }
 
-  //  const index = getCounter(true)
-  //  console.log(index)
+
 
   const duDateStatus = task.isDone;
   if (!duDateStatus && task.duDate > Date.now()) duDateStatus = 'late';
 
   const openQuickEditor = () => {};
-  // console.log(task.checklists)
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided, snapshot) => (
