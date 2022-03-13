@@ -82,14 +82,18 @@
   transform: translateX(1px);
 }
 
+.edit-menu {
+  min-width: 150px;
+}
+
 .task-edit {
   background-color: #f4f5f7;
   margin: 48px 0 80px;
   position: relative;
-  max-width: 768px;
   z-index: 20;
   min-height: 600px;
   border-radius: 3px;
+  width: 90vw;
   .pic {
     overflow: hidden;
     img {
@@ -696,8 +700,12 @@
 }
 
 //TABLET
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 950px) {
+  .task-edit {
+    max-width: 768px;
+  }
   .main-edit {
     flex-direction: row;
+    min-width: 150px;
   }
 }
