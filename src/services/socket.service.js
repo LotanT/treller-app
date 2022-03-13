@@ -5,7 +5,7 @@ export const SOCKET_EMIT_LOGOUT = 'unset-user-socket';
 
 export const socketService = createSocketService()
 
-const baseUrl = (process.env.NODE_ENV === 'production')? '' : '//localhost:3030'
+const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
 
 
 socketService.setup()
@@ -20,7 +20,7 @@ function createSocketService() {
     on(eventName, cb) {
       socket.on(eventName, cb)
     },
-    off(eventName, cb=null) {
+    off(eventName, cb = null) {
       if (!socket) return;
       if (!cb) socket.removeAllListeners(eventName)
       else socket.off(eventName, cb)
@@ -35,3 +35,11 @@ function createSocketService() {
   return socketService
 }
 
+<<<<<<< HEAD
+=======
+
+// socketService.on(SOCKET_EVENT_REVIEW_ABOUT_YOU, review => {
+//   console.log('Review about me!', review);
+// })
+
+>>>>>>> 5b45f516ddec673de5b6ff9431cdbf71698cb38c

@@ -44,7 +44,7 @@ function _AppHeaderUser(props) {
         <a href="#/" className="user-header-logo">
           <img src={MainLogo}></img>
         </a>
-        <div className="nav-links ">
+        {/* <div className="nav-links ">
           <a className="nav-link-btn">Workspaces </a>
           <img className="arrow" src={DownArrow} />
         </div>
@@ -62,7 +62,7 @@ function _AppHeaderUser(props) {
         <div className="nav-links ">
           <a className="nav-link-btn">Templates </a>
           <img className="arrow" src={DownArrow} />
-        </div>
+        </div> */}
         <div className="nav-btn" onClick={() => toggleModal("isAddBoard")}>
           <a>Create</a>
         </div>
